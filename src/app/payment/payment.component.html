@@ -1,6 +1,18 @@
-<div>
-    <h1 class="title">Payment</h1>
+<div nz-row nzJustify="center">
+    <h2 nz-typography>Payment</h2>
 </div>
 <div class="form-group">
-    <label for="payment"></label>
+    <form nz-form [formGroup]="paymentForm" (ngSubmit)="onSubmit(paymentForm.value)">
+        <nz-form-item>
+            <nz-form-label [nzSpan]="7" nzRequired>Credit Card Id</nz-form-label>
+            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Credit Card Id!">
+                <input nz-input type="text" formControlName="creditCardId" />
+              </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-control [nzOffset]="7" [nzSpan]="12">
+              <button nz-button nzType="primary" [disabled]="!paymentForm.valid">Submit</button>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
 </div>
