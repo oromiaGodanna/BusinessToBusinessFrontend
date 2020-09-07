@@ -14,13 +14,15 @@ import en from '@angular/common/locales/en';
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentService } from './payment.service';
 import { RatingComponent } from './rating/rating.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
     PaymentComponent,
-    RatingComponent
+    RatingComponent,
+    FeedbackComponent
   ],
   imports: [
     BrowserModule,
