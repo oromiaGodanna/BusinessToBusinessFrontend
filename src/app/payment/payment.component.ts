@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
 import { Observer } from 'rxjs/internal/types';
-
+import { PaymentService } from '../payment.service';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -11,7 +11,7 @@ import { Observer } from 'rxjs/internal/types';
 export class PaymentComponent implements OnInit {
   paymentForm: FormGroup;
   str = 'Hleo wid';
-  constructor(private fb: FormBuilder) {
+  constructor(private paymentService: PaymentService, private fb: FormBuilder) {
     this.paymentForm = this.fb.group({
       creditCardId: ['', [Validators.required], [this.creditCardAsyncValidator]]
     });
@@ -33,6 +33,7 @@ export class PaymentComponent implements OnInit {
     }, 1000);
   })
   onSubmit(value: { userName: string}): void{
-    console.log(value);
+   const paymentObj = this.paymentService.addPayment();
+   console.log(paymentObj);
   }
 }

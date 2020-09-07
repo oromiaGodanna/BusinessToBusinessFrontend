@@ -12,13 +12,15 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { PaymentComponent } from './payment/payment.component';
-
+import { PaymentService } from './payment.service';
+import { RatingComponent } from './rating/rating.component';
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    PaymentComponent
+    PaymentComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,7 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, PaymentService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
