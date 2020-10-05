@@ -1,0 +1,81 @@
+
+<nz-layout>
+    <nz-header>Place Order</nz-header>
+    
+    <nz-content>
+        <div nz-row>
+            <div nz-col nzSpan="14">
+                <h4 nz-typography class="align-center">Shipping Address</h4>
+                <div class="form-group">
+                    <form nz-form [formGroup]="addressForm" >
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzRequired>First Names</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your First Names!">
+                                <input nz-input type="text" formControlName="firstName" />
+                              </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzRequired>Last Name</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Last Name!">
+                                <input nz-input type="text" formControlName="lastName" />
+                              </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzRequired>Company Name</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Company Name!">
+                                <input nz-input type="text" formControlName="companyName" />
+                              </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzRequired>Company Address Line 1</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Credit Card Id!">
+                                <input nz-input type="text" formControlName="creditCardId" />
+                              </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6">Company Address Line 2</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Credit Card Id!">
+                                <input nz-input type="text" formControlName="creditCardId" />
+                              </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzRequired>City</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Credit Card Id!">
+                                <input nz-input type="text" formControlName="creditCardId" />
+                              </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzRequired>Postal code</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Credit Card Id!">
+                                <input nz-input type="text" formControlName="creditCardId" />
+                              </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzRequired>Phone number 1</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Credit Card Id!">
+                                <input nz-input type="text" formControlName="creditCardId" />
+                              </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="6" nzRequired>Phone number 2</nz-form-label>
+                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Credit Card Id!">
+                                <input nz-input type="text" formControlName="creditCardId" />
+                              </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-control [nzOffset]="7" [nzSpan]="12">
+                              <!-- <button nz-button nzType="primary" [disabled]="!paymentForm.valid">Submit</button> -->
+                            </nz-form-control>
+                        </nz-form-item>
+                    </form>
+                </div>
+            </div>
+            <div nz-col nzSpan="10">
+                <h4 nz-typography class="align-center">Order Summary</h4>
+                
+            </div>
+        </div>
+    </nz-content>
+    
+    
+</nz-layout>

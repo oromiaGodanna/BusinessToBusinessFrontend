@@ -1,1 +1,55 @@
-<p>feedback works!</p>
+
+<nz-content>
+    <h4 nz-typography class="align-center">Leave feedback about this order</h4>
+    <!-- add product img and name here -->
+    <div>
+        <nz-divider></nz-divider>
+        <p nz-typography class="align-center"><strong>please rate this transaction</strong></p>
+        <p nz-typography nzType="secondary"><strong>Rating features: </strong> </p>
+        <div nz-row nzAlign="bottom">    
+            <span nz-col nzSpan="8">Supplier service and communication</span>
+            <nz-rate nz-col nzSpan="6" nzOffset="2" [ngModel]="2.5" nzAllowHalf></nz-rate>
+        </div>
+        <div nz-row nzAlign="bottom">
+            <span nz-col nzSpan="8">On time shipment</span>
+            <nz-rate nz-col nzSpan="6" nzOffset="2" [ngModel]="2.5" nzAllowHalf></nz-rate>
+        </div>
+        <div nz-row nzAlign="bottom">
+            <span nz-col nzSpan="8">Product quality</span>
+            <nz-rate nz-col nzSpan="6" nzOffset="2"  [ngModel]="2.5" nzAllowHalf></nz-rate>
+        </div>
+    </div>
+    <nz-divider [nzText]="ratings" nzOrientation="left">
+        <ng-template #ratings>Overall rating: <nz-rate [ngModel]="2.5" nzAllowHalf nzDisabled></nz-rate></ng-template>
+      </nz-divider>
+    <div>
+        <p nz-typography class="align-center"><strong>Please write a review</strong> </p>
+        <input nz-input placeholder="Add a headline" style="width: 50%;"/>
+        <br /><br />
+        <p nz-typography >write your review: </p>
+        <textarea rows="4" nz-input style="width: 50%;"></textarea>
+    </div>
+    <nz-divider></nz-divider>
+    <div>
+        <p nz-typography class="align-center"><strong>Upload picture or video of the product</strong></p>
+        <nz-upload
+      class="avatar-uploader"
+      nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      nzName="avatar"
+      nzListType="picture-card"
+      [nzShowUploadList]="false"
+      [nzBeforeUpload]="beforeUpload"
+      (nzChange)="handleChange($event)"
+    >
+      <ng-container *ngIf="!avatarUrl">
+        <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
+        <div class="ant-upload-text">Upload</div>
+      </ng-container>
+      <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+    </nz-upload>
+    </div>
+    <nz-divider></nz-divider>
+    <button nz-button nzType="default">Submit</button>
+
+
+</nz-content>

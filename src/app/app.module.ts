@@ -13,16 +13,24 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { PaymentComponent } from './payment/payment.component';
 import { PaymentService } from './payment.service';
-import { RatingComponent } from './rating/rating.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { PlaceOrderComponent } from './place-order/place-order.component';
+import { OrdersComponent } from './orders/orders.component';
+import { FeedbackDisplaysComponent } from './feedback-displays/feedback-displays.component';
+import { DisputesComponent } from './disputes/disputes.component';
+import { NewDisputeComponent } from './new-dispute/new-dispute.component';
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
     PaymentComponent,
-    RatingComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    PlaceOrderComponent,
+    OrdersComponent,
+    FeedbackDisplaysComponent,
+    DisputesComponent,
+    NewDisputeComponent
   ],
   imports: [
     BrowserModule,
