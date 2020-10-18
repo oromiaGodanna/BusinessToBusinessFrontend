@@ -1,81 +1,191 @@
+<nz-content>
+    <h3 nz-typography class="align-center page-header-1">Place Order</h3>
 
-<nz-layout>
-    <nz-header>Place Order</nz-header>
-    
-    <nz-content>
-        <div nz-row>
-            <div nz-col nzSpan="14">
-                <h4 nz-typography class="align-center">Shipping Address</h4>
+    <div nz-row>
+        <div nz-col nzSpan="13">
+            <ng-container *ngIf="!next;else termsAndPolicies">
+                <h3 class="align-center page-header-2">Shipping Address</h3>
+
                 <div class="form-group">
-                    <form nz-form [formGroup]="addressForm" >
+                    <form nz-form [formGroup]="addressForm" (ngSubmit)="onSubmit(addressForm.value)">
                         <nz-form-item>
-                            <nz-form-label [nzSpan]="6" nzRequired>First Names</nz-form-label>
-                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your First Names!">
-                                <input nz-input type="text" formControlName="firstName" />
-                              </nz-form-control>
+                            <nz-form-label [nzSpan]="8">First Names</nz-form-label>
+                            <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
+                                nzErrorTip="Please input your First Names!">
+                                <input nz-input type="text" formControlName="firstName" placeholder="First names" />
+                            </nz-form-control>
                         </nz-form-item>
                         <nz-form-item>
-                            <nz-form-label [nzSpan]="6" nzRequired>Last Name</nz-form-label>
-                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Last Name!">
-                                <input nz-input type="text" formControlName="lastName" />
-                              </nz-form-control>
+                            <nz-form-label [nzSpan]="8">Last Name</nz-form-label>
+                            <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
+                                nzErrorTip="Please input your Last Name!">
+                                <input nz-input type="text" formControlName="lastName" placeholder="Last Name" />
+                            </nz-form-control>
                         </nz-form-item>
                         <nz-form-item>
-                            <nz-form-label [nzSpan]="6" nzRequired>Company Name</nz-form-label>
-                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Company Name!">
-                                <input nz-input type="text" formControlName="companyName" />
-                              </nz-form-control>
+                            <nz-form-label [nzSpan]="8">Company Name</nz-form-label>
+                            <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
+                                nzErrorTip="Please input your Company Name!">
+                                <input nz-input type="text" formControlName="companyName" placeholder="Company Name" />
+                            </nz-form-control>
                         </nz-form-item>
                         <nz-form-item>
-                            <nz-form-label [nzSpan]="6" nzRequired>Company Address Line 1</nz-form-label>
-                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Credit Card Id!">
-                                <input nz-input type="text" formControlName="creditCardId" />
-                              </nz-form-control>
+                            <nz-form-label [nzSpan]="8">Company Address Line 1</nz-form-label>
+                            <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
+                                nzErrorTip="Please input your company address!">
+                                <input nz-input type="text" formControlName="companyAddress1"
+                                    placeholder="Address(Sub city, Woreda, house number...)" />
+                            </nz-form-control>
                         </nz-form-item>
                         <nz-form-item>
-                            <nz-form-label [nzSpan]="6">Company Address Line 2</nz-form-label>
-                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Credit Card Id!">
-                                <input nz-input type="text" formControlName="creditCardId" />
-                              </nz-form-control>
+                            <nz-form-label [nzSpan]="8">Company Address Line 2</nz-form-label>
+                            <nz-form-control [nzSpan]="12" [nzOffset]="0.5">
+                                <input nz-input type="text" formControlName="companyAddress2"
+                                    placeholder="Address(optional)" />
+                            </nz-form-control>
                         </nz-form-item>
                         <nz-form-item>
-                            <nz-form-label [nzSpan]="6" nzRequired>City</nz-form-label>
-                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Credit Card Id!">
-                                <input nz-input type="text" formControlName="creditCardId" />
-                              </nz-form-control>
+                            <nz-form-label [nzSpan]="8">City</nz-form-label>
+                            <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
+                                nzErrorTip="Please input city name!">
+                                <input nz-input type="text" formControlName="city" placeholder="city" />
+                            </nz-form-control>
                         </nz-form-item>
                         <nz-form-item>
-                            <nz-form-label [nzSpan]="6" nzRequired>Postal code</nz-form-label>
-                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Credit Card Id!">
-                                <input nz-input type="text" formControlName="creditCardId" />
-                              </nz-form-control>
+                            <nz-form-label [nzSpan]="8">Postal code</nz-form-label>
+                            <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
+                                nzErrorTip="Please input your postal code!">
+                                <input nz-input type="text" formControlName="poBox" placeholder="Postal Code" />
+                            </nz-form-control>
                         </nz-form-item>
                         <nz-form-item>
-                            <nz-form-label [nzSpan]="6" nzRequired>Phone number 1</nz-form-label>
-                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Credit Card Id!">
-                                <input nz-input type="text" formControlName="creditCardId" />
-                              </nz-form-control>
+                            <nz-form-label [nzSpan]="8">Phone number 1</nz-form-label>
+                            <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
+                                nzErrorTip="Please input your phone number!">
+                                <input nz-input type="text" formControlName="phoneNumber1"
+                                    placeholder="Primary phone number" />
+                            </nz-form-control>
                         </nz-form-item>
                         <nz-form-item>
-                            <nz-form-label [nzSpan]="6" nzRequired>Phone number 2</nz-form-label>
-                            <nz-form-control [nzSpan]="12" nzHasFeedback nzErrorTip="Please input your Credit Card Id!">
-                                <input nz-input type="text" formControlName="creditCardId" />
-                              </nz-form-control>
+                            <nz-form-label [nzSpan]="8">Phone number 2</nz-form-label>
+                            <nz-form-control [nzSpan]="12" [nzOffset]="0.5">
+                                <input nz-input type="text" formControlName="phoneNumber2"
+                                    placeholder="Phone number(ptional)" />
+                            </nz-form-control>
                         </nz-form-item>
                         <nz-form-item>
-                            <nz-form-control [nzOffset]="7" [nzSpan]="12">
-                              <!-- <button nz-button nzType="primary" [disabled]="!paymentForm.valid">Submit</button> -->
+                            <nz-form-control [nzOffset]="18" [nzSpan]="6">
+                                <button nz-button nzType="primary" [disabled]="!addressForm.valid">Next</button>
                             </nz-form-control>
                         </nz-form-item>
                     </form>
                 </div>
-            </div>
-            <div nz-col nzSpan="10">
-                <h4 nz-typography class="align-center">Order Summary</h4>
-                
-            </div>
+            </ng-container>
+            <ng-template #termsAndPolicies>
+
+                <div nz-col [nzSpan]="22">
+                    <h3 class="align-center page-header-2 termsOfServices" [nzSpan]="20">Terms of Services</h3>
+
+                    <div class="scrollable-container">
+                        <h4><strong> ipsum dolor sit amet</strong></h4>
+                        <p>consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Sagittis vitae et leo duis ut diam quam. Mauris pellentesque
+                        pulvinar pellentesque habitant morbi.</p>
+                        <ul>
+                        
+                            <li>Auctor augue mauris augue neque gravida in fermentum et. </li>
+                            <li>In nisl nisi scelerisque eu ultrices vitae auctor. Vel facilisis volutpat est velit egestas dui
+                        id ornare.</li>
+                            <li>Senectus et netus et malesuada fames ac turpis egestas sed. Aliquet enim tortor at
+                        auctor urna nunc id.</li>
+                            <li>Cras pulvinar mattis nunc sed blandit. Volutpat lacus laoreet non
+                                curabitur.</li>
+                            
+                        </ul>
+                        Congue nisi vitae suscipit tellus mauris a. Amet volutpat consequat mauris nunc
+                        congue nisi vitae suscipit tellus. Vestibulum lectus mauris ultrices eros in. Suspendisse
+                        faucibus interdum posuere lorem ipsum dolor sit. Ac turpis egestas integer eget aliquet nibh.
+                        Sed velit dignissim sodales ut eu sem. At auctor urna nunc id cursus metus aliquam. Cursus risus
+                        at ultrices mi tempus imperdiet nulla. Est ullamcorper eget nulla facilisi etiam dignissim diam
+                        quis.
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <form nz-form [formGroup]="agreementForm" (ngSubmit)="onSubmit(agreementForm.value)">
+                        <nz-form-item class="agreeLabel">
+                            <nz-form-label [nzSpan]="18" nzRequired>Accept Terms</nz-form-label>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-control [nzSpan]="18">
+                                <label nz-checkbox formControlName="agree">
+                                    <span>I have read and agree to the Terms of Services.</span>
+                                </label>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-control [nzOffset]="14" [nzSpan]="3">
+                                <button nz-button nzType="default">Cancel</button>
+                            </nz-form-control>
+                            <nz-form-control [nzOffset]="1" [nzSpan]="6">
+                                <button nz-button nzType="primary" [disabled]="!agreementForm.value.agree">Place
+                                    Order</button>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </form>
+                </div>
+
+            </ng-template>
+
         </div>
-    </nz-content>
-    
-    
-</nz-layout>
+        <div nz-col nzSpan="10" class="order-summary">
+            <h3 class="align-center">Order Summary</h3>
+            <nz-divider></nz-divider>
+            <div class="order-items-summary">
+                <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
+                    <nz-list-item *ngFor="let item of data">
+                        <nz-list-item-meta>
+                            <nz-list-item-meta-avatar [nzSrc]="item.avatar"> </nz-list-item-meta-avatar>
+                            <nz-list-item-meta-title>
+                                <a href="{{ item.href }}">{{ item.title }}</a>
+                            </nz-list-item-meta-title>
+                            <nz-list-item-meta-description>
+                                {{ item.description }}
+                            </nz-list-item-meta-description>
+                        </nz-list-item-meta>
+                        <nz-list-item-extra>
+                            {{ item.price }}$
+                        </nz-list-item-extra>
+                    </nz-list-item>
+                    <nz-list-empty *ngIf="data.length === 0"></nz-list-empty>
+                </nz-list>
+
+            </div>
+            <nz-divider></nz-divider>
+
+            <div class="payment-summary">
+                <div nz-row>
+                    <div nz-col [nzSpan]="18" [nzOffset]="1">Subtotal</div>
+                    <div nz-col [nzSpan]="4" [nzOffset]="1">589.25 $</div>
+
+                </div>
+                <div nz-row>
+                    <div nz-col [nzSpan]="18" [nzOffset]="1">Shipping</div>
+                    <div nz-col [nzSpan]="4" [nzOffset]="1"></div>
+
+                </div>
+                <div nz-row>
+                    <div nz-col [nzSpan]="18" [nzOffset]="1">Taxes</div>
+                    <div nz-col [nzSpan]="4" [nzOffset]="1"></div>
+
+                </div>
+                <nz-divider></nz-divider>
+                <div nz-row>
+                    <div nz-col [nzSpan]="18" [nzOffset]="1">Total</div>
+                    <div nz-col [nzSpan]="4" [nzOffset]="1"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</nz-content>

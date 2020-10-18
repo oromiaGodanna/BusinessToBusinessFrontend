@@ -10,7 +10,6 @@ import { PaymentService } from '../payment.service';
 })
 export class PaymentComponent implements OnInit {
   paymentForm: FormGroup;
-  str = 'Hleo wid';
   constructor(private paymentService: PaymentService, private fb: FormBuilder) {
     this.paymentForm = this.fb.group({
       creditCardId: ['', [Validators.required], [this.creditCardAsyncValidator]]
@@ -18,7 +17,6 @@ export class PaymentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.str.replace(/\s/g, '').length);
   }
   creditCardAsyncValidator = (control: FormControl) => new Observable((observer: Observer<ValidationErrors | null>) => {
     setTimeout(() => {
@@ -32,8 +30,10 @@ export class PaymentComponent implements OnInit {
       observer.complete();
     }, 1000);
   })
-  onSubmit(value: { userName: string}): void{
+  onSubmit(value: { creditCardId: string}): void{
    const paymentObj = this.paymentService.addPayment();
    console.log(paymentObj);
+   console.log(value);
+
   }
 }
