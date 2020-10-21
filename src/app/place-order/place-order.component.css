@@ -65,7 +65,7 @@ nz-list-item-meta-avatar{
 }
 .order-items-summary{
     
-    max-height: 200px;
+    max-height: 290px;
     overflow-y: scroll;
 }
 .ant-avatar {

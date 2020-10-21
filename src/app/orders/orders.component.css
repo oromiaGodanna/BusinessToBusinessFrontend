@@ -1,0 +1,62 @@
+.order-list div:not(:last-child) .ant-card-bordered, .order-list-header div:not(:last-child){
+    border-right: 0px;
+}
+.order-list div:not(:first-child) .ant-card-bordered, .order-list-header div:not(:first-child) {
+    border-left: 0px;
+}
+.order-list div .ant-card-bordered{
+    height: 100%;
+}
+.order-list-header{
+    color: rgba(0,0,0,.85);
+    font-weight: 600;
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    
+}
+.order-list-header div{
+    padding: 14px 24px;
+    border: 1px;
+    border: 1px solid #f0f0f0;
+    border-bottom: 0px;
+    
+}
+.order-list-header div:last-child{
+    text-align: center;
+}
+.order-list .ant-card{
+    color: rgba(0,0,0,.85);
+    font-weight: 500;
+    font-size: 12px !important;
+    font-variant: tabular-nums;
+    line-height: 1.45;
+}
+.order-summary-image{
+    position: relative;
+}
+.paginate-orders .ant-pagination{
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+}
+.order-summary-image img{
+    width: 135px;
+    height: 100px;
+}
+.no-of-items{
+    position: absolute;
+    top: 78%;
+    left: 40%;
+    background-color: rgba(255, 255, 255, 0.7);
+    transform: translate(-50%, -50%);
+    width: 135px;
+    text-align: center;
+}
+.order-actions button{
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+}

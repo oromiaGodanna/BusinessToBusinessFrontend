@@ -12,7 +12,7 @@ export class PlaceOrderComponent implements OnInit {
   addressForm: FormGroup;
   agreementForm: FormGroup;
   loading = false;
-  next = true;
+  next = false;
   data = [
     {
       title: 'Ant Design Title 1',

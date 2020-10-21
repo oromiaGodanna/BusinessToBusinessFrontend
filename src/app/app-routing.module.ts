@@ -9,13 +9,14 @@ import { PaymentComponent } from './payment/payment.component';
 import { PlaceOrderComponent } from './place-order/place-order.component';
 
 const routes: Routes = [
-  { path: 'disputes-component', component: DisputesComponent },
-  { path: 'feedback-component', component: FeedbackComponent },
-  { path: 'feedbackDisplays-component', component: FeedbackDisplaysComponent },
-  { path: 'newDispute-component', component: NewDisputeComponent },
-  { path: 'orders-component', component: OrdersComponent },
-  { path: 'payment-component', component: PaymentComponent },
-  { path: 'placeOrder-component', component: PlaceOrderComponent },
+  { path: '',   redirectTo: '/place-order', pathMatch: 'full' },
+  { path: 'disputes', component: DisputesComponent },
+  { path: 'feedback', component: FeedbackComponent },
+  { path: 'feedback-displays', component: FeedbackDisplaysComponent },
+  { path: 'new-dispute', component: NewDisputeComponent },
+  { path: 'orders', component: OrdersComponent },
+  { path: 'payment', component: PaymentComponent },
+  { path: 'place-order', component: PlaceOrderComponent },
 ];
 
 @NgModule({
