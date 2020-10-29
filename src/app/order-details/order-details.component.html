@@ -1,0 +1,255 @@
+<nz-content>
+  <h3 nz-typography>Order Details</h3>
+  <span>Order ID: #11-5866525555</span>
+  <nz-steps nzType="navigation" nzSize="small" [nzCurrent]="index" (nzIndexChange)="onIndexChange($event)">
+      <nz-step nzTitle="Confirm Order" [nzDisabled]="true" nzStatus="finish"></nz-step>
+      <nz-step nzTitle=" Payment" [nzDisabled]="true" nzStatus="process"></nz-step>
+      <nz-step nzTitle="Shipment" [nzDisabled]="true" nzStatus="wait"></nz-step>
+      <nz-step nzTitle="Confirm Receipt" [nzDisabled]="true" nzStatus="wait"></nz-step>
+  </nz-steps>
+  <nz-card class="order-details-card" style="width:100%;">
+    <div nz-row>
+      <div nz-col [nzSpan]="16">
+        <ng-container [ngTemplateOutlet]="orderStatusWaitingForInitialPayment">
+          </ng-container>
+      </div>
+      <div nz-col [nzOffset]="1" [nzSpan]="7">
+         <nz-card>
+           <div nz-row class="order-details-left-card">
+             <div nz-col ><strong>Supplier</strong> </div>
+             <nz-divider></nz-divider>
+             <div nz-col [nzOffset]="1" [nzSpan]="16"> Oromia Sero 922854740<br>
+            </div>
+           </div>
+           <div nz-row class="order-details-left-card">
+            <div nz-col ><strong>Billing Information</strong> </div>
+            <nz-divider></nz-divider>
+            <div nz-col [nzOffset]="1" [nzSpan]="16"> Oromia Sero 922854740<br>
+              Addis ababa Ethiopia 25688</div>
+          </div>
+           <div nz-row class="order-details-left-card">
+            <div nz-col ><strong>Shipping Information</strong> </div>
+            <nz-divider></nz-divider>
+            <div nz-col [nzOffset]="1" [nzSpan]="16"> Oromia Sero 922854740<br>
+              Addis ababa Ethiopia 25688</div>
+          </div>
+          
+         </nz-card>
+      </div>
+      </div>
+    
+  </nz-card>
+  <nz-divider></nz-divider>
+  <div class="items-list">
+    <div nz-row>
+      <div nz-col nzSpan="8">
+        <h4 nz-typography>Order Items</h4>
+      </div>
+      <div nz-col nzOffset="8" nzSpan="8" class="align-right">
+        <button nz-button nzType="default" routerLink="/orders" routerLinkActive="active">Repurchase</button>
+      </div>
+    </div>
+    
+    <nz-table #basicTable [nzData]="listOfData" [nzFrontPagination]="false">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Address</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{ data.name }}</td>
+          <td>{{ data.age }}</td>
+          <td>{{ data.address }}</td>
+          <td>
+            <a>Action 一 {{ data.name }}</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a>Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <div class="payment-summary">
+    <div nz-row>
+      <div nz-col nzOffset="16" nzSpan="8">
+        <h4><strong>Payment Method: </strong> Apple pay </h4>
+        <nz-divider></nz-divider>
+        <div nz-row>
+          <div nz-col nzSpan="8">Retail Price: </div>
+          <div nz-col class="align-right" nzOffset="8"nzSpan="8">$254.26</div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="8">Sub Total: </div>
+          <div nz-col nzOffset="8"nzSpan="8" class="align-right">$253.56</div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="8">Shipping Fee: </div>
+          <div nz-col nzOffset="8"nzSpan="8" class="align-right">Free</div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="8">Discount</div>
+          <div nz-col nzOffset="8"nzSpan="8" class="align-right">-56.25</div>
+        </div>
+        <nz-divider></nz-divider>
+        <div nz-row>
+          <div nz-col nzSpan="8"><strong>Total: </strong></div>
+          <div nz-col nzOffset="8"nzSpan="8" class="align-right"><strong>$298.25</strong></div>
+        </div>
+        <nz-divider></nz-divider>
+      </div>
+    </div>
+  </div>
+  
+</nz-content>
+<ng-template #random>
+  <div class="order-status-details">
+    <div nz-row>
+      <h4 nz-col [nzSpan]="2">Status: </h4>
+      <span nz-col [nzOffset]="1" [nzSpan]="20" class="order-status"><strong>Waiting for order confirmation</strong></span>
+    </div>
+    <div nz-row>
+      <h4 nz-col [nzSpan]="2"> Reminder: </h4>
+      <ul  nz-col [nzOffset]="1" [nzSpan]="20"  class="order-reminders">
+        <li>1. please complete your intial payment within ---- . Otherwise the supplier has the right to cancel this order directly.</li>
+        <li>2. If you are uncertain about the shipment method and shipping fee please contact the supplier to confirm or modify your order.</li>
+        <li>1. please complete your intial payment within ---- . Otherwise the supplier has the right to cancel this order directly.</li>
+        <li>2. If you are uncertain about the shipment method and shipping fee please contact the supplier to confirm or modify your order.</li>
+      </ul>
+    </div>
+    <div nz-row>
+      <div [nzOffset]="3"  nz-col>
+        <button nz-button nzType="primary" routerLink="/orders" routerLinkActive="active">Cancel</button>
+      </div>
+      <div [nzOffset]="1" nz-col>
+        <button nz-button nzType="primary" routerLink="/orders" routerLinkActive="active">Modify</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #orderStatusWaitingForInitialPayment>
+  <div class="order-status-details">
+    <div nz-row>
+      <h4 nz-col [nzSpan]="2">Status: </h4>
+      <span nz-col [nzOffset]="1" [nzSpan]="20" class="order-status"><strong>Waiting for initial payment</strong></span>
+    </div>
+    <div nz-row>
+      <h4 nz-col [nzSpan]="2"> Reminder: </h4>
+      <ul  nz-col [nzOffset]="1" [nzSpan]="20"  class="order-reminders">
+        <li>1. please complete your intial payment within ---- . Otherwise the supplier has the right to cancel this order directly.</li>
+        <li>2. If you are uncertain about the shipment method and shipping fee please contact the supplier to confirm or modify your order.</li>
+        <li>1. please complete your intial payment within ---- . Otherwise the supplier has the right to cancel this order directly.</li>
+        <li>2. If you are uncertain about the shipment method and shipping fee please contact the supplier to confirm or modify your order.</li>
+      </ul>
+    </div>
+    <div nz-row>
+      <div [nzOffset]="3"  nz-col>
+        <button nz-button nzType="primary" routerLink="/payment" routerLinkActive="active">Pay Intital Payment</button>
+      </div>
+      <div [nzOffset]="1" nz-col>
+        <button nz-button nzType="primary" routerLink="/orders" routerLinkActive="active">Cancel</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #orderStatusWaitingForFinalPayment>
+  <div class="order-status-details">
+    <div nz-row>
+      <h4 nz-col [nzSpan]="2">Status: </h4>
+      <span nz-col [nzOffset]="1" [nzSpan]="20" class="order-status"><strong>Waiting for final payment</strong></span>
+    </div>
+    <div nz-row>
+      <h4 nz-col [nzSpan]="2"> Reminder: </h4>
+      <ul  nz-col [nzOffset]="1" [nzSpan]="20"  class="order-reminders">
+        <li>1. please complete your intial payment within ---- . Otherwise the supplier has the right to cancel this order directly.</li>
+        <li>2. If you are uncertain about the shipment method and shipping fee please contact the supplier to confirm or modify your order.</li>
+        <li>1. please complete your intial payment within ---- . Otherwise the supplier has the right to cancel this order directly.</li>
+        <li>2. If you are uncertain about the shipment method and shipping fee please contact the supplier to confirm or modify your order.</li>
+      </ul>
+    </div>
+    <div nz-row>
+      <div [nzOffset]="3"  nz-col>
+        <button nz-button nzType="primary" routerLink="/orders" routerLinkActive="active">Pay the Balance</button>
+      </div>
+      <div [nzOffset]="1" nz-col>
+        <button nz-button nzType="primary" routerLink="/orders" routerLinkActive="active">Request Refund</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #orderStatusWaitingForShipment>
+  <div class="order-status-details">
+    <div nz-row>
+      <h4 nz-col [nzSpan]="2">Status: </h4>
+      <span nz-col [nzOffset]="1" [nzSpan]="20" class="order-status"><strong>Waiting for supplier to ship order</strong></span>
+    </div>
+    <div nz-row>
+      <h4 nz-col [nzSpan]="2"> Reminder: </h4>
+      <ul  nz-col [nzOffset]="1" [nzSpan]="20"  class="order-reminders">
+        <li>1. please complete your intial payment within ---- . Otherwise the supplier has the right to cancel this order directly.</li>
+        <li>2. If you are uncertain about the shipment method and shipping fee please contact the supplier to confirm or modify your order.</li>
+        <li>1. please complete your intial payment within ---- . Otherwise the supplier has the right to cancel this order directly.</li>
+        <li>2. If you are uncertain about the shipment method and shipping fee please contact the supplier to confirm or modify your order.</li>
+      </ul>
+    </div>
+    <div nz-row>
+      <div [nzOffset]="3"  nz-col>
+        <button nz-button nzType="primary" routerLink="/orders" routerLinkActive="active">Request Refund</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #orderStatusWaitingForDeliveryConfirmation>
+  <div class="order-status-details">
+    <div nz-row>
+      <h4 nz-col [nzSpan]="2">Status: </h4>
+      <span nz-col [nzOffset]="1" [nzSpan]="20" class="order-status"><strong>Waiting for delivery confirmation</strong></span>
+    </div>
+    <div nz-row>
+      <h4 nz-col [nzSpan]="2"> Reminder: </h4>
+      <ul  nz-col [nzOffset]="1" [nzSpan]="20"  class="order-reminders">
+        <li>1. please complete your intial payment within ---- . Otherwise the supplier has the right to cancel this order directly.</li>
+        <li>2. If you are uncertain about the shipment method and shipping fee please contact the supplier to confirm or modify your order.</li>
+        <li>1. please complete your intial payment within ---- . Otherwise the supplier has the right to cancel this order directly.</li>
+        <li>2. If you are uncertain about the shipment method and shipping fee please contact the supplier to confirm or modify your order.</li>
+      </ul>
+    </div>
+    <div nz-row>
+      <div [nzOffset]="3"  nz-col>
+        <button nz-button nzType="primary" routerLink="/orders" routerLinkActive="active">Confirm Delivery</button>
+      </div>
+      <div [nzOffset]="1" nz-col>
+        <button nz-button nzType="primary" routerLink="/orders" routerLinkActive="active">Request Refund</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #orderStatusDelivered>
+  <div class="order-status-details">
+    <div nz-row>
+      <h4 nz-col [nzSpan]="2">Status: </h4>
+      <span nz-col [nzOffset]="1" [nzSpan]="20" class="order-status"><strong>Order Delivered.</strong></span>
+    </div>
+    <div nz-row>
+      <h4 nz-col [nzSpan]="2"> Reminder: </h4>
+      <ul  nz-col [nzOffset]="1" [nzSpan]="20"  class="order-reminders">
+        <li>1. please complete your intial payment within ---- . Otherwise the supplier has the right to cancel this order directly.</li>
+        <li>2. If you are uncertain about the shipment method and shipping fee please contact the supplier to confirm or modify your order.</li>
+        <li>1. please complete your intial payment within ---- . Otherwise the supplier has the right to cancel this order directly.</li>
+        <li>2. If you are uncertain about the shipment method and shipping fee please contact the supplier to confirm or modify your order.</li>
+      </ul>
+    </div>
+    <div nz-row>
+      <div [nzOffset]="3"  nz-col>
+        <button nz-button nzType="primary" routerLink="/orders" routerLinkActive="active">Close Reciept</button>
+      </div>
+      <div [nzOffset]="1" nz-col>
+        <button nz-button nzType="primary" routerLink="/orders" routerLinkActive="active">Request Refund</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

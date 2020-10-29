@@ -4,6 +4,7 @@ import { DisputesComponent } from './disputes/disputes.component';
 import { FeedbackDisplaysComponent } from './feedback-displays/feedback-displays.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { NewDisputeComponent } from './new-dispute/new-dispute.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 import { OrdersComponent } from './orders/orders.component';
 import { PaymentComponent } from './payment/payment.component';
 import { PlaceOrderComponent } from './place-order/place-order.component';
@@ -17,6 +18,8 @@ const routes: Routes = [
   { path: 'orders', component: OrdersComponent },
   { path: 'payment', component: PaymentComponent },
   { path: 'place-order', component: PlaceOrderComponent },
+  { path: 'order-details', component: OrderDetailsComponent },
+
 ];
 
 @NgModule({
