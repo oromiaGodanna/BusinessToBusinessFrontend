@@ -1,55 +1,85 @@
-
 <nz-content>
     <h4 nz-typography class="align-center">Leave feedback about this order</h4>
-    <!-- add product img and name here -->
-    <div>
-        <nz-divider></nz-divider>
-        <p nz-typography class="align-center"><strong>please rate this transaction</strong></p>
-        <p nz-typography nzType="secondary"><strong>Rating features: </strong> </p>
-        <div nz-row nzAlign="bottom">    
-            <span nz-col nzSpan="8">Supplier service and communication</span>
-            <nz-rate nz-col nzSpan="6" nzOffset="2" [ngModel]="2.5" nzAllowHalf></nz-rate>
-        </div>
-        <div nz-row nzAlign="bottom">
-            <span nz-col nzSpan="8">On time shipment</span>
-            <nz-rate nz-col nzSpan="6" nzOffset="2" [ngModel]="2.5" nzAllowHalf></nz-rate>
-        </div>
-        <div nz-row nzAlign="bottom">
-            <span nz-col nzSpan="8">Product quality</span>
-            <nz-rate nz-col nzSpan="6" nzOffset="2"  [ngModel]="2.5" nzAllowHalf></nz-rate>
-        </div>
-    </div>
-    <nz-divider [nzText]="ratings" nzOrientation="left">
-        <ng-template #ratings>Overall rating: <nz-rate [ngModel]="2.5" nzAllowHalf nzDisabled></nz-rate></ng-template>
-      </nz-divider>
-    <div>
-        <p nz-typography class="align-center"><strong>Please write a review</strong> </p>
-        <input nz-input placeholder="Add a headline" style="width: 50%;"/>
-        <br /><br />
-        <p nz-typography >write your review: </p>
-        <textarea rows="4" nz-input style="width: 50%;"></textarea>
-    </div>
     <nz-divider></nz-divider>
-    <div>
-        <p nz-typography class="align-center"><strong>Upload picture or video of the product</strong></p>
-        <nz-upload
-      class="avatar-uploader"
-      nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-      nzName="avatar"
-      nzListType="picture-card"
-      [nzShowUploadList]="false"
-      [nzBeforeUpload]="beforeUpload"
-      (nzChange)="handleChange($event)"
-    >
-      <ng-container *ngIf="!avatarUrl">
-        <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
-        <div class="ant-upload-text">Upload</div>
-      </ng-container>
-      <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
-    </nz-upload>
-    </div>
-    <nz-divider></nz-divider>
-    <button nz-button nzType="default">Submit</button>
+    <div nz-row>
+        <div nz-col nzSpan="5">
+            <img alt="example" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" width="150px"
+                height="150px" />
+            <div class="order-write-review-left">
+                <ul>
+                    <li class="order-item-name"><strong>Name of the product</strong></li>
+                    <li>Description: Large</li>
+                    <li>QTY: 2</li>
+                </ul>
+            </div>
+        </div>
 
+
+        <div nz-col nzOffset="1" nzSpan="16">
+            <div nz-row nzAlign="bottom" class="order-review-right-rating">
+                <span class="right-title" nz-col nz-typography nzSpan="4"><strong>Rating </strong></span>
+                <div nz-col nzSpan="12" nzOffset="2">
+                    <nz-rate [(ngModel)]="value" [nzTooltips]="tooltips"></nz-rate>
+                    <span *ngIf="value" class="ant-rate-text">{{ value ? tooltips[value - 1] : '' }}</span>
+                </div>
+
+            </div>
+
+            <div nz-row class="order-review-right-review">
+                <span class="right-title" nz-col nzSpan="4" nz-typography><strong>Review Content</strong></span>
+                <div nz-col nzSpan="12" nzOffset="2">
+                    <textarea rows="4" nz-input></textarea>
+
+                </div>
+            </div>
+            <div nz-row>
+                <div nz-col nzSpan="3" nzOffset="6">
+                    <nz-upload nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" [nzFileList]="fileList"
+                        (nzChange)="handleChange($event)">
+                        <button nz-button><i nz-icon nzType="upload"></i>Upload</button>
+                    </nz-upload>
+                </div>
+                <div nz-col nzSpan="12" nzOffset="1" class="feedback-upload-description">
+                    <span>0/3</span>
+                    <span> Upload a picture of delivered items</span>
+                </div>
+                <div nz-col nzSpan="16" nzOffset="6" class="feedback-upload-description"> 
+                    <span>
+                        Format only: JPEG,GIF or PNG(8MB max); Minimum: 500*680 px.Please upload clear, well-lit images which contain ordered product(s)
+                    </span>
+                </div>
+            </div>
+            <div nz-row nzAlign="bottom" class="view-additional-rating" (click)="viewAdditionalRaing()">
+                <span class="right-title" nz-col nzSpan="4" nz-typography><strong>Additional review</strong></span>
+                <span class="additional-detailed-review">Give detailed rating</span>
+            </div>
+            <div>
+                <ng-container *ngIf="!viewAdditional;else additionalRatings"></ng-container>
+
+            </div>
+
+
+            <nz-divider></nz-divider>
+        </div>
+        <div nz-col nzOffset="6" nzSpan="12" class="align-right bottom-buttons">
+            <button nz-button nzType="default">Cancel</button>
+            <button nz-button nzType="primary">Leave Feedback</button>
+        </div>
+
+    </div>
+    <ng-template #additionalRatings>
+        <div nz-row nzAlign="bottom">
+            <span nz-col nzSpan="8" nzOffset="1">Supplier service and communication</span>
+            <nz-rate nz-col nzSpan="8" nzOffset="4" [ngModel]="2.5" nzAllowHalf></nz-rate>
+        </div>
+        <div nz-row nzAlign="bottom">
+            <span nz-col nzSpan="8" nzOffset="1">On time shipment</span>
+            <nz-rate nz-col nzSpan="8" nzOffset="4" [ngModel]="2.5" nzAllowHalf></nz-rate>
+        </div>
+        <div nz-row nzAlign="bottom">
+            <span nz-col nzSpan="8" nzOffset="1">Product quality</span>
+            <nz-rate nz-col nzSpan="8" nzOffset="4" [ngModel]="2.5" nzAllowHalf></nz-rate>
+        </div>
+    </ng-template>
 
 </nz-content>

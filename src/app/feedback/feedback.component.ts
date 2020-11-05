@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NzMessageService, NzUploadFile } from 'ng-zorro-antd';
+import { NzMessageService, NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd';
 import { Observable, Observer } from 'rxjs';
 
 @Component({
@@ -8,53 +8,47 @@ import { Observable, Observer } from 'rxjs';
   styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent implements OnInit {
+  constructor(private msg: NzMessageService) {}
+  tooltips = ['Very Dissatisfied', 'Dissatisfied', 'Fair', 'Satisfied', 'Very Satisfied'];
+  value = 3;
+  viewAdditional = false;
   loading = false;
   avatarUrl?: string;
-  constructor(private msg: NzMessageService) {}
+  fileList: NzUploadFile[] = [
+    {
+      uid: '-1',
+      name: 'xxx.png',
+      status: 'done',
+      url: 'http://www.baidu.com/xxx.png'
+    }
+  ];
 
   ngOnInit(): void {
   }
-  beforeUpload = (file: NzUploadFile, fileList: NzUploadFile[]) => {
-    return new Observable((observer: Observer<boolean>) => {
-      const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-      if (!isJpgOrPng) {
-        this.msg.error('You can only upload JPG file!');
-        observer.complete();
-        return;
+
+  handleChange(info: NzUploadChangeParam): void {
+    let fileList = [...info.fileList];
+
+    // 1. Limit the number of uploaded files
+    // Only to show two recent uploaded files, and old ones will be replaced by the new
+    fileList = fileList.slice(-2);
+
+    // 2. Read from response and show file link
+    fileList = fileList.map(file => {
+      if (file.response) {
+        // Component will show file.url as link
+        file.url = file.response.url;
       }
-      const isLt2M = file.size / 1024 / 1024 < 2;
-      if (!isLt2M) {
-        this.msg.error('Image must smaller than 2MB!');
-        observer.complete();
-        return;
-      }
-      observer.next(isJpgOrPng && isLt2M);
-      observer.complete();
+      return file;
     });
-  }
 
-  private getBase64(img: File, callback: (img: string) => void): void {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => callback(reader.result.toString()));
-    reader.readAsDataURL(img);
+    this.fileList = fileList;
   }
-
-  handleChange(info: { file: NzUploadFile }): void {
-    switch (info.file.status) {
-      case 'uploading':
-        this.loading = true;
-        break;
-      case 'done':
-        // Get this url from response in real world.
-        this.getBase64(info.file.originFileObj, (img: string) => {
-          this.loading = false;
-          this.avatarUrl = img;
-        });
-        break;
-      case 'error':
-        this.msg.error('Network error');
-        this.loading = false;
-        break;
+  viewAdditionalRaing(): void{
+    if (this.viewAdditional === false){
+      this.viewAdditional = true;
+    }else{
+      this.viewAdditional = false;
     }
   }
 

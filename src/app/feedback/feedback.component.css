@@ -1,7 +1,50 @@
 .align-center{
     text-align: center;
 }
+
 :host ::ng-deep .avatar-uploader > .ant-upload {
     width: 128px;
     height: 128px;
   }
+.align-right{
+    text-align: right;
+}
+.bottom-buttons button:not(:last-child){
+    margin-right: 15px;
+}
+ul {
+    list-style-type:none !important;
+    padding-inline-start: 0px;
+}
+.right-title{
+    font-size: 14px;
+    color: #222;
+    font-weight: 700;
+    line-height: 1.15;
+}
+.order-write-review-left{
+    padding: 0px 0px 5px;
+}
+.order-item-name, .order-item-reivew-right{
+    color: #222;
+    padding: 10px 0 5px;
+}
+.order-review-right-rating, .order-review-right-review{
+    padding: 0px 0px 20px;
+}
+.feedback-upload-description span{
+    display: block;
+}
+.feedback-upload-description, .additional-detailed-review{
+    line-height: 14px;
+    font-size: 11px;
+    color: #999;
+    
+}
+.feedback-upload-description{
+    padding-top: 6px;
+}
+.view-additional-rating{
+    cursor: pointer;
+    margin: 14px 0px ;
+}
