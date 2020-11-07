@@ -1,5 +1,89 @@
 <nz-content>
-    <h3 nz-typography class="align-center page-header-1">Place Order</h3>
+    <h3 nz-typography class="align-center">Create Dispute</h3>
+    <h5 class="align-center">Please complete the dispute form below to request refund</h5>
+    <nz-divider></nz-divider>
+    <div class="form-group">
+        <form nz-form [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" nzRequired>Did you receive your order?</nz-form-label>
+                <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
+                    nzErrorTip="Please select an option!"
+                    nzExtra="Only answer yes if you have recived goods from the supplier!"
+                    >
+                    <nz-radio-group>
+                        <label nz-radio nzValue="Yes">Yes</label>
+                        <label nz-radio nzValue="No">No</label>
+                      </nz-radio-group>
+                  
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" nzRequired>Did you ship the order back?</nz-form-label>
+                <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
+                    nzErrorTip="Please select an option!"
+                    >
+                    <nz-radio-group>
+                        <label nz-radio nzValue="Yes">Yes</label>
+                        <label nz-radio nzValue="No">No</label>
+                      </nz-radio-group>
+                  
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" >Payment received</nz-form-label>
+                <label class="total-payment-recived" > $205.25</label>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" nzRequired>Refund Requested</nz-form-label>
+                <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
+                    nzErrorTip="Please select an option!"
+                    >
+                    <nz-radio-group style="    vertical-align: text-top;">
+                        <label nz-radio nzValue="Yes">Full Refund</label><br>
+                        <label nz-radio nzValue="No" class="partial-refund-radio">Partial Refund - Amount Requested  <strong> US$</strong></label>      
+                        <input nz-input placeholder="Refund amount" nzSize="small" class="partial-refund-input" />
+                      </nz-radio-group>
+                  
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" nzRequired>Reason</nz-form-label>
+                <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
+                    nzErrorTip="Please select an option!"
+                    >
+                    <nz-select [nzSize]="size" nzMode="multiple" nzPlaceHolder="Please select a reason">
+                        <nz-option *ngFor="let option of listOfOption" [nzLabel]="option" [nzValue]="option"></nz-option>
+                      </nz-select>
+                  
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" nzRequired>Details</nz-form-label>
+                <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
+                    nzErrorTip="Please select an option!"
+                    >
+                    <textarea rows="4" nz-input></textarea>                  
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label [nzSpan]="8" nzRequired>Evidence</nz-form-label>
+                <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
+                    nzErrorTip="Please select an option!"
+                    >
+                    <nz-upload nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" [nzFileList]="fileList" (nzChange)="handleChange($event)">
+                        <button nz-button><i nz-icon nzType="upload"></i>Upload</button>
+                      </nz-upload>                  
+                </nz-form-control>
+            </nz-form-item>
+            <nz-divider></nz-divider>
 
-    <div nz-row>
-        <div nz-col nzSpan="13">
+            <nz-form-item>
+                <nz-form-control [nzOffset]="16" [nzSpan]="4" class="new-dispute-btns">
+                    <button nz-button nzType="default" [disabled]="false">Cancel</button>
+                    <button nz-button nzType="primary" [disabled]="!addressForm.valid">Submit</button>
+
+                </nz-form-control>
+            </nz-form-item>
+        </form>
+    </div>
+</nz-content>
