@@ -1,6 +1,6 @@
 <nz-content>
     <h3 nz-typography>Your Orders</h3>
-    <nz-tabset [nzTabBarExtraContent]="extraTemplate">
+    <nz-tabset [nzTabBarExtraContent]="dateFilter">
         <nz-tab nzTitle="Orders">
             <ng-container [ngTemplateOutlet]="listOfOrders">
             </ng-container>
@@ -15,7 +15,7 @@
 
         </nz-tab>
     </nz-tabset>
-    <ng-template #extraTemplate>
+    <ng-template #dateFilter>
         <nz-range-picker nzMode="month" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-range-picker>
     </ng-template>
     <ng-template #listOfOrders>

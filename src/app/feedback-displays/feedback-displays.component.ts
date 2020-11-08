@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feedback-displays.component.css']
 })
 export class FeedbackDisplaysComponent implements OnInit {
-
+  btnSize = "small";
   constructor() { }
 
   ngOnInit(): void {

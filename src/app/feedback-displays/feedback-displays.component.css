@@ -1,0 +1,57 @@
+.review-filters div{
+    padding-left: 20px;
+    color: #222;
+}
+.review-filters div button{
+    font-weight: 600;
+}
+.review-filters div span{
+    margin-right: 5px;
+}
+.feedback-content-all{
+    margin-top: 15px;
+}
+.review-summary{
+    padding: 20px 15px;
+    background-color: #f7f8fa;
+    margin-bottom: 20px;
+}
+.review-list div:not(:last-child) .ant-card-bordered, .review-list-header div:not(:last-child){
+    border-right: 0px;
+}
+.review-list div:not(:first-child) .ant-card-bordered, .review-list-header div:not(:first-child) {
+    border-left: 0px;
+}
+.review-list div .ant-card-bordered{
+    height: 100%;
+}
+.profile-picture{
+    height: 32px;
+    width: 34px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.review-details div{
+    align-items: flex-end;
+    
+}
+.profile-picture{
+    border-radius: 34px;
+    border: 2px solid #FFF;
+}
+/* .review-pictures div{
+    display: inline-block;
+} */
+.review-pictures div{
+    width: 40px;
+    height: 100px;
+    position: relative;
+    margin-right: 5px;
+    flex-shrink: 0;
+    line-height: 108px;
+    overflow: hidden;
+    cursor: pointer;
+    background-image: url(https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
