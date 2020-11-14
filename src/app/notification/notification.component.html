@@ -1,0 +1,32 @@
+<nz-card>
+    <div class="notification-page">
+        <h3>Your Notifications</h3>
+
+        <nz-list nzItemLayout="horizontal">
+            <nz-list-item *ngFor="let item of notifications">
+                <nz-list-item-meta>
+                    <nz-list-item-meta-avatar>
+                        <nz-avatar nzIcon="bell"></nz-avatar>
+                    </nz-list-item-meta-avatar>
+                    <nz-list-item-meta-title>
+                        <a href="">{{ item.title }}</a>
+                    </nz-list-item-meta-title>
+                    <nz-list-item-meta-description>
+                        {{ item.content }}
+                    </nz-list-item-meta-description>
+                </nz-list-item-meta>
+
+                <ul nz-list-item-actions>
+                    <nz-list-item-action>
+                        <i *ngIf="!item.viewed.includes(authService.getCurrentUser()._id)" (click)="markAsViewed(item._id)" nz-icon nzType="eye" nzTheme="twotone" nzTwotoneColor="#0000ff"></i>
+                        <i *ngIf="item.viewed.includes(authService.getCurrentUser()._id)" nz-icon nzType="eye" nzTheme="outline"></i>
+                    </nz-list-item-action>
+                    <nz-list-item-action>
+                        <i nz-icon nzType="delete" (click)="deleteNotification(item._id)" nzTheme="twotone" nzTwotoneColor="#ff0000"></i>
+                    </nz-list-item-action>      
+                </ul>
+            </nz-list-item>
+            <nz-list-empty *ngIf="notifications.length === 0"></nz-list-empty>
+        </nz-list>
+    </div>
+</nz-card>

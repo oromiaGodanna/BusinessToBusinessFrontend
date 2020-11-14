@@ -1,0 +1,73 @@
+<nz-card [nzBordered]="false">
+  <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }" class="message-page">
+    <div nz-col class="gutter-row" [nzSpan]="8" class="search_bar">
+      <nz-list nzItemLayout="horizontal">
+        <nz-list-item *ngFor="let conv of conversations"
+          [ngStyle]="{'background-color': conv._id == selectedConversationId ? '#D3D3D3' : 'white'}">
+
+          <!-- [nzCount]="getNumberOfUnreadMessages(conv._id)" -->
+          <nz-badge [nzCount]="getNumberOfUnreadMessages(conv._id)" [nzOffset]=[10]>
+            <nz-list-item-meta nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png">
+              <nz-list-item-meta-title>
+                <a
+                  (click)="getMessages(conv._id)">{{ conv.users[0]._id == user._id ? conv.users[1].name : conv.users[0].name }}</a>
+              </nz-list-item-meta-title>
+            </nz-list-item-meta>
+          </nz-badge>
+
+        </nz-list-item>
+        <nz-list-empty *ngIf="conversations.length === 0"></nz-list-empty>
+      </nz-list>
+    </div>
+
+    <div nz-col class="gutter-row" [nzSpan]="16" class="message_board">
+
+      <div nz-row nzJustify="space-around" nzAlign="middle" *ngIf="selectedConversationId == null">
+        <div nz-col nzSpan="10">
+          <p class="height-500"> Select a conversation... </p>
+        </div>
+      </div>
+
+
+      <div nz-row nzJustify="space-around" nzAlign="middle"
+        *ngIf="selectedConversationId != null && messages.length == 0">
+        <div nz-col nzSpan="10">
+          <p class="height-500"> You have no messages.. </p>
+        </div>
+      </div>
+
+      <!-- <button nz-button nzType="primary" nzSize="large" >Delete Conversation</button> -->
+
+      <cdk-virtual-scroll-viewport itemSize="73" class="scroll">
+        <nz-list [nzSplit]="false">
+          <nz-list-item *cdkVirtualFor="let msg of messages" appChangeBackground>
+            <nz-skeleton *ngIf="!msg" [nzAvatar]="true" [nzParagraph]="{ rows: 1 }"></nz-skeleton>
+
+            <nz-list-item-meta *ngIf="msg">
+              <nz-list-item-meta-title>
+                <app-message-bubble [message]="msg" [sentByCurrentUser]="msg.sender._id == user._id"
+                  (click)="toggleShowOptions(msg)"></app-message-bubble>
+              </nz-list-item-meta-title>
+            </nz-list-item-meta>
+
+          </nz-list-item>
+        </nz-list>
+      </cdk-virtual-scroll-viewport>
+
+      <nz-space nzDirection="vertical" nzSize="50"></nz-space>
+
+      <div *ngIf="!(selectedConversationId == null) && !showOptions">
+        <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+          <input type="text" nz-input placeholder="message..." #messageText />
+        </nz-input-group>
+        <ng-template #suffixButton>
+          <button nz-button nzType="primary" nzSize="large" (click)="sendMessageRealtime(messageText)">Send</button>
+        </ng-template>
+      </div>
+      <div *ngIf="showOptions" class="options">
+        <button nz-button nzType="primary" nzDanger nzSize="large" (click)="deleteMessage()">DELETE MESSAGE</button>
+        <button nz-button nzType="primary" nzSize="large" (click)="toggleShowOptions(null)">CANCEL</button>
+      </div>
+    </div>
+  </div>
+</nz-card>

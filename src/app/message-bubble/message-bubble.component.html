@@ -1,0 +1,18 @@
+<div nz-row>
+    <div nz-col [nzSpan]="2">
+        <nz-avatar *ngIf="message.sender.image" nzSize="large" nzIcon="user" [nzSrc]="message.sender.image">
+        </nz-avatar>
+
+        <nz-avatar [nzText]="message.sender.name[0]  | uppercase" style="color:#f56a00; background-color:#fde3cf;"></nz-avatar>
+
+    </div>
+
+    <div nz-col [nzSpan]="22">
+        <div [ngClass]="{
+            'speech-sender': sentByCurrentUser,
+            'speech-receiver': !sentByCurrentUser
+        }">
+            {{ message.message }}
+        </div>
+    </div>
+</div>

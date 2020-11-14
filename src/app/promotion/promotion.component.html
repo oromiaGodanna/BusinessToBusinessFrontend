@@ -1,0 +1,53 @@
+<nz-card>
+
+    <div class="promotion_page">
+
+        <div class="actions">
+            <button nz-button nzType="primary" routerLink="email">New Email</button>
+            <button nz-button nzType="primary" routerLink="notification">New Notification</button>
+            <!-- <button nz-button nzType="primary" routerLink="sms">New SMS</button> -->
+
+            <nz-select [(ngModel)]="selected" (ngModelChange)="onSelectedChanged()">
+                <!-- <nz-option nzValue="all" nzLabel="all"></nz-option> -->
+                <nz-option nzValue="email" nzLabel="email"></nz-option>
+                <nz-option nzValue="notification" nzLabel="notification"></nz-option>
+                <!-- <nz-option nzValue="sms" nzLabel="sms"></nz-option> -->
+            </nz-select>
+        </div>
+
+        <nz-space [nzSize]="10" nzDirection="vertical"> </nz-space>
+        <h3>Your Promotions</h3>
+
+        <nz-list nzItemLayout="horizontal" *ngIf="selected == 'email'">
+            <nz-list-item *ngFor="let item of emails">
+                <nz-list-item-meta>
+                    <nz-list-item-meta-avatar>
+                        <nz-avatar nzIcon="mail"></nz-avatar>
+                    </nz-list-item-meta-avatar>
+                    <nz-list-item-meta-title>
+                        <a [routerLink]="['/promotion/email/', item._id]">{{ item.subject }}</a>
+                    </nz-list-item-meta-title>
+                </nz-list-item-meta >
+            </nz-list-item>
+            <nz-list-empty *ngIf="emails.length === 0"></nz-list-empty>
+        </nz-list>
+
+        <nz-list nzItemLayout="horizontal" *ngIf="selected == 'notification'">
+            <nz-list-item *ngFor="let item of notifications">
+                <nz-list-item-meta>
+                    <nz-list-item-meta-avatar>
+                        <nz-avatar nzIcon="bell"></nz-avatar>
+                    </nz-list-item-meta-avatar>
+                    <nz-list-item-meta-title>
+                        <!-- must go to profile page on click -->
+                        <a [routerLink]="['/promotion/notification/', item._id]">{{ item.title }}</a> 
+                    </nz-list-item-meta-title>
+                    <nz-list-item-meta-description>
+                        {{ item.content }}
+                    </nz-list-item-meta-description>
+                </nz-list-item-meta >
+            </nz-list-item>
+            <nz-list-empty *ngIf="notifications.length === 0"></nz-list-empty>
+        </nz-list>
+    </div>
+</nz-card>

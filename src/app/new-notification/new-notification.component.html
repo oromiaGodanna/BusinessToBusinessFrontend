@@ -1,0 +1,56 @@
+<nz-card>
+    <nz-tabset>
+        <nz-tab nzTitle="Notification">
+            <form nz-form #f="ngForm" (ngSubmit)="saveNotification(f.value)">
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="5">Title</nz-form-label>
+                  <nz-form-control nzHasFeedback [nzSpan]="12" [nzErrorTip]="titleErrors">
+                    <input nz-input [(ngModel)]="notification.title" name="title" required />
+                    <ng-template #titleErrors let-control>
+                      <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+                  </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="5">Content</nz-form-label>
+                  <nz-form-control nzHasFeedback [nzSpan]="12" [nzErrorTip]="contentErrors">
+                    <input nz-input [(ngModel)]="notification.content" name="content" required />
+                    <ng-template #contentErrors let-control>
+                      <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+                  </nz-form-control>
+                </nz-form-item>
+
+
+                <nz-form-item>
+                  <nz-form-label [nzSpan]="5">Send to</nz-form-label>
+                  <nz-form-control [nzSpan]="12" nzHasFeedback [nzErrorTip]="sendToErrors">
+                    <nz-space-item>
+                      <nz-select [(ngModel)]="selectValue" name="selector" nzAllowClear>
+                        <nz-option nzValue="all" nzLabel="All subscribers"></nz-option>
+                        <nz-option nzValue="randomNumber" nzLabel="A number of random subscribers"></nz-option>
+                        <!-- <nz-option nzValue="byUsername" nzLabel="Select by Username"></nz-option> -->
+                      </nz-select>
+                    </nz-space-item>
+                    <ng-template #sendToErrors let-control>
+                      <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+                  </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                  <nz-form-control  >
+                    <button nz-button nzType="primary" id="save" >Send</button>
+                  </nz-form-control>
+                </nz-form-item>
+                </form>
+            
+        </nz-tab>
+
+        <!-- <nz-tab nzTitle="Send">
+            
+        </nz-tab> -->
+
+    </nz-tabset>
+
+</nz-card>

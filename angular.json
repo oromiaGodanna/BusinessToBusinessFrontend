@@ -7,7 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "sass"
+          "style": "less"
         }
       },
       "root": "",
@@ -25,10 +25,16 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
-              "src/styles.sass"
+              "src/theme.less",
+              "src/styles.less"
             ],
             "scripts": []
           },
@@ -92,7 +98,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.less"
             ],
             "scripts": []
           }
@@ -123,6 +129,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "bTob"
 }

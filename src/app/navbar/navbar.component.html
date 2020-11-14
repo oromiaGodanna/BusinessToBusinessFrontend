@@ -1,0 +1,64 @@
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+  <div nz-col class="gutter-row" [nzSpan]="12" class="search_bar">
+    <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzAddOnAfter]="suffixIconButton">
+      <input type="text" nz-input placeholder="input search text" />
+    </nz-input-group>
+    <ng-template #suffixIconButton>
+      <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+    </ng-template>
+    <ng-template #addOnBeforeTemplate>
+      <nz-select [ngModel]="'Product'">
+        <nz-option nzLabel="Product" nzValue="Product"></nz-option>
+        <nz-option nzLabel="Seller" nzValue="Seller"></nz-option>
+      </nz-select>
+    </ng-template>
+  </div>
+
+  <div nz-col class="gutter-row" [nzSpan]="12">
+
+    <ul nz-menu nzTheme="light" nzMode="horizontal">
+
+      <li nz-menu-item routerLink="/login" routerLinkActive="ant-menu-item-selected" *ngIf="!isLoggedIn">
+        <i>Login</i>
+      </li>
+
+      <li nz-menu-item routerLink="/message" routerLinkActive="ant-menu-item-selected" *ngIf="isLoggedIn">
+        <nz-badge [nzCount]="messageCount">
+          <i nz-icon nzType="message" class="big_icon"></i>
+        </nz-badge>
+
+      </li>
+
+      <li nz-menu-item routerLink="/notification" routerLinkActive="ant-menu-item-selected" *ngIf="isLoggedIn">
+        <nz-badge [nzCount]="notificationCount">
+          <i nz-icon nzType="bell" class="big_icon"></i>
+        </nz-badge>
+      </li>
+      <li nz-submenu *ngIf="isLoggedIn">
+        <span title><i nz-icon nzType="user" class="big_icon"></i></span>
+        <ul>
+          <li nz-menu-group>
+            <ul>
+              <li nz-menu-item routerLink="/promotion" routerLinkActive="ant-menu-item-selected"> <i nz-icon
+                  nzType="export"></i> Promotion</li>
+              <li nz-menu-item> <i nz-icon nzType="user"></i> Profile</li>
+              <li nz-menu-item> <i nz-icon nzType="credit-card"></i> Payments</li>
+              <li nz-menu-item> <i nz-icon nzType="setting"></i> Settings</li>
+              <li nz-menu-item> <i nz-icon nzType="question-circle"></i> Logout</li>
+            </ul>
+          </li>
+          <li nz-menu-group>
+            <ul>
+              <li nz-menu-item> <i nz-icon nzType="customer-service"></i> Customer Support</li>
+              <li nz-menu-item><i nz-icon nzType="message"></i> How it works</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li nz-menu-item (click)="logout()" routerLinkActive="ant-menu-item-selected" *ngIf="isLoggedIn">
+        <i>Logout</i>
+      </li>
+    </ul>
+  </div>
+</div>

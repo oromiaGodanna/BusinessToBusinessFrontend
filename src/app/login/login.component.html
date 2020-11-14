@@ -1,0 +1,16 @@
+<nz-card >
+    <form nz-form nz-row #f="ngForm" (ngSubmit)="login(f)">
+        <nz-form-item>
+            <nz-form-label  nzFor="name">Name</nz-form-label>
+            <nz-form-control >
+                <input nz-input ngModel name="name" type="name" id="name">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label  nzNoColon></nz-form-label>
+            <nz-form-control >
+                <button nz-button [nzType]="'primary'">Log in</button>
+            </nz-form-control>
+        </nz-form-item>
+    </form>
+</nz-card>
