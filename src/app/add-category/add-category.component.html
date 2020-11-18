@@ -1,0 +1,126 @@
+<style>
+    .logo {
+          width: 120px;
+          height: 31px;
+          background: rgba(255, 255, 255, 0.2);
+          margin: 16px 30px 16px 0;
+          float: left;
+        }
+  
+        .header-menu {
+          line-height: 64px;
+        }
+  
+        .sider-menu {
+          height: 100%;
+          border-right: 0;
+        }
+  
+        .inner-layout {
+          padding: 0 24px 24px;
+        }
+  
+        nz-content {
+          background: #fff;
+          padding: 24px;
+          min-height: 280px;
+        }
+        .mr10{
+          margin-right:10px;
+        }
+  </style>
+  <nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+  <nz-layout>
+    <nz-header>
+      <div class="logo"></div>
+      <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+       
+      </ul>
+    </nz-header>
+    <nz-layout>
+      <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
+        <ul nzMode="inline" class="sider-menu" nz-menu nzTheme="dark" nzMode="inline">
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Products">
+            <ul>
+              <li nz-menu-item><a href="/myProducts"> Manage Products </a></li>
+              <li nz-menu-item><a href="/addProduct"> Add Product </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Category" nzSelected>
+            <ul>
+              <li nz-menu-item><a href="/categories"> Manage Categories </a></li>
+              <li nz-menu-item nzSelected><a href="/addCategory"> Add Category </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Measurement">
+            <ul>
+              <li nz-menu-item><a href="/measurements">Manage Measurements </a></li>
+              <li nz-menu-item><a href="/addMeasurement"> Add Measurement </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Special Offers">
+            <ul>
+              <li nz-menu-item><a href="/pendingSpecialoffer">Pending Special Offers </a></li>
+              <li nz-menu-item><a href="/activeSpecialoffer">Active Special Offers </a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </nz-sider>
+      <nz-layout class="inner-layout">
+        <nz-content>
+          
+          <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
+            <nz-tab [nzTitle]="'Add Category'">
+              <form nz-form [formGroup]="form" (ngSubmit)="submitForm()">
+        
+                <nz-form-item nz-row>
+                  <nz-form-label nzRequired nzFor="categoryName" nz-col nzSpan="6">Category Name</nz-form-label>
+                  <nz-form-control nzErrorTip="Please input Category Name!">
+                    <input type="text" nz-input formControlName="categoryName" id="categoryName"/>
+                  </nz-form-control>
+                </nz-form-item>
+            
+                <nz-form-item nz-row>
+                  <nz-form-label nzRequired nz-col nzSpan="6">Image</nz-form-label>
+                  <nz-form-control nzErrorTip="Please input Descriptive Category Image!">
+                    <input type="file" nz-input (change)="uploadFile($event)" formControlName="image">
+                  </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item nz-row *ngFor="let control of listOfControl; let i = index">
+                  <nz-form-label nz-col nzSpan="6" *ngIf="i == 0" [nzFor]="control.controlInstance">Sub-Categories </nz-form-label>
+                  <nz-form-control [nzOffset]="i == 0 ? 0 : 6" nzErrorTip="Please enter Sub-Category or delete this field.">
+                    <input class="passenger-input" nz-input placeholder="placeholder" [attr.id]="control.id" [formControlName]="control.controlInstance"/>
+                    <i nz-icon nzType="minus-circle-o" class="dynamic-delete-button" (click)="removeField(control, $event)"></i>
+                  </nz-form-control>
+                </nz-form-item>
+                <nz-form-item nz-col [nzPush]="6">
+                  <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 4 }">
+                    <button nz-button nzType="dashed" class="add-button" (click)="addField($event)">
+                      <i nz-icon nzType="plus"></i>
+                      Add Sub Category Field
+                    </button>
+                  </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item nz-row nzJustify="center">
+                
+                  <button nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" nz-button nzType="primary" class="mr10" nzShape="round" style="margin-right:15px;">Submit</button>
+                  <button nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" nz-button nzType="default" (click)="resetForm()" nzShape="round" >Clear</button>
+                
+              </nz-form-item>
+               
+              </form>
+            </nz-tab>
+          </nz-tabset>
+  
+        </nz-content>
+      </nz-layout>
+    </nz-layout>
+  </nz-layout>
+</nz-spin>

@@ -1,0 +1,320 @@
+<style>
+  .menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .menu li {
+    float: left;
+  }
+
+  .menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+  }
+
+  .menu li a:hover {
+
+    background-color: #111111;
+  }
+
+  .menu .active {
+
+    background-color: #111111;
+  }
+
+  .categoryList {
+    list-style-type: none;
+    color: black;
+    padding: 10px !important;
+  }
+
+  .categoryListUl {
+    list-style-type: none;
+    padding: 10px !important;
+  }
+
+  .SidertextSize {
+    font: 14px, arial, sans-serif;
+  }
+
+  .sideBarInfo {
+    display: none;
+    margin: 20px;
+    padding: 10px;
+    background: white
+  }
+
+  @media screen and (min-width: 970px) {
+    .sideBarInfo {
+      display: inline;
+    }
+  }
+
+  .pd20{
+      padding:20px;
+  }
+  .pd10{
+      padding:10px;
+  }
+  .mr10{
+      margin-right:10px;
+    }
+    .mt10{
+      margin-top:10px;
+    }
+    .mb10{
+      margin-bottom:10px;
+    }
+    .ml10{
+      margin-left:10px;
+    }
+    
+    .rateFillColor{
+        color: #FF9529;
+    }
+    .fontSize20{
+        font-size:20px;
+    }
+</style>
+<nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+  <nz-layout>
+  <nz-layout style="background:white;">
+
+    <div nz-row style="padding-top:10px;background: white;" nzAlign="middle">
+
+      <div nz-col [nzSpan]="4" class="logo">
+          <div nz-row nzJustify="center"> 
+              <img src="./../assets/images/logo.png" />
+          </div>
+      </div>
+      <div nz-col [nzSpan]="16">
+          <div nz-row nzJustify="center">
+              <nz-input-group  nz-col [nzSpan]="16" nzSearch [nzAddOnAfter]="suffixIconButton">
+                  <input type="text" nz-input placeholder="input search text" id="searchWord"/>
+              </nz-input-group>
+              <ng-template #suffixIconButton>
+                  <button nz-button style="background: #cb2d22;color:white" (click)="searchForProduct()">Search</button>
+              </ng-template>
+              <ng-template #choiceButton>
+                  <button nz-button nz-dropdown [nzDropdownMenu]="searchMenu">
+                      All Categories
+                      <i nz-icon nzType="down"></i>
+                  </button>
+                  <nz-dropdown-menu #searchMenu="nzDropdownMenu">
+                      <ul nz-menu>
+                          <li nz-menu-item>menu4 1st menu item</li>
+                          <li nz-menu-item>menu4 2nd menu item</li>
+                          <li nz-menu-item>menu4 3rd menu item</li>
+                      </ul>
+                  </nz-dropdown-menu>
+              </ng-template>
+          </div>
+      </div>
+  
+      <div nz-col [nzSpan]="4">
+          <div nz-row nzJustify="center">
+             
+            <a href="/wishlist" nz-button nzType="link">
+              <i nz-icon nzType="heart" nzTheme="outline" class="fontSize20" style="color: hotpink;"></i>
+            </a>
+              <a href="/cart" nz-button nzType="link">
+                  <i nz-icon nzType="shopping-cart" nzTheme="outline" class="fontSize20"></i>
+              </a>
+              <a href="#" nz-button nzType="link" class="fontSize20">
+                  <span> Orders </span>
+              </a>
+  
+          </div>
+      </div>
+  </div>
+  
+  <div nz-row nzJustify="center" style="background: #cb2d22;">
+      <ul class="menu">
+          <li><a routerLink="/index" class="nav-link text-white">Home</a></li>
+          <li><a routerLink="/products" class="nav-link text-white">Products</a></li>
+          <li><a routerLink="/specialOffers" class="nav-link text-white">special offers</a></li>
+          <li class="active">
+              <a nz-dropdown [nzDropdownMenu]="proformaMenu">
+              Proforma
+                  <i nz-icon nzType="down"></i>
+              </a>
+              <nz-dropdown-menu #proformaMenu="nzDropdownMenu">
+              <ul nz-menu nzSelectable>
+                  <li nz-menu-item><a routerLink="/requestProforma" class="nav-link text-white">Request Proforma</a></li>
+                  <li nz-menu-item><a routerLink="/pendingProformas" class="nav-link text-white">Open Pending Proformas</a></li>
+                  <li nz-menu-item><a routerLink="/activeProformas" class="nav-link text-white">Active Proformas</a></li>
+                  <li nz-menu-item><a routerLink="/closedProformas" class="nav-link text-white">Closed Proformas</a></li>
+              </ul>
+              </nz-dropdown-menu>
+          </li>
+      </ul>
+  </div>
+
+  </nz-layout>
+    <nz-layout>
+
+      <nz-content nz-row style="margin-top:20px;">
+        <div nz-col nzXs="20" nzSm="20" nzMd="18" nzLg="18" nzXl="18" style="margin:20px;padding:10px;background:white">
+          <form nz-form [formGroup]="form" (ngSubmit)="submitForm()">
+
+            <h1 nz-row nzJustify="center">One Request,Multiple Quotes</h1>
+            <h2 nz-row nzJustify="center">Item 1</h2>
+            <nz-form-item nz-row>
+              <nz-form-label nzRequired nz-col nzSpan="6">Category</nz-form-label>
+              <nz-form-control nzErrorTip="Select Product Category!">
+
+                <nz-select formControlName="category" nzShowSearch nzAllowClear nzPlaceHolder="Select a category">
+                  <nz-option *ngFor="let category of categories" nzLabel="{{category.name}}"
+                    nzValue="{{category.name}}">
+                  </nz-option>
+                </nz-select>
+
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nz-row>
+              <nz-form-label nz-col nzSpan="6">Sub-Category</nz-form-label>
+              <nz-form-control>
+
+                <nz-select formControlName="subCategory" nzShowSearch nzAllowClear nzPlaceHolder="Select a category">
+                  <nz-option *ngFor="let subCategory of subCategories" nzLabel="{{subCategory}}"
+                    nzValue="{{subCategory}}"></nz-option>
+                </nz-select>
+
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nz-row>
+              <nz-form-label nzRequired nz-col nzSpan="6" nzFor="productName">Quantity</nz-form-label>
+              <nz-form-control nzErrorTip="Enter product Quantity Needed!">
+                <input type="number" nz-input formControlName="quantity" id="quantity" />
+              </nz-form-control>
+            </nz-form-item>
+
+
+            <nz-form-item nz-row>
+              <nz-form-label nz-col nzSpan="6">Description</nz-form-label>
+              <nz-form-control>
+                <textarea formControlName="description" nz-input rows="2" placeholder="write any thing"></textarea>
+              </nz-form-control>
+            </nz-form-item>
+
+            <div *ngFor="let control of listOfItems; let i = index">
+              <h2 nz-row nzJustify="center">Item {{i+2}} </h2>
+              <nz-form-item nz-row>
+                <nz-form-label nzRequired nz-col nzSpan="6">Category</nz-form-label>
+                <nz-form-control nzErrorTip="Select Product Category!">
+
+                  <nz-select [formControlName]="control.category" nzShowSearch nzAllowClear
+                    nzPlaceHolder="Select a category">
+                    <nz-option *ngFor="let category of categories" nzLabel="{{category.name}}"
+                      nzValue="{{category.name}}"></nz-option>
+                  </nz-select>
+
+                </nz-form-control>
+              </nz-form-item>
+
+
+              <nz-form-item nz-row>
+                <nz-form-label nz-col nzSpan="6">Sub-Category</nz-form-label>
+                <nz-form-control>
+
+                  <nz-select [attr.id]="control.id" [formControlName]="control.subCategory" nzShowSearch nzAllowClear
+                    nzPlaceHolder="Select a sub category">
+                    <nz-option *ngFor="let subCategory of subCategories" nzLabel="{{subCategory}}"
+                      nzValue="{{subCategory}}"></nz-option>
+                  </nz-select>
+
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-item nz-row>
+                <nz-form-label nzRequired nz-col nzSpan="6" nzFor="productName">Quantity</nz-form-label>
+                <nz-form-control nzErrorTip="Enter product Quantity Needed!">
+                  <input type="number" nz-input [formControlName]="control.quantity" id="quantity{{control.id}}" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item nz-row>
+                <nz-form-label nz-col nzSpan="6">Description</nz-form-label>
+                <nz-form-control>
+                  <textarea [formControlName]="control.description" nz-input rows="2"
+                    placeholder="write any thing"></textarea>
+                </nz-form-control>
+                <!-- <i nz-icon nzType="minus-circle-o" class="dynamic-delete-button"
+                (click)="removeField(control, $event)"></i>-->
+              </nz-form-item>
+
+              <nz-form-item nz-row>
+                <nz-form-control nz-col nzSpan="6" nzOffset="8">
+                  <button nz-button nzType="dashed" class="dynamic-delete-button" (click)="removeField(control, $event)"
+                    style="color:#cb2d22">
+                    <i nz-icon nzType="minus-circle-o"></i>
+                    Remove Item {{i+2}}
+                  </button>
+                </nz-form-control>
+              </nz-form-item>
+
+            </div>
+
+            <nz-form-item nz-row>
+              <nz-form-control nz-col nzSpan="6" nzOffset="8">
+                <button nz-button nzType="dashed" class="add-button" (click)="addField($event)">
+                  <i nz-icon nzType="plus"></i>
+                  Add item
+                </button>
+              </nz-form-control>
+            </nz-form-item>
+
+           <!-- <nz-form-item>
+              <nz-form-label nz-col nzSpan="6">Starts On</nz-form-label>
+              <nz-form-control>
+                <nz-date-picker formControlName="startDate"></nz-date-picker>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label nz-col nzSpan="6">End On </nz-form-label>
+              <nz-form-control>
+                <nz-date-picker formControlName="endDate"></nz-date-picker>
+              </nz-form-control>
+            </nz-form-item>-->
+
+            <nz-form-item nz-row>
+              <nz-form-label nz-col nzSpan="6" nzFor="maxResponse">Maximum Response</nz-form-label>
+              <nz-form-control>
+                <input type="number" nz-input formControlName="maxResponse" id="maxResponse" />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nz-row>
+              <div nz-col nzSpan="12" nzOffset="6">
+                <button nz-button nzShape="round" style="margin-right:15px;background:#cb2d22;color:white">Request
+                  Quatation</button>
+                <button nz-button (click)="resetForm()" nzShape="round">Clear</button>
+              </div>
+            </nz-form-item>
+          </form>
+        </div>
+        <div class="sideBarInfo" nz-col nzMd="4" nzLg="4" nzXl="4">
+          <div class="pd10">
+            <h5>Basic Information</h5>
+            <ul>
+              <li>product Name</li>
+              <li>product Category</li>
+              <li>product Quantity</li>
+              <li>product </li>
+            </ul>
+          </div>
+        </div>
+
+      </nz-content>
+    </nz-layout>
+    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+  </nz-layout>
+</nz-spin>

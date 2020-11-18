@@ -1,0 +1,354 @@
+<style>
+  .menu {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+  }
+
+  .menu li {
+      float: left;
+  }
+
+  .menu li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 16px;
+      text-decoration: none;
+  }
+
+  .menu li a:hover {
+
+      background-color: #111111;
+  }
+
+  .menu .active {
+
+      background-color: #111111;
+  }
+
+  .categoryList {
+      list-style-type: none;
+      color:black;
+      padding:10px !important;
+  }
+  .SidertextSize{
+      font:14px,arial,sans-serif;
+  }
+  .pd10{
+      padding:10px;
+  }
+  .pd20{
+      padding:20px;
+  }
+
+  .m10{
+    margin:10px;
+  }
+  .mr10{
+      margin-right:10px;
+    }
+    .mt10{
+      margin-top:10px;
+    }
+    .mb10{
+      margin-bottom:10px;
+    }
+    .ml10{
+      margin-left:10px;
+    }
+    
+  .m20{
+    margin:20px;
+  }
+  .mr20{
+    margin-right:20px;
+  }
+  .ml20{
+    margin-left:20px;
+  }
+    .rateFillColor{
+        color: #FF9529;
+    }
+    .fontSize20{
+        font-size:20px;
+    }
+</style>
+<nz-layout style="background:white;">
+ 
+    <div nz-row style="padding-top:10px;background: white;" nzAlign="middle">
+
+        <div nz-col [nzSpan]="4" class="logo">
+            <div nz-row nzJustify="center"> 
+                <img src="./../assets/images/logo.png" />
+            </div>
+        </div>
+        <div nz-col [nzSpan]="16">
+            <div nz-row nzJustify="center">
+                <nz-input-group  nz-col [nzSpan]="16" nzSearch [nzAddOnAfter]="suffixIconButton">
+                    <input type="text" nz-input placeholder="input search text" id="searchWord"/>
+                </nz-input-group>
+                <ng-template #suffixIconButton>
+                    <button nz-button style="background: #cb2d22;color:white" (click)="searchForProduct()">Search</button>
+                </ng-template>
+                <ng-template #choiceButton>
+                    <button nz-button nz-dropdown [nzDropdownMenu]="searchMenu">
+                        All Categories
+                        <i nz-icon nzType="down"></i>
+                    </button>
+                    <nz-dropdown-menu #searchMenu="nzDropdownMenu">
+                        <ul nz-menu>
+                            <li nz-menu-item>menu4 1st menu item</li>
+                            <li nz-menu-item>menu4 2nd menu item</li>
+                            <li nz-menu-item>menu4 3rd menu item</li>
+                        </ul>
+                    </nz-dropdown-menu>
+                </ng-template>
+            </div>
+        </div>
+    
+        <div nz-col [nzSpan]="4">
+            <div nz-row nzJustify="center">
+               
+                <a href="/wishlist" nz-button nzType="link">
+                    <i nz-icon nzType="heart" nzTheme="outline" class="fontSize20" style="color: hotpink;"></i>
+                  </a>
+                <a href="/cart" nz-button nzType="link">
+                    <i nz-icon nzType="shopping-cart" nzTheme="outline" class="fontSize20"></i>
+                </a>
+                <a href="#" nz-button nzType="link" class="fontSize20">
+                    <span> Orders </span>
+                </a>
+    
+            </div>
+        </div>
+    </div>
+    
+    <div nz-row nzJustify="center" style="background: #cb2d22;">
+        <ul class="menu">
+            <li><a routerLink="/index" class="nav-link text-white">Home</a></li>
+            <li class="active"><a routerLink="/products" class="nav-link text-white">Products</a></li>
+            <li><a routerLink="/specialOffers" class="nav-link text-white">special offers</a></li>
+            <li>
+                <a nz-dropdown [nzDropdownMenu]="proformaMenu">
+                Proforma
+                    <i nz-icon nzType="down"></i>
+                </a>
+                <nz-dropdown-menu #proformaMenu="nzDropdownMenu">
+                <ul nz-menu nzSelectable>
+                    <li nz-menu-item><a routerLink="/requestProforma" class="nav-link text-white">Request Proforma</a></li>
+                    <li nz-menu-item><a routerLink="/pendingProformas" class="nav-link text-white">Open Pending Proformas</a></li>
+                    <li nz-menu-item><a routerLink="/activeProformas" class="nav-link text-white">Active Proformas</a></li>
+                    <li nz-menu-item><a routerLink="/closedProformas" class="nav-link text-white">Closed Proformas</a></li>
+                </ul>
+                </nz-dropdown-menu>
+            </li>
+        </ul>
+    </div>
+      <nz-content>
+        <div  nz-row nzJustify="center" style="padding:10px;margin-top:20px;background-color:white;"> 
+            <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="8" nzXl="8" style="height:100%">
+                <div nz-row>
+                 <img style="height:400px;width:100%" [src]="'./../assets/images/productImages/'+productImage" alt="Los Angeles">
+               </div>
+                 <div nz-row>
+                  <div *ngFor="let image of images;let i = index"> 
+                      <button (click)="changeImage(i)" style="padding:0px !important;"> <img style="height:100px;width:100px" [src]="'./../assets/images/productImages/'+image" alt="Los Angeles"> </button>
+                  </div>
+                </div>
+            
+            </div>
+            <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="8" nzXl="8" class="m10 ml20 mr20" style="height:100%">
+
+              <div nz-row>
+                
+                  <h2 nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">{{product.productName | uppercase}}</h2>
+                  <h2 nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12"><span>ETB </span><span nz-typography nzType="danger"> {{product.price}}</span>/{{product.measurement}}</h2>
+                
+              </div>
+             
+              <nz-divider></nz-divider>
+              <div nz-row nzJustify="end">
+                <div class="icons-list"> 
+                    <nz-space>
+                        <nz-space-item>
+                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                        </nz-space-item>
+                        <nz-space-item>
+                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                        </nz-space-item>
+                        <nz-space-item>
+                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                        </nz-space-item>
+                        <nz-space-item>
+                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                        </nz-space-item>
+                        <nz-space-item>
+                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                        </nz-space-item>
+                    </nz-space>
+                </div>
+              </div>
+             <!--  <h2 nz-row ><span nz-typography nzType="danger"> {{product.price}} Birr </span> / {{product.measurement}}</h2> -->
+              <p>
+                {{product.minOrder}} (min.Order)
+              </p>
+
+              <p>{{product.description}} </p>
+
+              <div *ngIf="product.additionalProductInfo[0]">
+                Colors: 
+                <nz-button-group *ngFor="let color of colorArray" class="pd10">
+                  <div style="width:30px;height:30px;background-color: brown;"></div>
+                </nz-button-group>
+
+              </div>
+              <div *ngIf="product.additionalProductInfo[1]">
+                Sizes: 
+                <nz-button-group *ngFor="let size of sizeArray" class="pd10">
+                  <button nz-button nzType="default" disabled>{{size}}</button>
+                </nz-button-group>
+              
+              </div>
+              <div *ngIf="product.additionalProductInfo[2]">
+                Sizes: 
+                <nz-button-group *ngFor="let size of sizeInNumberArray" class="pd10">
+                  <button nz-button nzType="default" disabled>{{size}}</button>
+                </nz-button-group>
+              </div>
+           <div nz-row nzJustify="center" nzAlign="bottom">
+                <div class="icons-list"> 
+                  <nz-space>
+                    <nz-space-item>
+                      <button nz-button nzType="primary" nzDanger (click)="addProductToWishlist(product._id)" ><i nz-icon nzType="heart" nzTheme="outline"></i> ADD</button>
+                    </nz-space-item>
+                    <nz-space-item>
+                      <button nz-button nzType="primary" (click)="addProductToCart(product._id)" ><i nz-icon nzType="shopping-cart" nzTheme="outline"></i> Add To Cart</button>
+                    </nz-space-item> 
+                    <nz-space-item>
+                      <button nz-button nzType="default" (click)="addProductToWishlist(product._id)" ><i nz-icon nzType="plus" nzTheme="outline"></i> Buy Now</button>
+                    </nz-space-item>
+                  </nz-space>
+                </div>
+              </div>
+          
+            </div>
+            <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="4" nzXl="4" class="m10">
+              
+              <div *ngIf="countRelatedProducts > 0">
+                <strong>Related Products</strong>
+                <nz-divider nzType="horizontal"></nz-divider>
+              </div>
+
+              <div nz-row nzJustify="center" *ngIf="countRelatedProducts > 1">
+                  
+                <a nz-row nzJustify="center"  href="product/{{relatedProducts[1]._id}}"><img class="card-img-top" height="150px" width="150px"
+                [src]="'./../assets/images/productImages/'+relatedProducts[1].images[0]" /></a><br>
+              
+                <p nz-row>
+                    <strong> ETB </strong> <span nz-typography nzType="danger"> {{relatedProducts[1].price}}</span>
+                    <span  *ngIf="relatedProducts[1].measurement"> / {{relatedProducts[1].measurement}}</span>
+                </p>
+              </div>
+
+              <div nz-row nzJustify="center" *ngIf="countRelatedProducts > 3">
+                  
+                <a nz-row nzJustify="center"  href="product/{{relatedProducts[2]._id}}"><img class="card-img-top" height="150px" width="150px"
+                [src]="'./../assets/images/productImages/'+relatedProducts[2].images[0]" /></a><br>
+              
+                <p nz-row>
+                    <strong> ETB </strong> <span nz-typography nzType="danger"> {{relatedProducts[2].price}}</span>
+                    <span  *ngIf="relatedProducts[2].measurement"> / {{relatedProducts[2].measurement}}</span>
+                </p>
+              </div>
+
+              <div nz-row nzJustify="center" *ngIf="countRelatedProducts > 4">
+                  
+                <a nz-row nzJustify="center"  href="product/{{relatedProducts[3]._id}}"><img class="card-img-top" height="150px" width="150px"
+                [src]="'./../assets/images/productImages/'+relatedProducts[3].images[0]" /></a><br>
+              
+                <p nz-row>
+                    <strong> ETB </strong> <span nz-typography nzType="danger"> {{relatedProducts[3].price}}</span>
+                    <span  *ngIf="relatedProducts[3].measurement"> / {{relatedProducts[3].measurement}}</span>
+                </p>
+              </div>
+
+            </div>
+        </div>
+        
+      </nz-content>
+
+        <nz-modal [(nzVisible)]="cartEntryModal" nzTitle="Add Product To Cart" [nzFooter]="null"  (nzOnCancel)="handleCancel()">
+           
+            <form nz-form [formGroup]="form" (ngSubmit)="addToCart()">
+        
+                <nz-form-item nz-row>
+                  <nz-form-label nzRequired nzFor="Amount" >Amount</nz-form-label>
+                  <nz-form-control nzErrorTip="Please Enter Amount Of the product You Want To Order!">
+                    <nz-input-number formControlName="selectedAmount" id="selectedAmount" [nzMin]="product.minOrder" [ngModel]="product.minOrder" (ngModelChange)="changeQuantity(product.minOrder)"></nz-input-number>
+                  </nz-form-control>
+                  <p> The Minimum Order Is {{product.minOrder}}</p>
+                </nz-form-item>
+
+                <nz-form-item nz-row *ngIf="(color != null) && (color  != '')">
+                    <nz-form-label nzRequired nzFor="color" >Color</nz-form-label>
+
+                    <nz-form-control nzErrorTip="Select Color For The Product!">
+
+                        <nz-select formControlName="selectedColor" nzShowSearch nzAllowClear
+                          nzPlaceHolder="Select Color" [nzMode]="'multiple'">
+                          <nz-option *ngFor="let singleColor of colorArray" nzLabel="{{singleColor}}"
+                            nzValue="{{singleColor}}" style="background-color:'{{singleColor}}'"></nz-option>
+
+                           
+                        </nz-select>
+    
+                      </nz-form-control>
+
+                </nz-form-item>
+
+                <nz-form-item nz-row *ngIf="(size != null) && (size  != '')">
+                    <nz-form-label nzRequired nzFor="size" >Size</nz-form-label>
+                    <nz-form-control nzErrorTip="Select Size For The Product!">
+
+                        <nz-select formControlName="selectedSize" nzShowSearch nzAllowClear
+                          nzPlaceHolder="Select Size" [nzMode]="'multiple'">
+                          <nz-option *ngFor="let singleSize of sizeArray" nzLabel="{{singleSize}}"
+                            nzValue="{{singleSize}}"></nz-option>
+                        </nz-select>
+    
+                      </nz-form-control>
+                </nz-form-item>
+
+                  <nz-form-item nz-row *ngIf="(sizeInNumber!= null) && (sizeInNumber  != '')">
+                    <nz-form-label nzRequired nzFor="size" >Size</nz-form-label>
+                    <nz-form-control nzErrorTip="Select Size For The Product!">
+
+                        <nz-select formControlName="selectedSizeInNumber" nzShowSearch nzAllowClear
+                          nzPlaceHolder="Select Size" [nzMode]="'multiple'">
+                          <nz-option *ngFor="let singleSize of sizeInNumberArray" nzLabel="{{singleSize}}"
+                            nzValue="{{singleSize}}"></nz-option>
+                        </nz-select>
+    
+                      </nz-form-control>
+                  </nz-form-item>
+            
+                <div nz-row>
+                    <p>If you want different types(color,size) of the product,You can add description when Ordering.</p>
+                </div>
+
+                <nz-form-item nz-row nzJustify="center">
+                
+                  <button nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" nz-button nzType="primary" class="mr10" nzShape="round" style="margin-right:15px;">Submit</button>
+                  <!--<button nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" nz-button nzType="default" (click)="resetForm()" nzShape="round" >Clear</button>-->
+                
+              </nz-form-item>
+               
+              </form>
+
+            
+            </nz-modal>
+
+        <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+</nz-layout>

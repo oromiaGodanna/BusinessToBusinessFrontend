@@ -1,0 +1,144 @@
+<style>
+    .logo {
+          width: 120px;
+          height: 31px;
+          background: rgba(255, 255, 255, 0.2);
+          margin: 16px 30px 16px 0;
+          float: left;
+        }
+  
+        .header-menu {
+          line-height: 64px;
+        }
+  
+        .sider-menu {
+          height: 100%;
+          border-right: 0;
+        }
+  
+        .inner-layout {
+          padding: 0 24px 24px;
+        }
+  
+        nz-content {
+          background: #fff;
+          padding: 24px;
+          min-height: 280px;
+        }
+        .mr10{
+          margin-right:10px;
+        }
+        .pd10{
+        padding:10px;
+        }
+        .rateFillColor{
+            color: #FF9529;
+        }
+        .fontSize20{
+            font-size:20px;
+        }
+
+  </style>
+  <nz-layout>
+    <nz-header>
+      <div class="logo"></div>
+      <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+       
+      </ul>
+    </nz-header>
+    <nz-layout>
+      <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
+        <ul nzMode="inline" class="sider-menu" nz-menu nzTheme="dark" nzMode="inline">
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Products">
+            <ul>
+              <li nz-menu-item><a href="/myProducts"> Manage Products </a></li>
+              <li nz-menu-item><a href="/addProduct"> Add Product </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Category">
+            <ul>
+              <li nz-menu-item><a href="/categories"> Manage Categories </a></li>
+              <li nz-menu-item><a href="/addCategory"> Add Category </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Measurement" nzSelected>
+            <ul>
+              <li nz-menu-item nzSelected><a href="/measurements">Manage Measurements </a></li>
+              <li nz-menu-item><a href="/addMeasurement"> Add Measurement </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Special Offers">
+            <ul>
+              <li nz-menu-item><a href="/pendingSpecialoffer">Pending Special Offers </a></li>
+              <li nz-menu-item><a href="/activeSpecialoffer">Active Special Offers </a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </nz-sider>
+      <nz-layout class="inner-layout">
+        <nz-content>
+          <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
+            <nz-tab [nzTitle]="'Measurements'">
+                <nz-table #nzTable [nzData]="measurements" nzTableLayout="fixed">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let data of nzTable.data">
+                        <tr id="{{data._id}}">
+                          <td id="measurementName{{data._id}}">{{ data.name }}</td>
+                          <td>
+                           
+                            <button nz-button nz-dropdown [nzDropdownMenu]="menu" nzType="primary">
+                              Menu
+                              <i nz-icon nzType="down"></i>
+                            </button>
+                            <nz-dropdown-menu #menu="nzDropdownMenu">
+                              <ul nz-menu>
+                                <li nz-menu-item><a nz-button nzType="link" (click)="showEditModal(data._id,data.name)"> <span nz-typography nzType="primary">Edit</span></a></li>
+                                <li nz-menu-item><a nz-button nzType="link" (click)="showDeleteConfirm(data._id)"> <span nz-typography nzType="danger">Delete</span></a></li>
+                              
+                              </ul>
+                            </nz-dropdown-menu>
+
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </nz-table>
+            </nz-tab>
+          </nz-tabset>
+        </nz-content>
+
+        <nz-modal [(nzVisible)]="editModal" nzTitle="Edit Measurement" [nzFooter]="null"  (nzOnCancel)="handleCancel()">
+            <form nz-form [formGroup]="form" (ngSubmit)="editMeasurement()">
+        
+              <nz-form-item nz-row>
+                <nz-form-label nz-col nzSpan="6">Name</nz-form-label>
+                <nz-form-control nzErrorTip="Please input Measurement Name!">
+                  <input type="text" nz-input nz-input formControlName="measurementName" [(ngModel)]="measurementName"/>
+                 <!--<textarea formControlName="description" nz-input rows="2" placeholder="write any thing"></textarea>--> 
+                </nz-form-control>
+              </nz-form-item>
+
+              <nz-form-item nz-row nzJustify="center">
+                
+                  <button nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" nz-button nzType="primary" nzShape="round" class="mr10">Submit</button>
+                  <button nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" nz-button nzType="default" (click)="resetForm()" nzShape="round" >Clear</button>
+                
+              </nz-form-item>
+            </form>
+          </nz-modal>
+
+          
+      </nz-layout>
+    </nz-layout>
+  </nz-layout>

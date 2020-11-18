@@ -1,0 +1,304 @@
+<style>
+    .menu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .menu li {
+        float: left;
+    }
+
+    .menu li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 16px;
+        text-decoration: none;
+    }
+
+    .menu li a:hover {
+        background-color: #111111;
+    }
+
+    .menu .active {
+        background-color: #111111;
+    }
+
+    .categoryList {
+        list-style-type: none;
+    }
+    .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding:5px;
+    background:white;
+    }
+    .centeredUp {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding:5px;
+    background:white;
+    }
+    .centeredDown{
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding:5px;
+    background:white;
+    }
+
+    .pd10{
+        padding:10px;
+    }
+    .rateFillColor{
+        color: #FF9529;
+    }
+    .fontSize20{
+        font-size:20px;
+    }
+
+</style>
+<nz-layout>
+    <div nz-row style="padding-top:10px;background: white;" nzAlign="middle">
+
+        <div nz-col [nzSpan]="4" class="logo">
+            <div nz-row nzJustify="center"> 
+                <img src="./../assets/images/logo.png" />
+            </div>
+        </div>
+        <div nz-col [nzSpan]="16">
+            <div nz-row nzJustify="center">
+                <nz-input-group  nz-col [nzSpan]="16" nzSearch [nzAddOnAfter]="suffixIconButton">
+                    <input type="text" nz-input placeholder="input search text" id="searchWord"/>
+                </nz-input-group>
+                <ng-template #suffixIconButton>
+                    <button nz-button style="background: #cb2d22;color:white" (click)="searchForProduct()">Search</button>
+                </ng-template>
+                <ng-template #choiceButton>
+                    <button nz-button nz-dropdown [nzDropdownMenu]="searchMenu">
+                        All Categories
+                        <i nz-icon nzType="down"></i>
+                    </button>
+                    <nz-dropdown-menu #searchMenu="nzDropdownMenu">
+                        <ul nz-menu>
+                            <li nz-menu-item>menu4 1st menu item</li>
+                            <li nz-menu-item>menu4 2nd menu item</li>
+                            <li nz-menu-item>menu4 3rd menu item</li>
+                        </ul>
+                    </nz-dropdown-menu>
+                </ng-template>
+            </div>
+        </div>
+    
+        <div nz-col [nzSpan]="4">
+            <div nz-row nzJustify="center">
+               
+                <a href="/wishlist" nz-button nzType="link">
+                    <i nz-icon nzType="heart" nzTheme="outline" class="fontSize20" style="color: hotpink;"></i>
+                  </a>
+                <a href="/cart" nz-button nzType="link">
+                    <i nz-icon nzType="shopping-cart" nzTheme="outline" class="fontSize20"></i>
+                </a>
+                <a href="#" nz-button nzType="link" class="fontSize20">
+                    <span> Orders </span>
+                </a>
+    
+            </div>
+        </div>
+    </div>
+    
+    <div nz-row nzJustify="center" style="background: #cb2d22;">
+        <ul class="menu">
+            <li class="active"><a routerLink="/index" class="nav-link text-white">Home</a></li>
+            <li><a routerLink="/products" class="nav-link text-white">Products</a></li>
+            <li><a routerLink="/specialOffers" class="nav-link text-white">special offers</a></li>
+            <li>
+                <a nz-dropdown [nzDropdownMenu]="proformaMenu">
+                Proforma
+                    <i nz-icon nzType="down"></i>
+                </a>
+                <nz-dropdown-menu #proformaMenu="nzDropdownMenu">
+                <ul nz-menu nzSelectable>
+                    <li nz-menu-item><a routerLink="/requestProforma" class="nav-link text-white">Request Proforma</a></li>
+                    <li nz-menu-item><a routerLink="/pendingProformas" class="nav-link text-white">Open Pending Proformas</a></li>
+                    <li nz-menu-item><a routerLink="/activeProformas" class="nav-link text-white">Active Proformas</a></li>
+                    <li nz-menu-item><a routerLink="/closedProformas" class="nav-link text-white">Closed Proformas</a></li>
+                </ul>
+                </nz-dropdown-menu>
+            </li>
+        </ul>
+    </div>
+    <nz-content>
+
+        <div nz-row style="height:400px">
+            <nz-carousel nzAutoPlay>
+                <div nz-carousel-content *ngFor="let category of categories">
+                    <img style="height:400px;width:100%" [src]="'./../assets/images/categoryImages/'+category.image" alt="Los Angeles">
+                </div>
+            </nz-carousel>
+        </div>
+
+        <div nz-row style="margin:20px;border-bottom:1px solid #E83E34;">
+            <h2>Top Categories</h2>
+        </div>
+
+        <!-- ////categories-->
+        <div nz-row>
+        <!--<div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="8" nzXl="8" style="padding:10px;">
+
+                <a href="product/{{products[0]._id}}"><img class="card-img-top" height="500px" width="100%" [src]="'./../assets/images/productImages/'+products[0].images[0]" /></a><br>
+                <div class="centered">
+                   <h2>CATEGORIES</h2> 
+                </div>
+            </div>
+            <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="8" nzXl="8" style="padding:10px;">
+                <div nz-row>
+                    <a href="product/{{products[1]._id}}"><img class="card-img-top" height="220px" width="100%" [src]="'./../assets/images/productImages/'+products[1].images[0]" /></a><br>
+                    <div class="centeredUp">
+                        <h2>CATEGORIES</h2> 
+                     </div>
+                </div>
+
+                <div nz-row>
+                    <a href="product/{{products[1]._id}}"><img class="card-img-top" height="220px" width="100%" [src]="'./../assets/images/productImages/'+products[1].images[0]" /></a><br>
+                    <div class="centeredDown">
+                        <h2>CATEGORIES</h2> 
+                     </div>
+                </div>
+              
+            </div>
+            <div nz-col nzXs="24" nzSm="12" nzMd="8" nzLg="8" nzXl="8" style="padding:10px;">
+                <a href="product/{{products[2]._id}}"><img class="card-img-top" height="500px" width="100%" [src]="'./../assets/images/productImages/'+products[2].images[0]" /></a><br>
+                <div class="centered">
+                    <h2>CATEGORIES</h2> 
+                 </div>
+            </div>-->
+
+        </div>
+
+
+        <div nz-row style="margin:20px;border-bottom:1px solid #E83E34;">
+            <h2>Recent Products</h2>
+        </div>
+
+        <div nz-row>
+            <div nz-col nzXs="24" nzSm="12" nzMd="6" nzLg="6" nzXl="4" class="pd10"
+                *ngFor="let product of products">
+
+                <nz-card [nzBordered]="true" nzHoverable style="height:100% !important">
+
+                    <a nz-row nzJustify="center" href="product/{{product._id}}"><img class="card-img-top" height="80px" width="100px" [src]="'./../assets/images/productImages/'+product.images[0]" /></a><br>
+
+                    <a href="product/{{product._id}}">{{product.productName | uppercase}}</a>
+                    <p><a href="product/{{product._id}}">{{((product.description) > 2)? (product.description):((product.description | slice:0:2)+'..')}}</a></p>
+
+                    <p>
+                        <strong> ETB </strong> <span nz-typography nzType="danger"> {{product.price}}</span>
+                        <span  *ngIf="product.measurement"> / {{product.measurement}}</span>
+                        <br>{{product.minOrder}} (min.Order)
+                    </p>
+
+                                
+
+
+                <div nz-row>
+                    <div style="text-align: start;">
+                        <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                
+                        <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                    
+                        <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                    
+                        <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                    
+                        <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                    </div>
+                    
+                    <div style="text-align: end;">
+                        
+                        <a nz-button nzType="link" (click)="addProductToWishlist(product._id)" 
+                            ><i nz-icon
+                                nzType="heart" nzTheme="outline"
+                                style="color: hotpink;"></i></a>
+                    </div>
+                    
+                </div>
+        
+                </nz-card>
+            </div>
+        </div>
+
+        <div nz-row style="background:white;">
+            <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+                <img src="./../assets/images/imageQ.jpg" width="400px" height="300px" />
+            </div>
+            <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" class="pd10">
+                <h1>One Request,Multiple Quotes</h1><br>
+                <p>What Are You Looking For...</p>
+                <a href="/requestProforma" nz-button nzType="link" nzShape="round"
+                    style="padding:2px;padding-right:5px;padding-left:5px;background:#E83E34;color:white"> Request
+                    For Quatation </a>
+
+            </div>
+        </div>
+
+        <div nz-row style="margin:20px;border-bottom:1px solid #E83E34;">
+            <h2>Special Offer</h2>
+        </div>
+
+        <div nz-row>
+            <div nz-col nzXs="24" nzSm="12" nzMd="6" nzLg="6" nzXl="4" class="pd10" *ngFor="let data of specialOffers"
+              >
+                <nz-card [nzBordered]="true" nzHoverable  style="height:100% !important">
+
+                    <a nz-row nzJustify="center" href="specialOfferProduct/{{data.product._id}}"><img
+                            class="card-img-top" height="80px" width="100px"
+                            [src]="'./../assets/images/productImages/'+data.product.images[0]" /></a><br>
+
+                    <a href="specialOfferProduct/{{data.product._id}}">{{data.product.productName | uppercase}}</a>
+                    <p><a href="specialOfferProduct/{{data.product._id}}">{{((data.product.description) > 2)? (data.product.description):((data.product.description | slice:0:2)+'..')}}</a></p>
+
+                    <p>
+                        <strong> ETB </strong>
+                        <span nz-typography nzType="danger"> {{data.specialoffer.discount}}</span><span nz-typography><del>{{data.product.price}}</del></span>
+                        <span  *ngIf="data.product.measurement"> / {{data.product.measurement}}</span>
+                        <br>{{data.product.minOrder}} (min.Order)
+                    </p>
+
+                    <div nz-row>
+                        <div style="text-align: start;">
+                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                    
+                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                        
+                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                        
+                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                        
+                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                        </div>
+                        
+                        <div style="text-align: end;">
+                            
+                            <a nz-button nzType="link" (click)="addProductToWishlist(data.product._id)" 
+                                ><i nz-icon
+                                    nzType="heart" nzTheme="outline"
+                                    style="color: hotpink;"></i></a>
+                        </div>
+                        
+                    </div>
+                </nz-card>
+            </div>
+
+        </div>
+
+    </nz-content>
+    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+</nz-layout>
