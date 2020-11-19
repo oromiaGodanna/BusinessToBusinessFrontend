@@ -1,0 +1,28 @@
+  
+  button{
+    font-weight: bolder;
+  }
+  .ant-btn-primary{
+    background-color: #E3141A;
+    border-color: #E3141A;
+  }
+  .ant-btn:hover, .ant-btn:focus{
+    border-color: #E3141A ;
+    color: #E3141A;
+    background-color: #fff;
+  }
+  
+  .ant-btn-primary:hover, .ant-btn-primary:focus{
+    border-color: #E3141A ;
+    color: #E3141A;
+    background-color: #fff;
+  }
+  
+  a{
+    color: #E3141A 
+  }
+  a:hover {
+    font-size: 15px;
+  }
+
+  

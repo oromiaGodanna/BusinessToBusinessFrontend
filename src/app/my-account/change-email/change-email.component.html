@@ -1,0 +1,51 @@
+<div nz-row class="content">
+
+    <div nz-col *ngIf="!verficationLinkSent" nzSpan="20">
+        <nz-card nzHoverable [nzActions]="[actionCancel, actionSave]">
+            <i nz-icon nzType="mail" style="font-size: 100px;"></i>
+            <h1 nz-typography>Change Log In Email </h1>
+            <p>when you fill in you registerd email address, you will be sent a link where you can reset your password.
+            </p>
+            <form nz-form (ngSubmit)="onSubmit()" #changeEmailForm="ngForm">
+                <nz-alert *ngIf="error == true" nzType="error" [nzMessage]="errorMsg" nzCloseable nzShowIcon>
+                </nz-alert>
+                <p>Your current registerd email address is: {{"example@email.com"}} </p>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please Enter a Valid Email Address">
+                        <nz-input-group nzAddOnAfterIcon="mail">
+                            <input nz-input nzSize="large" type="email" ngModel name="email"
+                                placeholder="Your Email here" required email />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <!-- <div nz-row>
+                    <div nz-col nzSpan="12">
+                        <button nz-button nzBlock type="button">Cancel</button>
+                    </div>
+                    <div nz-col nzSpan="12">
+                        <button nz-button nzBlock type="submit" [nzType]="'primary'"> Change Email</button>
+                    </div>
+                </div> -->
+                <ng-template #actionSave>
+                    <a nz-button nzType="link" nz-popconfirm
+                    nzPopconfirmTitle="Are you sure you want to change your email address?" nzPopconfirmPlacement="bottom"
+                    nzOkText="Yes" (nzOnConfirm)="onSubmit()" (nzOnCancel)="cancel()" nzPopconfirmPlacement="topLeft" [disabled]='!changeEmailForm.valid'><i nz-icon nzType="lock" nzTheme="outline" ></i>Change Email</a>
+                </ng-template>
+                <ng-template #actionCancel>
+                    <a nz-button nzType="link" nzDanger (click)="onCancel()"><i nz-icon nzType="close" nzTheme="outline"></i> Cancel</a>
+                </ng-template>
+                
+            </form>
+        </nz-card>
+    </div>
+    <div nz-col *ngIf="verficationLinkSent" nzSpan="12">
+        <nz-card nzHoverable>
+            <nz-result nzStatus="info" nzTitle="Reset Password" nzSubTitle="{{successMsg}}">
+                <div nz-result-extra>
+                    <button nz-button nzType="primary">Go to Email</button>
+                    <button nz-button (click)="changeEmail()">Change Email Address</button>
+                </div>
+            </nz-result>
+        </nz-card>
+    </div>
+</div>

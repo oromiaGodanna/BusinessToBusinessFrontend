@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "bTob": {
+    "BusinessToBusinessFrontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/bTob",
+            "outputPath": "dist/BusinessToBusinessFrontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -72,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "bTob:build"
+            "browserTarget": "BusinessToBusinessFrontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "bTob:build:production"
+              "browserTarget": "BusinessToBusinessFrontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "bTob:build"
+            "browserTarget": "BusinessToBusinessFrontend:build"
           }
         },
         "test": {
@@ -120,16 +120,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "bTob:serve"
+            "devServerTarget": "BusinessToBusinessFrontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "bTob:serve:production"
+              "devServerTarget": "BusinessToBusinessFrontend:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "bTob"
+  "defaultProject": "BusinessToBusinessFrontend"
 }

@@ -4275,6 +4275,16 @@ internal-ip@^4.3.0:
     default-gateway "^4.2.0"
     ipaddr.js "^1.9.0"
 
+intl-tel-input@^16.0.0:
+  version "16.1.0"
+  resolved "https://registry.yarnpkg.com/intl-tel-input/-/intl-tel-input-16.1.0.tgz#bfdac6ed8304198c63b4834cceeead7bc22fb0af"
+  integrity sha512-AsMOCDyvBqdVpKU/55AYzgycm0Wc3a55ErPVxjiek9EiuEC9CZmvtyADB6/7eE+iy814a5T43ThRh5kYMPOx7g==
+
+intl-tel-input@^17.0.8:
+  version "17.0.8"
+  resolved "https://registry.yarnpkg.com/intl-tel-input/-/intl-tel-input-17.0.8.tgz#e1b38e27a6c941b713b757ecf7b1f9f345f88c80"
+  integrity sha512-Jf7IdNCSJrWMBbcLQJ8I3nVYnJ5xRODJhPa+0QFcTsg82E332DbMDKnzTBkEID4Q1I7Nf8+96WzmMveadRbxxg==
+
 invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
@@ -5521,6 +5531,13 @@ ng-zorro-antd@^9.1.0:
     "@ant-design/icons-angular" "^9.0.0"
     date-fns "^2.10.0"
     resize-observer-polyfill "^1.5.1"
+
+ng2-tel-input@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/ng2-tel-input/-/ng2-tel-input-2.3.0.tgz#50ec08a7bda6eaa921443d6d3519f8aeada4ffee"
+  integrity sha512-sdcovwjeAgg/rctXfxz68oq5GbablLT3L+Khw165hqnkUA0xLASE+LybK4C+fMc6TLuMKlZ6Nsgc1ij2IGcs9Q==
+  dependencies:
+    intl-tel-input "^16.0.0"
 
 nice-try@^1.0.4:
   version "1.0.5"

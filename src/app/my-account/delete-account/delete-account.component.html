@@ -1,0 +1,59 @@
+<div nz-row class="content">
+    <div nz-col nzSpan="20">
+        <nz-card [nzBordered]="false" nzTitle="Send Request To Delete Your Account" >
+            <i nz-icon nzType="delete" style="font-size: 100px;"></i>
+            <h1 nz-typography>Want to Delete You Account?</h1>
+            <p>
+                To delete your account simply contact us and we will process your request.
+                Please note that deleting your account will remove your records and your purchases.
+                This will remove proof of obtaining the product with our licensing and is not recommended.
+            </p>
+            <form nz-form [formGroup]="deleteForm" (ngSubmit)="onSubmit()" *ngIf="!requestSent">
+                <nz-alert *ngIf="error == true" nzType="error" [nzMessage]="errorMsg" nzCloseable nzShowIcon>
+                </nz-alert>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please Enter Your Full Name">
+                        <nz-input-group nzAddOnBeforeIcon="user">
+                            <input nz-input nzSize="large" type="text" formControlName="name" placeholder="Full Name" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please Enter a Valid Email Address">
+                        <nz-input-group nzAddOnBeforeIcon="mail">
+                            <input nz-input nzSize="large" type="email" formControlName="email"
+                                placeholder="Your Email here" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please enter your resone for deactivating">
+                        <nz-input-group nzAddOnBeforeIcon="question">
+                            <input nz-input nzSize="large" type="text" formControlName="reason"
+                                placeholder="Reason for leaveing" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control>
+                        <nz-input-group nzAddOnBeforeIcon="message">
+                            <textarea rows="4" nz-input type='text' formControlName="message"
+                                placeholder="Your Message"></textarea>
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <div nz-row>
+                    <div nz-col [nzSpan]="10" style="text-align: center; float: left;">
+                        <button nz-button nzBlock [nzType]="'primary'" type="submit"
+                            [disabled]='!deleteForm.valid'>Send</button>
+                        <p>We'll aim to be back in touch within 12 hours</p>
+                    </div>
+                </div>
+            </form>
+            <nz-result *ngIf="requestSent" nzStatus="success" nzTitle='Your Request has been sent.'
+            nzSubTitle="We will get in contact with you with in the next 24 hours">
+        </nz-result>
+        </nz-card>
+       
+    </div>
+</div>

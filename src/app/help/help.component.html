@@ -1,0 +1,202 @@
+<nz-page-header class="site-page-header" nzTitle="Help Center">
+    <nz-page-header-subtitle>
+        <nz-divider nzType="vertical"></nz-divider>
+        <!-- <p>Are you a: </p> -->
+        <nz-select nzSpan="12" [nzOpen] [(ngModel)]="selectedRole">
+            <nz-option nzValue="All" nzLabel="All"></nz-option>
+            <nz-option nzValue="Buyer" nzLabel="Buyer"></nz-option>
+            <nz-option nzValue="Seller" nzLabel="Seller"></nz-option>
+            <nz-option nzValue="Both" nzLabel="Both"></nz-option>
+        </nz-select>
+    </nz-page-header-subtitle>
+</nz-page-header>
+
+<div class="content">
+    <div nz-row>
+        <div nz-col nzOffset="4" nzSpan="16">
+            <h2 style="text-align: center; font-style: italic;">How can we help You?</h2>
+            <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="addOnAfterTemplate">
+                <input type="text" nz-input placeholder="Search for key words ..." [(ngModel)]="searchValue" />
+            </nz-input-group>
+            <ng-template #addOnAfterTemplate>
+                <button nz-button nzSize="large" nzType="primary" (click)="onSearch()"><i nz-icon
+                        nzType="search"></i></button>
+            </ng-template>
+        </div>  
+    </div>
+
+    <div nz-row class="popular-topics">
+        <div nz-col nzSpan="24">
+            <nz-card nzTitle="Popular Topics">
+                <div nz-row [nzGutter]="[16, 24]">
+                    <div nz-col [nzSpan]="6" *ngFor="let topic of popularTopics; let  i = index">
+                        <nz-card [nzTitle]="topic.title" [nzHoverable]="true" class="topics">
+                            <i nz-icon [nzType]="topic.icon" nzTheme="outline"></i>
+                            <p>{{topic.content}}</p>
+                        </nz-card>
+                    </div>
+                </div>
+            </nz-card>
+        </div>
+    </div>
+
+    <div nz-row style="margin-top: 24px;">
+        <div nz-col nzSpan="8">
+            <h3> <i nz-icon nzType="unordered-list" nzTheme="outline"></i> Catagories</h3>
+            <ul nz-menu nzMode="inline">
+                <li nz-submenu nzTitle="B2B Intro" nzIcon="bank">
+                    <ul>
+                        <li nz-menu-item>About Us</li>
+                        <li nz-menu-item>Contact Us</li>
+                    </ul>
+                </li>
+                <li nz-submenu nzTitle="Account Management" nzIcon="user">
+                    <ul>
+                        <li nz-menu-item>Creating a Account</li>
+                        <li nz-menu-item>Logging In</li>
+                        <li nz-menu-item>Account Setting</li>
+                        <li nz-menu-item>Profile</li>
+                    </ul>
+                </li>
+                <li nz-submenu nzTitle="Subscription Model" nzIcon="tags">
+                    <ul>
+                        <li nz-menu-item>Types of Subscription models</li>
+                        <li nz-menu-item>Buying a subscription model</li>
+                        <li nz-menu-item>Upgrading Your subscription model</li>
+                    </ul>
+                </li>
+                <li nz-submenu nzTitle="Messaging" nzIcon="message">
+                </li>
+                <li nz-submenu nzTitle="Place Order" nzIcon="shopping-cart">
+                    <ul>
+                        <li nz-menu-item>Order Management</li>
+                        <li nz-menu-item>Place and Confirm Order</li>
+                        <li nz-menu-item>View Order Status</li>
+                    </ul>
+                </li>
+                <li nz-submenu nzTitle="Order Payment" nzIcon="wallet">
+                    <ul>
+                        <li nz-menu-item>Check Out Order</li>
+                        <li nz-menu-item>Cancel Order</li>
+                    </ul>
+                </li>
+                <li nz-submenu nzTitle="Feedback and Rating" nzIcon="like">
+                </li>
+                <li nz-submenu nzTitle="Promotions" nzIcon="bell">
+                </li>
+                <li nz-submenu nzTitle="Others" nzIcon="tool">
+                    <ul>
+                        <li nz-menu-group nzTitle="Creating a dispute">
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div nzSpan="14" style="width: 63%; margin-left: 24px;">
+            <nz-breadcrumb>
+                <nz-breadcrumb-item>
+                    Catagories
+                </nz-breadcrumb-item>
+                <nz-breadcrumb-item>
+                    Account Management
+                </nz-breadcrumb-item>
+                <nz-breadcrumb-item>
+                    Create an Account
+                </nz-breadcrumb-item>
+            </nz-breadcrumb>
+            <nz-card [nzBordered]="false" nzTitle="Create an Account" style="margin-top:12px;">
+                <nz-list>
+                    <nz-list-item>
+                        <div nz-col nzSpan="4">
+                            <b> For: </b> 
+                        </div>
+                        <div nz-col nzSpan="20">
+                            Buyers
+                        </div>
+                    </nz-list-item>
+                    <nz-list-item>
+                        <div nz-col nzSpan="4">
+                            <b> Pre-Condition : </b>
+                        </div>
+                        <div nz-col nzSpan="20">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.It was popularised
+                            in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
+                            recently with desktop publishing.
+                        </div>
+                    </nz-list-item>
+                    <nz-list-item>
+                        <div nz-col nzSpan="4">
+                            <b> Description: </b>
+                        </div>
+                        <div nz-col nzSpan="20">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting
+                            industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
+                            an
+                            unknown printer took a galley of type and scrambled it to make a type specimen book. It has
+                            survived not only five centuries, but also the leap into electronic typesetting, remaining
+                            essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                            containing Lorem Ipsum passages, and more recently with desktop publishing software like
+                            Aldus
+                            PageMaker including versions of Lorem Ipsum.
+                        </div>
+                    </nz-list-item>
+                    <nz-list-item>
+                        <div nz-col nzSpan="4">
+                            <b> Steps : </b>
+                        </div>
+                        <div nz-col nzSpan="20">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.It was popularised
+                          <br>
+                          Aldus PageMaker including versions of Lorem Ipsum.
+                        </div>
+                    </nz-list-item>
+                   
+                </nz-list>
+                <!-- <nz-card nzType="inner">
+                    <nz-descriptions>
+                        <nz-descriptions-item nzTitle="Description">Zhou Maomao</nz-descriptions-item>
+                    </nz-descriptions>
+                </nz-card>
+                <br>
+                <nz-card nzType="inner">
+                    <nz-descriptions>
+                        <nz-descriptions-item nzTitle="Pre-condition">Zhou Maomao</nz-descriptions-item>
+                    </nz-descriptions>
+                </nz-card>
+                <br>
+                <nz-card nzType="inner">
+                    <nz-descriptions>
+                        <nz-descriptions-item nzTitle="Description">Zhou Maomao</nz-descriptions-item>
+                    </nz-descriptions>
+                </nz-card> -->
+            </nz-card>
+        </div>
+    </div>
+    <br>
+
+    <div nz-row>
+        <div nz-col nzOffset="2" nzSpan="20">
+            <nz-divider nzText="Frequently asked questions"></nz-divider>
+            <!-- <h3>Frequently asked questions</h3> -->
+            <!-- <nz-breadcrumb>
+                <nz-breadcrumb-item>
+                  Catagories
+                </nz-breadcrumb-item>
+                <nz-breadcrumb-item>
+                  Account Management
+                </nz-breadcrumb-item>
+                <nz-breadcrumb-item>
+                  Create an Account
+                </nz-breadcrumb-item>
+              </nz-breadcrumb> -->
+
+            <nz-collapse [nzBordered]="false">
+                <nz-collapse-panel *ngFor="let FAQ of FAQs" [nzHeader]="FAQ.name" [nzActive]="FAQ.active">
+                    <p>{{ FAQ.content}}</p>
+                </nz-collapse-panel>
+            </nz-collapse>
+        </div>
+
+    </div>
+</div>

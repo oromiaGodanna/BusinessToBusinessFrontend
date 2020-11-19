@@ -1,0 +1,105 @@
+<nz-page-header nzTitle="Subscription Models">
+</nz-page-header>
+
+<div nz-row class="content">
+  <div nz-col nzSpan="12">
+    <nz-card style="align-content: center;" nzTitle="Create a New Subscription">
+      <form nz-form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
+        <nz-alert *ngIf="error == true" nzType="error" [nzMessage]="errorMsg" nzCloseable nzShowIcon> </nz-alert>
+        <nz-form-item>
+          <nz-form-label nzSpan="8" nzRequired>Name</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Please provide the name of the Subscription" [nzSpan]="12">
+            <input nz-input placeholder="Susbscription Name" formControlName="name" />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzSpan="8" nzRequired>Description</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Please provide a descripiton for the subscription" [nzSpan]="12">
+            <textarea nz-input placeholder="Autosize height with minimum and maximum number of lines"
+              [nzAutosize]="{ minRows: 3, maxRows: 6 }" formControlName="description"></textarea>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label nzSpan="8" nzRequired>Monthly Price</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Enter the Monthly price of the subscription" [nzSpan]="12">
+            <input nz-input type="number" placeholder="Price of Susbscription"
+              formControlName="monthlyPrice" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-divider nzText="Features"></nz-divider>
+        <nz-form-item>
+          <nz-form-label nzSpan="8" nzRequired>Number of Products</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Provide the number of products" [nzSpan]="12">
+            <input nz-input type="number" placeholder="Number of products"
+              formControlName="numOfProducts" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzSpan="8" nzRequired>Number of Quatations</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Provide the number of quatations a seller can receive"
+            [nzSpan]="12">
+            <input nz-input type="number" placeholder="Number of Quatations"
+              formControlName="numOfQuatations" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzSpan="8" nzRequired>Number of Email</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Provide the number of emails" [nzSpan]="12">
+            <input nz-input type="number" placeholder="Number of emails" formControlName="numOfEmails" />
+          </nz-form-control>
+        </nz-form-item>
+        <!-- <nz-form-item>
+          <nz-form-label nzSpan="8" nzRequired>Available from</nz-form-label>
+          <nz-form-control nzHasFeedback nzErrorTip="Provide the Availability of the subscription" [nzSpan]="12">
+            <input nz-input type="number" placeholder="Available On" formControlName="availableOn" />
+          </nz-form-control>
+        </nz-form-item> -->
+        <div nz-row>
+          <div nz-col [nzOffset]="8" [nzSpan]="12" style="text-align: center;">
+            <button nz-button nzBlock [nzType]="'primary'" type="submit" [disabled]='!subscriptionForm.valid'><i nz-icon
+                nzType="plus-square" nzTheme="outline"></i>Create Susbscription</button>
+          </div>
+        </div>
+      </form>
+    </nz-card>
+  </div>
+
+  <div nz-col nzOffset="2" nzSpan="10">
+    <h3>List of Subscriptions</h3>
+    <nz-tabset nzType="card">
+      <nz-tab *ngFor="let plan of plans; let i=index" [nzTitle]="plan.name">
+        <nz-descriptions [nzTitle]="plan.name" [nzColumn]="1">
+          <nz-descriptions-item nzTitle="Description">{{plan.description}}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Monthly Price">{{plan.monthlyPrice}} Br. /month</nz-descriptions-item>
+        </nz-descriptions>
+        <nz-descriptions nzTitle="Features" [nzColumn]="1">
+          <nz-descriptions-item nzTitle="Number of Products">{{plan.numOfProducts}}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Number of Quatations">{{plan.numOfQuatations}}</nz-descriptions-item>
+          <nz-descriptions-item nzTitle="Number of Emails">{{plan.numOfEmails}}</nz-descriptions-item>
+        </nz-descriptions>
+        <div nz-row>
+          <div nz-col nzSpan="10">
+            <button nz-button nzType="default" nzDanger nz-popconfirm
+              nzPopconfirmTitle="Are you sure delete this subscription?" nzPopconfirmPlacement="bottom"
+              nzOkText ="Yes" (nzOnConfirm)="deleteSubscription(i)" (nzOnCancel)="cancel()" nzPopconfirmPlacement="topLeft"> <i nz-icon
+                nzType="delete" nzTheme="outline"></i>Delete Susbscription</button>
+          </div>
+        </div>
+      </nz-tab>
+    </nz-tabset>
+    <nz-empty *ngIf="plans.length == 0"
+      [nzNotFoundContent]="contentTpl"
+      [nzNotFoundFooter]="footerTpl"
+    >
+      <ng-template #contentTpl>
+        <p> No subscriptions found . Add Subscriptions </p>
+      </ng-template>
+      <ng-template #footerTpl>
+        <!-- <button nz-button nzType="primary">Create New Subscriptions Now</button> -->
+       <h3>Create New Subscriptions here <i nz-icon nzType="arrow-right" nzTheme="outline"style="font-size: 30px;"></i></h3> 
+      </ng-template>
+    </nz-empty>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div nz-row class="content">
+    <div nz-col nzSpan="6">
+        <ul nz-menu nzMode="inline">
+            <li nz-menu-group nzTitle="My Account" nzIcon="user">
+                <ul>
+                    <li nz-menu-item nzMatchRouter><a [routerLink]="['/home']"><i nz-icon nzType="home"
+                                nzTheme="outline"></i> Home</a></li>
+                    <li nz-menu-item nzMatchRouter><a
+                            [routerLink]="['/my_account', userId , 'view']"><i nz-icon nzType="eye"
+                                nzTheme="outline"></i> View Profile</a></li>
+                    <li nz-menu-item nzMatchRouter><a
+                            [routerLink]="['/my_account', userId,'update']"> <i nz-icon
+                                nzType="edit" nzTheme="outline"></i>Update Profile</a></li>
+                    <li nz-menu-item nzMatchRouter><a
+                            [routerLink]="['/my_account', userId, 'change_email']"><i nz-icon
+                                nzType="mail" nzTheme="outline"></i>Change Email</a></li>
+                    <li nz-menu-item nzMatchRouter><a
+                            [routerLink]="['/my_account', userId, 'change_password']"><i nz-icon
+                                nzType="lock" nzTheme="outline"></i>Change Password</a></li>
+                    <li nz-menu-item><i nz-icon nzType="barcode" nzTheme="outline"></i>Products</li>
+                    <li nz-menu-item><i nz-icon nzType="transaction" nzTheme="outline"></i>Orders</li>
+                    <li nz-menu-item><i nz-icon nzType="partition" nzTheme="outline"></i>Prefered Catagories</li>
+                    <li nz-menu-item><i nz-icon nzType="wallet" nzTheme="outline"></i>Payment</li>
+                    <li nz-menu-item><i nz-icon nzType="gift" nzTheme="outline"></i>Subscription</li>
+                    <li nz-menu-item><i nz-icon nzType="team" nzTheme="outline"></i>Subscribers</li>
+                    <li nz-menu-item><i nz-icon nzType="heart" nzTheme="outline"></i>Subscribed To</li>
+                    <li nz-menu-item nzMatchRouter><a
+                        [routerLink]="['/my_account', userId, 'deactivate']"><i nz-icon nzType="poweroff" nzTheme="outline"></i>Deactivate Account</a></li>
+                    <li nz-menu-item (click)="logout()"><i nz-icon nzType="logout" nzTheme="outline"></i>Log Out</li>
+                </ul>
+            </li>
+        </ul>
+        <!-- <ng-template #AccountMenu>
+            <button nz-button (click)="toggleCollapsed()">
+                <i nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+            </button>
+            <h3 nz-typography>My Account</h3>
+        </ng-template> -->
+    </div>
+    <div nz-col nzOffset="1" nzSpan="16">
+        <router-outlet></router-outlet>
+    </div>
+</div>

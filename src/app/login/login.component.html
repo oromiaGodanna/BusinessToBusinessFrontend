@@ -1,16 +1,80 @@
-<nz-card >
-    <form nz-form nz-row #f="ngForm" (ngSubmit)="login(f)">
-        <nz-form-item>
-            <nz-form-label  nzFor="name">Name</nz-form-label>
-            <nz-form-control >
-                <input nz-input ngModel name="name" type="name" id="name">
-            </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-            <nz-form-label  nzNoColon></nz-form-label>
-            <nz-form-control >
-                <button nz-button [nzType]="'primary'">Log in</button>
-            </nz-form-control>
-        </nz-form-item>
+<div nz-row class="content">
+
+  <div nz-col nzSpan="10" class="sideInfo">
+    <h1 nz-typography>{{sideInfo.title}}</h1>
+    <h2 nz-typography> {{sideInfo.subTitle}}</h2>
+    <p> {{sideInfo.content }}</p>
+    <a>Know More</a>
+    <button nz-button routerLink="/register">Sign Up</button>
+  </div>
+
+  <div nz-col nzSpan="14">
+
+    <nz-page-header nzTitle="Login">
+      <nz-page-header-content>
+        <p>Don't have an account? <a routerLink="/register">Create your account. </a> It takes less than a minute.</p>
+      </nz-page-header-content>
+    </nz-page-header>
+
+    <form nz-form
+    (ngSubmit)="onSubmit(loginForm)" 
+    #loginForm="ngForm">
+    <nz-alert *ngIf="error == true"  nzType="error" [nzMessage]="errorMsg" nzCloseable nzShowIcon> </nz-alert>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>Email</nz-form-label>
+        <nz-form-control nzHasFeedback [nzErrorTip]="emailErrorTips" [nzSpan]="14">
+          <nz-input-group nzPrefixIcon="mail">
+            <input nz-input 
+            placeholder="E-mail" 
+            type="email" 
+            ngModel
+            name="email"
+            required
+            email />
+            <ng-template #emailErrorTips let-control>
+              <ng-container *ngIf="control.hasError('email')">Please input a valid email address!</ng-container>
+              <ng-container *ngIf="control.hasError('required')">Email is required!</ng-container>
+            </ng-template>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzRequired>Password</nz-form-label>
+        <nz-form-control nzHasFeedback [nzErrorTip]="passwordErrorTips" 
+        [nzSpan]="14" >
+          <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
+            <input nz-input 
+            placeholder="Password" 
+            [type]="passwordVisible ? 'text' : 'password'" 
+            ngModel
+            required
+            name="password"/>
+            <ng-template #passwordErrorTips let-control>
+              <ng-container *ngIf="control.hasError('required')">Password is required</ng-container>
+            </ng-template>
+          </nz-input-group>
+          <ng-template #suffixTemplate>
+            <i nz-icon [nzType]="passwordVisible ? 'eye' : 'eye-invisible'"
+              (click)="passwordVisible = !passwordVisible"></i>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <div nz-row>
+        <div nz-col [nzOffset]="16">
+          <a (click)="forgotPassword()">Forgot password</a>
+        </div>
+      </div>
+      
+      <br>
+      <div nz-row>
+        <div nz-col [nzOffset]="6" [nzSpan]="14" style="text-align: center;">
+          <button nz-button nzBlock [nzType]="'primary'" type="submit" [disabled]='!loginForm.valid'>Login</button>
+          <p>Don't Have an Account?<a routerLink="/register"> Register now! </a></p>
+        </div>
+      </div>
     </form>
-</nz-card>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+.content{
+    margin: 2.5% 5%;
+  }
+
+.popular-topics{
+      margin-top: 24px;
+  }
+
+button{
+    font-weight: bolder;
+  }
+
+.topics{
+    text-align: center;
+  }
+ 
+.topics .anticon{
+    color: #E3141A;
+    font-size: 42px;
+  } 
+
+.ant-btn-primary{
+    background-color: #E3141A;
+    border-color: #E3141A;
+  }
+
+.ant-btn:hover, .ant-btn:focus{
+    border-color: #E3141A ;
+    color: #E3141A;
+    background-color: #fff;
+  }
+
+.ant-btn-primary:hover, .ant-btn-primary:focus{
+    border-color: #E3141A ;
+    color: #E3141A;
+    background-color: #fff;
+  }
+  
+a{
+    color: #E3141A 
+  }
+
+a:hover {
+    font-size: 15px;
+  }
+
+.ant-card-head{
+      background: #E3141A;
+  }
+

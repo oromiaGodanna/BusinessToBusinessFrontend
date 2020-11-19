@@ -1,0 +1,78 @@
+<div nz-row class="content">
+    <div nz-col>
+        <nz-card nzTitle="Profile" [nzExtra]="editProfile">
+            <nz-card nzType="inner" nzTitle="Basic Information" [nzBordered]="false">
+                <div nz-row>
+                    <div nz-col nzSpan="6">
+                        <nz-avatar style="align-content: center;"[nzShape]="'square'" [nzSize]="100" nzIcon="user"></nz-avatar>
+                    </div>
+                    <div nz-col nzSpan="18">
+                        <nz-descriptions [nzColumn]="2"> 
+                            <nz-descriptions-item nzTitle="Email">
+                                {{user.email}}
+                                <a style="color: green;" *ngIf='user.verified'> [Verified] <i nz-icon nzType="safety-certificate" nzTheme="outline"></i></a>
+                                <a style="color: red;" *ngIf='!user.verified'> [Unverified]</a>
+                            </nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="Name">{{user.firstName}} {{user.lastName}}</nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="Role">{{user.userType}}</nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="Works at">{{user.companyName}}</nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="Joined in">{{user.joined}}</nz-descriptions-item>
+                        </nz-descriptions>
+                    </div>
+                </div>
+            </nz-card>
+
+            <nz-card nzType="inner" nzTitle="Contact Information" [nzBordered]="false" style="margin-top:16px;">
+                <nz-descriptions  [nzColumn]="3">
+                    <nz-descriptions-item nzTitle="Email">{{user.email}}
+                        <!-- <a style="color: green;" *ngIf='user.verified'>[Verified]</a>
+                        <a style="color: red;" *ngIf='!user.verified'> [Unverified]</a> -->
+                    </nz-descriptions-item>
+                    <!-- <nz-descriptions-item *ngIf="!user.alternativeEmail" nzTitle="Alternative Email">None</nz-descriptions-item> -->
+                    <nz-descriptions-item nzTitle="Alternative Email">{{user.alternativeEmail || 'None'}}</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Telephone">{{user.telephone || 'None'}}</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Mobile">{{user.mobile}}</nz-descriptions-item>
+                
+                        <nz-descriptions-item nzTitle="Social Links" *ngIf="user.userType != 'Buyer'">
+                            <!-- <i nz-icon nzType="facebook" nzTheme="outline"></i>: {{user.socialLinks.facebook || 'None'}} -->
+                            <br />
+                            <i nz-icon nzType="twitter" nzTheme="outline"></i> :  {{user.socialLinks.twitter || 'None'}}
+                            <br />
+                            <i nz-icon nzType="instagram" nzTheme="outline"></i> :  {{user.socialLinks.instagram || 'None'}}
+                            <br />
+                            <i nz-icon nzType="linkedin" nzTheme="outline"></i> :  {{user.socialLinks.linkedin || 'None'}}
+                        </nz-descriptions-item>
+                        <nz-descriptions-item nzTitle="Fax" *ngIf="user.userType != 'Buyer'">{{user.fax || 'None'}}</nz-descriptions-item>
+                    
+                </nz-descriptions>
+            </nz-card>
+
+
+    <nz-card nzType="inner" nzTitle="Company Information" style="margin-top:16px;" [nzBordered]="false" *ngIf="user.userType != 'Buyer'">
+        <nz-descriptions  [nzColumn]="3">
+            <nz-descriptions-item nzTitle="Company Name">{{user.companyName}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Year Established">{{user.yearEstablished || 'None'}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Official Website">{{user.officalWebsite || 'None'}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Business Type">{{user.businessType || 'None'}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Number of Employees">{{user.numOfEmployees || 0}}</nz-descriptions-item>
+            <!-- <nz-descriptions-item nzTitle="Platfforms for Selling">None</nz-descriptions-item> -->
+            <nz-descriptions-item nzTitle="Country">{{user.country}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Operational Address">{{user.address || 'None'}}</nz-descriptions-item>
+            <!-- <nz-descriptions-item nzTitle="Main Products">
+                <i nz-icon nzType="paper-clip" nzTheme="outline"></i> Duis in nulla vehicula
+                <br />
+                <i nz-icon nzType="paper-clip" nzTheme="outline"></i> felis pulvinar, eu feugiat
+                <br />
+                <i nz-icon nzType="paper-clip" nzTheme="outline"> </i>ornare posuere.
+            </nz-descriptions-item> -->
+            <nz-descriptions-item nzTitle="About us">
+              {{user.aboutUs || 'None'}}
+            </nz-descriptions-item>
+        </nz-descriptions>
+    </nz-card>
+        </nz-card>
+        <ng-template #editProfile>
+            <a (click)="onEdit()"><i nz-icon nzType="edit" nzTheme="outline"></i>Edit</a>
+          </ng-template>
+    </div>
+</div>
