@@ -1,0 +1,66 @@
+<nz-page-header nzTitle="Subscription Models">
+</nz-page-header>
+
+<div nz-row class="content">
+    <div nz-col nzOffset="6" nzSpan="12" style="text-align: center;">
+        <a>Subscription Pricing</a>
+        <br><br>
+        <h1 nz-typography>Start Your Journy</h1>
+        <a>Continue with basic for free or upgrade to unlock full features</a>
+        <br><br>
+        <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking
+            at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,
+            as
+        </p>
+    </div>
+
+    <div nz-col nzSpan="24" style="margin-top: 45px;">
+        <h4 nz-typography style="text-align: center;margin: 30px;"> <em>Which Plan is the right solution for your needs
+                ? </em></h4>
+        <div nz-row [nzGutter]="[16, 24]">
+            <div nz-col nzSpan="6" *ngFor="let plan of plans; let  i = index">
+                <nz-card [nzTitle]="plan.name" [nzExtra]="extraTemplate">
+                    <div style="text-align: center;">
+                        <h2 nz-typography>{{plan.monthlyPrice}} Br</h2>
+                        <h5 *ngIf="plan.price>0" nz-typography>per/month</h5>
+                        <h5 *ngIf="plan.price==0" nz-typography>Free</h5>
+                        <p>{{plan.description}}</p>
+                    </div>
+                    <nz-divider></nz-divider>
+                    <p><i nz-icon nzType="check" nzTheme="outline"></i> upload {{plan.numOfProducts}} products</p>
+                    <p><i nz-icon nzType="check" nzTheme="outline"></i> Get {{plan.numOfQuatations}} Quatations</p>
+                    <p><i nz-icon nzType="check" nzTheme="outline"></i> Send {{plan.numOfEmails}} promotional Emails</p>
+                    <br>
+                    <button *ngIf="plan.price==0" nz-button nzBlock nzType="dashed">Get Started</button>
+                    <button *ngIf="plan.price>0" nz-button nzBlock nzType="primary">Buy {{plan.name}}</button>
+                    
+                </nz-card>
+                <ng-template #extraTemplate>
+                    <nz-rate [nzCount]="3" [ngModel]="i" nzDisabled></nz-rate>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+    <div nz-col nzOffset="6" nzSpan="12" style="margin-top: 45px; text-align: center;">
+        <h1 nz-typography>Have any Question ?</h1>
+        <div nz-row nzGutter="24">
+            <div nz-col nzSpan="12">
+                <nz-card [nzHoverable]='true' (click)="helpCenter()" [nzBordered]="false">
+                    <i nz-icon nzType="book" nzTheme="outline" style="font-size: 52px;"></i>
+                    <h2 nz-typography>Help Center</h2>
+                    <p>Visit Our Help and Learning center.</p>
+                </nz-card>
+            </div>
+           <div nz-col nzSpan="12">
+            <nz-card [nzHoverable]='true' [nzBordered]="false">  
+                <i nz-icon nzType="phone" nzTheme="outline" style="font-size: 52px;"></i>
+                <h2 nz-typography>Contact Us</h2>
+                <p>Get in touch with Us</p>
+            </nz-card>
+           </div>    
+        </div>
+      
+    </div>
+
+</div>

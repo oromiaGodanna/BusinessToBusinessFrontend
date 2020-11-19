@@ -1,0 +1,53 @@
+<div nz-row class="content">
+    <div nz-col nzSpan="20">
+        <nz-card nzTitle="catagories" [nzExtra]="createNewtask">
+            <nz-card-tab>
+                <nz-tabset nzTabPosition="left" [(nzSelectedIndex)]="index" nzType="editable-card" (nzAdd)="newTab()">
+                    <nz-tab *ngFor="let catagory of catagories; let i = index" [nzTitle]="catagory">
+                        <!-- <nz-list>
+                            <nz-list-item *ngFor="let task of tasks; let i=index">
+                                <nz-descriptions [nzExtra]="editTemplate" [nzTitle]="task.taskName" [nzSize]="small"
+                                    [nzColon]="false" [nzColumn]="2"> 
+                                    <nz-descriptions-item nzTitle="Name">{{task.taskName}}
+                                    </nz-descriptions-item>
+                                    <nz-descriptions-item nzTitle="For">{{task.userType}}
+                                    </nz-descriptions-item>
+                                    <nz-descriptions-item nzTitle="Pre-Conditions">
+                                        {{task.preConditions}}
+                                        
+                                    </nz-descriptions-item>
+                                    <nz-descriptions-item nzTitle="Description">{{task.description}}
+                                    </nz-descriptions-item>
+                                    <nz-descriptions-item>
+                                        <button nz-button nzType="default" nzDanger (click)="deleteTask(i)"> Delete Task</button>
+                                    </nz-descriptions-item>
+                                    <nz-descriptions-item>
+                                        <button nz-button nzType="dashed" (click)="editTask(i)">Edit Task</button>
+                                    </nz-descriptions-item>
+                                  
+                                </nz-descriptions>
+
+
+                            </nz-list-item>
+
+                            <nz-list-empty *ngIf="tasks.length === 0"></nz-list-empty>
+                        </nz-list> -->
+                        <!-- <ng-template #editTemplate>
+                            <button nz-button nzType="primary">Edit</button>
+                        </ng-template> -->
+                    </nz-tab>
+                   
+                </nz-tabset>
+            </nz-card-tab>
+        </nz-card>
+    </div>
+</div>
+
+<ng-template #createNewtask>
+    <button nz-button nzType="text" nzBlock>Create a new Task</button>
+</ng-template>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <input nz-input placeholder="Name of the catagory" [(ngModel)]="catagoryName" />
+
+</nz-modal>

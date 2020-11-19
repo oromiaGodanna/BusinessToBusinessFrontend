@@ -1,0 +1,80 @@
+<div nz-row class="content">
+    <div nz-col nzOffset="4" nzSpan="16" *ngIf="user">
+        <nz-card nzTitle="Profile">
+            <nz-back-top></nz-back-top>
+            <nz-card nzType="inner" nzTitle="Basic Information" [nzBordered]="false">
+                <div nz-row>
+                    <div nz-col nzSpan="6">
+                        <nz-avatar style="align-content: center;" [nzSize]="80" nzIcon="user"></nz-avatar>
+                    </div>
+                    <div nz-col nzSpan="18">
+                        <nz-descriptions>
+                            <nz-descriptions-item nzTitle="Email">
+                                {{user.email}}
+                                <a style="color: green;" *ngIf='user.verified'> [Verified]</a>
+                                <a style="color: red;" *ngIf='!user.verified'> [Unverified]</a></nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="Name">{{user.firstName}} {{user.lastName}}</nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="Works at">{{user.companyName}}</nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="Joined in">{{"2020"}}</nz-descriptions-item>
+                            <nz-descriptions-item nzTitle="Role">{{user.userType}}</nz-descriptions-item>
+                        </nz-descriptions>
+                        <button nz-button [nzType]="'primary'" style="float: right;" (click)="subscribe()" *ngIf="!subscribed">Subscribe</button>
+                        <button nz-button style="float: right;" (click)="unsubscribe()" *ngIf="subscribed">Unsubscribe</button>
+                    </div>
+                </div>
+            </nz-card>
+            <nz-card nzType="inner" nzTitle="Contact Information" [nzBordered]="false" style="margin-top:16px;">
+                <nz-descriptions>
+                    <nz-descriptions-item nzTitle="Email">{{user.email}}
+                        <a style="color: green;" *ngIf='user.verified'>[Verified]</a>
+                        <a style="color: red;" *ngIf='!user.verified'> [Unverified]</a>
+                    </nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Alternative Email">{{"example@gmail.com"}}</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Fax">Empty</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Telephone">{{user.phoneNumber}}
+                    </nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Mobile">None</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Social Links">
+                        <i nz-icon nzType="facebook" nzTheme="outline"></i> : link@facebook.com
+                        <br />
+                        <i nz-icon nzType="twitter" nzTheme="outline"></i> : link@twitter.com
+                        <br />
+                        <i nz-icon nzType="instagram" nzTheme="outline"></i> : link@instagram.com
+                        <br />
+                        <i nz-icon nzType="linkedin" nzTheme="outline"></i> : link@linkedin.com
+                        <br />
+                        <i nz-icon nzType="youtube" nzTheme="outline"></i> : link@youtube.com
+                        <br />
+                        <i nz-icon nzType="amazon" nzTheme="outline"></i> : link@amazon.com
+                    </nz-descriptions-item>
+                </nz-descriptions>
+            </nz-card>
+            <nz-card nzType="inner" nzTitle="Company Information" style="margin-top:16px;" [nzBordered]="false">
+                <nz-descriptions>
+                    <nz-descriptions-item nzTitle="Company Name">{{user.CompanyName}} <a style="color: green;">
+                        [Verified]</a></nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Year Established">{{"2020"}}</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Official Website">{{"companyName.com"}}</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Business Type">Empty</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Total Number of Employees">None
+                    </nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Platfforms for Selling">None</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Registured Address">None</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Operational Address">None</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Main Products">
+                        <i nz-icon nzType="paper-clip" nzTheme="outline"></i> Duis in nulla vehicula
+                        <br />
+                        <i nz-icon nzType="paper-clip" nzTheme="outline"></i> felis pulvinar, eu feugiat
+                        <br />
+                        <i nz-icon nzType="paper-clip" nzTheme="outline"> </i>ornare posuere.
+                    </nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="About us">
+                        Proin feugiat facilisis tincidunt. Integer lacinia erat sed
+                        augue tincidunt, sit amet porta nulla ornare. In hac habitasse platea dictumst. Etiam sodales
+                        tortor at tortor aliquam vestibulum. Curabitur quam sem
+                    </nz-descriptions-item>
+                </nz-descriptions>
+            </nz-card>
+        </nz-card>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+.content{
+    margin: 5%;
+}
+.sideInfo{
+    background: #E3141A;
+    padding: 10% 5%;
+    color: white;
+    text-align: justify;
+  }
+  .sideInfo, h1, h2, h3 {
+    color: white;
+  }
+  .sideInfo button{
+    font-weight: bolder;
+    float: right;
+  }
+  .sideInfo a{
+    font-weight: bold;
+    color: white;
+  }
+  button{
+    font-weight: bolder;
+  }
+  .ant-btn-primary{
+    background-color: #E3141A;
+    border-color: #E3141A;
+  } 
+  .ant-btn:hover, .ant-btn:focus{
+    border-color: #E3141A;
+    color:  #E3141A;
+  }
+  
+  .ant-btn-primary:hover, .ant-btn-primary:focus{
+    border-color: #E3141A ;
+    color: #E3141A;
+    background-color: #fff;
+  }
+  
+  /* .ant-form-item-label{
+    font-weight: bold;
+  } */
+  
+  a{
+    color: #E3141A 
+  }
+  a:hover {
+    font-size: 15px;
+  }
+  .ant-checkbox-cheked{
+    background-color: #E3141A;
+    border-color: #E3141A;
+  }
+
+  .ant-btn-primary[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  
+  }
+
+  nz-alert {
+    align-self: center; 
+    margin-bottom: 10px;
+  }
