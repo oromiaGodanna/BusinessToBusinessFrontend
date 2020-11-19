@@ -1,0 +1,218 @@
+<style>
+    .logo {
+          width: 120px;
+          height: 31px;
+          background: rgba(255, 255, 255, 0.2);
+          margin: 16px 30px 16px 0;
+          float: left;
+        }
+  
+        .header-menu {
+          line-height: 64px;
+        }
+  
+        .sider-menu {
+          height: 100%;
+          border-right: 0;
+        }
+  
+        .inner-layout {
+          padding: 0 24px 24px;
+        }
+  
+        nz-content {
+          background: #fff;
+          padding: 24px;
+          min-height: 280px;
+        }
+        .pd10{
+      padding:10px;
+  }
+  .pd20{
+      padding:20px;
+  }
+
+  .mr10{
+      margin-right:10px;
+    }
+    .mt10{
+      margin-top:10px;
+    }
+    .mb10{
+      margin-bottom:10px;
+    }
+    .ml10{
+      margin-left:10px;
+    }
+    
+    .rateFillColor{
+        color: #FF9529;
+    }
+    .fontSize20{
+        font-size:20px;
+    }
+  </style>
+  <nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+  <nz-layout>
+    <nz-header>
+      <div class="logo"></div>
+      <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+       
+      </ul>
+    </nz-header>
+    <nz-layout>
+      <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
+        <ul nzMode="inline" class="sider-menu" nz-menu nzTheme="dark" nzMode="inline">
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Products" nzSelected>
+            <ul>
+              <li nz-menu-item nzSelected><a href="/myProducts"> Manage Products </a></li>
+              <li nz-menu-item><a href="/addProduct"> Add Product </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Category">
+            <ul>
+              <li nz-menu-item><a href="/categories"> Manage Categories </a></li>
+              <li nz-menu-item><a href="/addCategory"> Add Category </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Measurement">
+            <ul>
+              <li nz-menu-item><a href="/measurements">Manage Measurements </a></li>
+              <li nz-menu-item><a href="/addMeasurement"> Add Measurement </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Special Offers">
+            <ul>
+              <li nz-menu-item><a href="/pendingSpecialoffer">Pending Special Offers </a></li>
+              <li nz-menu-item><a href="/activeSpecialoffer">Active Special Offers </a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </nz-sider>
+      <nz-layout class="inner-layout">
+        <nz-content>
+          <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
+            <nz-tab [nzTitle]="'Product List'">
+                <nz-table #nzTable [nzData]="products" nzTableLayout="fixed">
+                    <thead>
+                      <tr>
+                        <th nzWidth="60px"></th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Sub Category</th>
+                        <th>Price</th>
+                        <th>Min Order</th>
+                        <th>Added At</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let data of nzTable.data">
+                        <tr id="{{data._id}}">
+                          <td [nzExpand]="expandSet.has(data._id)" (nzExpandChange)="onExpandChange(data._id, $event)"></td>
+                          <td>{{ data.productName }}</td>
+                          <td>{{ data.productCategory }}</td>
+                          <td>{{ data.productSubCategory }}</td>
+                          <td>{{ data.price }}</td>
+                          <td>{{ data.minOrder }}</td>
+                          <td>{{ data.createDate | date :  "MMMM d, y"}}</td>
+                          <td>
+                             <!--<a href="/editProduct/{{data._id}}"> <span nz-typography nzType="primary">Edit</span></a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                       
+                            <a  nz-button nzType="link" (click)="showDeleteConfirm(data._id)" > <span nz-typography nzType="danger">Delete</span></a>
+                            <nz-divider nzType="vertical"></nz-divider>
+                            <a  nz-button nzType="link" (click)="showModal(data._id)" > <span nz-typography nzType="primary">Add Special Offer</span></a>
+                              -->
+                            <button nz-button nz-dropdown [nzDropdownMenu]="menu" nzType="primary">
+                              Menu
+                              <i nz-icon nzType="down"></i>
+                            </button>
+                            <nz-dropdown-menu #menu="nzDropdownMenu">
+                              <ul nz-menu>
+                                <li nz-menu-item><a nz-button nzType="link" href="/editProduct/{{data._id}}"> <span nz-typography nzType="primary">Edit</span></a></li>
+                                <li nz-menu-item><a nz-button nzType="link" (click)="showDeleteConfirm(data._id)" > <span nz-typography nzType="danger">Delete</span></a></li>
+                                <li nz-menu-item><a nz-button nzType="link" (click)="showModal(data._id)" > <span nz-typography nzType="primary">Add Special Offer</span></a></li>
+                              </ul>
+                            </nz-dropdown-menu>
+                          </td>
+                        </tr>
+                        <tr [nzExpand]="expandSet.has(data._id)">
+                            <ul>
+                                <li *ngIf="data.additionalProductInfo[0]">Colors : {{ data.additionalProductInfo[0] }}</li>
+                                <li *ngIf="data.additionalProductInfo[1]">Size In Word : {{ data.additionalProductInfo[1] }}</li>
+                                <li *ngIf="data.additionalProductInfo[2]">Size In Number : {{ data.additionalProductInfo[2] }}</li>
+                                <li *ngIf="data.keyword != ''">Keywords : {{ data.keyword }}</li>
+                                <li *ngIf="data.measurement">Measurement : {{ data.measurement }}</li>
+                            </ul>
+                          <span *ngIf="data.description">Description : {{ data.description }}</span>
+                            <div nz-row>
+                               
+                                  <img  *ngFor="let image of data.images" nz-button nzType="link" (click)="viewImage(image)" [src]="'./../assets/images/productImages/'+image" height="100px" width="100px"/>
+                               
+                            </div>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </nz-table>
+            </nz-tab>
+          </nz-tabset>
+        </nz-content>
+
+        <nz-modal [(nzVisible)]="isVisible" nzTitle="Add Special Offer" [nzFooter]="null"  (nzOnCancel)="handleCancel()">
+          <form nz-form [formGroup]="form" (ngSubmit)="addSpecialOffer()">
+      
+            <nz-form-item nz-row>
+              <nz-form-label nz-col nzSpan="6">Title</nz-form-label>
+              <nz-form-control>
+                <input type="text" nz-input nz-input formControlName="description" />
+               <!--<textarea formControlName="description" nz-input rows="2" placeholder="write any thing"></textarea>--> 
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nz-row>
+              <nz-form-label nzRequired nz-col nzSpan="6" nzFor="productName">Discount Price</nz-form-label>
+              <input type="text" nz-input nz-col nzSpan="4" [disabled]="'true'" placeholder="BIRR"/>
+              <nz-form-control nzSpan="6" nzErrorTip="Enter Discount Price!">
+                <input type="number" nz-input formControlName="discountPrice" />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item style="display:none">
+              <nz-form-label nz-col nzSpan="6">Starts On</nz-form-label>
+              <nz-form-control>
+                <nz-date-picker formControlName="startDate"></nz-date-picker>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label nz-col nzSpan="6">End On </nz-form-label>
+              <nz-form-control>
+                <nz-date-picker formControlName="endDate"></nz-date-picker>
+              </nz-form-control>
+            </nz-form-item>
+         
+            <nz-form-item nz-row nzJustify="center">
+                
+              <button nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" nz-button nzType="primary" nzShape="round" class="mr10">Submit</button>
+              <button nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12" nz-button nzType="default" (click)="resetForm()" nzShape="round" >Clear</button>
+            
+          </nz-form-item>
+          </form>
+        </nz-modal>
+
+        <nz-modal [(nzVisible)]="showImage" nzTitle="Product Image" (nzOnCancel)="handleImageCancel()" [nzFooter]="null">
+          <img [src]="'./../assets/images/productImages/'+imageToView" width="100%"/>
+        </nz-modal>
+
+
+
+      </nz-layout>
+    </nz-layout>
+  </nz-layout>
+</nz-spin>

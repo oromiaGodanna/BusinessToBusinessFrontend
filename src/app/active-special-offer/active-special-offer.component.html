@@ -1,0 +1,158 @@
+<style>
+    .logo {
+          width: 120px;
+          height: 31px;
+          background: rgba(255, 255, 255, 0.2);
+          margin: 16px 30px 16px 0;
+          float: left;
+        }
+  
+        .header-menu {
+          line-height: 64px;
+        }
+  
+        .sider-menu {
+          height: 100%;
+          border-right: 0;
+        }
+  
+        .inner-layout {
+          padding: 0 24px 24px;
+        }
+  
+        nz-content {
+          background: #fff;
+          padding: 24px;
+          min-height: 280px;
+        }
+  </style>
+  <nz-layout>
+    <nz-header>
+      <div class="logo"></div>
+      <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+       
+      </ul>
+    </nz-header>
+    <nz-layout>
+      <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
+        <ul nzMode="inline" class="sider-menu" nz-menu nzTheme="dark" nzMode="inline">
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Products">
+            <ul>
+              <li nz-menu-item><a href="/myProducts"> Manage Products </a></li>
+              <li nz-menu-item><a href="/addProduct"> Add Product </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Category">
+            <ul>
+              <li nz-menu-item><a href="/categories"> Manage Categories </a></li>
+              <li nz-menu-item><a href="/addCategory"> Add Category </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Measurement">
+            <ul>
+              <li nz-menu-item><a href="/measurements">Manage Measurements </a></li>
+              <li nz-menu-item><a href="/addMeasurement"> Add Measurement </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Special Offers" nzSelected>
+            <ul>
+              <li nz-menu-item><a href="/pendingSpecialoffer">Pending Special Offers </a></li>
+              <li nz-menu-item nzSelected><a href="/activeSpecialoffer">Active Special Offers </a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </nz-sider>
+      <nz-layout class="inner-layout">
+        <nz-content>
+          <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
+            <nz-tab [nzTitle]="'Special Offers'">
+                <nz-table #nzTable [nzData]="specialOffers" nzTableLayout="fixed">
+                    <thead>
+                      <tr>
+                        <th nzWidth="60px"></th>
+                        <th>Title</th>
+                        <!--<th>start Date</th>--->
+                        <th>End Date</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let data of nzTable.data">
+                        <tr id="{{data.specialoffer._id}}">
+                          <td [nzExpand]="expandSet.has(data.specialoffer._id)" (nzExpandChange)="onExpandChange(data.specialoffer._id, $event)"></td>
+                          <td>
+                            <span *ngIf="data.specialoffer.title"> {{ data.specialoffer.title }}</span>
+                            <span *ngIf="!data.specialoffer.title"> Not Specified</span>
+                          </td>
+                          <!-- <td>{{ data.product.startDate }} </td>--->
+                          <td>
+                            <span *ngIf="data.specialoffer.endDate"> {{ data.specialoffer.endDate | date :  "MMMM d, y"}} </span>
+                            <span *ngIf="!data.specialoffer.endDate"> Not Specified</span>
+                          </td>
+                          <td>{{ data.specialoffer.discount }}</td>
+                          <td>
+                           
+                            <button nz-button nz-dropdown [nzDropdownMenu]="menu" nzType="primary">
+                              Menu
+                              <i nz-icon nzType="down"></i>
+                            </button>
+                            <nz-dropdown-menu #menu="nzDropdownMenu">
+                              <ul nz-menu>
+                                <li nz-menu-item><a nz-button nzType="link" (click)="deleteSpecialOfferModal(data.specialoffer._id,data.specialoffer.productId)"> <span nz-typography nzType="danger">Delete special offer</span></a></li>
+                                <li nz-menu-item><a nz-button nzType="link" (click)="deleteProductModal(data.specialoffer._id,data.specialoffer.productId)"> <span nz-typography nzType="danger">Delete product</span></a></li>
+                              </ul>
+                            </nz-dropdown-menu>
+
+                          </td>
+                          </tr>
+                          <tr [nzExpand]="expandSet.has(data.specialoffer._id)">
+                            <ul>
+                                <li>Product Name : {{ data.product.productName }}</li>
+                                <li>Category : {{ data.product.productCategory }}</li>
+                                <li>Price : {{ data.product.price }}</li>
+                                <li>Mininum Order : {{ data.product.minOrder }}</li>
+                                <li *ngIf="data.product.additionalProductInfo[0]">Colors : {{ data.product.additionalProductInfo[0] }}</li>
+                                <li *ngIf="data.product.additionalProductInfo[1]">Size In Word : {{ data.product.additionalProductInfo[1] }}</li>
+                                <li *ngIf="data.product.additionalProductInfo[2]">Size In Number : {{ data.product.additionalProductInfo[2] }}</li>
+                                <li *ngIf="data.product.keyword != ''">Keywords : {{ data.product.keyword }}</li>
+                                <li *ngIf="data.product.measurement">Measurement : {{ data.product.measurement }}</li>
+                            </ul>
+                          <span *ngIf="data.product.description">Description : {{ data.product.description }}</span>
+                            <div nz-row>
+                               
+                                  <img  *ngFor="let image of data.product.images" nz-button nzType="link" (click)="viewImage(image)" [src]="'./../assets/images/productImages/'+image" height="100px" width="100px"/>
+                               
+                            </div>
+                        </tr>
+                        
+                      </ng-container>
+                    </tbody>
+                  </nz-table>
+            </nz-tab>
+          </nz-tabset>
+        </nz-content>
+
+        <!--<nz-modal [(nzVisible)]="openSpecialOfferModal" nzTitle="Open Special Offer" (nzOnCancel)="handleCancel()" (nzFooter)="null">
+        
+          
+            <button *ngIf="openButton" nz-button nzType="primary" (click)="openSpecialOffer()" nzShape="round" style="margin-right:15px;">Open Now</button>
+            <button *ngIf="openButton" nz-button nzType="primary" (click)="setTime()" nzShape="round" >Set Date</button><br>
+
+            <nz-date-picker *ngIf="setTimeVisible" [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+            
+           
+        </nz-modal>-->
+
+        <nz-modal [(nzVisible)]="showImage" nzTitle="Product Image" (nzOnCancel)="handleImageCancel()" [nzFooter]="null">
+          <img [src]="'./../assets/images/productImages/'+imageToView" width="100%"/>
+        </nz-modal>
+
+      </nz-layout>
+    </nz-layout>
+  </nz-layout>

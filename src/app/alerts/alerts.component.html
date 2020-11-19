@@ -1,0 +1,102 @@
+<style>
+  .logo {
+        width: 120px;
+        height: 31px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 16px 30px 16px 0;
+        float: left;
+      }
+
+      .header-menu {
+        line-height: 64px;
+      }
+
+      .sider-menu {
+        height: 100%;
+        border-right: 0;
+      }
+
+      .inner-layout {
+        padding: 0 24px 24px;
+      }
+
+      nz-content {
+        background: #fff;
+        padding: 24px;
+        min-height: 280px;
+      }
+      .mr10{
+        margin-right:10px;
+      }
+</style>
+<nz-layout>
+  <nz-header>
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+     
+    </ul>
+  </nz-header>
+  <nz-layout>
+    <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
+      <ul nzMode="inline" class="sider-menu" nz-menu nzTheme="dark" nzMode="inline">
+
+        <li nz-submenu nzOpen nzIcon="user" nzTitle="Products">
+          <ul>
+            <li nz-menu-item><a href="/myProducts"> Manage Products </a></li>
+            <li nz-menu-item><a href="/addProduct"> Add Product </a></li>
+          </ul>
+        </li>
+
+        <li nz-submenu nzOpen nzIcon="user" nzTitle="Category" nzSelected>
+          <ul>
+            <li nz-menu-item><a href="/categories"> Manage Categories </a></li>
+            <li nz-menu-item nzSelected><a href="/addCategory"> Add Category </a></li>
+          </ul>
+        </li>
+
+        <li nz-submenu nzOpen nzIcon="user" nzTitle="Measurement">
+          <ul>
+            <li nz-menu-item><a href="/measurements">Manage Measurements </a></li>
+            <li nz-menu-item><a href="/addMeasurement"> Add Measurement </a></li>
+          </ul>
+        </li>
+
+        <li nz-submenu nzOpen nzIcon="user" nzTitle="Special Offers">
+          <ul>
+            <li nz-menu-item><a href="/pendingSpecialoffer">Pending Special Offers </a></li>
+            <li nz-menu-item><a href="/activeSpecialoffer">Active Special Offers </a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </nz-sider>
+ 
+    <nz-layout class="inner-layout">
+      <nz-content>
+          <nz-result *ngIf="successResult"
+                nzStatus="success"
+                nzTitle="{{message}}"
+              >
+              <div nz-result-extra *ngIf="route == 'product'">
+                  <a href="myProducts" nz-button nzType="primary">Go to Products</a>
+              </div>
+              <div nz-result-extra *ngIf="route == 'category'">
+                <a href="categories" nz-button nzType="primary">Go to Categories</a>
+              </div>
+              <div nz-result-extra *ngIf="route == 'specialOffer'">
+                <a href="pendingSpecialoffer" nz-button nzType="primary">Go to Special Offer Products</a>
+              </div>
+              <div nz-result-extra *ngIf="route == 'measurement'">
+                <a href="measurements" nz-button nzType="primary">Go to Measurements</a>
+              </div>
+          </nz-result>
+
+          <nz-result *ngIf="errorResult" nzStatus="warning" nzTitle="{{message}}">
+              <div nz-result-extra>
+                <button nz-button nzType="primary">Go Back</button>
+              </div>
+          </nz-result>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+</nz-layout>

@@ -1,0 +1,221 @@
+<style>
+    .menu {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+  
+    .menu li {
+      float: left;
+    }
+  
+    .menu li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 16px;
+      text-decoration: none;
+    }
+  
+    .menu li a:hover {
+  
+      background-color: #111111;
+    }
+  
+    .menu .active {
+  
+      background-color: #111111;
+    }
+  
+    .categoryList {
+      list-style-type: none;
+      color: black;
+      padding: 10px !important;
+    }
+  
+    .categoryListUl {
+      list-style-type: none;
+      padding: 10px !important;
+    }
+  
+    .SidertextSize {
+      font: 14px, arial, sans-serif;
+    }
+  
+    
+    .responseDiv{
+        height:500px;
+        padding:5px;
+        overflow-y:scroll;
+    }
+    .bodyDiv{
+       margin:10px;
+       padding:5px;
+    }
+    .whiteBg{
+        background:white;
+    }
+    .pd5{
+        padding:5px;
+    }
+    .pd10{
+        padding:10px;
+    }
+    .pd15{
+        padding:15px;
+    }
+    .pd20{
+        padding:20px;
+    }
+    .pd25{
+        padding:25px;
+    }
+    .pdl10{
+        padding-left:10px;
+    }
+    .mrg{
+        margin:10px;
+    }
+   
+  .mr10{
+      margin-right:10px;
+    }
+    .mt10{
+      margin-top:10px;
+    }
+    .mb10{
+      margin-bottom:10px;
+    }
+    .ml10{
+      margin-left:10px;
+    }
+    
+    .rateFillColor{
+        color: #FF9529;
+    }
+    .fontSize20{
+        font-size:20px;
+    }
+
+  </style>
+  <nz-spin [nzSpinning]="isSpinning" nzTip="Loading...">
+    <nz-layout style="background:white;">
+  
+      <div nz-row style="padding-top:10px;background: white;" nzAlign="middle">
+
+        <div nz-col [nzSpan]="4" class="logo">
+            <div nz-row nzJustify="center"> 
+                <img src="./../assets/images/logo.png" />
+            </div>
+        </div>
+        <div nz-col [nzSpan]="16">
+            <div nz-row nzJustify="center">
+                <nz-input-group  nz-col [nzSpan]="16" nzSearch [nzAddOnAfter]="suffixIconButton">
+                    <input type="text" nz-input placeholder="input search text" id="searchWord"/>
+                </nz-input-group>
+                <ng-template #suffixIconButton>
+                    <button nz-button style="background: #cb2d22;color:white" (click)="searchForProduct()">Search</button>
+                </ng-template>
+                <ng-template #choiceButton>
+                    <button nz-button nz-dropdown [nzDropdownMenu]="searchMenu">
+                        All Categories
+                        <i nz-icon nzType="down"></i>
+                    </button>
+                    <nz-dropdown-menu #searchMenu="nzDropdownMenu">
+                        <ul nz-menu>
+                            <li nz-menu-item>menu4 1st menu item</li>
+                            <li nz-menu-item>menu4 2nd menu item</li>
+                            <li nz-menu-item>menu4 3rd menu item</li>
+                        </ul>
+                    </nz-dropdown-menu>
+                </ng-template>
+            </div>
+        </div>
+    
+        <div nz-col [nzSpan]="4">
+            <div nz-row nzJustify="center">
+               
+              <a href="/wishlist" nz-button nzType="link">
+                <i nz-icon nzType="heart" nzTheme="outline" class="fontSize20" style="color: hotpink;"></i>
+              </a>
+                <a href="/cart" nz-button nzType="link">
+                    <i nz-icon nzType="shopping-cart" nzTheme="outline" class="fontSize20"></i>
+                </a>
+                <a href="#" nz-button nzType="link" class="fontSize20">
+                    <span> Orders </span>
+                </a>
+    
+            </div>
+        </div>
+    </div>
+    
+    <div nz-row nzJustify="center" style="background: #cb2d22;">
+        <ul class="menu">
+            <li><a routerLink="/index" class="nav-link text-white">Home</a></li>
+            <li><a routerLink="/products" class="nav-link text-white">Products</a></li>
+            <li><a routerLink="/specialOffers" class="nav-link text-white">special offers</a></li>
+            <li class="active">
+                <a nz-dropdown [nzDropdownMenu]="proformaMenu">
+                Proforma
+                    <i nz-icon nzType="down"></i>
+                </a>
+                <nz-dropdown-menu #proformaMenu="nzDropdownMenu">
+                <ul nz-menu nzSelectable>
+                    <li nz-menu-item><a routerLink="/requestProforma" class="nav-link text-white">Request Proforma</a></li>
+                    <li nz-menu-item><a routerLink="/pendingProformas" class="nav-link text-white">Open Pending Proformas</a></li>
+                    <li nz-menu-item><a routerLink="/activeProformas" class="nav-link text-white">Active Proformas</a></li>
+                    <li nz-menu-item><a routerLink="/closedProformas" class="nav-link text-white">Closed Proformas</a></li>
+                </ul>
+                </nz-dropdown-menu>
+            </li>
+        </ul>
+    </div>
+
+    <nz-layout>
+        <nz-content>
+            <div *ngIf="message != null">
+                <h2 nz-row nzJustify="center" nzType="warning">{{message}}!</h2>
+            </div>
+          
+            <div  *ngIf="responseData != null">
+            <div nz-row nzJustify="center" id="{{responseData.items[0]._id}}" class="bodyDiv">
+               <div nz-col nzXs="24" nzSm="24" nzMd="10" nzLg="10" nzXl="10" class="whiteBg pd10 mrg">
+                    <h3 nz-row nzJustify="center">Items</h3>
+                    <div>
+                        <h4 >{{responseData.items[0].category}} </h4>
+                         <p>{{responseData.items[0].description}}</p>
+                         <div nz-row nzJustify="center">
+                            <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="8" nzXl="8">
+                               <p *ngIf="responseData.items[0].subCategory"> <strong>Sub-Category : </strong> {{responseData.items[0].subCategory}}</p> 
+                            </div>
+                            <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="8" nzXl="8">
+                                <p> <strong>Quantity : </strong> {{responseData.items[0].quantity}} </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="divTable whiteBg pdl10 mrg" nz-col nzXs="24" nzSm="24" nzMd="8" nzLg="8" nzXl="8" >
+                    <h4 nz-row nzJustify="center"> Responses ({{responseData.response.length}})</h4>
+                    <div class="responseDiv">
+                        <div *ngFor="let response of responseData.response" class="commentDiv">
+                            <nz-comment [nzAuthor]="responseData.users[0].username">
+                                <nz-avatar nz-comment-avatar nzIcon="user"></nz-avatar>
+                                <nz-comment-content>
+                                <p>{{response.unitPrice}} BIRR</p>
+                                </nz-comment-content>
+                            </nz-comment>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div  *ngIf="responseData == null">
+            <h2>NO response is added</h2>
+        </div>
+        </nz-content>
+    </nz-layout>
+    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+</nz-layout>
+</nz-spin>
