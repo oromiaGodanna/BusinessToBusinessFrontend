@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } fro
 import { Observable, Observer } from 'rxjs';
 import {Router} from '@angular/router'; // import router from angular router
 import { Product } from '../models/product';
+import {UserService } from '../services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { ProductsService } from '../services/products.service';
 import { CategoryService } from '../services/category.service';
@@ -36,8 +37,9 @@ export class AddProductComponent implements OnInit {
   isSpinning = false;
   successMsg = "Product Is Successfully Added!!!";
   failedMsg = "Failed To Add Product!!!";
-  
-  constructor(private http:HttpClient,private route:Router,private productService:ProductsService,
+  token;
+
+  constructor(private http:HttpClient,private route:Router,private userService:UserService,private productService:ProductsService,
     private categoryService:CategoryService,private measurementService:MeasurementsService,private fb: FormBuilder,private i18n: NzI18nService) {
     this.form = this.fb.group({
       productName: [null, [Validators.required]],
@@ -56,6 +58,11 @@ export class AddProductComponent implements OnInit {
   } 
  
   ngOnInit(): void {
+
+    this.token = this.userService.getToken();
+    if(this.token.role != 'admin'){
+      this.route.navigate(['/products']);
+    }
     this.getCategories();
     this.getMeasurements();
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);

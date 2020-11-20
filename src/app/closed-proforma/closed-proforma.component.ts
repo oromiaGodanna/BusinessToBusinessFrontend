@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute} from '@angular/router'; // import router from angular router
 import { HttpClient } from '@angular/common/http';
 import { CategoryService } from '../services/category.service';
+import {UserService } from '../services/user.service';
 import { Proforma } from '../models/proforma';
 import { ProformaService } from '../services/proforma.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -20,22 +21,27 @@ export class ClosedProformaComponent implements OnInit {
   proforma:Proforma;
   message=null;
   proformaId;
+  token;
 
   constructor(private httpClient:HttpClient,private categoryService:CategoryService,
-    private proformaService:ProformaService, private routee: ActivatedRoute,
+    private proformaService:ProformaService, private routee: ActivatedRoute,private userService:UserService,
     private modal: NzModalService, private router: Router
     ) { }
 
-  ngOnInit(): void {
-   this.getAllCategories();
-   this.getClosedProformas();
+  ngOnInit(): void { 
+    this.token = this.userService.getToken();
+    if(this.token.userId == null){
+      this.router.navigate(['/products']);
+    }else{
+      this.getAllCategories();
+      this.getClosedProformas();
 
-    this.routee.paramMap.subscribe(params => {
-      if(params.get('message')){
-        this.message = params.get('message');
-      }
-    });
-
+        this.routee.paramMap.subscribe(params => {
+          if(params.get('message')){
+            this.message = params.get('message');
+          }
+        });
+    }
    
   }
 

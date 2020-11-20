@@ -10,6 +10,7 @@ import { Proforma,Item } from '../models/proforma';
 import { ProformaService } from '../services/proforma.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-pending-proforma',
@@ -32,10 +33,11 @@ export class PendingProformaComponent implements OnInit {
   message=null;
   proformaId;
   openProformaVisible=false;
+  token;
 
   constructor(private http:HttpClient,private router:Router,private categoryService:CategoryService,
     private proformaService:ProformaService,private i18n: NzI18nService, private routee: ActivatedRoute,
-    private modal: NzModalService,private fb: FormBuilder,private messageService: NzMessageService
+    private modal: NzModalService,private userService:UserService,private fb: FormBuilder,private messageService: NzMessageService
     ) { 
       this.form = this.fb.group({
         endDate: [''],
@@ -43,17 +45,22 @@ export class PendingProformaComponent implements OnInit {
     }
 
   ngOnInit(): void {
-   this.getCategories();
-   this.getPendingProformas();
+    this.token = this.userService.getToken();
+    if(this.token.userId == null ){
+      this.router.navigate(['/products']);
+    }else{
+      this.getCategories();
+      this.getPendingProformas();
 
-    this.routee.paramMap.subscribe(params => {
-      if(params.get('message')){
-        this.message = params.get('message');
-      }
-    });
+        this.routee.paramMap.subscribe(params => {
+          if(params.get('message')){
+            this.message = params.get('message');
+          }
+        });
 
-    this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
-    this.isEnglish = !this.isEnglish;
+        this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
+        this.isEnglish = !this.isEnglish;
+    }
   }
 
   getCategories(): void {

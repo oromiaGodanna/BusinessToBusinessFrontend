@@ -11,6 +11,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-product-list',
@@ -21,7 +22,7 @@ export class ProductListComponent implements OnInit {
 
   constructor(private http:HttpClient,private productService:ProductsService,
     private specialofferService:SpecialofferService,
-    private router: Router,private fb: FormBuilder,
+    private router: Router,private fb: FormBuilder,private userService:UserService,
     private modal: NzModalService,private message: NzMessageService,private i18n: NzI18nService) { 
     this.form = this.fb.group({
       description: [''],
@@ -42,12 +43,11 @@ export class ProductListComponent implements OnInit {
   isSpinning = false;
   successMsg = "Product Is Successfully Uploaded As Special Offer!!!";
   failedMsg = "Failed To Update Product To Special Offer!!!";
-  token={
-    userId:1,
-    role:'admin',
-  };
+  token;
 
   ngOnInit(): void {
+    this.token = this.userService.getToken();
+    
     if(this.token.role != 'seller' && this.token.role != 'admin'){
       this.router.navigate(['/products']);
     }
