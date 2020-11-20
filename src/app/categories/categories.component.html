@@ -1,0 +1,123 @@
+<style>
+    .logo {
+          width: 120px;
+          height: 31px;
+          background: rgba(255, 255, 255, 0.2);
+          margin: 16px 30px 16px 0;
+          float: left;
+        }
+  
+        .header-menu {
+          line-height: 64px;
+        }
+  
+        .sider-menu {
+          height: 100%;
+          border-right: 0;
+        }
+  
+        .inner-layout {
+          padding: 0 24px 24px;
+        }
+  
+        nz-content {
+          background: #fff;
+          padding: 24px;
+          min-height: 280px;
+        }
+  </style>
+  <nz-layout>
+    <nz-header>
+      <div class="logo"></div>
+      <ul nz-menu nzTheme="dark" nzMode="horizontal" class="header-menu">
+       
+      </ul>
+    </nz-header>
+    <nz-layout>
+      <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
+        <ul nzMode="inline" class="sider-menu" nz-menu nzTheme="dark" nzMode="inline">
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Products">
+            <ul>
+              <li nz-menu-item><a href="/myProducts"> Manage Products </a></li>
+              <li nz-menu-item><a href="/addProduct"> Add Product </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Category" nzSelected>
+            <ul>
+              <li nz-menu-item nzSelected><a href="/categories"> Manage Categories </a></li>
+              <li nz-menu-item><a href="/addCategory"> Add Category </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Measurement">
+            <ul>
+              <li nz-menu-item><a href="/measurements">Manage Measurements </a></li>
+              <li nz-menu-item><a href="/addMeasurement"> Add Measurement </a></li>
+            </ul>
+          </li>
+
+          <li nz-submenu nzOpen nzIcon="user" nzTitle="Special Offers">
+            <ul>
+              <li nz-menu-item><a href="/pendingSpecialoffer">Pending Special Offers </a></li>
+              <li nz-menu-item><a href="/activeSpecialoffer">Active Special Offers </a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </nz-sider>
+      <nz-layout class="inner-layout">
+        <nz-content>
+          <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
+            <nz-tab [nzTitle]="'Category Lists'">
+                <nz-table #nzTable [nzData]="categories" nzTableLayout="fixed">
+                    <thead>
+                      <tr>
+                        <th nzWidth="60px"></th>
+                        <th>Name</th>
+                        <th>Sub-Categories</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let data of nzTable.data">
+                        <tr id="{{data._id}}">
+                          <td [nzExpand]="expandSet.has(data._id)" (nzExpandChange)="onExpandChange(data._id, $event)"></td>
+                          <td>{{ data.name }}</td>
+                          <td>
+                              <p *ngFor="let subCategory of data['subCategories']">{{ subCategory }}</p>
+                          </td>
+                          <td>
+                           
+                            <button nz-button nz-dropdown [nzDropdownMenu]="menu" nzType="primary">
+                              Menu
+                              <i nz-icon nzType="down"></i>
+                            </button>
+                            <nz-dropdown-menu #menu="nzDropdownMenu">
+                              <ul nz-menu>
+                                <li nz-menu-item><a nz-button nzType="link" href="/editCategory/{{data._id}}"> <span nz-typography nzType="primary">Edit</span></a></li>
+                                <li nz-menu-item><a nz-button nzType="link" (click)="showDeleteConfirm(data._id)"> <span nz-typography nzType="danger">Delete</span></a></li>
+                              
+                              </ul>
+                            </nz-dropdown-menu>
+
+                          </td>
+                        </tr>
+                        <tr [nzExpand]="expandSet.has(data._id)">
+                            <div nz-row>
+                                <img [src]="'./../assets/images/categoryImages/'+data.image" nz-button nzType="link" (click)="viewImage(data.image)" height="100px" width="100px"/>
+                            </div>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </nz-table>
+            </nz-tab>
+          </nz-tabset>
+        </nz-content>
+        <nz-modal [(nzVisible)]="showImage" nzTitle="Product Image" (nzOnCancel)="handleImageCancel()" (nzOkDisabled)="true">
+          <img [src]="'./../assets/images/categoryImages/'+imageToView" width="100%"/>
+        </nz-modal>
+      </nz-layout>
+    </nz-layout>
+  </nz-layout>
