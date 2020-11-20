@@ -8,6 +8,7 @@ import { CategoryService } from '../services/category.service';
 import { Category } from '../models/category';
 import { ActivatedRoute } from '@angular/router';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-edit-category',
@@ -17,7 +18,7 @@ import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 export class EditCategoryComponent implements OnInit {
 
   constructor(private http:HttpClient,private routee:Router,private categoryService:CategoryService,
-    private route: ActivatedRoute,private fb: FormBuilder,private i18n: NzI18nService) { 
+    private route: ActivatedRoute,private userService:UserService,private fb: FormBuilder,private i18n: NzI18nService) { 
     this.form = this.fb.group({
       categoryName: [null, [Validators.required]],
       subCategories: [''],
@@ -41,13 +42,10 @@ export class EditCategoryComponent implements OnInit {
   isEnglish = false;
   successMsg = "Category Is Successfully Edited!!!";
   failedMsg = "Failed To Edit Category!!!";
-  token={
-    userId:1,
-    role:'admin',
-  };
+  token;
 
   ngOnInit(): void {
-
+    this.token = this.userService.getToken();
     if(this.token.role != 'admin'){
       this.routee.navigate(['/products']);
     }else{

@@ -8,6 +8,7 @@ import { CategoryService } from '../services/category.service';
 import { MeasurementsService } from '../services/measurements.service';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -16,7 +17,7 @@ import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 })
 export class EditProductComponent implements OnInit {
 
-  constructor(private productService:ProductsService,private routee:Router,
+  constructor(private productService:ProductsService,private routee:Router,private userService:UserService,
     private categoryService:CategoryService,private measurementService:MeasurementsService, private route: ActivatedRoute,
     private fb: FormBuilder,private i18n: NzI18nService) {
     this.form = this.fb.group({
@@ -50,13 +51,10 @@ export class EditProductComponent implements OnInit {
     successMsg = "Product Is Successfully Edited!!!";
     failedMsg = "Failed To Edit Product!!!";
     
-    token={
-      userId:1,
-      role:'seller',
-    };
+    token;
 
     ngOnInit(): void {
-
+      this.token = this.userService.getToken();
       if(this.token.role != 'seller' && this.token.role != 'admin'){
         this.routee.navigate(['/products']);
       }

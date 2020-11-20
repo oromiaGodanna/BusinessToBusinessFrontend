@@ -8,6 +8,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 import { Router } from '@angular/router';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-measurements',
@@ -17,7 +18,7 @@ import { Router } from '@angular/router';
 export class MeasurementsComponent implements OnInit {
 
   constructor(private http:HttpClient,private measurementService:MeasurementsService, 
-    private router: Router,private fb: FormBuilder,
+    private router: Router,private fb: FormBuilder,private userService:UserService,
     private modal: NzModalService,private message: NzMessageService,private i18n: NzI18nService) { 
       this.form = this.fb.group({
         measurementName: [null, [Validators.required]],
@@ -34,12 +35,11 @@ export class MeasurementsComponent implements OnInit {
   form: FormGroup;
   isSpinning=false;
 
-  token={
-    userId:1,
-    role:'admin',
-  };
+  token;
 
   ngOnInit(): void {
+    this.token = this.userService.getToken();
+    
     if(this.token.role != 'admin'){
       this.router.navigate(['/products']);
     }
