@@ -59,7 +59,7 @@ export class ProductsComponent implements OnInit {
   isEnglish = false;
   form: FormGroup;
   offset=0;
-  limit=4;
+  limit=12;
   moreProducts:Product[];
   counterI=0;
   initialCountProducts=1;

@@ -42,6 +42,9 @@
   .pd20{
       padding:20px;
   }
+  .pdr10{
+    padding-right:10px;
+  }
 
   .m10{
     margin:10px;
@@ -163,8 +166,8 @@
 
               <div nz-row>
                 
-                  <h2 nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">{{product.productName | uppercase}}</h2>
-                  <h2 nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12"><span>ETB </span><span nz-typography nzType="danger"> {{product.price}}</span>/{{product.measurement}}</h2>
+                  <h2 nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">{{product.productName | uppercase}}</h2>
+                  <h2 nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12"><span>ETB </span><span nz-typography nzType="danger"> {{product.price}}</span>/{{product.measurement}}</h2>
                 
               </div>
              
@@ -199,8 +202,8 @@
 
               <div *ngIf="product.additionalProductInfo[0]">
                 Colors: 
-                <nz-button-group *ngFor="let color of colorArray" class="pd10">
-                  <div style="width:30px;height:30px;background-color: brown;"></div>
+                <nz-button-group *ngFor="let color of colorArray" class="pdr10">
+                  <div style="width:20px;height:20px;" [style.background-color]="color"></div>
                 </nz-button-group>
 
               </div>
@@ -234,13 +237,29 @@
               </div>
           
             </div>
-            <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="4" nzXl="4" class="m10">
+            <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="4" nzXl="4" class="m10">
               
               <div *ngIf="countRelatedProducts > 0">
                 <strong>Related Products</strong>
                 <nz-divider nzType="horizontal"></nz-divider>
               </div>
 
+              
+                <div *ngFor="let singleProduct of relatedProducts;let i=index">
+                  <div *ngIf="singleProduct._id != product._id">
+                      
+                    <a nz-row nzJustify="center"  href="product/{{singleProduct._id}}"><img class="card-img-top" height="150px" width="150px"
+                    [src]="'./../assets/images/productImages/'+singleProduct.images[0]" /></a>
+                  
+                    <p nz-row nzJustify="center">
+                        <strong> ETB </strong> <span nz-typography nzType="danger"> {{singleProduct.price}}</span>
+                        <span  *ngIf="singleProduct.measurement"> / {{singleProduct.measurement}}</span>
+                    </p>
+                  </div>
+                </div>
+
+              
+            <!-- 
               <div nz-row nzJustify="center" *ngIf="countRelatedProducts > 1">
                   
                 <a nz-row nzJustify="center"  href="product/{{relatedProducts[1]._id}}"><img class="card-img-top" height="150px" width="150px"
@@ -272,7 +291,7 @@
                     <strong> ETB </strong> <span nz-typography nzType="danger"> {{relatedProducts[3].price}}</span>
                     <span  *ngIf="relatedProducts[3].measurement"> / {{relatedProducts[3].measurement}}</span>
                 </p>
-              </div>
+              </div>-->
 
             </div>
         </div>

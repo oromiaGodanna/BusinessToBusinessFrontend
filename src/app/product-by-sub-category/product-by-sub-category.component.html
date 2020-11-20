@@ -163,11 +163,11 @@
     
     <nz-layout >
         <nz-layout>
-            <nz-sider style="background-color:white;" class="sidebarCategory">
+            <nz-sider class="sidebarCategory" style="margin-top:10px;margin-left:10px;background:white;">
                 <div nz-row>
-                    <strong>CATEGORIES</strong>
+                    <strong style="background:#cb2d22;width:100%;color:white" class="pd10">CATEGORIES</strong>
                 </div>
-            <ul class="categoryList" style="padding:10px" class="SidertextSize">
+            <ul class="categoryList" style="padding:10px;list-style-type: none !important;" class="SidertextSize">
                 <li *ngFor="let category of categories">
                     <a href="productByCategory/{{category.name}}"><strong style="color:black">{{category.name  | uppercase}}</strong></a>
                     <ul *ngIf="category.subCategories" class="categoryList">

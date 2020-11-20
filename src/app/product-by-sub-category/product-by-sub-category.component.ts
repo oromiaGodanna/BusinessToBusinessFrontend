@@ -39,7 +39,7 @@ export class ProductBySubCategoryComponent implements OnInit {
     countInitialProducts=1;
     countMoreProducts=1;
     offset=0;
-    limit=2;
+    limit=12;
 
   ngOnInit(): void {
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);

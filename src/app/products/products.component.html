@@ -157,14 +157,14 @@
         
 
     <nz-layout>
-        <nz-sider class="sidebarCategory" style="margin-left:10px;background:white;">
-            <div>
+        <nz-sider class="sidebarCategory" style="margin-top:10px;margin-left:10px;background:white;">
+             <!--<div>
                 <a nz-button nzType="link" (click)="openFilter()">
                     <i nz-icon nzType="search" nzTheme="outline" nzShape="round"></i>
                     FILTER
                 </a>
             </div>
-
+           
             <div style="display: none;" id="filterSideBar">
                 <form nz-form [formGroup]="form" (ngSubmit)="filterSearch()" class="pd10">
                         
@@ -204,12 +204,12 @@
                         </nz-form-item>
                   
                 </form>
-            </div>
+            </div>-->
 
             <div nz-row>
-                <strong style="background:#cb2d22;width:100%" class="pd10">CATEGORIES</strong>
+                <strong style="background:#cb2d22;width:100%;color:white" class="pd10">CATEGORIES</strong>
             </div>
-            <ul class="categoryList" class="SidertextSize pd10">
+            <ul class="categoryList" style="padding:10px;list-style-type: none !important;" class="SidertextSize">
                 <li *ngFor="let category of categories">
                     <a href="productByCategory/{{category.name}}"><strong style="color:rgb(100, 12, 12)">{{category.name | uppercase}}</strong></a>
                     <ul *ngIf="category.subCategories" class="categoryList">

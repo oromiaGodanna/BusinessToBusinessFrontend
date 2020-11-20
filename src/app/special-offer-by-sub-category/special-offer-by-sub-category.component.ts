@@ -34,7 +34,7 @@ export class SpecialOfferBySubCategoryComponent implements OnInit {
     relatedProducts=[];
      moreRelatedProducts=[];
     offset=0;
-    limit=1;
+    limit=12;
     initialCountProducts=1;
     countProducts=1;
     categories;

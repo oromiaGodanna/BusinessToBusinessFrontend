@@ -49,7 +49,7 @@ export class FilterProductComponent implements OnInit {
     specialOffer;
     productDiscount;
     offset=0;
-    limit=1;
+    limit=12;
     moreProducts=[];
     countInitialProducts=1;
     countMoreProducts=1;

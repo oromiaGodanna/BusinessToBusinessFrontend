@@ -55,7 +55,7 @@ export class IndexComponent implements OnInit {
   isEnglish = false;
   specialOffers;
   offset=0;
-  limit=4;
+  limit=12;
   getProducts(): void {
     
         this.productService.getProducts(this.offset,this.limit).subscribe(res => {

@@ -35,7 +35,7 @@ export class SpecialOfferProductComponent implements OnInit {
     specialOffer; 
     isEnglish = false;
     offset=0;
-    limit=12;
+    limit=4;
     color;
     size;
     sizeInNumber;

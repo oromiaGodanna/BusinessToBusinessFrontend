@@ -37,7 +37,7 @@ export class SpecialofferListComponent implements OnInit {
   specialOffers=[];
   moreSpecialOffers=[];
   offset=0;
-  limit=1;
+  limit=12;
   initialCountProducts=1;
   countProducts=1;
   productId;

@@ -41,7 +41,7 @@ export class SearchProductComponent implements OnInit {
     categories;
     isEnglish = false;
     offset=0;
-    limit=1;
+    limit=12;
 
   ngOnInit(): void {
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);

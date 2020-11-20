@@ -40,7 +40,7 @@ export class ProductComponent implements OnInit {
   productImage;
   productCategory;
   offset=0;
-  limit=12;
+  limit=4;
   relatedProducts=[];
   color;
   size;

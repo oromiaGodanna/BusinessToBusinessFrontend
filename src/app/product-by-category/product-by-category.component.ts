@@ -37,7 +37,7 @@ export class ProductByCategoryComponent implements OnInit {
     categories;
     isEnglish = false;
     offset=0;
-    limit=4;
+    limit=12;
 
   ngOnInit(): void {
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
