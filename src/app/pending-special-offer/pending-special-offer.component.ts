@@ -40,7 +40,7 @@ export class PendingSpecialOfferComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.userService.getToken();
-    if(this.token.role != 'seller'){
+    if(this.token.userType != 'seller'){
       this.router.navigate(['/products']);
     }
 
@@ -102,7 +102,7 @@ export class PendingSpecialOfferComponent implements OnInit {
 
   openSpecialOffer(){
 
-    if(this.token.role != 'seller'){
+    if(this.token.userType != 'seller'){
       this.router.navigate(['/products']);
     }
 
@@ -121,7 +121,7 @@ export class PendingSpecialOfferComponent implements OnInit {
   }
   
   deleteSpecialOffer(){
-    if(this.token.role != 'seller'){
+    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }
     this.specialofferService.deleteSpecialOffer(this.productId).subscribe(res => {
@@ -132,7 +132,7 @@ export class PendingSpecialOfferComponent implements OnInit {
   }
 
   deleteProduct(){
-      if(this.token.role != 'seller'){
+      if(this.token.userType != 'seller' && this.token.userType != 'admin'){
         this.router.navigate(['/products']);
       }
       this.specialofferService.deleteProduct(this.productId).subscribe(res => {

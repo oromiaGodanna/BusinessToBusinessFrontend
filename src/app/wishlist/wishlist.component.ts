@@ -33,7 +33,7 @@ export class WishlistComponent implements OnInit {
     ngOnInit(): void {
       this.token = this.userService.getToken();
 
-      if(this.token.userId != null){
+      if(this.token._id != null){
 
         this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
         this.isEnglish = !this.isEnglish;
@@ -64,7 +64,7 @@ export class WishlistComponent implements OnInit {
   }*/
 
   removeProductFromWishlist(productId){
-    if(this.token.userId != null){
+    if(this.token._id != null){
       var divId = document.getElementById(productId).style.display = 'none';
       this.wishlistService.removeFromWishlist(productId).subscribe();
       return true;
@@ -72,7 +72,7 @@ export class WishlistComponent implements OnInit {
   }
 
   addProductToWishlist(productId){
-    if(this.token.userId != null){
+    if(this.token._id != null){
 
       
       this.wishlistObj = {
@@ -115,7 +115,7 @@ export class WishlistComponent implements OnInit {
 
   countProductInWishlist(){
    
-    if(this.token.userId != null){
+    if(this.token._id != null){
       this.wishlistService.countWishlist().subscribe(res => {
         this.productinWishlistNum = Number(res);
       });

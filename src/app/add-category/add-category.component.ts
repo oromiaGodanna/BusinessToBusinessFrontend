@@ -46,7 +46,7 @@ export class AddCategoryComponent implements OnInit {
 
     this.token = this.userService.getToken();
 
-    if(this.token.role != 'admin'){
+    if(this.token.userType != 'admin'){
       this.route.navigate(['/products']);
     }else{
       this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);

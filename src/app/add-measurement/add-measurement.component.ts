@@ -35,7 +35,7 @@ export class AddMeasurementComponent implements OnInit {
 
    ngOnInit(): void {
     this.token = this.userService.getToken();
-    if(this.token.role != 'admin'){
+    if(this.token.userType != 'admin'){
       this.route.navigate(['/products']);
     }
     this.isEnglish = !this.isEnglish;

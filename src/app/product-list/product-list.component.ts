@@ -48,7 +48,7 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.userService.getToken();
     
-    if(this.token.role != 'seller' && this.token.role != 'admin'){
+    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }
     this.getProducts();
@@ -78,7 +78,7 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct(productId):void{
-    if(this.token.role != 'seller' && this.token.role != 'admin'){
+    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }
     this.productService.removeProduct(productId).subscribe(res => {

@@ -30,7 +30,7 @@ export class ClosedProformaComponent implements OnInit {
 
   ngOnInit(): void { 
     this.token = this.userService.getToken();
-    if(this.token.userId == null){
+    if(this.token._id == null){
       this.router.navigate(['/products']);
     }else{
       this.getAllCategories();

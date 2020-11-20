@@ -42,7 +42,7 @@ export class ActiveSpecialOfferComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.userService.getToken();
      
-    if(this.token.role != 'seller' && this.token.role != 'admin'){
+    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }else{
       this.getActiveSpecialOffers();
@@ -117,7 +117,7 @@ export class ActiveSpecialOfferComponent implements OnInit {
   }
   
   deleteSpecialOffer(){
-    if(this.token.role != 'seller' && this.token.role != 'admin'){
+    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }
     this.specialofferService.deleteSpecialOffer(this.productId).subscribe(res => {
@@ -128,7 +128,7 @@ export class ActiveSpecialOfferComponent implements OnInit {
   }
 
   deleteProduct(){
-    if(this.token.role != 'seller' && this.token.role != 'admin'){
+    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }
       this.specialofferService.deleteProduct(this.productId).subscribe(res => {

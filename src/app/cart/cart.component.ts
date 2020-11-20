@@ -43,7 +43,7 @@ export class CartComponent implements OnInit {
     ngOnInit(): void {
       this.token = this.userService.getToken();
 
-      if(this.token.userId != null){
+      if(this.token._id != null){
 
         this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
         this.isEnglish = !this.isEnglish;
@@ -90,7 +90,7 @@ export class CartComponent implements OnInit {
     }
 
     addToCart(cartObj) {
-      if(this.token.userId != null){
+      if(this.token._id != null){
           var cart = {
             productId:cartObj.productId,
             amount:cartObj.amount,  
@@ -132,7 +132,7 @@ export class CartComponent implements OnInit {
 
 
   removeProductFromCart(productId){
-    if(this.token.userId != null){
+    if(this.token._id != null){
       var subTotAfter = parseFloat((document.getElementById("subTotal"+productId).innerHTML));
       var divId = document.getElementById(productId).style.display = 'none';
       
@@ -192,7 +192,7 @@ export class CartComponent implements OnInit {
   }
 
   countProductIncart(){
-    if(this.token.userId != null){
+    if(this.token._id != null){
       this.cartService.countCart().subscribe(res => {
         this.productinCartNum = Number(res);
       });

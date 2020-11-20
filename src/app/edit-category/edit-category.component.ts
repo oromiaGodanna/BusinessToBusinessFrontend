@@ -46,7 +46,7 @@ export class EditCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.userService.getToken();
-    if(this.token.role != 'admin'){
+    if(this.token.userType != 'admin'){
       this.routee.navigate(['/products']);
     }else{
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);

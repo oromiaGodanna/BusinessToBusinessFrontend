@@ -32,7 +32,7 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.userService.getToken();
-    if(this.token.role != 'admin'){
+    if(this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }else{
       this.getCategories();
@@ -78,7 +78,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   deleteCategory(categoryId):void{
-    if(this.token.role != 'admin'){
+    if(this.token.rouserTypele != 'admin'){
       this.router.navigate(['/products']);
     }else{
     this.categoryService.deleteCategory(categoryId).subscribe(res => {

@@ -55,7 +55,7 @@ export class EditProductComponent implements OnInit {
 
     ngOnInit(): void {
       this.token = this.userService.getToken();
-      if(this.token.role != 'seller' && this.token.role != 'admin'){
+      if(this.token.userType != 'seller' && this.token.userType != 'admin'){
         this.routee.navigate(['/products']);
       }
 

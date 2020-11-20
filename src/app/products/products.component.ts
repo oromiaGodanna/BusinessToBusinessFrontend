@@ -64,10 +64,7 @@ export class ProductsComponent implements OnInit {
   counterI=0;
   initialCountProducts=1;
   countProducts=1;
-  token={
-    userId:1,
-    role:'admin'
-  };
+  
 
   getProducts(): void {
         

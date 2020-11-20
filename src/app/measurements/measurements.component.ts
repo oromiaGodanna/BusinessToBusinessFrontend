@@ -40,7 +40,7 @@ export class MeasurementsComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.userService.getToken();
     
-    if(this.token.role != 'admin'){
+    if(this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }
     this.getMeasurements();
@@ -69,7 +69,7 @@ export class MeasurementsComponent implements OnInit {
   }
 
   deleteMeasurement(measurementId):void{
-    if(this.token.role != 'admin'){
+    if(this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }
     this.measurementService.deleteMeasurement(measurementId).subscribe(res => {
@@ -91,7 +91,7 @@ export class MeasurementsComponent implements OnInit {
   }
 
   editMeasurement(){
-    if(this.token.role != 'admin'){
+    if(this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }
 
