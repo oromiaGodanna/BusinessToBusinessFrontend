@@ -66,6 +66,19 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { NzResultModule } from 'ng-zorro-antd/result';
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzRateModule } from 'ng-zorro-antd/rate';
+import { NzEmptyModule } from 'ng-zorro-antd/empty';
+
+
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { NotificationService } from './services/notification.service';
 import { PromotionService } from './services/promotion.service';
@@ -145,7 +158,18 @@ registerLocaleData(en);
     NzCardModule,
     NzTabsModule,
     NzRadioModule,
-    NzBadgeModule
+    NzBadgeModule,
+    NzPageHeaderModule,
+    NzAlertModule,
+    NzStepsModule,
+    NzResultModule,
+    NzBackTopModule,
+    NzDescriptionsModule,
+    NzBreadCrumbModule,
+    NzModalModule,
+    NzCollapseModule,
+    NzRateModule,
+    NzEmptyModule
 
   ],
   providers: [
