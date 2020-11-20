@@ -14,7 +14,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 
 import {Ng2TelInputModule} from 'ng2-tel-input';
-import { NgZorroAntdModule, } from 'ng-zorro-antd';
+// import { NgZorroAntdModule, } from 'ng-zorro-antd';
 
 
 import { MessageComponent } from './message/message.component';
@@ -123,7 +123,7 @@ registerLocaleData(en);
 
 
     ReactiveFormsModule,
-    NgZorroAntdModule,
+    // NgZorroAntdModule,
     Ng2TelInputModule,
 
     // ant design components
