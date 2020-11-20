@@ -14,6 +14,7 @@ import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import {CartComponent} from '../cart/cart.component';
 import {WishlistComponent} from '../wishlist/wishlist.component';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-special-offer-product',
@@ -24,7 +25,7 @@ export class SpecialOfferProductComponent implements OnInit {
 
   constructor(private http:HttpClient,private productService:ProductsService, private route: ActivatedRoute, private router: Router,private cartService:CartService,
     private iconService: NzIconService,private wishlistService:WishlistService, private specialofferService:SpecialofferService,
-    private modal: NzModalService,private notification: NzNotificationService,private i18n: NzI18nService) { }
+    private modal: NzModalService,private notification: NzNotificationService,private userService:UserService,private i18n: NzI18nService) { }
     
     form: FormGroup;
     product;
@@ -115,7 +116,7 @@ export class SpecialOfferProductComponent implements OnInit {
     addProductToWishlist(productId){
     
       let wishlistObj = new WishlistComponent(this.http,this.wishlistService,
-      this.router,this.iconService,this.specialofferService,this.notification,this.i18n);
+      this.router,this.iconService,this.specialofferService,this.notification,this.userService,this.i18n);
       wishlistObj.addProductToWishlist(productId);
   
     }
@@ -174,7 +175,7 @@ export class SpecialOfferProductComponent implements OnInit {
         };
        // alert("yes");
         let cartComponent = new CartComponent(this.http,this.cartService,
-          this.modal,this.specialofferService,this.i18n,this.notification,this.router);
+          this.modal,this.specialofferService,this.i18n,this.userService,this.notification,this.router);
           cartComponent.addToCart(cartObj);
       }
   

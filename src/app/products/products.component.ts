@@ -18,6 +18,7 @@ import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 import {WishlistComponent} from '../wishlist/wishlist.component';
 import {CartComponent} from '../cart/cart.component';
 import { DomSanitizer } from '@angular/platform-browser';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-products',
@@ -33,7 +34,7 @@ export class ProductsComponent implements OnInit {
     private categoryService:CategoryService,private fb: FormBuilder,private wishlistService:WishlistService,private modal: NzModalService,
     private offerService:SpecialofferService,
     private router: Router,private iconService: NzIconService,
-    private notification: NzNotificationService,private i18n: NzI18nService,private sanit:DomSanitizer){ 
+    private notification: NzNotificationService,private i18n: NzI18nService,private userService:UserService,private sanit:DomSanitizer){ 
       this.form = this.fb.group({
         productCategory: [null, [Validators.required]],
         productSubCategory: [null, [Validators.required]],
@@ -95,7 +96,7 @@ export class ProductsComponent implements OnInit {
   addProductToWishlist(productId){
     
     let wishlistObj = new WishlistComponent(this.http,this.wishlistService,
-    this.router,this.iconService,this.offerService,this.notification,this.i18n);
+    this.router,this.iconService,this.offerService,this.notification,this.userService,this.i18n);
     wishlistObj.addProductToWishlist(productId);
 
   }
@@ -108,7 +109,7 @@ export class ProductsComponent implements OnInit {
 
    
     let cartComponent = new CartComponent(this.http,this.cartService,
-    this.modal,this.offerService,this.i18n,this.notification,this.router);
+    this.modal,this.offerService,this.i18n,this.userService,this.notification,this.router);
     cartComponent.addToCart(productId);
 
   }
