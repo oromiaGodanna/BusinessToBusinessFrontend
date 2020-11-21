@@ -10,7 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, CommonModule } from '@angular/common';
 import en from '@angular/common/locales/en';
 
 import {Ng2TelInputModule} from 'ng2-tel-input';
@@ -133,8 +133,10 @@ registerLocaleData(en);
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    // CommonModule,
 
 
     ReactiveFormsModule,
