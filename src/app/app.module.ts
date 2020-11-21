@@ -77,6 +77,8 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+
 
 
 import {ScrollingModule} from '@angular/cdk/scrolling';
@@ -169,7 +171,8 @@ registerLocaleData(en);
     NzModalModule,
     NzCollapseModule,
     NzRateModule,
-    NzEmptyModule
+    NzEmptyModule,
+    NzMessageModule
 
   ],
   providers: [
