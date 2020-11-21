@@ -161,11 +161,11 @@
 
     
     <nz-layout>
-            <nz-sider style="background-color: white;" class="sidebarCategory">
-              <div nz-row >
-                <strong>CATEGORIES</strong>
-              </div>
-            <ul class="categoryList" class="SidertextSize pd10">
+        <nz-sider class="sidebarCategory" style="margin-top:10px;margin-left:10px;background:white;">
+            <div nz-row>
+                <strong style="background:#cb2d22;width:100%;color:white" class="pd10">CATEGORIES</strong>
+            </div>
+            <ul class="categoryList" class="SidertextSize pd10 " style="padding:10px;list-style-type: none !important;">
                 <li *ngFor="let category of categories">
                     <a href="specialOfferByCategory/{{category.name}}" *ngIf="category.name === productCategory" class="sider"><strong class="active">{{category.name | uppercase}}</strong> </a>
                     <a href="specialOfferByCategory/{{category.name}}" *ngIf="category.name != productCategory"><strong style="color:black">{{category.name | uppercase}}</strong></a>

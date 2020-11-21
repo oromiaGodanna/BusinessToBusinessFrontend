@@ -7,6 +7,7 @@ import { NzIconService } from 'ng-zorro-antd/icon';
 import { SpecialofferService } from '../services/specialoffer.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -17,7 +18,7 @@ export class WishlistComponent implements OnInit {
 
   constructor(private http:HttpClient,private wishlistService:WishlistService,
     private router: Router,private iconService: NzIconService,private specialofferService:SpecialofferService,
-    private notification: NzNotificationService,private i18n: NzI18nService) { }
+    private notification: NzNotificationService,private userService:UserService,private i18n: NzI18nService) { }
 
   wishlist=[];
   wishlistObj;
@@ -27,13 +28,12 @@ export class WishlistComponent implements OnInit {
   specialOffer;
   productDiscount;
   productinWishlistNum;
-  token={
-    userId:1,
-  };
+  token;
 
     ngOnInit(): void {
+      this.token = this.userService.getToken();
 
-      if(this.token.userId != null){
+      if(this.token._id != null){
 
         this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
         this.isEnglish = !this.isEnglish;
@@ -64,7 +64,7 @@ export class WishlistComponent implements OnInit {
   }*/
 
   removeProductFromWishlist(productId){
-    if(this.token.userId != null){
+    if(this.token._id != null){
       var divId = document.getElementById(productId).style.display = 'none';
       this.wishlistService.removeFromWishlist(productId).subscribe();
       return true;
@@ -72,7 +72,7 @@ export class WishlistComponent implements OnInit {
   }
 
   addProductToWishlist(productId){
-    if(this.token.userId != null){
+    if(this.token._id != null){
 
       
       this.wishlistObj = {
@@ -115,7 +115,7 @@ export class WishlistComponent implements OnInit {
 
   countProductInWishlist(){
    
-    if(this.token.userId != null){
+    if(this.token._id != null){
       this.wishlistService.countWishlist().subscribe(res => {
         this.productinWishlistNum = Number(res);
       });

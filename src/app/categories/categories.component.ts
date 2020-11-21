@@ -5,6 +5,7 @@ import { Product } from '../models/product';
 import { HttpClient } from '@angular/common/http';
 import { CategoryService } from '../services/category.service';
 import { Category } from '../models/category';
+import {UserService } from '../services/user.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
@@ -20,20 +21,18 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private http:HttpClient,private categoryService:CategoryService, 
     private router: Router,private fb: FormBuilder,
-    private modal: NzModalService,private message: NzMessageService,private i18n: NzI18nService) { }
+    private modal: NzModalService,private message: NzMessageService,private userService:UserService,private i18n: NzI18nService) { }
 
   categories;
   subCategories;
   showImage=false;
   imageToView;
   isEnglish = false;
-  token={
-    userId:1,
-    role:'admin',
-  };
+  token;
 
   ngOnInit(): void {
-    if(this.token.role != 'admin'){
+    this.token = this.userService.getToken();
+    if(this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }else{
       this.getCategories();
@@ -79,7 +78,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   deleteCategory(categoryId):void{
-    if(this.token.role != 'admin'){
+    if(this.token.rouserTypele != 'admin'){
       this.router.navigate(['/products']);
     }else{
     this.categoryService.deleteCategory(categoryId).subscribe(res => {

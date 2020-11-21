@@ -17,6 +17,7 @@ import { CategoryService } from '../services/category.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import {CartComponent} from '../cart/cart.component';
 import {WishlistComponent} from '../wishlist/wishlist.component';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-special-offer-by-sub-category',
@@ -27,14 +28,14 @@ export class SpecialOfferBySubCategoryComponent implements OnInit {
 
   constructor(private http:HttpClient,private route:ActivatedRoute,private productService:ProductsService,private cartService:CartService,
     private specialofferService:SpecialofferService,private wishlistService:WishlistService,private iconService: NzIconService,private message: NzMessageService,private notification: NzNotificationService,
-    private router: Router,private fb: FormBuilder, private categoryService:CategoryService,private modal: NzModalService,private i18n: NzI18nService) { }
+    private router: Router,private fb: FormBuilder,private userService:UserService, private categoryService:CategoryService,private modal: NzModalService,private i18n: NzI18nService) { }
 
     productCategory;
     productSubCategory;
     relatedProducts=[];
      moreRelatedProducts=[];
     offset=0;
-    limit=1;
+    limit=12;
     initialCountProducts=1;
     countProducts=1;
     categories;
@@ -72,14 +73,14 @@ export class SpecialOfferBySubCategoryComponent implements OnInit {
   
   addProductToCart(productId){
       let cartComponent = new CartComponent(this.http,this.cartService,
-      this.modal,this.specialofferService,this.i18n,this.notification,this.router);
+      this.modal,this.specialofferService,this.i18n,this.userService,this.notification,this.router);
       cartComponent.addToCart(productId);
   }
 
   addProductToWishlist(productId){
     
     let wishlistObj = new WishlistComponent(this.http,this.wishlistService,
-    this.router,this.iconService,this.specialofferService,this.notification,this.i18n);
+    this.router,this.iconService,this.specialofferService,this.notification,this.userService,this.i18n);
     wishlistObj.addProductToWishlist(productId);
 
   }

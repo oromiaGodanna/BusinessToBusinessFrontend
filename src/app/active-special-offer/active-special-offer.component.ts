@@ -2,6 +2,7 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProductsService } from '../services/products.service';
 import { SpecialofferService } from '../services/specialoffer.service';
+import {UserService } from '../services/user.service';
 import { Product } from '../models/product';
 import { SpecialOffer } from '../models/SpecialOffer';
 import { Router } from '@angular/router';
@@ -20,7 +21,7 @@ import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 export class ActiveSpecialOfferComponent implements OnInit {
 
   constructor(private http:HttpClient,private productService:ProductsService,
-    private specialofferService:SpecialofferService,private message: NzMessageService,
+    private specialofferService:SpecialofferService,private userService:UserService,private message: NzMessageService,
     private router: Router,private fb: FormBuilder,private modal: NzModalService,private i18n: NzI18nService) { }
 
   products: Product[];
@@ -36,13 +37,12 @@ export class ActiveSpecialOfferComponent implements OnInit {
   activeSpecialOffer;
   imageToView;
   showImage;
-  token={
-    userId:1,
-    role:'seller',
-  };
+  token;
 
   ngOnInit(): void {
-    if(this.token.role != 'seller' && this.token.role != 'admin'){
+    this.token = this.userService.getToken();
+     
+    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }else{
       this.getActiveSpecialOffers();
@@ -117,7 +117,7 @@ export class ActiveSpecialOfferComponent implements OnInit {
   }
   
   deleteSpecialOffer(){
-    if(this.token.role != 'seller' && this.token.role != 'admin'){
+    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }
     this.specialofferService.deleteSpecialOffer(this.productId).subscribe(res => {
@@ -128,7 +128,7 @@ export class ActiveSpecialOfferComponent implements OnInit {
   }
 
   deleteProduct(){
-    if(this.token.role != 'seller' && this.token.role != 'admin'){
+    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
       this.router.navigate(['/products']);
     }
       this.specialofferService.deleteProduct(this.productId).subscribe(res => {

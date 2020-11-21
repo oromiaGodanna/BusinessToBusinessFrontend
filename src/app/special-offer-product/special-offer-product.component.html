@@ -43,6 +43,9 @@
   .pd20{
       padding:20px;
   }
+  .pdr10{
+    padding-right:10px;
+  }
   .pd10{
       padding:10px;
   }
@@ -159,8 +162,8 @@
 
             <div nz-row>
               
-                <h2 nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12">{{product.productName | uppercase}}</h2>
-                <h2 nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="12" nzXl="12" >
+                <h2 nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12">{{product.productName | uppercase}}</h2>
+                <h2 nz-col nzXs="12" nzSm="12" nzMd="12" nzLg="12" nzXl="12" >
                   <span>ETB </span>
                   <span nz-typography nzType="danger"> {{specialOffer.discount}} </span>
                   <span  *ngIf="product.measurement"> / {{product.measurement}}</span> 
@@ -178,8 +181,8 @@
 
                 <div *ngIf="product.additionalProductInfo[0]">
                 Colors: 
-                <nz-button-group *ngFor="let color of colorArray" class="pd10">
-                  <div style="width:30px;height:30px;background-color: brown;"></div>
+                <nz-button-group *ngFor="let color of colorArray" class="pdr10">
+                  <div style="width:20px;height:20px;" [style.background-color]="color"></div>
                 </nz-button-group>
 
               </div>
@@ -213,14 +216,31 @@
               </div>
           
             </div>
-              <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="4" nzXl="4" class="m10">
+              <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="4" nzXl="4" class="m10">
               
                 <div *ngIf="countRelatedProducts > 0">
                   <strong>Related Products</strong>
                   <nz-divider nzType="horizontal"></nz-divider>
                 </div>
-  
-                <div nz-row nzJustify="center" *ngIf="countRelatedProducts > 1">
+
+                
+                  <div *ngFor="let singleProduct of relatedProducts;let i=index">
+                      <div *ngIf="singleProduct.product._id != product._id">
+                          
+                          
+                      <a nz-row nzJustify="center"  href="specialOfferProduct/{{singleProduct.product._id}}"><img class="card-img-top" height="150px" width="150px"
+                      [src]="'./../assets/images/productImages/'+singleProduct.product.images[0]" /></a><br>
+                    
+                      <p nz-row nzJustify="center">
+                        <strong> ETB </strong>
+                        <span nz-typography nzType="danger"> {{singleProduct.specialoffer.discount}} </span>
+                        <span  *ngIf="singleProduct.product.measurement"> / {{singleProduct.product.measurement}}</span>
+                        <span nz-typography><del> {{singleProduct.product.price}}</del></span>
+                      </p>
+                      </div>
+                </div>
+               
+              <!-- <div nz-row nzJustify="center" *ngIf="countRelatedProducts > 1">
                     
                   <a nz-row nzJustify="center"  href="specialOfferProduct/{{relatedProducts[1].product._id}}"><img class="card-img-top" height="150px" width="150px"
                   [src]="'./../assets/images/productImages/'+relatedProducts[1].product.images[0]" /></a><br>
@@ -257,7 +277,7 @@
                     <span  *ngIf="relatedProducts[3].product.measurement"> / {{relatedProducts[3].product.measurement}}</span>
                     <span nz-typography><del> {{relatedProducts[3].product.price}}</del></span>
                   </p>
-                </div>
+                </div> -->
   
               </div>
           </div>
