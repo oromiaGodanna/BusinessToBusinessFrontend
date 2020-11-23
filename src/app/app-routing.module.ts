@@ -97,8 +97,7 @@ const routes: Routes = [
   { path: 'reset_password/:token', component: ResetPasswordComponent },
   { path: 'subscription', component: SubscriptionModelsComponent },
   { path: 'subscription_forms', canActivate : [AuthGuard, RoleGuard], component: SubscriptionFormComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent },
+  
   
   {path:'products',component:ProductsComponent},
   {path:'wishlist',component:WishlistComponent},
@@ -136,6 +135,8 @@ const routes: Routes = [
   { path: 'addMeasurement', component: AddMeasurementComponent},
   { path: 'filterProducts/:productCategory/:productSubCategory/:maxPrice', component: FilterProductComponent},
 
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({

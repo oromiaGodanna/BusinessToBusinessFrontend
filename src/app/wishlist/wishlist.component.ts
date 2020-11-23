@@ -28,10 +28,13 @@ export class WishlistComponent implements OnInit {
   specialOffer;
   productDiscount;
   productinWishlistNum;
-  token;
+  token={
+    _id:'1111111111',
+  };
 
     ngOnInit(): void {
-      this.token = this.userService.getToken();
+     // this.token = this.userService.getToken();
+      
 
       if(this.token._id != null){
 
