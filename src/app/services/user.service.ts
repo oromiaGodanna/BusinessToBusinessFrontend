@@ -93,11 +93,16 @@ export class UserService {
    const url = `${this.serverUrl}/customer//unsubscribe/${id}`;
    return this.http.put(url, userId);
  }
+
   logOut(){
     this.authToken = null;
     this.user = null;
     localStorage.clear();
   }
+setLocalStorageToNull(){
+  localStorage.setItem('token', null);
+  localStorage.setItem('user', null);
+}
 
 storeUserData(token, user){
   localStorage.setItem("token", token);
