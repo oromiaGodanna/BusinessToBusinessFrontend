@@ -46,6 +46,48 @@ import { SubscriptionModelsComponent } from './subscription-models/subscription-
 import { SubscriptionFormComponent } from './subscription-models/subscription-form/subscription-form.component';
 import { DeleteAccountComponent } from './my-account/delete-account/delete-account.component';
 
+//jerry's
+
+import { ProductsComponent } from './products/products.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { ProductsService } from './services/products.service';
+import { WishlistService } from './services/wishlist.service';
+import { CategoryService } from './services/category.service';
+import { SpecialofferService } from './services/specialoffer.service';
+import { ProformaService } from './services/proforma.service';
+import { CartService } from './services/cart.service';
+import { ResponseService } from './services/response.service';
+import { MeasurementsService } from './services/measurements.service';
+import { ProductComponent } from './product/product.component';
+import { CartComponent } from './cart/cart.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
+import { SpecialofferListComponent } from './specialoffer-list/specialoffer-list.component';
+import { ActiveSpecialOfferComponent } from './active-special-offer/active-special-offer.component';
+import { PendingSpecialOfferComponent } from './pending-special-offer/pending-special-offer.component';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { IndexComponent } from './index/index.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { EditCategoryComponent } from './edit-category/edit-category.component';
+import { ProductByCategoryComponent } from './product-by-category/product-by-category.component';
+import { ProductBySubCategoryComponent } from './product-by-sub-category/product-by-sub-category.component';
+import { SpecialOfferByCategoryComponent } from './special-offer-by-category/special-offer-by-category.component';
+import { SpecialOfferBySubCategoryComponent } from './special-offer-by-sub-category/special-offer-by-sub-category.component';
+import { SpecialOfferProductComponent } from './special-offer-product/special-offer-product.component';
+import { RequestProformaComponent } from './request-proforma/request-proforma.component';
+import { PendingProformaComponent } from './pending-proforma/pending-proforma.component';
+import { ClosedProformaComponent } from './closed-proforma/closed-proforma.component';
+import { ViewProformaComponent } from './view-proforma/view-proforma.component';
+import { OpenedProformaComponent } from './opened-proforma/opened-proforma.component';
+import { ViewResponsesComponent } from './view-responses/view-responses.component';
+import { SearchProductComponent } from './search-product/search-product.component';
+import { FilterProductComponent } from './filter-product/filter-product.component';
+import { MeasurementsComponent } from './measurements/measurements.component';
+import { AddMeasurementComponent } from './add-measurement/add-measurement.component';
+import { AlertsComponent } from './alerts/alerts.component';
+import { AddProductComponent } from './add-product/add-product.component';
+
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -64,6 +106,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzCarouselModule } from 'ng-zorro-antd/Carousel';
 
 
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
@@ -78,6 +121,12 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzTypographyModule } from 'ng-zorro-antd/typography';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+
+import { NzTableModule } from 'ng-zorro-antd/table';
+
 
 
 
@@ -89,9 +138,9 @@ import { ChangeBackgroundDirective } from './directives/change-background.direct
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { SocketService } from './services/socket.service';
-
-
-
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzCommentModule } from 'ng-zorro-antd/comment';
 
 
 registerLocaleData(en);
@@ -128,6 +177,36 @@ registerLocaleData(en);
     SubscriptionModelsComponent,
     SubscriptionFormComponent,
     DeleteAccountComponent,
+    ProductsComponent,
+    WishlistComponent,
+    ProductComponent,
+    CartComponent,
+    AddProductComponent,
+    ProductListComponent,
+    EditProductComponent,
+    SpecialofferListComponent,
+    ActiveSpecialOfferComponent,
+    PendingSpecialOfferComponent,
+    IndexComponent,
+    AddCategoryComponent,
+    CategoriesComponent,
+    EditCategoryComponent,
+    AlertsComponent,
+    ProductByCategoryComponent,
+    ProductBySubCategoryComponent,
+    SpecialOfferByCategoryComponent,
+    SpecialOfferBySubCategoryComponent,
+    SpecialOfferProductComponent,
+    RequestProformaComponent,
+    PendingProformaComponent,
+    ClosedProformaComponent,
+    ViewProformaComponent,
+    OpenedProformaComponent,
+    ViewResponsesComponent,
+    SearchProductComponent,
+    FilterProductComponent,
+    MeasurementsComponent,
+    AddMeasurementComponent
   ],
   imports: [
     BrowserModule,
@@ -174,7 +253,18 @@ registerLocaleData(en);
     NzCollapseModule,
     NzRateModule,
     NzEmptyModule,
-    NzMessageModule
+    NzMessageModule,
+
+
+    NzCarouselModule,
+    NzTypographyModule,
+    NzNotificationModule,
+    NzUploadModule,
+    NzTableModule,
+    NzDatePickerModule,
+    NzInputNumberModule,
+    NzSpinModule,
+    NzCommentModule,
 
   ],
   providers: [

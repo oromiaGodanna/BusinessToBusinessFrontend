@@ -11,44 +11,44 @@ export class ProformaService {
   constructor(private http:HttpClient) { }
 
   createProforma(proforma: Proforma){
-    return this.http.post('http://localhost:3000/api/createProforma/', proforma);
+    return this.http.post('http://localhost:3000/proforma/createProforma/', proforma);
   }
 
   requestProforma(proformaId,proformaData){
-    return this.http.post('http://localhost:3000/api/requestProforma/'+proformaId, proformaData);
+    return this.http.post('http://localhost:3000/proforma/requestProforma/'+proformaId, proformaData);
   }
 
   getProforma(proformaId){
-    return this.http.get('http://localhost:3000/api/getProforma/'+proformaId);
+    return this.http.get('http://localhost:3000/proforma/getProforma/'+proformaId);
   }
 
   getProformas(): Observable<Proforma[]>{
-    return this.http.get<Proforma[]>('http://localhost:3000/api/getProformas');
+    return this.http.get<Proforma[]>('http://localhost:3000/proforma/getProformas');
   }
 
   getMyProformas(): Observable<Proforma[]>{
-    return this.http.get<Proforma[]>('http://localhost:3000/api/getMyProformas');
+    return this.http.get<Proforma[]>('http://localhost:3000/proforma/getMyProformas');
   }
  
   closeProforma(proformaId){
-    return this.http.get('http://localhost:3000/api/closeProforma/'+proformaId);
+    return this.http.get('http://localhost:3000/proforma/closeProforma/'+proformaId);
   }
   
 
   deleteProforma(proformaId){
-    return this.http.delete('http://localhost:3000/api/deleteProforma/'+proformaId);
+    return this.http.delete('http://localhost:3000/proforma/deleteProforma/'+proformaId);
   }
 
   pendingProformas(): Observable<Proforma[]>{
-    return this.http.get<Proforma[]>('http://localhost:3000/api/pendingProforma');
+    return this.http.get<Proforma[]>('http://localhost:3000/proforma/pendingProforma');
   }
 
   activeProformas(): Observable<Proforma[]>{
-    return this.http.get<Proforma[]>('http://localhost:3000/api/activeProforma');
+    return this.http.get<Proforma[]>('http://localhost:3000/proforma/activeProforma');
   }
   
   closedProformas(): Observable<Proforma[]>{
-    return this.http.get<Proforma[]>('http://localhost:3000/api/closedProforma');
+    return this.http.get<Proforma[]>('http://localhost:3000/proforma/closedProforma');
   }
 
 }
