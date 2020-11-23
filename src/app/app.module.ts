@@ -282,6 +282,8 @@ registerLocaleData(en);
     NzResultModule,
     NzAvatarModule,
     NzCommentModule,
+    NzBadgeModule,
+    NzMenuModule,
 
   ],
   providers: [

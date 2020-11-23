@@ -70,11 +70,11 @@
         .sidebarCategory{
             display:none;
         }
-    }
-
-    @media screen and (max-width: 430px) {
         .categoryChoice{
             display:inline;
+        }
+        .sidebarForSmalDevice{
+            display:inline !important;
         }
     }
     
@@ -218,7 +218,25 @@
                 </li>
             </ul>
         </nz-sider>
+        
         <nz-content style="margin-left:10px;" id="contentDiv">
+                <div  nz-row style="display:none;margin-right:10px;padding:10px!important" class="sidebarForSmalDevice">
+                    <ul nz-menu nzMode="inline">
+                        <li nz-submenu nzTitle="CATEGORIES" style="background:#cb2d22;width:100%;color:white">
+                            <ul>
+                            <li *ngFor="let category of categories" nz-menu-group>
+                                <a href="productByCategory/{{category.name}}"><strong style="color:rgb(100, 12, 12)">{{category.name | uppercase}}</strong></a>
+                                <ul *ngIf="category.subCategories">
+                                <li *ngFor="let subCategory of category.subCategories" nz-menu-item>
+                                    <a href="productBySubCategory/{{subCategory}}" style="color:black">{{subCategory}}</a>
+                                </li>
+                                
+                                </ul>
+                            </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             
                 <form nz-form [formGroup]="form" (ngSubmit)="filterSearch()" style="background:white;display:none;" id="filterFormSmallDevice">
 
@@ -276,7 +294,7 @@
                                
 
                                 <a href="product/{{product._id}}">{{product.productName | uppercase}}</a>
-                                <p><a href="product/{{product._id}}">{{((product.description) > 2)? (product.description):((product.description | slice:0:2)+'..')}}</a></p>
+                                <p><a href="product/{{product._id}}">{{((product.description) > 100)? (product.description):((product.description | slice:0:100)+'..')}}</a></p>
 
                                 <p>
                                     <strong> ETB </strong> <span nz-typography nzType="danger"> {{product.price}}</span>
