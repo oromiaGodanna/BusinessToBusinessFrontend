@@ -58,4 +58,8 @@ export class ChangeEmailComponent implements OnInit {
   cancel(){
     this.message.info('Email change Canceled');
   }
+
+  changeEmail(){
+    
+  }
 }

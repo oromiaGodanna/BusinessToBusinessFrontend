@@ -5,7 +5,7 @@
   <div nz-col nzSpan="12">
     <nz-card style="align-content: center;" nzTitle="Create a New Subscription">
       <form nz-form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
-        <nz-alert *ngIf="error == true" nzType="error" [nzMessage]="errorMsg" nzCloseable nzShowIcon> </nz-alert>
+        <nz-alert *ngIf="error == true" nzType="error" [nzMessage]="errMsg" nzCloseable nzShowIcon> </nz-alert>
         <nz-form-item>
           <nz-form-label nzSpan="8" nzRequired>Name</nz-form-label>
           <nz-form-control nzHasFeedback nzErrorTip="Please provide the name of the Subscription" [nzSpan]="12">

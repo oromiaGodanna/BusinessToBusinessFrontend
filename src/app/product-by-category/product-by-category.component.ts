@@ -17,6 +17,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 import {WishlistComponent} from '../wishlist/wishlist.component';
 import {CartComponent} from '../cart/cart.component';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-product-by-category',
@@ -26,7 +27,7 @@ import {CartComponent} from '../cart/cart.component';
 export class ProductByCategoryComponent implements OnInit {
   constructor(private http:HttpClient,private productService:ProductsService,private cartService:CartService, private route: ActivatedRoute,
     private router: Router, private specialofferService:SpecialofferService,private wishlistService:WishlistService,private iconService: NzIconService, private categoryService:CategoryService,
-    private notification: NzNotificationService,private i18n: NzI18nService,private modal: NzModalService) { }
+    private notification: NzNotificationService,private userService:UserService,private i18n: NzI18nService,private modal: NzModalService) { }
 
     productCategory;
     productSubCategory;
@@ -37,7 +38,7 @@ export class ProductByCategoryComponent implements OnInit {
     categories;
     isEnglish = false;
     offset=0;
-    limit=4;
+    limit=12;
 
   ngOnInit(): void {
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
@@ -68,14 +69,14 @@ export class ProductByCategoryComponent implements OnInit {
 
   addProductToCart(productId){
       let cartComponent = new CartComponent(this.http,this.cartService,
-      this.modal,this.specialofferService,this.i18n,this.notification,this.router);
+      this.modal,this.specialofferService,this.i18n,this.userService,this.notification,this.router);
       cartComponent.addToCart(productId);
   }
 
   addProductToWishlist(productId){
     
     let wishlistObj = new WishlistComponent(this.http,this.wishlistService,
-    this.router,this.iconService,this.specialofferService,this.notification,this.i18n);
+    this.router,this.iconService,this.specialofferService,this.notification,this.userService,this.i18n);
     wishlistObj.addProductToWishlist(productId);
 
   }

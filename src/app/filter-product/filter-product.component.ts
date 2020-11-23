@@ -17,7 +17,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 import {WishlistComponent} from '../wishlist/wishlist.component';
 import {CartComponent} from '../cart/cart.component';
-
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-filter-product',
@@ -28,7 +28,7 @@ export class FilterProductComponent implements OnInit {
 
   constructor(private http:HttpClient,private productService:ProductsService,private cartService:CartService,
     private categoryService:CategoryService,private fb: FormBuilder,private wishlistService:WishlistService,private modal: NzModalService,
-    private offerService:SpecialofferService,
+    private offerService:SpecialofferService,private userService:UserService,
     private router: Router,private route: ActivatedRoute,private iconService: NzIconService,
     private notification: NzNotificationService,private specialofferService:SpecialofferService,private i18n: NzI18nService) { }
 
@@ -49,7 +49,7 @@ export class FilterProductComponent implements OnInit {
     specialOffer;
     productDiscount;
     offset=0;
-    limit=1;
+    limit=12;
     moreProducts=[];
     countInitialProducts=1;
     countMoreProducts=1;
@@ -91,7 +91,7 @@ export class FilterProductComponent implements OnInit {
     addProductToWishlist(productId){
       
       let wishlistObj = new WishlistComponent(this.http,this.wishlistService,
-      this.router,this.iconService,this.offerService,this.notification,this.i18n);
+      this.router,this.iconService,this.offerService,this.notification,this.userService,this.i18n);
       wishlistObj.addProductToWishlist(productId);
   
     }
@@ -104,7 +104,7 @@ export class FilterProductComponent implements OnInit {
   
      
       let cartComponent = new CartComponent(this.http,this.cartService,
-      this.modal,this.offerService,this.i18n,this.notification,this.router);
+      this.modal,this.offerService,this.i18n,this.userService,this.notification,this.router);
       cartComponent.addToCart(productId);
   
     }

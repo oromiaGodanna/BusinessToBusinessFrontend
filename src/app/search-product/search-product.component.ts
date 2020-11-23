@@ -17,6 +17,8 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 import {WishlistComponent} from '../wishlist/wishlist.component';
 import {CartComponent} from '../cart/cart.component';
+import {UserService } from '../services/user.service';
+
 
 @Component({
   selector: 'app-search-product',
@@ -28,7 +30,7 @@ export class SearchProductComponent implements OnInit {
   constructor(private http:HttpClient,private productService:ProductsService, private route: ActivatedRoute,
     private iconService: NzIconService,private wishlistService:WishlistService,private cartService:CartService,
     private router: Router, private categoryService:CategoryService,private modal: NzModalService,
-    private specialofferService:SpecialofferService,
+    private specialofferService:SpecialofferService,private userService:UserService,
     private notification: NzNotificationService,private i18n: NzI18nService) { }
 
     productCategory;
@@ -41,7 +43,7 @@ export class SearchProductComponent implements OnInit {
     categories;
     isEnglish = false;
     offset=0;
-    limit=1;
+    limit=12;
 
   ngOnInit(): void {
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
@@ -79,14 +81,14 @@ export class SearchProductComponent implements OnInit {
 
   addProductToCart(productId){
       let cartComponent = new CartComponent(this.http,this.cartService,
-      this.modal,this.specialofferService,this.i18n,this.notification,this.router);
+      this.modal,this.specialofferService,this.i18n,this.userService,this.notification,this.router);
       cartComponent.addToCart(productId);
   }
 
   addProductToWishlist(productId){
     
     let wishlistObj = new WishlistComponent(this.http,this.wishlistService,
-    this.router,this.iconService,this.specialofferService,this.notification,this.i18n);
+    this.router,this.iconService,this.specialofferService,this.notification,this.userService,this.i18n);
     wishlistObj.addProductToWishlist(productId);
 
   }

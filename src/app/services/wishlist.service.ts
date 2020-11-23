@@ -11,21 +11,21 @@ export class WishlistService {
   constructor(private http:HttpClient) { }
 
   getWishlist(): Observable<Wishlist[]>{
-    return this.http.get<Wishlist[]>('http://localhost:3000/api/getWishList');
+    return this.http.get<Wishlist[]>('http://localhost:3000/wishlist/getWishList');
   }
   
   addToWishList(wishlist:Wishlist){
     //alert(wishlist.productIds);
-   return this.http.post('http://localhost:3000/api/addToWishList', wishlist);
+   return this.http.post('http://localhost:3000/wishlist/addToWishList', wishlist);
    
   }
 
   removeFromWishlist(productId){
-    return this.http.delete('http://localhost:3000/api/removeFromWishList/'+productId);
+    return this.http.delete('http://localhost:3000/wishlist/removeFromWishList/'+productId);
   }
 
   countWishlist(){
-    return this.http.get('http://localhost:3000/api/countProductInWishlist/');
+    return this.http.get('http://localhost:3000/wishlist/countProductInWishlist/');
   }
   
 }

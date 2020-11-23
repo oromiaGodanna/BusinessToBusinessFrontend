@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { Product } from '../models/product';
+import {UserService } from '../services/user.service';
 import {Router} from '@angular/router'; // import router from angular router
 import { HttpClient } from '@angular/common/http';
 import { MeasurementsService } from '../services/measurements.service';
@@ -15,7 +16,7 @@ import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 })
 export class AddMeasurementComponent implements OnInit {
 
-  constructor(private http:HttpClient,private route:Router,private measurementService:MeasurementsService,
+  constructor(private http:HttpClient,private route:Router,private userService:UserService,private measurementService:MeasurementsService,
     private fb: FormBuilder,private i18n: NzI18nService) {
     this.form = this.fb.group({
       measurementName: [null, [Validators.required]],
@@ -30,13 +31,11 @@ export class AddMeasurementComponent implements OnInit {
    isEnglish = false;
    successMsg = "Measurement Is Successfully Added!!!";
    failedMsg = "Failed To Add Measurement!!!";
-   token={
-     userId:1,
-     role:'admin',
-   };
+   token;
 
    ngOnInit(): void {
-    if(this.token.role != 'admin'){
+    this.token = this.userService.getToken();
+    if(this.token.userType != 'admin'){
       this.route.navigate(['/products']);
     }
     this.isEnglish = !this.isEnglish;

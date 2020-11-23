@@ -29,7 +29,7 @@
                 <ng-template #actionSave>
                     <a nz-button nzType="link" nz-popconfirm
                     nzPopconfirmTitle="Are you sure you want to change your email address?" nzPopconfirmPlacement="bottom"
-                    nzOkText="Yes" (nzOnConfirm)="onSubmit()" (nzOnCancel)="cancel()" nzPopconfirmPlacement="topLeft" [disabled]='!changeEmailForm.valid'><i nz-icon nzType="lock" nzTheme="outline" ></i>Change Email</a>
+                    nzOkText="Yes" (nzOnConfirm)="onSubmit()" (nzOnCancel)="cancel()" nzPopconfirmPlacement="topLeft" [attr.disabled]='!changeEmailForm.valid'><i nz-icon nzType="lock" nzTheme="outline" ></i>Change Email</a>
                 </ng-template>
                 <ng-template #actionCancel>
                     <a nz-button nzType="link" nzDanger (click)="onCancel()"><i nz-icon nzType="close" nzTheme="outline"></i> Cancel</a>

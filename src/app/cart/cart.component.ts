@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cart } from '../models/cart';
+import {UserService } from '../services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { CartService } from '../services/cart.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -17,7 +18,7 @@ export class CartComponent implements OnInit {
   
 
   constructor(private http:HttpClient,private cartService:CartService,private modal: NzModalService,
-     private specialofferService:SpecialofferService,private i18n: NzI18nService,
+     private specialofferService:SpecialofferService,private i18n: NzI18nService,private userService:UserService,
      private notification: NzNotificationService,private router: Router) { }
 
   cart=[];
@@ -36,14 +37,13 @@ export class CartComponent implements OnInit {
   cartProductId;
   showCartModal;
   cartEntryModal=false;
-  token={
-    userId:1,
-  };
+  token;
   
  
     ngOnInit(): void {
+      this.token = this.userService.getToken();
 
-      if(this.token.userId != null){
+      if(this.token._id != null){
 
         this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
         this.isEnglish = !this.isEnglish;
@@ -90,7 +90,7 @@ export class CartComponent implements OnInit {
     }
 
     addToCart(cartObj) {
-      if(this.token.userId != null){
+      if(this.token._id != null){
           var cart = {
             productId:cartObj.productId,
             amount:cartObj.amount,  
@@ -132,7 +132,7 @@ export class CartComponent implements OnInit {
 
 
   removeProductFromCart(productId){
-    if(this.token.userId != null){
+    if(this.token._id != null){
       var subTotAfter = parseFloat((document.getElementById("subTotal"+productId).innerHTML));
       var divId = document.getElementById(productId).style.display = 'none';
       
@@ -192,7 +192,7 @@ export class CartComponent implements OnInit {
   }
 
   countProductIncart(){
-    if(this.token.userId != null){
+    if(this.token._id != null){
       this.cartService.countCart().subscribe(res => {
         this.productinCartNum = Number(res);
       });

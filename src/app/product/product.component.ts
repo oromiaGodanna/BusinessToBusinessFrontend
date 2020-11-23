@@ -16,6 +16,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 import {WishlistComponent} from '../wishlist/wishlist.component';
 import {CartComponent} from '../cart/cart.component';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-product',
@@ -27,7 +28,7 @@ export class ProductComponent implements OnInit {
   constructor(private http:HttpClient,private productService:ProductsService,private cartService:CartService, private route: ActivatedRoute,
     private iconService: NzIconService,private wishlistService:WishlistService,private modal: NzModalService,
     private specialofferService:SpecialofferService,
-    private router: Router,private notification: NzNotificationService,private i18n: NzI18nService) { 
+    private router: Router,private notification: NzNotificationService,private i18n: NzI18nService,private userService:UserService) { 
       
     }
 
@@ -40,7 +41,7 @@ export class ProductComponent implements OnInit {
   productImage;
   productCategory;
   offset=0;
-  limit=12;
+  limit=4;
   relatedProducts=[];
   color;
   size;
@@ -126,7 +127,7 @@ export class ProductComponent implements OnInit {
   addProductToWishlist(productId){
     
     let wishlistObj = new WishlistComponent(this.http,this.wishlistService,
-    this.router,this.iconService,this.specialofferService,this.notification,this.i18n);
+    this.router,this.iconService,this.specialofferService,this.notification,this.userService,this.i18n);
     wishlistObj.addProductToWishlist(productId);
 
   }
@@ -193,7 +194,7 @@ export class ProductComponent implements OnInit {
       };
      // alert("yes");
       let cartComponent = new CartComponent(this.http,this.cartService,
-        this.modal,this.specialofferService,this.i18n,this.notification,this.router);
+        this.modal,this.specialofferService,this.i18n,this.userService,this.notification,this.router);
         cartComponent.addToCart(cartObj);
     }
 
