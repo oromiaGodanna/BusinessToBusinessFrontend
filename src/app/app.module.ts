@@ -142,6 +142,7 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
+import { MenubarComponent } from './menubar/menubar.component';
 
 
 registerLocaleData(en);
@@ -207,7 +208,8 @@ registerLocaleData(en);
     SearchProductComponent,
     FilterProductComponent,
     MeasurementsComponent,
-    AddMeasurementComponent
+    AddMeasurementComponent,
+    MenubarComponent
   ],
   imports: [
     BrowserModule,

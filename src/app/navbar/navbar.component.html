@@ -1,10 +1,10 @@
 <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
   <div nz-col class="gutter-row" [nzSpan]="12" class="search_bar">
     <nz-input-group nzSearch [nzAddOnBefore]="addOnBeforeTemplate" [nzAddOnAfter]="suffixIconButton">
-      <input type="text" nz-input placeholder="input search text" />
+      <input type="text" nz-input placeholder="input search text"  id="searchWord"/>
     </nz-input-group>
     <ng-template #suffixIconButton>
-      <button nz-button nzType="primary" nzSearch><i nz-icon nzType="search"></i></button>
+      <button nz-button nzType="primary" nzSearch (click)="searchForProduct()"><i nz-icon nzType="search"></i></button>
     </ng-template>
     <ng-template #addOnBeforeTemplate>
       <nz-select [ngModel]="'Product'">
@@ -85,4 +85,6 @@
       </li>
     </ul>
   </div>
+  
 </div>
+

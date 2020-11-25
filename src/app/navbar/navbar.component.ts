@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user';
 import { NotificationService } from '../services/notification.service';
@@ -25,7 +26,7 @@ export class NavbarComponent implements OnInit {
   countCart=0;
   countWishlist=0;
   //
-  constructor(private authService: AuthService, private notificationService: NotificationService,
+  constructor(private authService: AuthService, private notificationService: NotificationService,private router: Router,
     private messageService: MessageService,private wishlistService:WishlistService,private cartService:CartService) {
 
     this.notificationService.getUnreadCount();
@@ -60,15 +61,13 @@ export class NavbarComponent implements OnInit {
     });
 
       if(this.isLoggedIn){
-        let countingCart = this.cartService.countCart().subscribe();
-        this.countCart = 4;
+        this.cartService.countCart().subscribe(res=>{
+          this.countCart = Number(res);
+        });
+        this.wishlistService.countWishlist().subscribe(res=>{
+          this.countWishlist = Number(res);
+        });
       }
-
-      if(this.isLoggedIn){
-        let countingWishlist = this.wishlistService.countWishlist().subscribe();
-        this.countWishlist = 5;
-      }
-
 
   }
 
@@ -76,6 +75,10 @@ export class NavbarComponent implements OnInit {
     this.authService.logout();
   }
 
+  searchForProduct(){
+    var searchWord =  (<HTMLInputElement>document.getElementById("searchWord")).value;
+    this.router.navigate(['/searchForProduct', searchWord]);
+  }
 
 
 }

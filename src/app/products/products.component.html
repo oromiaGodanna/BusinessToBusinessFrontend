@@ -1,5 +1,5 @@
 <style>
-    .menu {
+   /* .menu {
         list-style-type: none;
         margin: 0;
         padding: 0;
@@ -26,7 +26,7 @@
     .menu .active {
 
         background-color: #111111;
-    }
+    }*/
 
     .categoryList {
         list-style-type: none;
@@ -100,7 +100,7 @@
 <nz-layout>
 
 
-    <div nz-row style="padding-top:10px;background: white;" nzAlign="middle">
+    <!--<div nz-row style="padding-top:10px;background: white;" nzAlign="middle">
 
         <div nz-col [nzSpan]="4" class="logo">
             <div nz-row nzJustify="center">
@@ -147,8 +147,8 @@
 
             </div>
         </div>
-    </div>
-
+    </div>-->
+<!--menu if not logged in 
     <div nz-row nzJustify="center" style="background: #cb2d22;">
         <ul class="menu">
             <li><a routerLink="/index" class="nav-link text-white">Home</a></li>
@@ -173,9 +173,7 @@
                 </nz-dropdown-menu>
             </li>
         </ul>
-    </div>
-
-
+    </div>-->
 
 
 
@@ -187,7 +185,7 @@
             <ul class="categoryList" style="padding:10px;list-style-type: none !important;" class="SidertextSize">
                 <li *ngFor="let category of categories">
                     <a href="productByCategory/{{category.name}}"><strong
-                            style="color:rgb(100, 12, 12)">{{category.name | uppercase}}</strong></a>
+                            style="color:black">{{category.name | uppercase}}</strong></a>
                     <ul *ngIf="category.subCategories" class="categoryList">
                         <li *ngFor="let subCategory of category.subCategories"> <a
                                 href="productBySubCategory/{{subCategory}}" style="color:black">{{subCategory}}</a></li>
@@ -446,5 +444,5 @@
 
         </nz-content>
     </nz-layout>
-    <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer>
+   
 </nz-layout>
