@@ -18,6 +18,30 @@
 
     <ul nz-menu nzTheme="light" nzMode="horizontal">
 
+      <!--wishlist and cart-->
+
+      <li nz-menu-item routerLink="/wishlist" routerLinkActive="ant-menu-item-selected" *ngIf="isLoggedIn">
+        <nz-badge [nzCount]="countWishlist">
+          <i nz-icon nzType="heart" nzTheme="outline" class="big_icon" style="color: hotpink;"></i>
+        </nz-badge>
+      </li>
+
+      <li nz-menu-item routerLink="/wishlist" routerLinkActive="ant-menu-item-selected" *ngIf="!isLoggedIn">
+          <i nz-icon nzType="heart" nzTheme="outline" class="big_icon" style="color: hotpink;"></i>
+      </li>
+
+      <li nz-menu-item routerLink="/cart" routerLinkActive="ant-menu-item-selected" *ngIf="isLoggedIn">
+        <nz-badge [nzCount]="countCart">
+          <i nz-icon nzType="shopping-cart" nzTheme="outline" class="big_icon"></i>
+        </nz-badge>
+      </li>
+
+      <li nz-menu-item routerLink="/cart" routerLinkActive="ant-menu-item-selected" *ngIf="!isLoggedIn">
+        <i nz-icon nzType="shopping-cart" nzTheme="outline" class="big_icon"></i>
+      </li>
+     
+      <!--end of wishlist and cart-->
+
       <li nz-menu-item routerLink="/login" routerLinkActive="ant-menu-item-selected" *ngIf="!isLoggedIn">
         <i>Login</i>
       </li>

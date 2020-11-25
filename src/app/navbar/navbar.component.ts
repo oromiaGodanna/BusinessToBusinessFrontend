@@ -3,6 +3,10 @@ import { AuthService } from '../services/auth.service';
 import { User } from '../models/user';
 import { NotificationService } from '../services/notification.service';
 import { MessageService } from '../services/message.service';
+//jerry's
+import { CartService } from '../services/cart.service';
+import { WishlistService } from '../services/wishlist.service';
+//
 import { element } from 'protractor';
 
 @Component({
@@ -17,8 +21,12 @@ export class NavbarComponent implements OnInit {
   notificationCount: number = 0;
   messageCount: number = 0;
 
+  //jerry's
+  countCart=0;
+  countWishlist=0;
+  //
   constructor(private authService: AuthService, private notificationService: NotificationService,
-    private messageService: MessageService) {
+    private messageService: MessageService,private wishlistService:WishlistService,private cartService:CartService) {
 
     this.notificationService.getUnreadCount();
 
@@ -50,6 +58,17 @@ export class NavbarComponent implements OnInit {
         this.isLoggedIn = false;
       }
     });
+
+      if(this.isLoggedIn){
+        let countingCart = this.cartService.countCart().subscribe();
+        this.countCart = 4;
+      }
+
+      if(this.isLoggedIn){
+        let countingWishlist = this.wishlistService.countWishlist().subscribe();
+        this.countWishlist = 5;
+      }
+
 
   }
 
