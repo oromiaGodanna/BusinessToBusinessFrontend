@@ -1,0 +1,24 @@
+ <!--menu if not logged in -->
+ <div nz-row nzJustify="center" style="background: #cb2d22;" >
+    <ul nz-menu nzMode="horizontal" style="background: #cb2d22; color: white !important;">
+        <li nz-menu-item routerLink="/index" routerLinkActive="ant-menu-item-selected"><i class="menuItems">Home</i></li>
+        <li nz-menu-item routerLink="/products" routerLinkActive="ant-menu-item-selected"><i class="menuItems">Products</i></li>
+        <li nz-menu-item routerLink="/specialOffers" routerLinkActive="ant-menu-item-selected"><i class="menuItems">special offers</i></li>
+        <li nz-submenu>
+            <span title class="menuItems">Proforma</span>
+            
+            <ul>
+              <li nz-menu-group>
+                <ul>
+                  <!--<li nz-menu-item routerLink="/requestProforma" routerLinkActive="ant-menu-item-selected"><i>Request Proforma</i></li>-->
+                  <li nz-menu-item routerLink="/pendingProformas" routerLinkActive="ant-menu-item-selected"> <i>Pending Proformas</i></li>
+                  <li nz-menu-item routerLink="/activeProformas" routerLinkActive="ant-menu-item-selected"><i>Active Proformas</i></li>
+                  <li nz-menu-item routerLink="/closedProformas" routerLinkActive="ant-menu-item-selected"><i>Closed Proformas</i></li>
+                </ul>
+              </li>
+            </ul>
+        </li>
+    </ul>
+  </div>
+
+<!--End of menu if not logged in -->

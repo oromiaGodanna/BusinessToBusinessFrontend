@@ -116,8 +116,10 @@
                 <nz-form-item nz-row>
                   <nz-form-label nzRequired nz-col nzSpan="6" nzFor="productName">Min Order</nz-form-label>
                   <nz-form-control nzErrorTip="Enter Minimum Order!">
-                    <input type="number" nz-input formControlName="minOrder" id="minOrder" />
+                    <!--<input type="number" nz-input formControlName="minOrder" id="minOrder" min="50" (ngModelChange)="changeMinOrder()" />-->
+                    <nz-input-number formControlName="minOrder" id="minOrder" [nzMin]="'50'" [ngModel]="'50'" (ngModelChange)="changeMinOrder()"></nz-input-number>
                   </nz-form-control>
+                  <span>The Initial Minimum Order For Product is 50</span>
                 </nz-form-item>
 
                 <nz-form-item nz-row>

@@ -114,10 +114,7 @@ export class ProductsComponent implements OnInit {
 
   }
 
-  searchForProduct(){
-    var searchWord =  (<HTMLInputElement>document.getElementById("searchWord")).value;
-    this.router.navigate(['/searchForProduct', searchWord]);
-  }
+ 
 
   filterSearch(){
     var validationStatus = true;

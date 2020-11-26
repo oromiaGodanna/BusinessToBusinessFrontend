@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user';
 import { NotificationService } from '../services/notification.service';
 import { MessageService } from '../services/message.service';
+//jerry's
+import { CartService } from '../services/cart.service';
+import { WishlistService } from '../services/wishlist.service';
+//
 import { element } from 'protractor';
 
 @Component({
@@ -17,8 +22,12 @@ export class NavbarComponent implements OnInit {
   notificationCount: number = 0;
   messageCount: number = 0;
 
-  constructor(private authService: AuthService, private notificationService: NotificationService,
-    private messageService: MessageService) {
+  //jerry's
+  countCart=0;
+  countWishlist=0;
+  //
+  constructor(private authService: AuthService, private notificationService: NotificationService,private router: Router,
+    private messageService: MessageService,private wishlistService:WishlistService,private cartService:CartService) {
 
     this.notificationService.getUnreadCount();
 
@@ -51,12 +60,25 @@ export class NavbarComponent implements OnInit {
       }
     });
 
+      if(this.isLoggedIn){
+        this.cartService.countCart().subscribe(res=>{
+          this.countCart = Number(res);
+        });
+        this.wishlistService.countWishlist().subscribe(res=>{
+          this.countWishlist = Number(res);
+        });
+      }
+
   }
 
   logout() {
     this.authService.logout();
   }
 
+  searchForProduct(){
+    var searchWord =  (<HTMLInputElement>document.getElementById("searchWord")).value;
+    this.router.navigate(['/searchForProduct', searchWord]);
+  }
 
 
 }

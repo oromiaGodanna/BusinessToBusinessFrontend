@@ -28,7 +28,9 @@ export class WishlistComponent implements OnInit {
   specialOffer;
   productDiscount;
   productinWishlistNum;
-  token;
+  token={
+    _id:"11111111"
+  };
 
     ngOnInit(): void {
      // this.token = this.userService.getToken();
@@ -124,9 +126,5 @@ export class WishlistComponent implements OnInit {
     }
   }
 
-  searchForProduct(){
-    var searchWord =  (<HTMLInputElement>document.getElementById("searchWord")).value;
-    this.router.navigate(['/searchForProduct', searchWord]);
-  }
   
 }
