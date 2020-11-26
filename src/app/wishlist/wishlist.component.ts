@@ -33,8 +33,10 @@ export class WishlistComponent implements OnInit {
   };
 
     ngOnInit(): void {
-     // this.token = this.userService.getToken();
-
+     var loggedInStatus = this.userService.isLoggedIn();
+     var userData = this.userService.getUserData();
+      console.log(loggedInStatus);
+      console.log(userData);
       if(this.token._id != null){
 
         this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
