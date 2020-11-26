@@ -34,14 +34,15 @@ export class MeasurementsComponent implements OnInit {
   measurementName;
   form: FormGroup;
   isSpinning=false;
-
   token;
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
 
   ngOnInit(): void {
-    this.token = this.userService.getToken();
+   // this.token = this.userService.getToken();
     
-    if(this.token.userType != 'admin'){
-      this.router.navigate(['/products']);
+    if(this.userDataa.userType != 'Admin'){
+      this.router.navigate(['/login']);
     }
     this.getMeasurements();
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
@@ -69,8 +70,8 @@ export class MeasurementsComponent implements OnInit {
   }
 
   deleteMeasurement(measurementId):void{
-    if(this.token.userType != 'admin'){
-      this.router.navigate(['/products']);
+    if(this.userDataa.userType != 'Admin'){
+      this.router.navigate(['/login']);
     }
     this.measurementService.deleteMeasurement(measurementId).subscribe(res => {
        this.createMessage('success',`Measurement Successfully deleted!!!`);
@@ -91,8 +92,8 @@ export class MeasurementsComponent implements OnInit {
   }
 
   editMeasurement(){
-    if(this.token.userType != 'admin'){
-      this.router.navigate(['/products']);
+    if(this.userDataa.userType != 'Admin'){
+      this.router.navigate(['/login']);
     }
 
     var formData: any = new FormData();

@@ -5,6 +5,7 @@ import { CategoryService } from '../services/category.service';
 import { Response } from '../models/response';
 import { ResponseService } from '../services/response.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-view-responses',
@@ -20,26 +21,28 @@ export class ViewResponsesComponent implements OnInit {
   isSpinning = false;
   message=null;
   itemId;
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
 
   constructor(private httpClient:HttpClient,private categoryService:CategoryService,
     private responseService:ResponseService, private router: Router, private routee: ActivatedRoute,
-    private modal: NzModalService
+    private modal: NzModalService,private userService:UserService
     ) { }
 
   ngOnInit(): void {
-   this.getAllCategories();
+    if(this.userDataa._id == null){
+      this.router.navigate(['/login']);
+    }else{
+      this.getAllCategories();
+      this.routee.paramMap.subscribe(params => {
+        this.itemId = params.get('itemId');
 
-    this.routee.paramMap.subscribe(params => {
-      this.itemId = params.get('itemId');
-
-      this.responseService.getResponses(this.itemId).subscribe(res => {
-        this.responseData = res;
-        //this.responseData = this.responseDatas;
+        this.responseService.getResponses(this.itemId).subscribe(res => {
+          this.responseData = res;
+          //this.responseData = this.responseDatas;
+        });
       });
-  
-    });
-
-   
+    }
   }
 
   getAllCategories(): void {

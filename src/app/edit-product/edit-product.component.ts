@@ -50,29 +50,33 @@ export class EditProductComponent implements OnInit {
     measurements;
     successMsg = "Product Is Successfully Edited!!!";
     failedMsg = "Failed To Edit Product!!!";
-    
     token;
+    loggedInStatus=this.userService.isLoggedIn();
+    userDataa=this.userService.getUserData();
 
     ngOnInit(): void {
-      this.token = this.userService.getToken();
-      if(this.token.userType != 'seller' && this.token.userType != 'admin'){
-        this.routee.navigate(['/products']);
+      //this.token = this.userService.getToken();
+      if(this.userDataa.userType == 'Admin' || this.userDataa.userType == 'Seller' || this.userDataa.userType == 'Both'){
+       
+        this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
+        this.isEnglish = !this.isEnglish;
+
+        this.route.paramMap.subscribe(params => {
+          var _id = params.get('id');
+          this.productId = _id;
+          this.productService.getProduct(_id).subscribe(res => {
+            this.product= res;
+            
+          });
+        });
+
+        this.getCategories();
+        this.getMeasurements();
+      }else{
+        this.routee.navigate(['/login']);
       }
 
-      this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
-      this.isEnglish = !this.isEnglish;
-
-      this.route.paramMap.subscribe(params => {
-        var _id = params.get('id');
-        this.productId = _id;
-        this.productService.getProduct(_id).subscribe(res => {
-          this.product= res;
-          
-        });
-      });
-
-      this.getCategories();
-      this.getMeasurements();
+      
     }
 
     getCategories(): void {

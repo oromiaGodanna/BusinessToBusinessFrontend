@@ -29,11 +29,13 @@ export class CategoriesComponent implements OnInit {
   imageToView;
   isEnglish = false;
   token;
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
 
   ngOnInit(): void {
-    this.token = this.userService.getToken();
-    if(this.token.userType != 'admin'){
-      this.router.navigate(['/products']);
+    //this.token = this.userService.getToken();
+    if(this.userDataa.userType != 'admin'){
+      this.router.navigate(['/login']);
     }else{
       this.getCategories();
       this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
@@ -78,8 +80,8 @@ export class CategoriesComponent implements OnInit {
   }
 
   deleteCategory(categoryId):void{
-    if(this.token.rouserTypele != 'admin'){
-      this.router.navigate(['/products']);
+    if(this.userDataa.userType != 'Admin'){
+      this.router.navigate(['/login']);
     }else{
     this.categoryService.deleteCategory(categoryId).subscribe(res => {
        this.createMessage('success');

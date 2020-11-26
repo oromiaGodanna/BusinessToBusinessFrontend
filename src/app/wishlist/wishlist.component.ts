@@ -28,8 +28,8 @@ export class WishlistComponent implements OnInit {
   specialOffer;
   productDiscount;
   productinWishlistNum;
-  loggedInStatus=this.userService.isLoggedIn();;
-  userDataa=this.userService.getUserData();;
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
   token = {
     _id: "11111111"
   };
@@ -37,10 +37,11 @@ export class WishlistComponent implements OnInit {
   ngOnInit(): void {
     
     console.log(this.loggedInStatus);
-    console.log(this.userDataa);
+    console.log(this.userDataa.userType);
+     console.log(this.userDataa);
     if (this.loggedInStatus) {
        //if user is buyer or both and if wishlist exists
-      if (this.token._id != null) {
+      if (this.userDataa.userType == "Buyer" || this.userDataa.userType == "Both") {
 
         this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
         this.isEnglish = !this.isEnglish;
@@ -74,7 +75,7 @@ export class WishlistComponent implements OnInit {
  }*/
 
   removeProductFromWishlist(productId) {
-    if (this.token._id != null) {
+    if (this.userDataa.userType == "Buyer" || this.userDataa.userType == "Both") {
       var divId = document.getElementById(productId).style.display = 'none';
       this.wishlistService.removeFromWishlist(productId).subscribe();
       return true;
@@ -83,7 +84,7 @@ export class WishlistComponent implements OnInit {
 
   addProductToWishlist(productId) {
     if (this.loggedInStatus) {
-      if (this.token._id != null) {
+      if (this.userDataa.userType == "Buyer" || this.userDataa.userType == "Both") {
 
 
         this.wishlistObj = {
@@ -129,7 +130,7 @@ export class WishlistComponent implements OnInit {
 
   countProductInWishlist() {
     if (this.loggedInStatus) {
-      if (this.token._id != null) {
+      if (this.userDataa.userType == "Buyer" || this.userDataa.userType == "Both") {
         this.wishlistService.countWishlist().subscribe(res => {
           this.productinWishlistNum = Number(res);
         });

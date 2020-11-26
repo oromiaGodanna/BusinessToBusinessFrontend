@@ -43,11 +43,13 @@ export class EditCategoryComponent implements OnInit {
   successMsg = "Category Is Successfully Edited!!!";
   failedMsg = "Failed To Edit Category!!!";
   token;
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
 
   ngOnInit(): void {
-    this.token = this.userService.getToken();
-    if(this.token.userType != 'admin'){
-      this.routee.navigate(['/products']);
+    //this.token = this.userService.getToken();
+    if(this.userDataa.userType != 'Admin'){
+      this.routee.navigate(['/login']);
     }else{
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
     this.isEnglish = !this.isEnglish;

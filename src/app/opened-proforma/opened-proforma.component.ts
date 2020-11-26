@@ -5,6 +5,7 @@ import { CategoryService } from '../services/category.service';
 import { Proforma } from '../models/proforma';
 import { ProformaService } from '../services/proforma.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-opened-proforma',
@@ -23,22 +24,27 @@ export class OpenedProformaComponent implements OnInit {
   message=null;
   proformaId;
   closeProformaVisible=false;
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
 
   constructor(private httpClient:HttpClient,private categoryService:CategoryService,
     private proformaService:ProformaService, private routee: ActivatedRoute,
-    private modal: NzModalService, private router: Router
+    private modal: NzModalService, private router: Router,private userService:UserService
     ) { }
 
   ngOnInit(): void {
-   this.getAllCategories();
-   this.getActiveProformas();
+    if(this.userDataa._id == null ){
+      this.router.navigate(['/login']);
+    }else{
+    this.getAllCategories();
+    this.getActiveProformas();
 
-    this.routee.paramMap.subscribe(params => {
-      if(params.get('message')){
-        this.message = params.get('message');
-      }
-    });
-
+      this.routee.paramMap.subscribe(params => {
+        if(params.get('message')){
+          this.message = params.get('message');
+        }
+      });
+    }
    
   }
 
@@ -58,10 +64,13 @@ export class OpenedProformaComponent implements OnInit {
   }
 
   getActiveProformas(): void {
-    
-    this.proformaService.activeProformas().subscribe(res => {
-      this.activeProformas = res;
-    });
+    if(this.userDataa._id == null ){
+      this.router.navigate(['/login']);
+    }else{
+      this.proformaService.activeProformas().subscribe(res => {
+        this.activeProformas = res;
+      });
+    }
   }
 
   showCloseConfirm(profromaId): void {

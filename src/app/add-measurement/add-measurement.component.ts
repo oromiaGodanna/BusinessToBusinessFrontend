@@ -32,11 +32,13 @@ export class AddMeasurementComponent implements OnInit {
    successMsg = "Measurement Is Successfully Added!!!";
    failedMsg = "Failed To Add Measurement!!!";
    token;
+   loggedInStatus=this.userService.isLoggedIn();
+   userDataa=this.userService.getUserData();
 
    ngOnInit(): void {
-    this.token = this.userService.getToken();
-    if(this.token.userType != 'admin'){
-      this.route.navigate(['/products']);
+    //this.token = this.userService.getToken();
+    if(this.userDataa.userType != 'Admin'){
+      this.route.navigate(['/login']);
     }
     this.isEnglish = !this.isEnglish;
   }

@@ -38,17 +38,23 @@ export class ActiveSpecialOfferComponent implements OnInit {
   imageToView;
   showImage;
   token;
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
 
   ngOnInit(): void {
-    this.token = this.userService.getToken();
-     
-    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
-      this.router.navigate(['/products']);
-    }else{
-      this.getActiveSpecialOffers();
-      this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
-      this.isEnglish = !this.isEnglish;
+    //this.token = this.userService.getToken();
+    if (this.loggedInStatus) {
+      if(this.userDataa.userType == 'Seller' || this.userDataa.userType == 'Admin' || this.userDataa.userType == 'Both'){
+        this.getActiveSpecialOffers();
+        this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
+        this.isEnglish = !this.isEnglish;
+      }else{
+        this.router.navigate(['/login']);
+      }
+    } else {
+      this.router.navigate(['/login']);
     }
+
   }
 
   getActiveSpecialOffers(): void {
@@ -128,13 +134,17 @@ export class ActiveSpecialOfferComponent implements OnInit {
   }
 
   deleteProduct(){
-    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
-      this.router.navigate(['/products']);
+    if (this.loggedInStatus) {
+      if(this.userDataa.userType != 'seller' && this.userDataa.userType != 'admin'){
+        this.router.navigate(['/products']);
+      }
+        this.specialofferService.deleteProduct(this.productId).subscribe(res => {
+        this.createMessage('success','product deleted successfully');
+        console.log(res);
+      });
+    } else {
+      this.router.navigate(['/login']);
     }
-      this.specialofferService.deleteProduct(this.productId).subscribe(res => {
-      this.createMessage('success','product deleted successfully');
-      console.log(res);
-    });
   }
 
   expandSet = new Set<number>();

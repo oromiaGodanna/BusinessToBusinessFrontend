@@ -39,15 +39,17 @@ export class AddCategoryComponent implements OnInit {
    successMsg = "Category Is Successfully Added!!!";
    failedMsg = "Failed To Add Category!!!";
    token;
+   loggedInStatus=this.userService.isLoggedIn();
+   userDataa=this.userService.getUserData();
 
   listOfControl: Array<{ id: number; controlInstance: string }> = [];
 
    ngOnInit(): void {
 
-    this.token = this.userService.getToken();
+    //this.token = this.userService.getToken();
 
-    if(this.token.userType != 'admin'){
-      this.route.navigate(['/products']);
+    if(this.userDataa.userType != 'Admin'){
+      this.route.navigate(['/login']);
     }else{
       this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
       this.isEnglish = !this.isEnglish;

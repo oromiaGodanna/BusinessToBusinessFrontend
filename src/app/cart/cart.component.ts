@@ -37,8 +37,8 @@ export class CartComponent implements OnInit {
   cartProductId;
   showCartModal;
   cartEntryModal = false;
-  loggedInStatus = this.userService.isLoggedIn();
-  userDataa;
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
   token = {
     _id: "11111111",
   };
@@ -47,7 +47,7 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     if (this.loggedInStatus) {
       //if user is buyer or both and if wishlist exists
-      if (this.token._id != null) {
+      if (this.userDataa.userType == "Buyer" || this.userDataa.userType == "Both") {
 
         this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
         this.isEnglish = !this.isEnglish;
@@ -98,7 +98,7 @@ export class CartComponent implements OnInit {
 
   addToCart(cartObj) {
     if (this.loggedInStatus) {
-      if (this.token._id != null) {
+      if (this.userDataa.userType == "Buyer" || this.userDataa.userType == "Both") {
         var cart = {
           productId: cartObj.productId,
           amount: cartObj.amount,
@@ -146,7 +146,7 @@ export class CartComponent implements OnInit {
 
     if (this.loggedInStatus) {
 
-      if (this.token._id != null) {
+      if (this.userDataa.userType == "Buyer" || this.userDataa.userType == "Both") {
         var subTotAfter = parseFloat((document.getElementById("subTotal" + productId).innerHTML));
         var divId = document.getElementById(productId).style.display = 'none';
 
@@ -211,7 +211,7 @@ export class CartComponent implements OnInit {
 
   countProductIncart() {
     if (this.loggedInStatus) {
-      if (this.token._id != null) {
+      if (this.userDataa.userType == "Buyer" || this.userDataa.userType == "Both") {
         this.cartService.countCart().subscribe(res => {
           this.productinCartNum = Number(res);
         });
