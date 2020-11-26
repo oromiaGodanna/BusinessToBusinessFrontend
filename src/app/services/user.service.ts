@@ -99,6 +99,7 @@ export class UserService {
     this.user = null;
     localStorage.clear();
   }
+  
 setLocalStorageToNull(){
   localStorage.setItem('token', null);
   localStorage.setItem('user', null);

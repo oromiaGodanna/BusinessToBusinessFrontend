@@ -10,7 +10,6 @@ import { WishlistService } from '../services/wishlist.service';
 import {UserService } from '../services/user.service';
 //
 import { element } from 'protractor';
-
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -74,7 +73,9 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
+    this.userService.logOut();
+    this.router.navigate(['login']);
+    //this.authService.logout();
   }
 
   searchForProduct(){
