@@ -2,8 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl, NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd';
-import { AppHttpService } from '../services/app-http.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 import { RegisterInfo } from '../models/register.model';
 import { UserService } from '../services/user.service';
@@ -14,12 +13,12 @@ import { UserService } from '../services/user.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
 
   token: string;
   current = 0;
   signupForm: FormGroup;
-  countries = [];
   initialCountry = "ET";
   selectedCountry = 'Ethiopia';
   userInfo;
@@ -57,14 +56,6 @@ export class RegisterComponent implements OnInit {
           });
         }
         else {
-          this.userService.getCountries().subscribe(
-            (response: any) => {
-              if (response.status == 200) {
-                this.countries = response.countries;
-              } else {
-                this.message.error('Failed to retrive list of countries.Please refresh the page.');
-              }
-            });
           this.initForm();
         }
       });
@@ -76,7 +67,6 @@ export class RegisterComponent implements OnInit {
       this.signupForm.get('password.password').value,
       this.signupForm.get('firstName').value,
       this.signupForm.get('lastName').value,
-      this.signupForm.get('country').value,
       this.signupForm.get('role').value,
       this.signupForm.get('companyName').value,
       this.signupForm.get('tinNumber').value,
@@ -117,8 +107,8 @@ export class RegisterComponent implements OnInit {
 
   // passwordPattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}";
   passwordPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$";
-  mobileNoPattern = "^([+]39)?((38[{8,9}|0])|(34[{7-9}|0])|(36[6|8|0])|(33[{3-9}|0])|(32[{8,9}]))([\d]{7})$";
-  //mobileNoPattern = "^((\\+91-?)|0)?[0-9]{10}$";
+  //mobileNoPattern = "^([+]39)?((38[{8,9}|0])|(34[{7-9}|0])|(36[6|8|0])|(33[{3-9}|0])|(32[{8,9}]))([\d]{7})$";
+  mobileNoPattern = "^((\\+91-?)|0)?[0-9]{10}$";
 
   private initForm() {
     this.signupForm = new FormGroup({
@@ -129,41 +119,32 @@ export class RegisterComponent implements OnInit {
       }, this.passwordMatch),
       firstName: new FormControl(null, Validators.required),
       lastName: new FormControl(null, Validators.required),
-      country: new FormControl(this.selectedCountry, [Validators.required]),
+      //country: new FormControl(this.selectedCountry, [Validators.required]),
       role: new FormControl(null, [Validators.required]),
       companyName: new FormControl(null, Validators.required),
       tinNumber: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
-      mobile: new FormControl(null, [Validators.required]),
-      // phoneNumbers: new FormArray([
-      //   new FormControl(null, Validators.required)
-      // ]),
-      // phoneNumbers: new FormArray([
-      //   new FormGroup({
-      //     areaCode: new FormControl(null, Validators.required),
-      //     phoneNumber: new FormControl(null, Validators.required)
-      //   }),
-      // ]),
-      agree: new FormControl(false, Validators.required)
+      mobile: new FormControl(null, [Validators.required, Validators.pattern(this.mobileNoPattern)]),
+      agree: new FormControl(null, Validators.required)
     });
   }
 
-  telInput = {
-    initialCountry: this.initialCountry,
-  }
-  getNumber(event: any): void {
-    this.signupForm.patchValue({ mobile: event });
-  }
+  // telInput = {
+  //   initialCountry: this.initialCountry,
+  // }
+  // getNumber(event: any): void {
+  //   this.signupForm.patchValue({ mobile: event });
+  // }
 
-  hasError(event: any): void {
-    if (!event && this.signupForm.value.mobile !== '') {
-      this.signupForm.get('mobile').setErrors({ 'invalidPhoneNumber': true });
-    }
-  }
+  // hasError(event: any): void {
+  //   if (!event && this.signupForm.value.mobile !== '') {
+  //     this.signupForm.get('mobile').setErrors({ 'invalidPhoneNumber': true });
+  //   }
+  // }
 
-  onCountryChange(value) {
-    this.signupForm.get('country')!.setValue(value.name);
-    this.initialCountry = value;
-  }
+  // onCountryChange(value) {
+  //   this.signupForm.get('country')!.setValue(value.name);
+  //   this.initialCountry = value;
+  // }
 
   passwordMatch(controls: FormGroup): { invalid: boolean } {
     if (controls.get('password').value !== controls.get('confirmPassword').value) {
@@ -173,9 +154,9 @@ export class RegisterComponent implements OnInit {
     return null;
   }
 
-  onCountrySelected(value: string) {
-    this.selectedCountry = value;
-  }
+  // onCountrySelected(value: string) {
+  //   this.selectedCountry = value;
+  // }
 
   // get phoneNumbers(): FormArray {
   //   return this.signupForm.get('phoneNumbers') as FormArray;
