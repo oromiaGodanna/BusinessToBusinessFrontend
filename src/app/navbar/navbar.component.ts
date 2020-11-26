@@ -4,6 +4,7 @@ import { User } from '../models/user';
 import { NotificationService } from '../services/notification.service';
 import { MessageService } from '../services/message.service';
 import { element } from 'protractor';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +19,7 @@ export class NavbarComponent implements OnInit {
   messageCount: number = 0;
 
   constructor(private authService: AuthService, private notificationService: NotificationService,
-    private messageService: MessageService) {
+    private messageService: MessageService, private userService: UserService) {
 
     this.notificationService.getUnreadCount();
 
@@ -43,7 +44,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
-    this.authService.userSubject.subscribe((user: User) => {
+    this.userService.userSubject.subscribe((user: User) => {
       if (user) {
         this.isLoggedIn = true;
       } else {
@@ -54,7 +55,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
+    this.userService.logOut();
   }
 
 

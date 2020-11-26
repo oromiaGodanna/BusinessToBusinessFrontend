@@ -6,6 +6,7 @@ import { LoginInfo } from '../models/login.model';
 import { RegisterInfo } from '../models/register.model';
 import { AppHttpService } from './app-http.service';
 import { User } from '../models/user';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -110,6 +111,7 @@ export class UserService {
   storeUserData(token, user) {
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(user));
+    this.setCurrentUser(token);
   }
 
   updateUserData(user) {
@@ -137,24 +139,24 @@ export class UserService {
     this.authToken = token;
   }
 
-  // setCurrentUser(token) {
-  //   const helper = new JwtHelperService();
-  //   try {
-  //     this.userSubject.next(helper.decodeToken(token));
+  setCurrentUser(token) {
+    const helper = new JwtHelperService();
+    try {
+      this.userSubject.next(helper.decodeToken(token));
 
-  //   } catch (error) {
-  //     console.log('Invalid token');
-  //   }
-  // }
+    } catch (error) {
+      console.log('Invalid token');
+    }
+  }
 
-  // getCurrentUser() :User{
-  //   let token = this.getToken();
-  //   const helper = new JwtHelperService();
-  //   try {
-  //     return helper.decodeToken(token);
+  getCurrentUser() :User{
+    let token = this.getToken();
+    const helper = new JwtHelperService();
+    try {
+      return helper.decodeToken(token);
 
-  //   } catch (error) {
-  //     console.log('Invalid token');
-  //   }
-  // }
+    } catch (error) {
+      console.log('Invalid token');
+    }
+  }
 }
