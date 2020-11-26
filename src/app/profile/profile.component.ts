@@ -35,6 +35,7 @@ export class ProfileComponent implements OnInit {
       }
     );
     if(this.userService.isLoggedIn()){
+      console.log('user is logged in');
       this.loggedInUser = this.userService.getUserData();
       if(this.loggedInUser.subscribedTo.includes(this.id)){
         this.subscribed = true;

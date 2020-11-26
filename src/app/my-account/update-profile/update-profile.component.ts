@@ -64,6 +64,10 @@ export class UpdateProfileComponent implements OnInit {
   phonePattern = "^((\\+91-?)|0)?[0-9]{10}$";
 
   ngOnInit(): void {
+    if(this.userService.isLoggedIn()){
+      console.log('user is logged in');
+    }
+    
     this.user = this.userService.getUserData();
     // this.user = JSON.parse(localStorage.getItem('user'));
     this.userId = this.user._id;

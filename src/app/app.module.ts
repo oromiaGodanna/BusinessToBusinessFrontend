@@ -142,7 +142,7 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
-
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 registerLocaleData(en);
 
@@ -287,6 +287,7 @@ registerLocaleData(en);
     NzCommentModule,
     NzBadgeModule,
     NzMenuModule,
+    NzCheckboxModule 
 
   ],
   providers: [

@@ -10,9 +10,6 @@
 
   <div nz-col nzSpan="14">
     <nz-page-header nzTitle="Create Account">
-      <!-- <nz-page-header-extra>
-        <button nz-button (click)="onVerify()" nzType="primary">Go Check Email</button>
-      </nz-page-header-extra> -->
       <nz-page-header-content>
         <nz-steps [nzCurrent]="current">
           <nz-step nzTitle="Information" nzIcon="form"></nz-step>
@@ -99,17 +96,11 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="6" nzRequired>Mobile</nz-form-label>
         <nz-form-control nzHasFeedback [nzErrorTip]="ErrorTips" nzSpan="14">
-          <input nz-input type="tel" formControlName="mobile" 
-          ng2TelInput 
-          [ng2TelInputOptions]="{initialCountry: initialCountry}"
-          (ng2TelOutput)="getNumber($event)" 
-          (hasError)="hasError($event)"
-          (countryChange)="onCountryChange($event)"/> 
-          <!-- style="width: 385px" -->
+          <input nz-input type="tel" formControlName="mobile" placeholder="0911234567"/> 
           <ng-template #ErrorTips let-control>
             <ng-container *ngIf="control.hasError('required')">Please enter your phone number!</ng-container>
-            <!-- <ng-container *ngIf="control.hasError('pattern')">Please enter a valid phone number!</ng-container>  -->
-            <ng-container *ngIf="control.hasError('invalidPhoneNumber')">Invalid Phone Number Please enter a valid phone number!</ng-container>
+            <ng-container *ngIf="control.hasError('pattern')">Please enter a valid phone number!</ng-container> 
+            <!-- <ng-container *ngIf="control.hasError('invalidPhoneNumber')">Invalid Phone Number Please enter a valid phone number!</ng-container> -->
           </ng-template>
         </nz-form-control>
       </nz-form-item>
@@ -157,7 +148,7 @@
         </nz-form-control>
       </nz-form-item>
 
-      <nz-form-item>
+      <!-- <nz-form-item>
         <nz-form-label [nzSpan]="6" nzRequired>Country</nz-form-label>
         <nz-form-control [nzSpan]="14" nzHasFeedback nzErrorTip="Please select your country!">
           <nz-select nzPrefixIcon="global" nzPlaceHolder="Select a country from the options availabl "
@@ -165,7 +156,7 @@
             <nz-option nzCustomContent *ngFor="let country of countries; ;let i = index" [nzLabel]="country.name" [nzValue]="country.name"> <nz-avatar [nzShape]="'square'"  [nzSize]="20"  nzIcon="user" [nzSrc]="country.flag"></nz-avatar> {{countries[i].name}}</nz-option>
           </nz-select>
         </nz-form-control>
-      </nz-form-item>
+      </nz-form-item> -->
 
       <!-- <nz-form-item>
         <nz-form-label [nzSpan]="6" nzRequired>Mobile</nz-form-label>
