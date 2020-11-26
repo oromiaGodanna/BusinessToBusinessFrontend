@@ -23,20 +23,12 @@ export class NavbarComponent implements OnInit {
   notificationCount: number = 0;
   messageCount: number = 0;
 
-<<<<<<< HEAD
-  constructor(private authService: AuthService, private notificationService: NotificationService,
-    private messageService: MessageService, private userService: UserService) {
-||||||| merged common ancestors
-  constructor(private authService: AuthService, private notificationService: NotificationService,
-    private messageService: MessageService) {
-=======
   //jerry's
-  countCart=0;
-  countWishlist=0;
+  countCart = 0;
+  countWishlist = 0;
   //
-  constructor(private authService: AuthService, private notificationService: NotificationService,private router: Router,
-    private messageService: MessageService,private wishlistService:WishlistService,private cartService:CartService) {
->>>>>>> 71c55a6d2d2421a1e9cdf8cb8fe40eb025bd3829
+  constructor(private authService: AuthService, private notificationService: NotificationService, private router: Router,
+    private messageService: MessageService, private wishlistService: WishlistService, private cartService: CartService, private userService: UserService) {
 
     this.notificationService.getUnreadCount();
 
@@ -69,14 +61,14 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-      if(this.isLoggedIn){
-        this.cartService.countCart().subscribe(res=>{
-          this.countCart = Number(res);
-        });
-        this.wishlistService.countWishlist().subscribe(res=>{
-          this.countWishlist = Number(res);
-        });
-      }
+    if (this.isLoggedIn) {
+      this.cartService.countCart().subscribe(res => {
+        this.countCart = Number(res);
+      });
+      this.wishlistService.countWishlist().subscribe(res => {
+        this.countWishlist = Number(res);
+      });
+    }
 
   }
 
@@ -84,8 +76,8 @@ export class NavbarComponent implements OnInit {
     this.userService.logOut();
   }
 
-  searchForProduct(){
-    var searchWord =  (<HTMLInputElement>document.getElementById("searchWord")).value;
+  searchForProduct() {
+    var searchWord = (<HTMLInputElement>document.getElementById("searchWord")).value;
     this.router.navigate(['/searchForProduct', searchWord]);
   }
 
