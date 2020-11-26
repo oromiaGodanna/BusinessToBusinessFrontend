@@ -82,10 +82,7 @@ export class ProductBySubCategoryComponent implements OnInit {
 
   }
 
-  searchForProduct(){
-    var searchWord =  (<HTMLInputElement>document.getElementById("searchWord")).value;
-    this.router.navigate(['/searchForProduct', searchWord]);
-  }
+  
 
   loadMoreRelatedProductsBySubCategory(){
 

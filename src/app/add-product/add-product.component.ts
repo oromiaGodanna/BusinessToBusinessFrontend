@@ -37,7 +37,10 @@ export class AddProductComponent implements OnInit {
   isSpinning = false;
   successMsg = "Product Is Successfully Added!!!";
   failedMsg = "Failed To Add Product!!!";
-  token;
+  token={
+    _id:"1111",
+    userType:"admin"
+  };
 
   constructor(private http:HttpClient,private route:Router,private userService:UserService,private productService:ProductsService,
     private categoryService:CategoryService,private measurementService:MeasurementsService,private fb: FormBuilder,private i18n: NzI18nService) {
@@ -59,7 +62,7 @@ export class AddProductComponent implements OnInit {
  
   ngOnInit(): void {
 
-    this.token = this.userService.getToken();
+    //this.token = this.userService.getToken();
     if(this.token.userType != 'admin'){
       this.route.navigate(['/products']);
     }
@@ -194,4 +197,16 @@ export class AddProductComponent implements OnInit {
     this.form.reset();
   }
 
+  changeMinOrder(){
+  
+    var val = this.form.get('minOrder').value;
+    
+    if(val=='' || parseInt(val) < 50){
+      val=50;
+      this.form.get('minOrder').setValue = val;
+    }
+  
+   }
+
 }
+5

@@ -35,78 +35,82 @@ export class UserService {
     return this.http.post(url, registerInfo);
   }
 
-  confirmEmail(token: String): Observable<any> {
-    const url = `${this.serverUrl}/customer/email_confirmation/${token}`;
-    return this.http.get(url);
-  }
+ confirmEmail(token: String):Observable<any>{
+   const url = `${this.serverUrl}/customer/email_confirmation/${token}`;
+   return this.http.get(url);
+ }
 
-  resendEmailConfirmation(email): Observable<any> {
-    const url = `${this.serverUrl}/customer/resend_confirmation`;
-    return this.http.post(url, { email: email });
-  }
+ resendEmailConfirmation(email):Observable<any>{
+   const url = `${this.serverUrl}/customer/resend_confirmation`;
+   return this.http.post(url, { email: email});
+ }
+ 
+ getUserProfile(userId):Observable<any>{
+   const url = `${this.serverUrl}/customer/${userId}`;
+   console.log(url);
+   return this.http.get(url);
+ }
 
-  getUserProfile(userId): Observable<any> {
-    const url = `${this.serverUrl}/customer/${userId}`;
-    console.log(url);
-    return this.http.get(url);
-  }
+ forgotPassword(email):Observable<any>{
+   const url = `${this.serverUrl}/customer/forgotPassword`;
+   return  this.http.put(url, {email: email});
+ }
 
-  forgotPassword(email): Observable<any> {
-    const url = `${this.serverUrl}/customer/forgotPassword`;
-    return this.http.put(url, { email: email });
-  }
+ resetPassword(token, password):Observable<any>{
+   const url = `${this.serverUrl}/customer/resetPassword/${token}`;
+   console.log('user service reset password', url);
+   console.log('token', token);
+   return this.http.put(url, {newPassword: password})
+ }
 
-  resetPassword(token, password): Observable<any> {
-    const url = `${this.serverUrl}/customer/resetPassword/${token}`;
-    console.log('user service reset password', url);
-    console.log('token', token);
-    return this.http.put(url, { newPassword: password })
-  }
+ getCountries():Observable<any>{
+   const url = `${this.serverUrl}/countries`;
+   return this.http.get(url);
+ }
 
-  getCountries(): Observable<any> {
-    const url = `${this.serverUrl}/countries`;
-    return this.http.get(url);
-  }
+ changePassword(id, oldPassword, newPassword):Observable<any>{
+  //  const id = this.getUserData()._id;
+  //  console.log(id);
+   const url = `${this.serverUrl}/customer/changePassword/${id}` ;
+   return this.http.put(url, {oldPassword: oldPassword, newPassword: newPassword});
+ }
 
-  changePassword(id, oldPassword, newPassword): Observable<any> {
-    //  const id = this.getUserData()._id;
-    //  console.log(id);
-    const url = `${this.serverUrl}/customer/changePassword/${id}`;
-    return this.http.put(url, { oldPassword: oldPassword, newPassword: newPassword });
-  }
+ changeEmail(id, email):Observable<any>{
+   const url = `${this.serverUrl}/customer/changeEmail/${id}`;
+   return this.http.put(url, {email: email});
+ }
 
-  changeEmail(id, email): Observable<any> {
-    const url = `${this.serverUrl}/customer/changeEmail/${id}`;
-    return this.http.put(url, { email: email });
-  }
+ updateProfile(id, userData){
+   const url = `${this.serverUrl}/customer/updateProfile/${id}`;
+   return this.http.put(url, userData);
+ }
 
-  updateProfile(id, userData) {
-    const url = `${this.serverUrl}/customer/updateProfile/${id}`;
-    return this.http.put(url, userData);
-  }
+ sendDeleteRequest(id, deleteRequest: DeleteRequest): Observable<any>{
+ const url=`${this.serverUrl}/customer/deleteRequest/${id}`;
+ return this.http.post(url, deleteRequest)
+ }
 
-  sendDeleteRequest(id, deleteRequest: DeleteRequest): Observable<any> {
-    const url = `${this.serverUrl}/customer/deleteRequest/${id}`;
-    return this.http.post(url, deleteRequest)
-  }
+ subscribeTo(id, userId):Observable<any>{
+   const url = `${this.serverUrl}/customer/subscribe/${id}`;
+   return this.http.put(url, {id: userId})
+ }
 
-  subscribeTo(id, userId): Observable<any> {
-    const url = `${this.serverUrl}/customer/subscribe/${id}`;
-    return this.http.put(url, { id: userId })
-  }
+ unsubscribe(id, userId):Observable<any>{
+   const url = `${this.serverUrl}/customer//unsubscribe/${id}`;
+   return this.http.put(url, userId);
+ }
 
-  unsubscribe(id, userId): Observable<any> {
-    const url = `${this.serverUrl}/customer//unsubscribe/${id}`;
-    return this.http.put(url, userId);
-  }
-
-  logOut() {
+  logOut(){
     this.authToken = null;
     this.user = null;
     localStorage.clear();
     this.userSubject.next(null);
 
   }
+setLocalStorageToNull(){
+  localStorage.setItem('token', null);
+  localStorage.setItem('user', null);
+}
 
   storeUserData(token, user) {
     localStorage.setItem("token", token);

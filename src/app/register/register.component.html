@@ -99,17 +99,15 @@
       <nz-form-item>
         <nz-form-label [nzSpan]="6" nzRequired>Mobile</nz-form-label>
         <nz-form-control nzHasFeedback [nzErrorTip]="ErrorTips" nzSpan="14">
-          <input nz-input type="tel" formControlName="mobile" 
-          ng2TelInput 
-          [ng2TelInputOptions]="{initialCountry: initialCountry}"
-          (ng2TelOutput)="getNumber($event)" 
-          (hasError)="hasError($event)"
-          (countryChange)="onCountryChange($event)"/> 
+          <input nz-input type="tel" formControlName="mobile" ng2TelInput
+            [ng2TelInputOptions]="{initialCountry: initialCountry}" (ng2TelOutput)="getNumber($event)"
+            (hasError)="hasError($event)" (countryChange)="onCountryChange($event)" />
           <!-- style="width: 385px" -->
           <ng-template #ErrorTips let-control>
             <ng-container *ngIf="control.hasError('required')">Please enter your phone number!</ng-container>
             <!-- <ng-container *ngIf="control.hasError('pattern')">Please enter a valid phone number!</ng-container>  -->
-            <ng-container *ngIf="control.hasError('invalidPhoneNumber')">Invalid Phone Number Please enter a valid phone number!</ng-container>
+            <ng-container *ngIf="control.hasError('invalidPhoneNumber')">Invalid Phone Number Please enter a valid phone
+              number!</ng-container>
           </ng-template>
         </nz-form-control>
       </nz-form-item>
@@ -131,8 +129,9 @@
           </nz-input-group>
           <ng-template #tinNoErrorTips let-control>
             <ng-container *ngIf="control.hasError('required')">Please enter your Tin Number!</ng-container>
-            <ng-container *ngIf="control.hasError('minlength') || control.hasError('maxlength')">Tin number should be a 10 digit number</ng-container> 
-                    </ng-template>
+            <ng-container *ngIf="control.hasError('minlength') || control.hasError('maxlength')">Tin number should be a
+              10 digit number</ng-container>
+          </ng-template>
         </nz-form-control>
       </nz-form-item>
 
@@ -145,7 +144,7 @@
                 <input type="text" nz-input placeholder="First Name" type="text" formControlName="firstName" />
               </div>
               <div nz-col nzSpan="12">
-                <input type="text" nz-input placeholder="Last Name" type="text" formControlName="lastName"  />
+                <input type="text" nz-input placeholder="Last Name" type="text" formControlName="lastName" />
               </div>
             </div>
           </nz-input-group>
@@ -153,7 +152,7 @@
             <ng-container *ngIf="control.get('firstName').hasError('required')">First Name is required!</ng-container>
             <ng-container *ngIf="this.signUpForm.get('lastName').hasError('required')">Last Name is required!</ng-container>
           </ng-template> -->
-       
+
         </nz-form-control>
       </nz-form-item>
 
@@ -162,7 +161,11 @@
         <nz-form-control [nzSpan]="14" nzHasFeedback nzErrorTip="Please select your country!">
           <nz-select nzPrefixIcon="global" nzPlaceHolder="Select a country from the options availabl "
             formControlName="country" (ngModelChange)="onCountrySelected($event)">
-            <nz-option nzCustomContent *ngFor="let country of countries; ;let i = index" [nzLabel]="country.name" [nzValue]="country.name"> <nz-avatar [nzShape]="'square'"  [nzSize]="20"  nzIcon="user" [nzSrc]="country.flag"></nz-avatar> {{countries[i].name}}</nz-option>
+            <nz-option nzCustomContent *ngFor="let country of countries; ;let i = index" [nzLabel]="country.name"
+              [nzValue]="country.name">
+              <nz-avatar [nzShape]="'square'" [nzSize]="20" nzIcon="user" [nzSrc]="country.flag"></nz-avatar>
+              {{countries[i].name}}
+            </nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
@@ -206,18 +209,22 @@
 
       <nz-form-item>
         <nz-form-control [nzOffset]="6" [nzSpan]="14">
-          <label nz-checkbox formControlName="agree" nzTooltipTitle="agree to Terms & Conditions" nzTooltipPlacement="topLeft" nz-tooltip >{{agreement}}</label>
+          <label nz-checkbox formControlName="agree" nzTooltipTitle="agree to Terms & Conditions"
+            nzTooltipPlacement="topLeft" nz-tooltip>
+            <span>{{agreement}}</span>
+          </label>
+
         </nz-form-control>
       </nz-form-item>
 
       <div nz-row>
         <div nz-col [nzOffset]="6" [nzSpan]="14" style="text-align: center;">
-          <button nz-button nzBlock [nzType]="'primary'" type="submit" [disabled]='!signupForm.valid' >Agree and
+          <button nz-button nzBlock [nzType]="'primary'" type="submit" [disabled]='!signupForm.valid'>Agree and
             Register!</button>
           <p>Already Have an Account? <a routerLink="/login">Sign In! </a></p>
         </div>
       </div>
-      
+
     </form>
 
     <nz-result *ngIf="current==1 && verfication == 'sent'" nzStatus="info"

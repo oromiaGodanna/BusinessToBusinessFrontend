@@ -93,10 +93,7 @@ export class SpecialofferListComponent implements OnInit {
 
   }
 
-  searchForProduct(){
-    var searchWord =  (<HTMLInputElement>document.getElementById("searchWord")).value;
-    this.router.navigate(['/searchForProduct', searchWord]);
-  }
+  
 
   loadMoreSpecialOffers(){
 
