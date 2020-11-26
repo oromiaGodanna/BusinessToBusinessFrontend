@@ -8,7 +8,6 @@
                         <div nz-col nzOffset="8" nzSpan="8">
                             <nz-avatar style="align-content: center;" [nzSize]="100" nzIcon="user"></nz-avatar>
                             <nz-upload>
-
                             </nz-upload>
                         </div>
                     </div> -->
@@ -69,7 +68,7 @@
                                 <nz-form-label [nzSpan]="12" nzRequired>Role</nz-form-label>
                                 <nz-form-control nzErrorTip="Please input your role!" nzSpan="20">
                                     <nz-select nzPrefixIcon="flag" nzPlaceHolder="Select Your role "
-                                        formControlName="userType" >
+                                        formControlName="userType">
                                         <nz-option nzLabel="Buyer" nzValue="Buyer"></nz-option>
                                         <nz-option nzLabel="Seller" nzValue="Seller"></nz-option>
                                         <nz-option nzLabel="Both" nzValue="Both"></nz-option>
@@ -132,15 +131,11 @@
                                 <nz-form-label [nzSpan]="12" nzRequired>Mobile</nz-form-label>
                                 <nz-form-control [nzErrorTip]="mobileErrorTips" nzSpan="20">
                                     <!-- <nz-input-group nzPrefixIcon="mobile"> -->
-                                    <input formControlName="mobile" nz-input type="tel" ng2TelInput
-                                        (ng2TelOutput)="getMobile($event)" (hasError)="mobileHasError($event)" />
+                                    <input formControlName="mobile" nz-input placeholder="0911234567" />
                                     <!-- </nz-input-group> -->
                                     <ng-template #mobileErrorTips let-control>
-                                        <ng-container *ngIf="control.hasError('required')">Please enter your phone
-                                            number!</ng-container>
-                                        <!-- <ng-container *ngIf="control.hasError('pattern')">Please enter a valid phone number!</ng-container>  -->
-                                        <ng-container *ngIf="control.hasError('invalidPhoneNumber')">Invalid Phone
-                                            Number Please enter a valid phone number!</ng-container>
+                                        <ng-container *ngIf="control.hasError('required')">Please enter your phone number!</ng-container>
+                                        <ng-container *ngIf="control.hasError('pattern')">Invalid Phone Number Please enter a valid phone number!</ng-container>
                                     </ng-template>
                                 </nz-form-control>
                             </nz-form-item>
@@ -151,9 +146,7 @@
                                 <nz-form-control nzErrorTip="Please input your telephone number!" nzSpan="20">
                                     <!-- <nz-input-group nzPrefixIcon="phone"> -->
                                     <input nz-input placeholder="Telephone Number" type="tel"
-                                        formControlName="telephone" ng2TelInput
-                                        [ng2TelInputOptions]="{initialCountry:initialCountry}"
-                                        (ng2TelOutput)="getTelephone($event)" (hasError)="telephoneHasError($event)" />
+                                        formControlName="telephone" />
                                     <!-- </nz-input-group> -->
                                 </nz-form-control>
                             </nz-form-item>
@@ -269,20 +262,31 @@
                             <nz-form-item>
                                 <nz-form-label [nzSpan]="12" nzRequired>Business Type</nz-form-label>
                                 <nz-form-control nzErrorTip="Please input your Password!" nzSpan="20">
-                                    
-                                        <nz-select nzPrefixIcon="cluster" nzPlaceHolder="Select Your business Type "
-                                        formControlName="businessType"  [nzOptions]="businessTypes">
+
+                                    <nz-select nzPrefixIcon="cluster" nzPlaceHolder="Select Your business Type "
+                                        formControlName="businessType" [nzOptions]="businessTypes">
                                         <nz-option nzLabel="Buyer" nzValue="Buyer"></nz-option>
                                         <nz-option nzLabel="Seller" nzValue="Seller"></nz-option>
                                         <nz-option nzLabel="Both" nzValue="Both"></nz-option>
                                     </nz-select>
-                                        <!-- <input formControlName="businessType" nz-input type="text"
-                                            placeholder="Select Your business Type" /> -->
-                                   
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
                         <div nz-col nzSpan="12">
+                            <nz-form-item>
+                                <nz-form-label [nzSpan]="12" nzRequired>Established In</nz-form-label>
+                                <nz-form-control nzSpan="20">
+                                    <!-- <nz-input-group nzPrefixIcon="calendar"> -->
+                                    <nz-date-picker nzMode="year" formControlName="yearEstablished"
+                                        placeholder="Year Establishemet"></nz-date-picker>
+                                    <!-- <input nz-input type='number' placeholder="Year Establishemet"
+                                            formControlName="yearEstablished" /> -->
+                                    <!-- </nz-input-group> -->
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        
+                        <!-- <div nz-col nzSpan="12">
                             <nz-form-item>
                                 <nz-form-label [nzSpan]="12">Country</nz-form-label>
                                 <nz-form-control nzErrorTip="Please input your Password!" nzSpan="20">
@@ -297,22 +301,10 @@
                                     </nz-select>
                                 </nz-form-control>
                             </nz-form-item>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div nz-row>
-                        <div nz-col nzSpan="12">
-                            <nz-form-item>
-                                <nz-form-label [nzSpan]="12" nzRequired>Established In</nz-form-label>
-                                 <nz-form-control nzSpan="20">
-                                    <!-- <nz-input-group nzPrefixIcon="calendar"> -->
-                                        <nz-date-picker nzMode="year" formControlName="yearEstablished" placeholder="Year Establishemet"></nz-date-picker>
-                                        <!-- <input nz-input type='number' placeholder="Year Establishemet"
-                                            formControlName="yearEstablished" /> -->
-                                    <!-- </nz-input-group> -->
-                                </nz-form-control> 
-                            </nz-form-item>
-                        </div>
                         <div nz-col nzSpan="12">
                             <nz-form-item>
                                 <nz-form-label [nzSpan]="20">Number of Employees</nz-form-label>
@@ -324,9 +316,6 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                    </div>
-
-                    <div nz-row>
                         <div nz-col nzSpan="12">
                             <nz-form-item>
                                 <nz-form-label [nzSpan]="12" nzRequired>Official WebSite</nz-form-label>
@@ -338,10 +327,13 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div nz-col nzSpan="12">
+                    </div>
+
+                    <div nz-row>
+                        <div nz-col nzSpan="24">
                             <nz-form-item>
                                 <nz-form-label [nzSpan]="12" nzRequired>Address</nz-form-label>
-                                <nz-form-control nzErrorTip="Please enter your Company's!" nzSpan="20">
+                                <nz-form-control nzErrorTip="Please enter your Company's!" nzSpan="22">
                                     <nz-input-group nzPrefixIcon="environment">
                                         <input formControlName="address" nz-input type="text"
                                             placeholder="Company Address" />
@@ -372,7 +364,7 @@
             <ng-template #actionSave>
                 <a nz-button nzType="link" (click)="onSubmit()"><i nz-icon nzType="save" nzTheme="outline"></i> Save
                     Changes</a>
-                    <!-- [disabled]='!profileForm.valid' -->
+                <!-- [disabled]='!profileForm.valid' -->
             </ng-template>
             <ng-template #actionCancel>
                 <a nz-button nzType="link" nzDanger (click)="onCancel()"><i nz-icon nzType="close"
