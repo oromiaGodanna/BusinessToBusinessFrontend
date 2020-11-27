@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
 import * as io from 'socket.io-client';
+import { UserService } from './user.service';
 
 
 @Injectable({
@@ -8,8 +8,8 @@ import * as io from 'socket.io-client';
 })
 export class SocketService {
 
-  public socket = io('http://localhost:3000', { query: {token: this.authService.getToken()} });
+  public socket = io('http://localhost:3000', { query: {token: this.userService.getToken()} });
 
 
-  constructor(private authService: AuthService) { }
+  constructor(private userService: UserService) { }
 }

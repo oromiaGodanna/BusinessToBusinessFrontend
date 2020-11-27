@@ -10,7 +10,7 @@
             <nz-list-item-meta nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png">
               <nz-list-item-meta-title>
                 <a
-                  (click)="getMessages(conv._id)">{{ conv.users[0]._id == user._id ? conv.users[1].name : conv.users[0].name }}</a>
+                  (click)="getMessages(conv._id)">{{ conv.users[0]._id == user._id ? conv.users[1].firstName : conv.users[0].firstName }}</a>
               </nz-list-item-meta-title>
             </nz-list-item-meta>
           </nz-badge>
@@ -24,7 +24,8 @@
 
       <div nz-row nzJustify="space-around" nzAlign="middle" *ngIf="selectedConversationId == null">
         <div nz-col nzSpan="10">
-          <p class="height-500"> Select a conversation... </p>
+          <p class="height-500" *ngIf="conversations.length != 0"> Select a conversation... </p>
+          <p class="height-500" *ngIf="conversations.length === 0" >You have no conversations. To start a conversation, click on contact supplier on a product page. </p>
         </div>
       </div>
 
