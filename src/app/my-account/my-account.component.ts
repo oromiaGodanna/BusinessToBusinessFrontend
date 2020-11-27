@@ -29,8 +29,7 @@ export class MyAccountComponent implements OnInit {
     this.userService.logOut();
     this.message.success('Log Out Successful.');
     this.router.navigate(['login']);
-    
-
+    console.log("is logged in? " ,this.userService.isLoggedIn());
   }
 
 }

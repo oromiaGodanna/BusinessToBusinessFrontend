@@ -37,16 +37,21 @@ export class PendingSpecialOfferComponent implements OnInit {
   imageToView;
   showImage;
   token;
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
 
   ngOnInit(): void {
-    this.token = this.userService.getToken();
-    if(this.token.userType != 'seller'){
-      this.router.navigate(['/products']);
+    //this.token = this.userService.getToken();
+    if(this.userDataa.userType == 'Admin' || this.userDataa.userType == 'Seller' || this.userDataa.userType == 'Both'){
+      
+        this.getPendingSpecialOffers();
+        this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
+        this.isEnglish = !this.isEnglish;
+    }else{
+      this.router.navigate(['/login']);
     }
 
-    this.getPendingSpecialOffers();
-    this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
-    this.isEnglish = !this.isEnglish;
+  
    
   }
 
@@ -102,8 +107,8 @@ export class PendingSpecialOfferComponent implements OnInit {
 
   openSpecialOffer(){
 
-    if(this.token.userType != 'seller'){
-      this.router.navigate(['/products']);
+    if(this.userDataa.userType != 'Admin' && this.userDataa.userType != 'Seller' && this.userDataa.userType != 'Both'){
+      this.router.navigate(['/login']);
     }
 
     var specialOfferObj ={
@@ -121,8 +126,8 @@ export class PendingSpecialOfferComponent implements OnInit {
   }
   
   deleteSpecialOffer(){
-    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
-      this.router.navigate(['/products']);
+    if(this.userDataa.userType != 'Admin' && this.userDataa.userType != 'Seller' && this.userDataa.userType != 'Both'){
+      this.router.navigate(['/login']);
     }
     this.specialofferService.deleteSpecialOffer(this.productId).subscribe(res => {
       this.createMessage('success','Special Offer from the product is successfully deleted!!!');
@@ -132,8 +137,8 @@ export class PendingSpecialOfferComponent implements OnInit {
   }
 
   deleteProduct(){
-      if(this.token.userType != 'seller' && this.token.userType != 'admin'){
-        this.router.navigate(['/products']);
+    if(this.userDataa.userType != 'Admin' && this.userDataa.userType != 'Seller' && this.userDataa.userType != 'Both'){
+        this.router.navigate(['/login']);
       }
       this.specialofferService.deleteProduct(this.productId).subscribe(res => {
       this.createMessage('success','product deleted successfully');

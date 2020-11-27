@@ -45,7 +45,7 @@ export class UpdateProfileComponent implements OnInit {
     },
     fax: String,
     tinNumber: Number,
-    yearEstablished: Number,
+    yearEstablished: Date,
     businessType: String,
     numOfEmployees: Number,
     address: String,
@@ -64,30 +64,11 @@ export class UpdateProfileComponent implements OnInit {
   phonePattern = "^((\\+91-?)|0)?[0-9]{10}$";
 
   ngOnInit(): void {
-    if(this.userService.isLoggedIn()){
-      console.log('user is logged in');
-    }
-
     this.user = this.userService.getUserData();
-    // this.user = JSON.parse(localStorage.getItem('user'));
     this.userId = this.user._id;
-    // this.userService.getCountries().subscribe((response: any) => {
-    //   if (response.status == 200) {
-    //     this.countries = response.countries;
-    //     const country: any = this.countries.filter(country => country.name == this.user.country);
-    //     if (country) {
-    //       this.initialCountry = country[0].value;
-    //     }
-    //   }
-    // });
-
     this.initForm();
     this.loadUser();
   }
-
-  // editProfile() {
-  //   this.profileForm.enable();
-  // }
 
   private loadUser() {
     this.profileForm.patchValue(this.user);
@@ -114,7 +95,6 @@ export class UpdateProfileComponent implements OnInit {
       yearEstablished: new FormControl(null),
       businessType: new FormControl(null),
       numOfEmployees: new FormControl(null, [Validators.min(0)]),
-      country: new FormControl(null, [Validators.required]),
       address: new FormControl(null),
       // address: new FormGroup({
       //   country: new FormControl(null),
@@ -168,15 +148,13 @@ export class UpdateProfileComponent implements OnInit {
       this.userData.yearEstablished = this.profileForm.get('yearEstablished').value,
       this.userData.businessType = this.profileForm.get('businessType').value,
       this.userData.numOfEmployees = this.profileForm.get('numOfEmployees').value,
-      this.userData.country = this.profileForm.get('country').value,
       this.userData.address = this.profileForm.get('address').value,
       // this.userData.address.region = this.profileForm.get('address.region').value,
       // this.userData.address.city = this.profileForm.get('address.city').value,
       this.userData.officalWebsite = this.profileForm.get('officalWebsite').value,
       this.userData.aboutUs = this.profileForm.get('aboutUs').value,
 
-      console.log('userData', this.userData);
-    ///console.log(this.profileForm);
+    console.log('userData', this.userData);
     this.userService.updateProfile(this.userId, this.userData).subscribe(
       (response: any) => {
         console.log('response', response);
@@ -190,21 +168,6 @@ export class UpdateProfileComponent implements OnInit {
     this.loadUser();
   }
 
-  getTelephone(value: any) {
-
-  }
-
-  getMobile(value: any) {
-
-  }
-
-  mobileHasError(event: any) {
-
-  }
-
-  telephoneHasError(event: any) {
-
-  }
 }
 
 

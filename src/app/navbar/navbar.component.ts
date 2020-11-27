@@ -7,9 +7,8 @@ import { MessageService } from '../services/message.service';
 //jerry's
 import { CartService } from '../services/cart.service';
 import { WishlistService } from '../services/wishlist.service';
+import {UserService } from '../services/user.service';
 //
-import { element } from 'protractor';
-import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -74,6 +73,8 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.userService.logOut();
+    this.router.navigate(['login']);
+    //this.authService.logout();
   }
 
   searchForProduct() {

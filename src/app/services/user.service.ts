@@ -107,6 +107,7 @@ export class UserService {
     this.userSubject.next(null);
 
   }
+  
 setLocalStorageToNull(){
   localStorage.setItem('token', null);
   localStorage.setItem('user', null);

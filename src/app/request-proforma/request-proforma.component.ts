@@ -8,6 +8,7 @@ import { NzDatePickerComponent } from 'ng-zorro-antd/date-picker';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 import { Proforma,Item } from '../models/proforma';
 import { ProformaService } from '../services/proforma.service';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-request-proforma',
@@ -24,12 +25,14 @@ export class RequestProformaComponent implements OnInit {
   items:Item[]=[];
   isSpinning = false;
   proforma:Proforma;
- 
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
 
   listOfItems: Array<{ id: number; category: string; subCategory: string; description: string; quantity: string; }> = [];
 
-  constructor(private http:HttpClient,private route:Router,private categoryService:CategoryService,private proformaService:ProformaService,private i18n: NzI18nService,
-    private fb: FormBuilder) { 
+  constructor(private http:HttpClient,private route:Router,private categoryService:CategoryService,
+    private proformaService:ProformaService,private i18n: NzI18nService,
+    private fb: FormBuilder,private userService:UserService) { 
 
       this.form = this.fb.group({
         category: [null, [Validators.required]],
@@ -46,6 +49,9 @@ export class RequestProformaComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    if(this.userDataa._id == null){
+      this.route.navigate(['/login']);
+    }
     this.getCategories();
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
     this.isEnglish = !this.isEnglish;

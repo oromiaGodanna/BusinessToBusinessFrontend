@@ -34,6 +34,8 @@ export class PendingProformaComponent implements OnInit {
   proformaId;
   openProformaVisible=false;
   token;
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
 
   constructor(private http:HttpClient,private router:Router,private categoryService:CategoryService,
     private proformaService:ProformaService,private i18n: NzI18nService, private routee: ActivatedRoute,
@@ -45,9 +47,9 @@ export class PendingProformaComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.token = this.userService.getToken();
-    if(this.token._id == null ){
-      this.router.navigate(['/products']);
+    //this.token = this.userService.getToken();
+    if(this.userDataa._id == null ){
+      this.router.navigate(['/login']);
     }else{
       this.getCategories();
       this.getPendingProformas();

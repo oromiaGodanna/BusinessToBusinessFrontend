@@ -44,12 +44,14 @@ export class ProductListComponent implements OnInit {
   successMsg = "Product Is Successfully Uploaded As Special Offer!!!";
   failedMsg = "Failed To Update Product To Special Offer!!!";
   token;
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
 
   ngOnInit(): void {
-    this.token = this.userService.getToken();
+    //this.token = this.userService.getToken();
     
-    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
-      this.router.navigate(['/products']);
+    if(this.userDataa.userType != 'Admin' && this.userDataa.userType != 'Seller' && this.userDataa.userType != 'Both'){
+      this.router.navigate(['/login']);
     }
     this.getProducts();
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
@@ -78,8 +80,8 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct(productId):void{
-    if(this.token.userType != 'seller' && this.token.userType != 'admin'){
-      this.router.navigate(['/products']);
+    if(this.userDataa.userType != 'Admin' && this.userDataa.userType != 'Seller' && this.userDataa.userType != 'Both'){
+      this.router.navigate(['/login']);
     }
     this.productService.removeProduct(productId).subscribe(res => {
        this.createMessage('success');

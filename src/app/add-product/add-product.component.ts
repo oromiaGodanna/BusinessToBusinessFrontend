@@ -41,6 +41,8 @@ export class AddProductComponent implements OnInit {
     _id:"1111",
     userType:"admin"
   };
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
 
   constructor(private http:HttpClient,private route:Router,private userService:UserService,private productService:ProductsService,
     private categoryService:CategoryService,private measurementService:MeasurementsService,private fb: FormBuilder,private i18n: NzI18nService) {
@@ -63,13 +65,16 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
 
     //this.token = this.userService.getToken();
-    if(this.token.userType != 'admin'){
-      this.route.navigate(['/products']);
+    if(this.userDataa.userType == 'Admin' || this.userDataa.userType == 'Seller' || this.userDataa.userType == 'Both'){
+     
+      this.getCategories();
+      this.getMeasurements();
+      this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
+      this.isEnglish = !this.isEnglish;
+    }else{
+      this.route.navigate(['/login']);
     }
-    this.getCategories();
-    this.getMeasurements();
-    this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
-    this.isEnglish = !this.isEnglish;
+    
   }
 
   getCategories(): void {

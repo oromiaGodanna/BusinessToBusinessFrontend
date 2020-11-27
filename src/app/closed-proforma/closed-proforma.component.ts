@@ -22,6 +22,8 @@ export class ClosedProformaComponent implements OnInit {
   message=null;
   proformaId;
   token;
+  loggedInStatus=this.userService.isLoggedIn();
+  userDataa=this.userService.getUserData();
 
   constructor(private httpClient:HttpClient,private categoryService:CategoryService,
     private proformaService:ProformaService, private routee: ActivatedRoute,private userService:UserService,
@@ -29,9 +31,9 @@ export class ClosedProformaComponent implements OnInit {
     ) { }
 
   ngOnInit(): void { 
-    this.token = this.userService.getToken();
-    if(this.token._id == null){
-      this.router.navigate(['/products']);
+    //this.token = this.userService.getToken();
+    if(this.userDataa._id == null){
+      this.router.navigate(['/login']);
     }else{
       this.getAllCategories();
       this.getClosedProformas();
