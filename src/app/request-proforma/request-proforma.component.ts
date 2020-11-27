@@ -49,7 +49,7 @@ export class RequestProformaComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    if(this.userDataa._id == null){
+    if(!(this.loggedInStatus)){
       this.route.navigate(['/login']);
     }
     this.getCategories();

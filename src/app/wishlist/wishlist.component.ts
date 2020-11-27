@@ -28,6 +28,7 @@ export class WishlistComponent implements OnInit {
   specialOffer;
   productDiscount;
   productinWishlistNum;
+  countProduct=1;
   loggedInStatus=this.userService.isLoggedIn();
   userDataa=this.userService.getUserData();
   token = {
@@ -37,9 +38,10 @@ export class WishlistComponent implements OnInit {
   ngOnInit(): void {
     
     console.log(this.loggedInStatus);
-    console.log(this.userDataa.userType);
-     console.log(this.userDataa);
+    
     if (this.loggedInStatus) {
+      console.log(this.userDataa.userType);
+     console.log(this.userDataa);
        //if user is buyer or both and if wishlist exists
       if (this.userDataa.userType == "Buyer" || this.userDataa.userType == "Both") {
 
@@ -47,7 +49,7 @@ export class WishlistComponent implements OnInit {
         this.isEnglish = !this.isEnglish;
         this.wishlistService.getWishlist().subscribe(res => {
           this.wishlist = res;
-
+          this.countProduct = this.wishlist.length;
           this.wishlist.forEach(element => {
             //var x= document.getElementById('isModalVisible'+element._id).style.display = 'none';
             if (element.specialOfferId != null) {

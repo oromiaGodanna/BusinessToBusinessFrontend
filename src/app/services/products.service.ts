@@ -17,6 +17,9 @@ export class ProductsService {
   getAllProducts(): Observable<Product[]>{
     return this.http.get<Product[]>('http://localhost:3000/product/getAllProducts');
   }
+  getAllMyProducts(userId): Observable<Product[]>{
+    return this.http.get<Product[]>('http://localhost:3000/product/getProductSeller/'+userId);
+  }
 
   getProduct(productId): Observable<Product[]>{
     return this.http.get<Product[]>('http://localhost:3000/product/getProduct/'+productId);
@@ -56,4 +59,6 @@ export class ProductsService {
   filterProducts(filterObj,offset,limit): Observable<Product[]>{
     return this.http.post<Product[]>('http://localhost:3000/product/filter/'+offset+'/'+limit,filterObj);
   }
+
+  
 }

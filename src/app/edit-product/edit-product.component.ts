@@ -66,12 +66,17 @@ export class EditProductComponent implements OnInit {
           this.productId = _id;
           this.productService.getProduct(_id).subscribe(res => {
             this.product= res;
-            
+            //////
+            if(this.product.userId == this.userDataa._id){
+              this.getCategories();
+              this.getMeasurements();
+            }else{
+              this.routee.navigate(['/login']);
+            }
           });
-        });
 
-        this.getCategories();
-        this.getMeasurements();
+        });
+       
       }else{
         this.routee.navigate(['/login']);
       }

@@ -52,10 +52,12 @@ export class ProductListComponent implements OnInit {
     
     if(this.userDataa.userType != 'Admin' && this.userDataa.userType != 'Seller' && this.userDataa.userType != 'Both'){
       this.router.navigate(['/login']);
+    }else{
+      this.getProducts();
+      this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
+      this.isEnglish = !this.isEnglish;
     }
-    this.getProducts();
-    this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
-    this.isEnglish = !this.isEnglish;
+  
   }
  
   createMessage(type: string): void {
@@ -63,11 +65,18 @@ export class ProductListComponent implements OnInit {
   }
 
   getProducts(): void {
+    if(this.userDataa.userType == 'Admin'){
+      this.productService.getAllProducts().subscribe(res => {
+      //  console.log(res);
+        this.products = res;
+      });
+    }else{
+      this.productService.getAllMyProducts(this.userDataa._id).subscribe(res => {
+        //  console.log(res);
+          this.products = res;
+        });
+    }
     
-    this.productService.getAllProducts().subscribe(res => {
-    //  console.log(res);
-     this.products = res;
-    });
   }
 
   expandSet = new Set<number>();

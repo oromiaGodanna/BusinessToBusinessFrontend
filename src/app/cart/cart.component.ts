@@ -26,7 +26,7 @@ export class CartComponent implements OnInit {
   productDiscount;
   specialOffer;
   isEnglish = false;
-  countProduct;
+  countProduct=1;
   result;
   subTotalPrice = 0;
   taxVal = 0;
