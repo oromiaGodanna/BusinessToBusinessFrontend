@@ -144,6 +144,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { MenubarComponent } from './menubar/menubar.component';
+import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 
 
 registerLocaleData(en);
@@ -210,7 +211,8 @@ registerLocaleData(en);
     FilterProductComponent,
     MeasurementsComponent,
     AddMeasurementComponent,
-    MenubarComponent
+    MenubarComponent,
+    SidebarMenuComponent
   ],
   imports: [
     BrowserModule,
