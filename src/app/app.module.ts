@@ -10,7 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, CommonModule } from '@angular/common';
 import en from '@angular/common/locales/en';
 
 import {Ng2TelInputModule} from 'ng2-tel-input';
@@ -120,11 +120,14 @@ import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzRateModule } from 'ng-zorro-antd/rate';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 import { NzTableModule } from 'ng-zorro-antd/table';
+
+
 
 
 import {ScrollingModule} from '@angular/cdk/scrolling';
@@ -135,16 +138,13 @@ import { ChangeBackgroundDirective } from './directives/change-background.direct
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { SocketService } from './services/socket.service';
-
-
-
-import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { MenubarComponent } from './menubar/menubar.component';
 import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
+
 
 
 registerLocaleData(en);
@@ -218,8 +218,10 @@ registerLocaleData(en);
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    // CommonModule,
 
 
     ReactiveFormsModule,
@@ -257,42 +259,22 @@ registerLocaleData(en);
     NzCollapseModule,
     NzRateModule,
     NzEmptyModule,
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NzButtonModule,
-    NzLayoutModule,
-    NzMenuModule,
-    NzBreadCrumbModule,
+    NzMessageModule,
+
+
     NzCarouselModule,
-    NzCardModule,
-    NzGridModule,
-    NzSpaceModule,
-    NzIconModule,
-    NzTabsModule,
     NzTypographyModule,
     NzNotificationModule,
-    NzFormModule,
-    NzSelectModule,
-    BrowserAnimationsModule,
-    NzInputModule,
     NzUploadModule,
     NzTableModule,
-    NzDividerModule,
-    NzModalModule,
-    NzMessageModule,
     NzDatePickerModule,
     NzInputNumberModule,
-    NzDropDownModule,
     NzSpinModule,
-    NzResultModule,
-    NzAvatarModule,
     NzCommentModule,
     NzBadgeModule,
     NzMenuModule,
-    NzCheckboxModule 
+    NzCheckboxModule,
+
 
   ],
   providers: [

@@ -9,7 +9,7 @@ import { CartService } from '../services/cart.service';
 import { WishlistService } from '../services/wishlist.service';
 import {UserService } from '../services/user.service';
 //
-import { element } from 'protractor';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -23,11 +23,11 @@ export class NavbarComponent implements OnInit {
   messageCount: number = 0;
 
   //jerry's
-  countCart=0;
-  countWishlist=0;
+  countCart = 0;
+  countWishlist = 0;
   //
-  constructor(private authService: AuthService, private notificationService: NotificationService,private router: Router,
-    private messageService: MessageService,private wishlistService:WishlistService,private cartService:CartService,private userService:UserService) {
+  constructor(private authService: AuthService, private notificationService: NotificationService, private router: Router,
+    private messageService: MessageService, private wishlistService: WishlistService, private cartService: CartService, private userService: UserService) {
 
     this.notificationService.getUnreadCount();
 
@@ -51,24 +51,23 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.userService.isLoggedIn();
-   /*this.isLoggedIn = this.authService.isLoggedIn(); 
-    this.authService.userSubject.subscribe((user: User) => {
+    this.isLoggedIn = this.authService.isLoggedIn();
+    this.userService.userSubject.subscribe((user: User) => {
       if (user) {
         this.isLoggedIn = true;
       } else {
         this.isLoggedIn = false;
       }
-    });*/
+    });
 
-      if(this.isLoggedIn){
-        this.cartService.countCart().subscribe(res=>{
-          this.countCart = Number(res);
-        });
-        this.wishlistService.countWishlist().subscribe(res=>{
-          this.countWishlist = Number(res);
-        });
-      }
+    if (this.isLoggedIn) {
+      this.cartService.countCart().subscribe(res => {
+        this.countCart = Number(res);
+      });
+      this.wishlistService.countWishlist().subscribe(res => {
+        this.countWishlist = Number(res);
+      });
+    }
 
   }
 
@@ -78,8 +77,8 @@ export class NavbarComponent implements OnInit {
     //this.authService.logout();
   }
 
-  searchForProduct(){
-    var searchWord =  (<HTMLInputElement>document.getElementById("searchWord")).value;
+  searchForProduct() {
+    var searchWord = (<HTMLInputElement>document.getElementById("searchWord")).value;
     this.router.navigate(['/searchForProduct', searchWord]);
   }
 

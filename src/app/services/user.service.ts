@@ -1,30 +1,36 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { DeleteRequest } from '../models/deleteRequest.model';
 import { LoginInfo } from '../models/login.model';
 import { RegisterInfo } from '../models/register.model';
 import { AppHttpService } from './app-http.service';
+import { User } from '../models/user';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  authToken:any;
+  authToken: any;
   user: any;
-  #isLoggedIn = false;
+  _isLoggedIn = false;
   isAdmin = false;
+
+
+  userSubject = new Subject<User>();
+
 
   serverUrl = 'http://localhost:3000';
   constructor(private http: AppHttpService) { }
 
 
-  loginUser(loginInfo: LoginInfo): Observable<any>{
+  loginUser(loginInfo: LoginInfo): Observable<any> {
     const url = `${this.serverUrl}/customer/login`;
     return this.http.post(url, loginInfo);
   }
 
-  registeruser(registerInfo: RegisterInfo): Observable<any>{
+  registeruser(registerInfo: RegisterInfo): Observable<any> {
     const url = `${this.serverUrl}/customer/register`;
     return this.http.post(url, registerInfo);
   }
@@ -98,6 +104,8 @@ export class UserService {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
+    this.userSubject.next(null);
+
   }
   
 setLocalStorageToNull(){
@@ -105,33 +113,55 @@ setLocalStorageToNull(){
   localStorage.setItem('user', null);
 }
 
-storeUserData(token, user){
-  localStorage.setItem("token", token);
-  localStorage.setItem("user", JSON.stringify(user));
-}
-
-updateUserData(user){
-  localStorage.setItem("user", JSON.stringify(user));
-}
-
-getUserData(){
-    return JSON.parse(localStorage.getItem("user"));
-}
-
-getToken(){
-  return localStorage.getItem("token");
-}
-
-isLoggedIn(){
-  if(this.getUserData()){
-    return true
-  }else{
-    return false
+  storeUserData(token, user) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
+    this.setCurrentUser(token);
   }
-}
 
-loadToken(){
-  const token = localStorage.getItem('token');
-  this.authToken = token;
-}
+  updateUserData(user) {
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+
+  getUserData() {
+    return JSON.parse(localStorage.getItem("user"));
+  }
+
+  getToken() {
+    return localStorage.getItem("token");
+  }
+
+  isLoggedIn() {
+    if (this.getUserData()) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  loadToken() {
+    const token = localStorage.getItem('token');
+    this.authToken = token;
+  }
+
+  setCurrentUser(token) {
+    const helper = new JwtHelperService();
+    try {
+      this.userSubject.next(helper.decodeToken(token));
+
+    } catch (error) {
+      console.log('Invalid token');
+    }
+  }
+
+  getCurrentUser() :User{
+    let token = this.getToken();
+    const helper = new JwtHelperService();
+    try {
+      return helper.decodeToken(token);
+
+    } catch (error) {
+      console.log('Invalid token');
+    }
+  }
 }

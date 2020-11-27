@@ -2,9 +2,10 @@ import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/
 import { Conversation, Message } from '../models/message';
 import { MessageService } from '../services/message.service';
 import { AuthService } from '../services/auth.service';
-import { User } from '../models/user';
 import { ChangeBackgroundDirective } from '../directives/change-background.directive';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { User } from '../models/user';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class MessageComponent implements OnInit {
 
   @ViewChild(CdkVirtualScrollViewport) public virtualScrollViewport?: CdkVirtualScrollViewport;
 
-  constructor(private messageService: MessageService, private authService: AuthService) {
+  constructor(private messageService: MessageService, private userService: UserService) {
     this.messageService.newMessageReceived().subscribe((data) => {
       console.log('new message received', data);
       // this.messages.push(msg);
@@ -56,7 +57,7 @@ export class MessageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user = this.authService.getCurrentUser();
+    this.user = this.userService.getCurrentUser();
     this.getAllConversations(this.user._id);
 
     this.messageService.unreadCountReceived().subscribe((unreadCount) => {
@@ -107,8 +108,10 @@ export class MessageComponent implements OnInit {
       return;
     }
 
+    console.log(this.user);
+
     let message = {
-      sender: { _id: this.user._id, name: this.user.name },
+      sender: { _id: this.user._id, firstName: this.user.firstName },
       message: messageText.value,
     };
 
