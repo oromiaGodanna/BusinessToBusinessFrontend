@@ -1,0 +1,87 @@
+.align-center{
+    text-align: center;
+    vertical-align: middle;
+}
+.page-header-1{
+    
+    padding: 15px;
+    margin-bottom: 25px;
+}
+.page-header-2{
+
+    margin-bottom: 25px;
+
+}
+.ant-form-item-label{
+    text-align: left;
+}
+.termsOfServices{
+    padding-top: 3%;
+}
+.agreeLabel{
+    margin-top: 35px;
+    margin-bottom: 0px;
+}
+.form-group{
+    padding-right: 8px;
+}
+.scrollable-container{
+    padding: 15px;
+    height: 275px;
+    overflow-y: scroll;
+    border: 1px solid #dadada;
+}
+.order-summary{
+    border: 1px solid #dadada;
+    border-radius: 4px;
+    background: #fafafa;
+    border-top: 1px solid #e1e1e1;
+    color: #777;
+    margin-bottom: auto;
+}
+.order-summary h3{
+    padding-top: 4%;
+    padding-bottom: 1%;
+}
+nz-avatar{
+    width: 100px !important;
+    height: 80px;
+    border-radius: 0%;  
+}
+nz-list-item-meta-avatar{
+    
+    padding-left: 20px;
+}
+::ng-deep .order-summary .ant-list-item-meta-avatar .ant-avatar {
+    width: 100px !important;
+    height: 80px;
+    border-radius: 0%;  
+}
+::ng-deep .order-summary .ant-avatar > img {
+    width: auto;
+}
+.ant-list-item-meta-title > a {
+    color: rgba(134, 100, 100, 0.9);
+}
+.order-items-summary{
+    
+    max-height: 290px;
+    overflow-y: scroll;
+}
+.ant-avatar {
+    height: 80px;
+}
+nz-list-item-extra{
+    padding-right: 20px;
+}
+.ant-divider-horizontal {
+    margin: 14px 0;
+}
+.payment-summary .ant-row:not(:last-child){
+    
+    padding: 8px;
+}
+.payment-summary .ant-row:last-child{
+    padding: 8px;
+    padding-bottom: 14px;
+}

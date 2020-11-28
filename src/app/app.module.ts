@@ -88,6 +88,17 @@ import { AddMeasurementComponent } from './add-measurement/add-measurement.compo
 import { AlertsComponent } from './alerts/alerts.component';
 import { AddProductComponent } from './add-product/add-product.component';
 
+//ori's 
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentService } from './services/payment.service';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { PlaceOrderComponent } from './place-order/place-order.component';
+import { OrdersComponent } from './orders/orders.component';
+import { FeedbackDisplaysComponent } from './feedback-displays/feedback-displays.component';
+import { DisputesComponent } from './disputes/disputes.component';
+import { NewDisputeComponent } from './new-dispute/new-dispute.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -106,7 +117,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
-import { NzCarouselModule } from 'ng-zorro-antd/Carousel';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
@@ -212,7 +223,15 @@ registerLocaleData(en);
     MeasurementsComponent,
     AddMeasurementComponent,
     MenubarComponent,
-    SidebarMenuComponent
+    SidebarMenuComponent,
+    PaymentComponent,
+    FeedbackComponent,
+    PlaceOrderComponent,
+    OrdersComponent,
+    FeedbackDisplaysComponent,
+    DisputesComponent,
+    NewDisputeComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,

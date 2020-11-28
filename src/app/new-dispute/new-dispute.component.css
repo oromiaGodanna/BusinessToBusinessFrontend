@@ -1,0 +1,22 @@
+.align-center{
+    text-align: center;
+}
+:host ::ng-deep .ant-form-item-extra {
+    font-size: 12px;
+}
+.total-payment-recived{
+    padding-top: 1px;
+    margin-top: auto;
+    margin-bottom: auto;
+    vertical-align: bottom;
+}
+.partial-refund-radio{
+    width: 58%;
+}
+.partial-refund-input{
+    width: 38%;
+    margin-left: 5px;
+}
+.new-dispute-btns button{
+    margin-left: 13px;
+}

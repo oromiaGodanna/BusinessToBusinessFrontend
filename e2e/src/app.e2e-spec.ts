@@ -10,7 +10,11 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
+<<<<<<< HEAD
     expect(page.getTitleText()).toEqual('bTob app is running!');
+=======
+    expect(page.getTitleText()).toEqual('BusinessToBusiness app is running!');
+>>>>>>> feat/allOrderComponents
   });
 
   afterEach(async () => {
