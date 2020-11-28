@@ -7,7 +7,7 @@
                 <h3 class="align-center page-header-2">Shipping Address</h3>
 
                 <div class="form-group">
-                    <form nz-form [formGroup]="addressForm" (ngSubmit)="onSubmit(addressForm.value)">
+                    <form nz-form [formGroup]="addressForm" (ngSubmit)="onNext(addressForm.value)">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="8">First Names</nz-form-label>
                             <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
@@ -125,11 +125,10 @@
                         </nz-form-item>
                         <nz-form-item>
                             <nz-form-control [nzOffset]="14" [nzSpan]="3">
-                                <button nz-button nzType="default">Cancel</button>
+                                <button nz-button type="button" nzType="default">Cancel</button>
                             </nz-form-control>
                             <nz-form-control [nzOffset]="1" [nzSpan]="6">
-                                <button nz-button nzType="primary" [disabled]="!agreementForm.value.agree" routerLink="/orders" routerLinkActive="active">Place
-                                    Order</button>
+                                <button nz-button type="submit" nzType="primary"  [disabled]="!agreementForm.value.agree">Place Order</button>
                             </nz-form-control>
                         </nz-form-item>
                     </form>
@@ -143,11 +142,11 @@
             <nz-divider></nz-divider>
             <div class="order-items-summary">
                 <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
-                    <nz-list-item *ngFor="let item of data">
+                    <nz-list-item *ngFor="let item of orderedItems">
                         <nz-list-item-meta>
-                            <nz-list-item-meta-avatar [nzSrc]="item.avatar"> </nz-list-item-meta-avatar>
+                            <nz-list-item-meta-avatar [nzSrc]="link"> </nz-list-item-meta-avatar>
                             <nz-list-item-meta-title>
-                                <a href="{{ item.href }}">{{ item.title }}</a>
+                                <a href="{{ item.href }}">{{ item.productName }}</a>
                             </nz-list-item-meta-title>
                             <nz-list-item-meta-description>
                                 {{ item.description }}
@@ -157,7 +156,7 @@
                             {{ item.price }}$
                         </nz-list-item-extra>
                     </nz-list-item>
-                    <nz-list-empty *ngIf="data.length === 0"></nz-list-empty>
+                    <nz-list-empty *ngIf="orderedItems.length === 0"></nz-list-empty>
                 </nz-list>
 
             </div>

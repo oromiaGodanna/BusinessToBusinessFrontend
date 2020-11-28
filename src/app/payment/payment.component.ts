@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators, FormBuilder, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
 import { Observer } from 'rxjs/internal/types';
-import { PaymentService } from '../payment.service';
+import { PaymentService } from '../services/payment.service';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',

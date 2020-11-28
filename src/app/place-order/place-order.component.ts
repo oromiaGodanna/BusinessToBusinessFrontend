@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { val } from 'objection';
-import { Observable, Observer } from 'rxjs';
-
+import { Observable, Observer, throwError } from 'rxjs';
+import { catchError } from 'rxjs/internal/operators/catchError';
+import { map } from 'rxjs/internal/operators/map';
+import { OrderService } from '../services/order.service';
 @Component({
   selector: 'app-place-order',
   templateUrl: './place-order.component.html',
@@ -11,42 +14,30 @@ import { Observable, Observer } from 'rxjs';
 export class PlaceOrderComponent implements OnInit {
   addressForm: FormGroup;
   agreementForm: FormGroup;
+  orderAddress: any;
   loading = false;
   next = false;
-  data = [
-    {
-      title: 'Ant Design Title 1',
-      description: "description for this title and ant design list",
-      avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-      price: 55.25
-
+  link = "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
+  newOrder = {
+    buyerId: "",
+    sellerId: "",
+    cartEntryId: [],
+    numberOfItems: 0,
+    totalPrice: 0,
+    shippingAddress: {
+      addressline1: ""
     },
-    {
-      title: 'Ant Design Title 2',
-      description: "description for this title and ant design list",
-      avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-      price: 55.25
+    status: "Waiting for confirmation",
+    paymentIds: []
+  };
+  registeredNewOrder: any;
+  orderedItems: any; cart: any;
 
-    },
-    {
-      title: 'Ant Design Title 3',
-      description: "description for this title and ant design list",
-      avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-      price: 55.25
 
-    },
-    {
-      title: 'Ant Design Title 4',
-      description: "description for this title and ant design list",
-      avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-      price: 55.25
-
-    }
-  ];
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private orderService: OrderService) {
     this.addressForm = this.fb.group({
       firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      lastName : ['', [Validators.required]],
       companyName: ['', [Validators.required]],
       companyAddress1: ['', [Validators.required]],
       companyAddress2: [''],
@@ -61,13 +52,27 @@ export class PlaceOrderComponent implements OnInit {
 
   }
 
-  onSubmit(value: any): void{
-    console.log(value);
+  onNext(value: any): void{
+    this.newOrder.shippingAddress = value;
     this.next = true;
+  }
+  onSubmit(value: any): void{
+    console.log('I have been clicked.', value);
 
+    this.orderService.createOrder(this.newOrder).
+    subscribe(data => {
+         console.log(data);
+         this.registeredNewOrder = data;
+         console.log(this.newOrder);
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       });
+    this.router.navigate(['/order-details', {id: this.registeredNewOrder._id}]);
   }
 
   ngOnInit(): void {
+    this.orderedItems = this.orderService.getEachCartItems("");
+    this.cart = this.orderService.getCartById("");
   }
 
 }

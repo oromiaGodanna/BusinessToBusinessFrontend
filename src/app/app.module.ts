@@ -12,7 +12,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { PaymentComponent } from './payment/payment.component';
-import { PaymentService } from './payment.service';
+import { PaymentService } from './services/payment.service';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { PlaceOrderComponent } from './place-order/place-order.component';
 import { OrdersComponent } from './orders/orders.component';
