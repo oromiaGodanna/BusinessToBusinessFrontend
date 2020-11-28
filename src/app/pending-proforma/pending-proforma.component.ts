@@ -168,9 +168,4 @@ export class PendingProformaComponent implements OnInit {
    this.openProformaVisible = false;
   }
 
-  searchForProduct(){
-    var searchWord =  (<HTMLInputElement>document.getElementById("searchWord")).value;
-    this.router.navigate(['/searchForProduct', searchWord]);
-  }
-
 }

@@ -98,10 +98,5 @@ export class OpenedProformaComponent implements OnInit {
   createMessage(msg){
     this.message = msg;
   }
-
-  searchForProduct(){
-    var searchWord =  (<HTMLInputElement>document.getElementById("searchWord")).value;
-    this.router.navigate(['/searchForProduct', searchWord]);
-  }
-
+  
 }
