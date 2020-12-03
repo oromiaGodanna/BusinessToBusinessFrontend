@@ -156,7 +156,8 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { MenubarComponent } from './menubar/menubar.component';
 import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 
-
+import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
 registerLocaleData(en);
 
@@ -294,6 +295,8 @@ registerLocaleData(en);
     NzMenuModule,
     NzCheckboxModule,
 
+    NzProgressModule,
+    NzPaginationModule,
 
   ],
   providers: [
