@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { val } from 'objection';
 import { Observable, Observer, throwError } from 'rxjs';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
+import { Order } from '../models/order';
 import { OrderService } from '../services/order.service';
 @Component({
   selector: 'app-place-order',
@@ -14,22 +14,10 @@ import { OrderService } from '../services/order.service';
 export class PlaceOrderComponent implements OnInit {
   addressForm: FormGroup;
   agreementForm: FormGroup;
-  orderAddress: any;
   loading = false;
   next = false;
   link = "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
-  newOrder = {
-    buyerId: "",
-    sellerId: "",
-    cartEntryId: [],
-    numberOfItems: 0,
-    totalPrice: 0,
-    shippingAddress: {
-      addressline1: ""
-    },
-    status: "Waiting for confirmation",
-    paymentIds: []
-  };
+  newOrder : Order;
   registeredNewOrder: any;
   orderedItems: any; cart: any;
 
@@ -54,25 +42,39 @@ export class PlaceOrderComponent implements OnInit {
 
   onNext(value: any): void{
     this.newOrder.shippingAddress = value;
+    //set other features of new order
     this.next = true;
   }
   onSubmit(value: any): void{
-    console.log('I have been clicked.', value);
 
     this.orderService.createOrder(this.newOrder).
     subscribe(data => {
          console.log(data);
          this.registeredNewOrder = data;
-         console.log(this.newOrder);
+         console.log(this.registeredNewOrder._id);
+         this.router.navigate(['/order-details', {id: this.registeredNewOrder._id}]);
+
        }), catchError( error => {
          return throwError( 'Something went wrong!' );
        });
-    this.router.navigate(['/order-details', {id: this.registeredNewOrder._id}]);
   }
 
   ngOnInit(): void {
     this.orderedItems = this.orderService.getEachCartItems("");
     this.cart = this.orderService.getCartById("");
+    this.newOrder = {
+      buyerId: "",
+      sellerId: "",
+      cartEntryId: "",
+      totalAmount: 20.0,
+      totalPrice: 122.02,
+      shippingAddress:{},
+      status: "Waiting for confirmation",
+      paymentIds: []
+    }
+    this.newOrder.cartEntryId = "5c0a7922c9d89830f4911426";
+    this.newOrder.buyerId = "5c0a7922c9d89830f4911426";
+    this.newOrder.sellerId = "5c0a7922c9d89830f4911426";
   }
 
 }

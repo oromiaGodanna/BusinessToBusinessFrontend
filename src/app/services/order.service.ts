@@ -29,7 +29,7 @@ export class OrderService {
 
   createOrder(newOrder): any{
     console.log('I have come here', newOrder);
-    return this.http.post<any>(`${this.uri}/order/createOrder/`, newOrder);
+    return this.http.post<any>(`${this.uri}/order/createOrder`, newOrder);
   }
   getCartById(cartId): any{
     return this.sampleCart;
