@@ -31,6 +31,13 @@ export class OrderService {
     console.log('I have come here', newOrder);
     return this.http.post<any>(`${this.uri}/order/createOrder`, newOrder);
   }
+
+  getOrder(orderId): any{
+    return this.http.get<any>(`${this.uri}/order/getOrder/${orderId}`);
+  }
+
+
+  //simulation of getting cart and cartitems
   getCartById(cartId): any{
     return this.sampleCart;
   }
