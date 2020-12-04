@@ -20,6 +20,7 @@ import { FeedbackDisplaysComponent } from './feedback-displays/feedback-displays
 import { DisputesComponent } from './disputes/disputes.component';
 import { NewDisputeComponent } from './new-dispute/new-dispute.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { OrderDetailsSupplierComponent } from './order-details-supplier/order-details-supplier.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -32,7 +33,8 @@ registerLocaleData(en);
     FeedbackDisplaysComponent,
     DisputesComponent,
     NewDisputeComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    OrderDetailsSupplierComponent
   ],
   imports: [
     BrowserModule,

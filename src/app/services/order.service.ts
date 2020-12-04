@@ -36,6 +36,47 @@ export class OrderService {
     return this.http.get<any>(`${this.uri}/order/getOrder/${orderId}`);
   }
 
+  getBuyerOrders(buyerId): any{
+    return this.http.get<any>(`${this.uri}/order/getBuyerOrders/${buyerId}`);
+  }
+
+  getSupplierOrders(sellerId): any{
+    return this.http.get<any>(`${this.uri}/order/getSupplierOrders/${sellerId}`);
+  }
+
+  acceptOrder(orderId): any{
+    return this.http.put<any>(`${this.uri}/order/acceptOrder/${orderId}`, {});
+
+  }
+
+  declineOrder(orderId): any{
+    return this.http.put<any>(`${this.uri}/order/declineOrder/${orderId}`, {});
+
+  }
+  cancelOrder(orderId): any{
+    return this.http.put<any>(`${this.uri}/order/cancelOrder/${orderId}`, {});
+
+  }
+  changePaymentStatus(orderId): any{
+    return this.http.put<any>(`${this.uri}/order/changePaymentStatus/${orderId}`, {});
+
+  }
+  changeShipmentStatus(orderId): any{
+    return this.http.put<any>(`${this.uri}/order/changeShipmentStatus/${orderId}`, {});
+
+  }
+  changeDeliveryStatus(orderId): any{
+    return this.http.put<any>(`${this.uri}/order/changeDeliveryStatus/${orderId}`, {});
+
+  }
+  orderDelivered(orderId): any{
+    return this.http.put<any>(`${this.uri}/order/orderDelivered/${orderId}`, {});
+
+  }
+  closeOrderReceipt(orderId): any{
+    return this.http.put<any>(`${this.uri}/order/closeOrderReceipt/${orderId}`, {});
+
+  }
 
   //simulation of getting cart and cartitems
   getCartById(cartId): any{

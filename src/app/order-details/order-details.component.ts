@@ -55,5 +55,8 @@ export class OrderDetailsComponent implements OnInit {
   onIndexChange(event: number): void {
     this.index = event;
   }
+  changeOrderStatus(status: string, orderId: string): any{
+
+  }
 
 }
