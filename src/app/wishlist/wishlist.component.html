@@ -111,7 +111,19 @@
 
     </div>
     <div nz-row nzJustify="center" *ngIf="!(countProduct > 0)">
-      <h2>Your Wishlist is empty</h2>
+
+      <div nz-col nzXs="24" nzSm="12" nzMd="12" nzLg="8" nzXl="6">
+            <nz-card [nzBordered]="true" nzHoverable style="height:100% !important">
+
+               
+                <i nz-row nzJustify="center" nz-icon nzType="heart" nzTheme="outline" style="color: hotpink;font-size:40px;"></i> <br>
+
+                        <h2 nz-row nzJustify="center">Your Wishlist is empty</h2>                      
+
+            </nz-card>
+
+      </div>
+     
     </div>
 
 

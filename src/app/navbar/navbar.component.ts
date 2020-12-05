@@ -18,7 +18,7 @@ import {UserService } from '../services/user.service';
 export class NavbarComponent implements OnInit {
 
   isLoggedIn: boolean;
-
+  userType="";
   notificationCount: number = 0;
   messageCount: number = 0;
 
