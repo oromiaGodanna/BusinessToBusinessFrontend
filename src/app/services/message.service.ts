@@ -108,8 +108,12 @@ export class MessageService {
     return observable;
   }
 
-  createConversation() {
+  createConversation(conversation) {
+    return this.http.post<Conversation>('/messages',conversation);
+  }
 
+  createConversationRealTime(conversation) {
+    this.socket.emit("create conversation",conversation);
   }
 
   sendMessage(convId, message) {

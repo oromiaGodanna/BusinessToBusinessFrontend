@@ -1,4 +1,4 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { DeleteRequest } from '../models/deleteRequest.model';
@@ -22,7 +22,7 @@ export class UserService {
 
 
   serverUrl = 'http://localhost:3000';
-  constructor(private http: AppHttpService) { }
+  constructor(private http: HttpClient) { }
 
 
   loginUser(loginInfo: LoginInfo): Observable<any> {
@@ -98,6 +98,10 @@ export class UserService {
  unsubscribe(id, userId):Observable<any>{
    const url = `${this.serverUrl}/customer//unsubscribe/${id}`;
    return this.http.put(url, userId);
+ }
+
+ getMe(){
+   return this.http.get<User>(`${this.serverUrl}/customer/me`);
  }
 
   logOut(){
