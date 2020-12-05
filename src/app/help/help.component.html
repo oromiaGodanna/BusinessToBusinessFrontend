@@ -32,7 +32,7 @@
                     <div nz-col [nzSpan]="6" *ngFor="let topic of popularTopics; let  i = index">
                         <nz-card [nzTitle]="topic.title" [nzHoverable]="true" class="topics">
                             <i nz-icon [nzType]="topic.icon" nzTheme="outline"></i>
-                            <p>{{topic.content}}</p>
+                            <p>{{topic.subTitle}}</p>
                         </nz-card>
                     </div>
                 </div>
@@ -42,6 +42,18 @@
 
     <div nz-row style="margin-top: 24px;">
         <div nz-col nzSpan="8">
+            <h3> <i nz-icon nzType="unordered-list" nzTheme="outline"></i> Catagories</h3>
+            <ul nz-menu nzMode="inline">
+                <li *ngFor="let topic of topics; let topic_i = index" nz-submenu [nzTitle]="topic.title" [nzIcon]="topic.icon">
+                    <ul>
+                        <li nz-menu-item *ngFor="let task of topic.tasks; let task_i = index" (click)="onSelectTask(topic_i, task_i)"> {{task.taskName}}</li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        
+        <!-- <div nz-col nzSpan="8">
             <h3> <i nz-icon nzType="unordered-list" nzTheme="outline"></i> Catagories</h3>
             <ul nz-menu nzMode="inline">
                 <li nz-submenu nzTitle="B2B Intro" nzIcon="bank">
@@ -91,28 +103,28 @@
                     </ul>
                 </li>
             </ul>
-        </div>
+        </div> -->
 
-        <div nzSpan="14" style="width: 63%; margin-left: 24px;">
+        <div nzSpan="14" style="width: 63%; margin-left: 24px;" *ngIf="selectedTopic && selectedTask">
             <nz-breadcrumb>
                 <nz-breadcrumb-item>
                     Catagories
                 </nz-breadcrumb-item>
                 <nz-breadcrumb-item>
-                    Account Management
+                    {{selectedTopic.title}}
                 </nz-breadcrumb-item>
                 <nz-breadcrumb-item>
-                    Create an Account
+                    {{selectedTask.taskName}}
                 </nz-breadcrumb-item>
-            </nz-breadcrumb>
-            <nz-card [nzBordered]="false" nzTitle="Create an Account" style="margin-top:12px;">
+            </nz-breadcrumb>            
+            <nz-card [nzBordered]="false" [nzTitle]="selectedTask.taskName" style="margin-top:12px;">
                 <nz-list>
                     <nz-list-item>
                         <div nz-col nzSpan="4">
                             <b> For: </b> 
                         </div>
                         <div nz-col nzSpan="20">
-                            Buyers
+                            {{ selectedTask.userType }}
                         </div>
                     </nz-list-item>
                     <nz-list-item>
@@ -120,9 +132,7 @@
                             <b> Pre-Condition : </b>
                         </div>
                         <div nz-col nzSpan="20">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.It was popularised
-                            in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
-                            recently with desktop publishing.
+                            {{ selectedTask.preConditions }}
                         </div>
                     </nz-list-item>
                     <nz-list-item>
@@ -130,15 +140,7 @@
                             <b> Description: </b>
                         </div>
                         <div nz-col nzSpan="20">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting
-                            industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
-                            an
-                            unknown printer took a galley of type and scrambled it to make a type specimen book. It has
-                            survived not only five centuries, but also the leap into electronic typesetting, remaining
-                            essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                            containing Lorem Ipsum passages, and more recently with desktop publishing software like
-                            Aldus
-                            PageMaker including versions of Lorem Ipsum.
+                            {{ selectedTask.description }}
                         </div>
                     </nz-list-item>
                     <nz-list-item>
@@ -151,7 +153,6 @@
                           Aldus PageMaker including versions of Lorem Ipsum.
                         </div>
                     </nz-list-item>
-                   
                 </nz-list>
                 <!-- <nz-card nzType="inner">
                     <nz-descriptions>
@@ -176,24 +177,11 @@
     <br>
 
     <div nz-row>
-        <div nz-col nzOffset="2" nzSpan="20">
+        <div nz-col nzSpan="18"  *ngIf="selectedTopic">
             <nz-divider nzText="Frequently asked questions"></nz-divider>
-            <!-- <h3>Frequently asked questions</h3> -->
-            <!-- <nz-breadcrumb>
-                <nz-breadcrumb-item>
-                  Catagories
-                </nz-breadcrumb-item>
-                <nz-breadcrumb-item>
-                  Account Management
-                </nz-breadcrumb-item>
-                <nz-breadcrumb-item>
-                  Create an Account
-                </nz-breadcrumb-item>
-              </nz-breadcrumb> -->
-
             <nz-collapse [nzBordered]="false">
-                <nz-collapse-panel *ngFor="let FAQ of FAQs" [nzHeader]="FAQ.name" [nzActive]="FAQ.active">
-                    <p>{{ FAQ.content}}</p>
+                <nz-collapse-panel *ngFor="let FAQ of selectedTopic.FAQs" [nzHeader]="FAQ.question" [nzActive]="FAQ.active">
+                    <p>{{ FAQ.answer}}</p>
                 </nz-collapse-panel>
             </nz-collapse>
         </div>
