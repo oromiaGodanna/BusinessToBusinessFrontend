@@ -158,6 +158,7 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 
 
 
+import { OrderDetailsSupplierComponent } from './order-details-supplier/order-details-supplier.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -231,7 +232,8 @@ registerLocaleData(en);
     FeedbackDisplaysComponent,
     DisputesComponent,
     NewDisputeComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    OrderDetailsSupplierComponent
   ],
   imports: [
     BrowserModule,
