@@ -17,6 +17,7 @@ import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 import {WishlistComponent} from '../wishlist/wishlist.component';
 import {CartComponent} from '../cart/cart.component';
 import {UserService } from '../services/user.service';
+import {MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-product',
@@ -28,7 +29,7 @@ export class ProductComponent implements OnInit {
   constructor(private http:HttpClient,private productService:ProductsService,private cartService:CartService, private route: ActivatedRoute,
     private iconService: NzIconService,private wishlistService:WishlistService,private modal: NzModalService,
     private specialofferService:SpecialofferService,
-    private router: Router,private notification: NzNotificationService,private i18n: NzI18nService,private userService:UserService) { 
+    private router: Router,private notification: NzNotificationService,private i18n: NzI18nService,private userService:UserService,private messageService:MessageService) { 
       
     }
 
@@ -207,5 +208,15 @@ export class ProductComponent implements OnInit {
   }
 
  }
+
+  contactSeller(sellerId){
+          var loggedInUserId = this.userService.getUserData()._id;
+        var conversation = {
+          users:[sellerId,loggedInUserId],
+          messages:[]
+        };
+       this.messageService.createConversation(conversation);
+       this.router.navigate(['/message']);
+  }
 
 }

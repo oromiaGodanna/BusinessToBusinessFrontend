@@ -53,8 +53,9 @@ export class CartComponent implements OnInit {
         this.isEnglish = !this.isEnglish;
         this.cartService.getCart().subscribe(res => {
           this.cart = res;
+          this.countProduct = this.cart.length;
           if ((this.cart).length > 0) {
-            this.countProduct = this.cart.length;
+            
 
             this.cart.forEach(element => {
               //var x= document.getElementById('isModalVisible'+element._id).style.display = 'none';
