@@ -56,7 +56,7 @@ export class EditProductComponent implements OnInit {
 
     ngOnInit(): void {
       //this.token = this.userService.getToken();
-      if(this.userDataa.userType == 'Admin' || this.userDataa.userType == 'Seller' || this.userDataa.userType == 'Both'){
+      if(this.userDataa.userType == 'Seller' || this.userDataa.userType == 'Both'){
        
         this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
         this.isEnglish = !this.isEnglish;

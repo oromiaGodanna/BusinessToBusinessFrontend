@@ -50,7 +50,7 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     //this.token = this.userService.getToken();
     
-    if(this.userDataa.userType != 'Admin' && this.userDataa.userType != 'Seller' && this.userDataa.userType != 'Both'){
+    if(this.userDataa.userType != 'Seller' && this.userDataa.userType != 'Both'){
       this.router.navigate(['/login']);
     }else{
       this.getProducts();
