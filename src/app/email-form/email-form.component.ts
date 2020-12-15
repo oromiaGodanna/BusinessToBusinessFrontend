@@ -7,6 +7,8 @@ import { take, map, switchMap, debounceTime } from 'rxjs/operators';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user';
+import { UserService } from '../services/user.service';
+import { NzNotificationService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-email-form',
@@ -29,6 +31,8 @@ export class EmailFormComponent implements OnInit {
   };
   id;
 
+  sending = false;
+
   // number
   selectValue = 'all';
 
@@ -44,10 +48,11 @@ export class EmailFormComponent implements OnInit {
     this.searchChange$.next(value);
   }
   constructor(private promoService: PromotionService,
-    private authService: AuthService,
+    private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private antNotification: NzNotificationService) {
 
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) this.promoService.getEmailById(this.id).pipe(take(1)).subscribe((email: Email) => this.email = email);
@@ -65,12 +70,12 @@ export class EmailFormComponent implements OnInit {
           })
         );
 
-      // this.promoService.getSubscribers()
-      //   .pipe(
-      //     map((list: any) => {
-      //       return list.map((item: any) => `${item.name} ${name}`);
-      //     })
-      //   );
+    // this.promoService.getSubscribers()
+    //   .pipe(
+    //     map((list: any) => {
+    //       return list.map((item: any) => `${item.name} ${name}`);
+    //     })
+    //   );
 
 
     const optionList$: Observable<string[]> = this.searchChange$
@@ -89,7 +94,7 @@ export class EmailFormComponent implements OnInit {
 
   async createEmail(value) {
 
-    const userId = this.authService.getCurrentUser()._id;
+    const userId = this.userService.getCurrentUser()._id;
 
     const newEmail: Email = {
       sender: userId,
@@ -109,7 +114,7 @@ export class EmailFormComponent implements OnInit {
       await this.promoService.updateEmail(this.id, newEmail).toPromise();
     } else {
       console.log('creating ...');
-      await this.promoService.sendEmail(newEmail).toPromise();
+      await this.promoService.createEmail(newEmail).toPromise();
     }
     this.router.navigate(['/promotion']);
 
@@ -117,10 +122,67 @@ export class EmailFormComponent implements OnInit {
 
 
   sendEmail() {
-    // console.log(this.selectedUser);
-    console.log(this.promoService.getSubscribers())
 
-    
+    this.sending = true;
+
+    // get subscribers: email, _id, firstName from 
+    let subscribers;
+    this.userService.getMe().subscribe((customer) => {
+
+
+      console.log(customer);
+      subscribers = customer.subscribers;
+      console.log(subscribers);
+
+      if(subscribers.length == 0){
+        this.antNotification.create(
+          'warning',
+          'You can\'t send emails',
+          'To send emails, you need subscribers. You currently have 0 subscribers.',
+          { nzPlacement: 'topLeft' }
+        );
+      }
+
+      if (this.selectValue.includes('all')) {
+        // user selected all
+
+        console.log('in selected all');
+
+        this.promoService.sendEmail(this.id, subscribers).subscribe((result) =>  {
+          console.log(result);
+          if(result){
+            this.antNotification.create(
+              'success',
+              'Emails sent',
+              'The emails have been sent to your subscribers.',
+              { nzPlacement: 'topLeft' }
+
+            );
+
+            this.router.navigate(['/promotion']);
+          }
+        }, (error) => {
+          this.antNotification.create(
+            'error',
+            'An error occurred',
+            error.message,
+            { nzPlacement: 'topLeft' }
+
+          );
+        });
+
+
+      } else {
+        // user selected random number of subscribers
+
+
+      }
+    });
+
+
+
+
+
   }
 
 }
