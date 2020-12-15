@@ -5,6 +5,10 @@
 ::ng-deep .ant-steps-navigation .ant-steps-item::before{
     background-color: unset;
 } */
+
+nz-content{
+    margin-top: 30px;
+}
 ::ng-deep .ant-steps{
 
     margin-bottom: 12px;
