@@ -60,7 +60,7 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    if (this.isLoggedIn) {
+    if (this.isLoggedIn && (this.userType=="Buyer" || this.userType == "Both") ) {
       this.cartService.countCart().subscribe(res => {
         this.countCart = Number(res);
       });

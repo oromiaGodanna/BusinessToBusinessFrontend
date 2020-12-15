@@ -22,11 +22,19 @@ export class UserService {
 
 
   serverUrl = 'http://localhost:3000';
+  paymentUrl =  'http://localhost:';
+
   constructor(private http: AppHttpService) { }
 
 
   loginUser(loginInfo: LoginInfo): Observable<any> {
     const url = `${this.serverUrl}/customer/login`;
+    return this.http.post(url, loginInfo);
+  }
+
+  loginAdmin(loginInfo: LoginInfo): Observable<any> {
+    console.log('user service admin login');
+    const url = `${this.serverUrl}/admin/login`;
     return this.http.post(url, loginInfo);
   }
 
@@ -90,21 +98,29 @@ export class UserService {
  return this.http.post(url, deleteRequest)
  }
 
- subscribeTo(id, userId):Observable<any>{
-   const url = `${this.serverUrl}/customer/subscribe/${id}`;
+ subscribeTo(subscriberId, userId):Observable<any>{
+   const url = `${this.serverUrl}/customer/subscribe/${subscriberId}`;
    return this.http.put(url, {id: userId})
  }
 
- unsubscribe(id, userId):Observable<any>{
-   const url = `${this.serverUrl}/customer//unsubscribe/${id}`;
-   return this.http.put(url, userId);
- }
+ unsubscribe(subscriberId, userId):Observable<any>{
+   console.log(userId);
+   console.log('unsubscribe');
+   const url = `${this.serverUrl}/customer/unsubscribe/${subscriberId}`;
+   return this.http.put(url, {id:userId});
 
+ }
+ 
   logOut(){
     this.authToken = null;
     this.user = null;
     localStorage.clear();
     this.userSubject.next(null);
+  }
+
+  createPaymnetAccount(userId): Observable<any>{
+    const url = `${this.paymentUrl}/${userId}`;
+    return this.http.post(url,userId);
 
   }
   

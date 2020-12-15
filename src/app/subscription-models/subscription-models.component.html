@@ -32,7 +32,7 @@
                     <p><i nz-icon nzType="check" nzTheme="outline"></i> Send {{plan.numOfEmails}} promotional Emails</p>
                     <br>
                     <button *ngIf="plan.monthlyPrice==0" nz-button nzBlock nzType="dashed">Get Started</button>
-                    <button *ngIf="plan.monthlyPrice>0" nz-button nzBlock nzType="primary">Buy {{plan.name}}</button>
+                    <button *ngIf="plan.monthlyPrice>0" nz-button nzBlock nzType="primary" (click)="buySubscription(i)">Buy {{plan.name}}</button>
                     
                 </nz-card>
                 <ng-template #extraTemplate>

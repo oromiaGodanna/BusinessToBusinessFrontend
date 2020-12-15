@@ -158,6 +158,9 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { AdminComponent } from './admin/admin.component';
+import { UserListComponent } from './admin/user-list/user-list.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 
 registerLocaleData(en);
 
@@ -232,7 +235,10 @@ registerLocaleData(en);
     FeedbackDisplaysComponent,
     DisputesComponent,
     NewDisputeComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    AdminComponent,
+    UserListComponent,
+    AdminLoginComponent
   ],
   imports: [
     BrowserModule,

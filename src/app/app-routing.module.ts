@@ -70,6 +70,9 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { OrdersComponent } from './orders/orders.component';
 import { PaymentComponent } from './payment/payment.component';
 import { PlaceOrderComponent } from './place-order/place-order.component';
+import { AdminComponent } from './admin/admin.component';
+import { UserListComponent } from './admin/user-list/user-list.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 
 const routes: Routes = [
   { path: 'message', component: MessageComponent},
@@ -90,8 +93,7 @@ const routes: Routes = [
   { path: 'email_confirmation/:token', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile/:id', component: ProfileComponent },
-  {
-    path: 'my_account',  component: MyAccountComponent, canActivate: [AuthGuard], children: [
+  {path: 'my_account',  component: MyAccountComponent, canActivate: [AuthGuard], children: [
       { path: ':id/view', component: ViewProfileComponent },
       { path: ':id/update', component: UpdateProfileComponent },
       { path: ':id/change_email', component: ChangeEmailComponent },
@@ -104,9 +106,17 @@ const routes: Routes = [
   { path: 'forgot_password', component: ForgotPasswordComponent },
   { path: 'reset_password/:token', component: ResetPasswordComponent },
   { path: 'subscription', component: SubscriptionModelsComponent },
-  { path: 'subscription_forms', canActivate : [AuthGuard, RoleGuard], component: SubscriptionFormComponent },
   
-  
+  {path: 'adminLogin', component: AdminLoginComponent },
+  {path: 'admin', component:AdminComponent, children: [
+   
+    { path: 'user_list', component: UserListComponent },
+    { path: 'subscription_forms', component: SubscriptionFormComponent },
+    { path: 'addCategory', component: AddCategoryComponent},
+    { path: 'categories', component: CategoriesComponent},
+    { path: 'measurements', component: MeasurementsComponent},
+    { path: 'addMeasurement', component: AddMeasurementComponent},
+  ]},
   {path:'products',component:ProductsComponent},
   {path:'wishlist',component:WishlistComponent},
   {path:'cart',component:CartComponent},
@@ -118,8 +128,8 @@ const routes: Routes = [
   { path: 'activeSpecialoffer', component: ActiveSpecialOfferComponent},
   { path: 'specialOffers', component: SpecialofferListComponent},
   { path: 'index', component: IndexComponent},
-  { path: 'addCategory', component: AddCategoryComponent},
-  { path: 'categories', component: CategoriesComponent},
+  
+ 
   { path: 'editCategory/:id', component: EditCategoryComponent},
   { path: 'successMessage/:type/:message', component: AlertsComponent},
   { path: 'successMessage/:type/:message/:route', component: AlertsComponent},
@@ -139,8 +149,7 @@ const routes: Routes = [
   { path: 'viewResponses/:itemId', component: ViewResponsesComponent},
   { path: 'searchForProduct', component: SearchProductComponent},
   { path: 'searchForProduct/:searchWord', component: SearchProductComponent},
-  { path: 'measurements', component: MeasurementsComponent},
-  { path: 'addMeasurement', component: AddMeasurementComponent},
+ 
   { path: 'filterProducts/:productCategory/:productSubCategory/:maxPrice', component: FilterProductComponent},
 
   { path: 'disputes', component: DisputesComponent },
