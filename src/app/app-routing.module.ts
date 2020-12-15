@@ -62,6 +62,15 @@ import { MeasurementsComponent } from './measurements/measurements.component';
 import { AddMeasurementComponent } from './add-measurement/add-measurement.component';
 import { FilterProductComponent } from './filter-product/filter-product.component';
 
+import { DisputesComponent } from './disputes/disputes.component';
+import { FeedbackDisplaysComponent } from './feedback-displays/feedback-displays.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { NewDisputeComponent } from './new-dispute/new-dispute.component';
+import { OrderDetailsSupplierComponent } from './order-details-supplier/order-details-supplier.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+import { OrdersComponent } from './orders/orders.component';
+import { PaymentComponent } from './payment/payment.component';
+import { PlaceOrderComponent } from './place-order/place-order.component';
 
 const routes: Routes = [
   { path: 'message', component: MessageComponent},
@@ -135,8 +144,20 @@ const routes: Routes = [
   { path: 'addMeasurement', component: AddMeasurementComponent},
   { path: 'filterProducts/:productCategory/:productSubCategory/:maxPrice', component: FilterProductComponent},
 
+  { path: 'disputes', component: DisputesComponent },
+  { path: 'feedback', component: FeedbackComponent },
+  { path: 'feedback-displays', component: FeedbackDisplaysComponent },
+  { path: 'new-dispute', component: NewDisputeComponent },
+  { path: 'orders', component: OrdersComponent },
+  { path: 'payment', component: PaymentComponent },
+  { path: 'place-order', component: PlaceOrderComponent },
+  { path: 'order-details', component: OrderDetailsComponent },
+  { path: 'order-details-supplier', component: OrderDetailsSupplierComponent },
+
+
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
+
 ];
 
 @NgModule({

@@ -49,7 +49,7 @@ export class RequestProformaComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    if(this.userDataa._id == null){
+    if(!(this.loggedInStatus)){
       this.route.navigate(['/login']);
     }
     this.getCategories();
@@ -160,7 +160,7 @@ export class RequestProformaComponent implements OnInit {
         (response) => {
           
           console.log(response);
-          var successMsg = "Proforma Is Successfully Added!!!";
+          var successMsg = "Proforma Is Successfully Added!Open the proforma to notify the request!";
         
           this.route.navigate(['/pendingProforma/'+successMsg]); // navigate to other page
         },
@@ -210,9 +210,5 @@ export class RequestProformaComponent implements OnInit {
       this.form.removeControl(i.quantity);
   }
 
-  searchForProduct(){
-    var searchWord =  (<HTMLInputElement>document.getElementById("searchWord")).value;
-    this.route.navigate(['/searchForProduct', searchWord]);
-  }
 
 }

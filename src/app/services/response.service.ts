@@ -12,19 +12,19 @@ export class ResponseService {
   constructor(private http:HttpClient) { }
 
   sendResponse(response){
-    return this.http.post('http://localhost:3000/api/sendResponse/', response);
+    return this.http.post('http://localhost:3000/proforma/sendResponse/', response);
   }
 
   getResponses(itemId){
-    return this.http.get('http://localhost:3000/api/getResponses/'+itemId);
+    return this.http.get('http://localhost:3000/proforma/getResponses/'+itemId);
   }
 
   getProformaResponses(proformaId){
-    return this.http.get('http://localhost:3000/api/getProformaResponses/'+proformaId);
+    return this.http.get('http://localhost:3000/proforma/getProformaResponses/'+proformaId);
   }
 
   getResponse(responseId){
-    return this.http.get('http://localhost:3000/api/getResponse/'+responseId);
+    return this.http.get('http://localhost:3000/proforma/getResponse/'+responseId);
   }
 
 }

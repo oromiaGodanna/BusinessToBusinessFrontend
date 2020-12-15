@@ -5,7 +5,7 @@ import { CartService } from '../services/cart.service';
 import { SpecialofferService } from '../services/specialoffer.service';
 import { WishlistService } from '../services/wishlist.service';
 import { Product } from '../models/product';
-import { SpecialOffer } from '../models/SpecialOffer';
+import { SpecialOffer } from '../models/specialOffer';
 import { Router,ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';

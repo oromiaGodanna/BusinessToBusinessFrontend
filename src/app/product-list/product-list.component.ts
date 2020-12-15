@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProductsService } from '../services/products.service';
 import { SpecialofferService } from '../services/specialoffer.service';
 import { Product } from '../models/product';
-import { SpecialOffer } from '../models/SpecialOffer';
+import { SpecialOffer } from '../models/specialOffer';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
@@ -50,12 +50,14 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     //this.token = this.userService.getToken();
     
-    if(this.userDataa.userType != 'Admin' && this.userDataa.userType != 'Seller' && this.userDataa.userType != 'Both'){
+    if(this.userDataa.userType != 'Seller' && this.userDataa.userType != 'Both'){
       this.router.navigate(['/login']);
+    }else{
+      this.getProducts();
+      this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
+      this.isEnglish = !this.isEnglish;
     }
-    this.getProducts();
-    this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
-    this.isEnglish = !this.isEnglish;
+  
   }
  
   createMessage(type: string): void {
@@ -63,11 +65,18 @@ export class ProductListComponent implements OnInit {
   }
 
   getProducts(): void {
+    if(this.userDataa.userType == 'Admin'){
+      this.productService.getAllProducts().subscribe(res => {
+      //  console.log(res);
+        this.products = res;
+      });
+    }else{
+      this.productService.getAllMyProducts(this.userDataa._id).subscribe(res => {
+        //  console.log(res);
+          this.products = res;
+        });
+    }
     
-    this.productService.getAllProducts().subscribe(res => {
-    //  console.log(res);
-     this.products = res;
-    });
   }
 
   expandSet = new Set<number>();

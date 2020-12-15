@@ -18,7 +18,7 @@ import {UserService } from '../services/user.service';
 export class NavbarComponent implements OnInit {
 
   isLoggedIn: boolean;
-
+  userType;
   notificationCount: number = 0;
   messageCount: number = 0;
 
@@ -55,6 +55,7 @@ export class NavbarComponent implements OnInit {
     this.userService.userSubject.subscribe((user: User) => {
       if (user) {
         this.isLoggedIn = true;
+        this.userType= user.userType;
       } else {
         this.isLoggedIn = false;
       }

@@ -430,7 +430,7 @@
       <button class="checkout">Checkout</button>
 
     </div>
-    <div nz-row *ngIf="!(cart.length > 0)" nzJustify="center">
+    <div nz-row *ngIf="!(countProduct > 0)" nzJustify="center">
       <h2> No Product Is Added To Cart Or The Product You Added Has Been Sold Out!</h2>
     </div>
 

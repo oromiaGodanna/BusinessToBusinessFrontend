@@ -4,7 +4,7 @@ import { ProductsService } from '../services/products.service';
 import { SpecialofferService } from '../services/specialoffer.service';
 import {UserService } from '../services/user.service';
 import { Product } from '../models/product';
-import { SpecialOffer } from '../models/SpecialOffer';
+import { SpecialOffer } from '../models/specialOffer';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
@@ -44,7 +44,7 @@ export class ActiveSpecialOfferComponent implements OnInit {
   ngOnInit(): void {
     //this.token = this.userService.getToken();
     if (this.loggedInStatus) {
-      if(this.userDataa.userType == 'Seller' || this.userDataa.userType == 'Admin' || this.userDataa.userType == 'Both'){
+      if(this.userDataa.userType == 'Admin'){
         this.getActiveSpecialOffers();
         this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
         this.isEnglish = !this.isEnglish;

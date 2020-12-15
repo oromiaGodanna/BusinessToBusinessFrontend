@@ -34,7 +34,7 @@ export class CategoriesComponent implements OnInit {
 
   ngOnInit(): void {
     //this.token = this.userService.getToken();
-    if(this.userDataa.userType != 'admin'){
+    if(this.userDataa.userType != 'Admin'){
       this.router.navigate(['/login']);
     }else{
       this.getCategories();

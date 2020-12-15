@@ -88,6 +88,17 @@ import { AddMeasurementComponent } from './add-measurement/add-measurement.compo
 import { AlertsComponent } from './alerts/alerts.component';
 import { AddProductComponent } from './add-product/add-product.component';
 
+//ori's 
+import { PaymentComponent } from './payment/payment.component';
+import { PaymentService } from './services/payment.service';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { PlaceOrderComponent } from './place-order/place-order.component';
+import { OrdersComponent } from './orders/orders.component';
+import { FeedbackDisplaysComponent } from './feedback-displays/feedback-displays.component';
+import { DisputesComponent } from './disputes/disputes.component';
+import { NewDisputeComponent } from './new-dispute/new-dispute.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
+
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -106,7 +117,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
-import { NzCarouselModule } from 'ng-zorro-antd/Carousel';
+import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 
 
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
@@ -143,9 +154,12 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzCommentModule } from 'ng-zorro-antd/comment';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { MenubarComponent } from './menubar/menubar.component';
+import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 
+import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
-
+import { OrderDetailsSupplierComponent } from './order-details-supplier/order-details-supplier.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -210,7 +224,17 @@ registerLocaleData(en);
     FilterProductComponent,
     MeasurementsComponent,
     AddMeasurementComponent,
-    MenubarComponent
+    MenubarComponent,
+    SidebarMenuComponent,
+    PaymentComponent,
+    FeedbackComponent,
+    PlaceOrderComponent,
+    OrdersComponent,
+    FeedbackDisplaysComponent,
+    DisputesComponent,
+    NewDisputeComponent,
+    OrderDetailsComponent,
+    OrderDetailsSupplierComponent
   ],
   imports: [
     BrowserModule,
@@ -273,6 +297,8 @@ registerLocaleData(en);
     NzMenuModule,
     NzCheckboxModule,
 
+    NzProgressModule,
+    NzPaginationModule,
 
   ],
   providers: [

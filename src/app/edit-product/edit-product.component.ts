@@ -56,7 +56,7 @@ export class EditProductComponent implements OnInit {
 
     ngOnInit(): void {
       //this.token = this.userService.getToken();
-      if(this.userDataa.userType == 'Admin' || this.userDataa.userType == 'Seller' || this.userDataa.userType == 'Both'){
+      if(this.userDataa.userType == 'Seller' || this.userDataa.userType == 'Both'){
        
         this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
         this.isEnglish = !this.isEnglish;
@@ -66,12 +66,17 @@ export class EditProductComponent implements OnInit {
           this.productId = _id;
           this.productService.getProduct(_id).subscribe(res => {
             this.product= res;
-            
+            //////
+            if(this.product.userId == this.userDataa._id){
+              this.getCategories();
+              this.getMeasurements();
+            }else{
+              this.routee.navigate(['/login']);
+            }
           });
-        });
 
-        this.getCategories();
-        this.getMeasurements();
+        });
+       
       }else{
         this.routee.navigate(['/login']);
       }
