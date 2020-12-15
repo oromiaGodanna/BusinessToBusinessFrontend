@@ -6,6 +6,10 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
 import { Order } from '../models/order';
 import { OrderService } from '../services/order.service';
+import { UserService } from '../services/user.service';
+import { ProductsService } from '../services/products.service'
+import { CartService } from '../services/cart.service';
+
 @Component({
   selector: 'app-place-order',
   templateUrl: './place-order.component.html',
@@ -16,13 +20,14 @@ export class PlaceOrderComponent implements OnInit {
   agreementForm: FormGroup;
   loading = false;
   next = false;
-  link = "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
+  link = "https://..com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
   newOrder : Order;
   registeredNewOrder: any;
-  orderedItems: any; cart: any;
+  orderedItems: [any]; cart: any; currentUser;
 
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private orderService: OrderService) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private cartService: CartService, private orderService: OrderService,
+    private userService: UserService, private productService: ProductsService) {
     this.addressForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName : ['', [Validators.required]],
@@ -46,7 +51,7 @@ export class PlaceOrderComponent implements OnInit {
     this.next = true;
   }
   onSubmit(value: any): void{
-
+    console.log('submitting');
     this.orderService.createOrder(this.newOrder).
     subscribe(data => {
          console.log(data);
@@ -60,8 +65,20 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  //  this.currentUser =  this.userService.getUserData();
+  //  this.currentUser = this.currentUser._id;
+  //  console.log(this.currentUser);
     this.orderedItems = this.orderService.getEachCartItems("");
     this.cart = this.orderService.getCartById("");
+    this.cartService.getCart().
+    subscribe(data => {
+        this.cart = data;
+        console.log(data);
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       });
+    
+
     this.newOrder = {
       buyerId: "",
       sellerId: "",

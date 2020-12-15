@@ -209,6 +209,9 @@ export class CartComponent implements OnInit {
     document.getElementById("cartShipping").innerHTML = (shippment).toString();
     document.getElementById("cartTotal").innerHTML = (totalPrice).toString();
   }
+  checkOut(){
+    this.router.navigate(['/place-order'])
+  }
 
   countProductIncart() {
     if (this.loggedInStatus) {

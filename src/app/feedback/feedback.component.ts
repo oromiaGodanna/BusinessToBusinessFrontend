@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NzMessageService, NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd';
+import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
+import { NzMessageService } from "ng-zorro-antd/message";
 import { Observable, Observer } from 'rxjs';
 
 @Component({
