@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { NzSelectSizeType, NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd';
+import { NzSelectSizeType, UploadChangeParam, UploadFile } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-new-dispute',
@@ -12,7 +12,7 @@ export class NewDisputeComponent implements OnInit {
   radioValue = '';
   size: NzSelectSizeType = 'default';
   listOfOption = ["reason 1", "reason 2", "reason 1", "reason 2", "reason 1", "reason 2"];
-  fileList: NzUploadFile[] = [
+  fileList: UploadFile[] = [
     {
       uid: '-1',
       name: 'xxx.png',
@@ -38,7 +38,7 @@ export class NewDisputeComponent implements OnInit {
   ngOnInit(): void {
   }
   onSubmit(): void{}
-  handleChange(info: NzUploadChangeParam): void {
+  handleChange(info: UploadChangeParam): void {
     let fileList = [...info.fileList];
 
     // 1. Limit the number of uploaded files

@@ -49,6 +49,18 @@ export class MessageService {
     return observable;
   }
 
+  newConversationCreated(){
+    const observable = new Observable<Conversation[]>(observer => {
+      this.socket.on('conversations', (data) => {
+        observer.next(data);
+      });
+      return () => {
+        this.socket.disconnect();
+      };
+    });
+    return observable;
+  }
+
 
   unreadCountReceived() {
     const observable = new Observable<{ convId: string, unread: number }[]>(observer => {
@@ -108,8 +120,12 @@ export class MessageService {
     return observable;
   }
 
-  createConversation() {
+  createConversation(conversation) {
+    return this.http.post<Conversation>('/messages', conversation);
+  }
 
+  createConversationRealtime(conversation) {
+    this.socket.emit('create conversation', conversation);
   }
 
   sendMessage(convId, message) {

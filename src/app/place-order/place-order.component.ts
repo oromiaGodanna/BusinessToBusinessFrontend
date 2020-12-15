@@ -4,7 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Observer, throwError } from 'rxjs';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
+import { Order } from '../models/order';
 import { OrderService } from '../services/order.service';
+import { UserService } from '../services/user.service';
+import { ProductsService } from '../services/products.service'
+import { CartService } from '../services/cart.service';
+
 @Component({
   selector: 'app-place-order',
   templateUrl: './place-order.component.html',
@@ -13,27 +18,16 @@ import { OrderService } from '../services/order.service';
 export class PlaceOrderComponent implements OnInit {
   addressForm: FormGroup;
   agreementForm: FormGroup;
-  orderAddress: any;
   loading = false;
   next = false;
-  link = "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
-  newOrder = {
-    buyerId: "",
-    sellerId: "",
-    cartEntryId: [],
-    numberOfItems: 0,
-    totalPrice: 0,
-    shippingAddress: {
-      addressline1: ""
-    },
-    status: "Waiting for confirmation",
-    paymentIds: []
-  };
+  link = "https://..com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
+  newOrder : Order;
   registeredNewOrder: any;
-  orderedItems: any; cart: any;
+  orderedItems: [any]; cart: any; currentUser;
 
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private orderService: OrderService) {
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private router: Router, private cartService: CartService, private orderService: OrderService,
+    private userService: UserService, private productService: ProductsService) {
     this.addressForm = this.fb.group({
       firstName: ['', [Validators.required]],
       lastName : ['', [Validators.required]],
@@ -53,25 +47,51 @@ export class PlaceOrderComponent implements OnInit {
 
   onNext(value: any): void{
     this.newOrder.shippingAddress = value;
+    //set other features of new order
     this.next = true;
   }
   onSubmit(value: any): void{
-    console.log('I have been clicked.', value);
-
+    console.log('submitting');
     this.orderService.createOrder(this.newOrder).
     subscribe(data => {
          console.log(data);
          this.registeredNewOrder = data;
-         console.log(this.newOrder);
+         console.log(this.registeredNewOrder._id);
+         this.router.navigate(['/order-details', {id: this.registeredNewOrder._id}]);
+
        }), catchError( error => {
          return throwError( 'Something went wrong!' );
        });
-    this.router.navigate(['/order-details', {id: this.registeredNewOrder._id}]);
   }
 
   ngOnInit(): void {
+  //  this.currentUser =  this.userService.getUserData();
+  //  this.currentUser = this.currentUser._id;
+  //  console.log(this.currentUser);
     this.orderedItems = this.orderService.getEachCartItems("");
     this.cart = this.orderService.getCartById("");
+    this.cartService.getCart().
+    subscribe(data => {
+        this.cart = data;
+        console.log(data);
+       }), catchError( error => {
+         return throwError( 'Something went wrong!' );
+       });
+    
+
+    this.newOrder = {
+      buyerId: "",
+      sellerId: "",
+      cartEntryId: "",
+      totalAmount: 20.0,
+      totalPrice: 122.02,
+      shippingAddress:{},
+      status: "Waiting for confirmation",
+      paymentIds: []
+    }
+    this.newOrder.cartEntryId = "5c0a7922c9d89830f4911426";
+    this.newOrder.buyerId = "5c0a7922c9d89830f4911426";
+    this.newOrder.sellerId = "5c0a7922c9d89830f4911426";
   }
 
 }

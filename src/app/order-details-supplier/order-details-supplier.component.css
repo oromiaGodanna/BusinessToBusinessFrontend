@@ -1,0 +1,88 @@
+/* 
+::ng-deep .ant-steps-item-icon{
+    display: none;
+}
+::ng-deep .ant-steps-navigation .ant-steps-item::before{
+    background-color: unset;
+} */
+::ng-deep .ant-steps{
+
+    margin-bottom: 12px;
+    box-shadow: rgb(232, 232, 232) 0px -1px 0px 0 inset;
+
+}
+.align-right{
+    text-align: right;
+}
+.order-details-card{
+    margin-top: 6px;
+    background-color: rgba(0, 0, 0, 0.05);
+    
+    /* background-color: rgba(163, 66, 66, 0.05); */
+}
+.order-details-tables{
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 25px 20px;
+
+}
+.contact-info div{
+    background-color: white;
+
+}
+.contact-info{
+    margin-bottom: 25px;
+}
+.product-img{
+    width: 48px;
+    height: 48px;
+}
+.order-info{
+    padding: 15px 0px 25px;
+}
+.order-info span{
+    padding-right: 20px;
+}
+.supplier-contact-info, .buyer-contact-info{
+    padding: 14px 30px 2px 20px;
+
+}
+.supplier-contact-info{
+    border-right: 1px solid #c0c5c5;
+}
+.info span{
+    display: block;
+}
+
+.items-list{
+    clear: both;
+}
+.order-reminders{
+    list-style: none;
+    padding-inline-start: 0px;
+}
+.order-status-details h4{
+    text-align: right;
+}
+.order-details-left-card div:first-child{
+    text-align: right;
+}.payment-summary nz-divider{
+    margin-top: 0px;
+    color: #ffffff;
+}
+.order-details-left-card nz-divider{
+    margin: 0px;
+}
+.order-details-left-card{
+    font-size: 12px;
+}
+.order-details-left-card:not(:last-child){
+    margin-bottom: 8px;
+}
+
+::ng-deep .ant-table-tbody > tr.ant-table-row:hover > td {
+    background: white;
+}
+::ng-deep .ant-table-thead > tr > th {
+    
+    padding-left: 12px;
+}

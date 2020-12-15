@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ProductsService } from '../services/products.service';
 import { SpecialofferService } from '../services/specialoffer.service';
 import { Product } from '../models/product';
-import { SpecialOffer } from '../models/SpecialOffer';
+import { SpecialOffer } from '../models/specialOffer';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
@@ -50,7 +50,7 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     //this.token = this.userService.getToken();
     
-    if(this.userDataa.userType != 'Admin' && this.userDataa.userType != 'Seller' && this.userDataa.userType != 'Both'){
+    if(this.userDataa.userType != 'Seller' && this.userDataa.userType != 'Both'){
       this.router.navigate(['/login']);
     }else{
       this.getProducts();
@@ -139,8 +139,12 @@ export class ProductListComponent implements OnInit {
           "endDate":this.form.get('endDate').value,
           };
       
+          this.isVisible = false;
+          
       this.specialofferService.addSpecialOffer(this.product).subscribe(
         (response) => {
+
+          
           
            // console.log(response)
             if(response['sucess'] == true){
@@ -149,6 +153,7 @@ export class ProductListComponent implements OnInit {
               var msg="Product Is Already On Pending For SpecialOffer!";
               this.router.navigate(['/successMessage/success/'+msg+'/specialOffer']); // navigate to other page
             }
+
             
           },
           (error) => {

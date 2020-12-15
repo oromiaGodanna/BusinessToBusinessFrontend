@@ -162,6 +162,7 @@ import { AdminComponent } from './admin/admin.component';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 
+import { OrderDetailsSupplierComponent } from './order-details-supplier/order-details-supplier.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -238,7 +239,8 @@ registerLocaleData(en);
     OrderDetailsComponent,
     AdminComponent,
     UserListComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    OrderDetailsSupplierComponent
   ],
   imports: [
     BrowserModule,
@@ -314,7 +316,7 @@ registerLocaleData(en);
     AppHttpService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
-  exports: [RouterModule],
+  exports: [RouterModule],                                                                                            
   bootstrap: [AppComponent],
 })
 export class AppModule { }

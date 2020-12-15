@@ -66,7 +66,6 @@
               <nz-select [(ngModel)]="selectValue" nzAllowClear nzPlaceHolder="Send to">
                 <nz-option nzValue="all" nzLabel="All subscribers"></nz-option>
                 <nz-option nzValue="randomNumber" nzLabel="A number of random subscribers"></nz-option>
-                <nz-option nzValue="byUsername" nzLabel="Select by Username"></nz-option>
               </nz-select>
             </nz-space-item>
 
@@ -86,7 +85,7 @@
             </nz-space-item>
 
             <nz-space-item>
-              <button nz-button nzType="primary" id="send" (click)="sendEmail()">Send</button>
+              <button nz-button nzType="primary" id="send" (click)="sendEmail()" [nzLoading]="sending">Send</button>
             </nz-space-item>
           </nz-space>
 

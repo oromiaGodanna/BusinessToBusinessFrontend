@@ -8,6 +8,7 @@ import { ResponseService } from '../services/response.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
+import {UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-view-proforma',
@@ -27,9 +28,10 @@ export class ViewProformaComponent implements OnInit {
   addResponseModal=false;
   form: FormGroup;
   isEnglish = false;
+  loggedInStatus=this.userService.isLoggedIn();
 
   constructor(private httpClient:HttpClient,private categoryService:CategoryService,
-    private proformaService:ProformaService, private router: Router,private routee: ActivatedRoute,
+    private proformaService:ProformaService, private router: Router,private routee: ActivatedRoute,private userService:UserService,
     private modal: NzModalService,private fb: FormBuilder,private responseService:ResponseService,private i18n: NzI18nService
     ) {
 
@@ -40,19 +42,23 @@ export class ViewProformaComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
-    this.isEnglish = !this.isEnglish;
+    if(!(this.loggedInStatus)){
+      this.router.navigate(['/login']);
+    }else{
 
-   this.getAllCategories();
-  
-    this.routee.paramMap.subscribe(params => {
-      var proformaId = params.get('proformaId');
-      this.proformaService.getProforma(proformaId).subscribe(res => {
-          this.proforma = res;
-          this.proformaId = proformaId;
-      });
-    });
+      this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
+      this.isEnglish = !this.isEnglish;
 
+      this.getAllCategories();
+      
+        this.routee.paramMap.subscribe(params => {
+          var proformaId = params.get('proformaId');
+          this.proformaService.getProforma(proformaId).subscribe(res => {
+              this.proforma = res;
+              this.proformaId = proformaId;
+          });
+        });
+    }
    
   }
 
@@ -100,7 +106,7 @@ export class ViewProformaComponent implements OnInit {
 
       this.responseService.sendResponse(responseData).subscribe(
         (response) => {
-          var divId = document.getElementById(this.itemId).style.display = 'none';
+          var divId = document.getElementById('responsebtn'+this.itemId).style.display = 'none';
           this.message="Response is Successfully Sent!";
           this.isSpinning = false;
         }

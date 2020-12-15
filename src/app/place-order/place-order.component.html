@@ -1,5 +1,7 @@
-<nz-content>
-    <h3 nz-typography class="align-center page-header-1">Place Order</h3>
+<nz-content >
+    <div nz-row>
+        <div nz-col nzSpan="20" nzOffset="2">
+            <h3 nz-typography class="align-center page-header-1">Place Order</h3>
 
     <div nz-row>
         <div nz-col nzSpan="13">
@@ -84,7 +86,11 @@
             <ng-template #termsAndPolicies>
 
                 <div nz-col [nzSpan]="22">
+<<<<<<< HEAD
                     <h3 class="align-center page-header-2 termsOfServices">Terms of Services</h3>
+=======
+                    <!-- <h3 class="align-center page-header-2 termsOfServices" [nzSpan]="20">Terms of Services</h3> -->
+>>>>>>> a2ffb0e031a76199f0ecf2d8abcd821a36697d7b
 
                     <div class="scrollable-container">
                         <h4><strong> ipsum dolor sit amet</strong></h4>
@@ -142,7 +148,7 @@
             <nz-divider></nz-divider>
             <div class="order-items-summary">
                 <nz-list nzItemLayout="horizontal" [nzLoading]="loading">
-                    <nz-list-item *ngFor="let item of orderedItems">
+                    <nz-list-item *ngFor="let item of cart">
                         <nz-list-item-meta>
                             <nz-list-item-meta-avatar [nzSrc]="link"> </nz-list-item-meta-avatar>
                             <nz-list-item-meta-title>
@@ -153,10 +159,10 @@
                             </nz-list-item-meta-description>
                         </nz-list-item-meta>
                         <nz-list-item-extra>
-                            {{ item.price }}$
+                            {{ item.price }} Birr
                         </nz-list-item-extra>
                     </nz-list-item>
-                    <nz-list-empty *ngIf="orderedItems.length === 0"></nz-list-empty>
+                    <!-- <nz-list-empty *ngIf="orderedItems.length === 0"></nz-list-empty> -->
                 </nz-list>
 
             </div>
@@ -187,4 +193,7 @@
 
         </div>
     </div>
+        </div>
+    </div>
+    
 </nz-content>

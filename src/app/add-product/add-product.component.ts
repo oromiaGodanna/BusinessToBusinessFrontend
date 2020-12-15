@@ -62,10 +62,10 @@ export class AddProductComponent implements OnInit {
     })
   } 
  
-  ngOnInit(): void {
+  ngOnInit(): void {                                                                                                                                                                                                                          
 
     //this.token = this.userService.getToken();
-    if(this.userDataa.userType == 'Admin' || this.userDataa.userType == 'Seller' || this.userDataa.userType == 'Both'){
+    if(this.userDataa.userType == 'Seller' || this.userDataa.userType == 'Both'){
      
       this.getCategories();
       this.getMeasurements();

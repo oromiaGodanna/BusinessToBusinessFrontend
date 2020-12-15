@@ -18,7 +18,7 @@ export class PromotionService {
 
   constructor(private http: HttpClient) { }
 
-  sendEmail(email: Email){
+  createEmail(email: Email){
     return this.http.post(`${this.url}/email`, email);
   }
 
@@ -48,28 +48,13 @@ export class PromotionService {
   }
 
   
+  sendEmail(id, subscribers){
 
-  // will be in seller service
-  getSubscribers(){
+    console.log('in promo send mail');
+    console.log(subscribers);
 
-    return [
-      {
-        _id: "5e5e163bfa804a1bd4f8c9a6",
-        email: "tungat72@gmail.com",
-        name: "tunga"
-      },
-      {
-        _id: "5e5e16d7fa804a1bd4f8c9a7",
-        email: "tungat72@gmail.com",
-        name: "abel"
-      },
-      {
-        _id: "5e5e16f4fa804a1bd4f8c9a8",
-        email: "tungat72@gmail.com",
-        name: "bob"
-      }
-    ];
-    
+    return this.http.post(`${this.url}/email/${id}`, { subscribers: subscribers});
+
   }
 
 }

@@ -3,4 +3,6 @@ export interface User{
     firstName: string;
     image?: string;
     email: string;
+    userType:String;
+    subscribers:[User];
 }

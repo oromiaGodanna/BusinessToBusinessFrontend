@@ -11,6 +11,7 @@ import { ProformaService } from '../services/proforma.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import {UserService } from '../services/user.service';
+import {NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-pending-proforma',
@@ -38,7 +39,7 @@ export class PendingProformaComponent implements OnInit {
   userDataa=this.userService.getUserData();
 
   constructor(private http:HttpClient,private router:Router,private categoryService:CategoryService,
-    private proformaService:ProformaService,private i18n: NzI18nService, private routee: ActivatedRoute,
+    private proformaService:ProformaService,private i18n: NzI18nService, private routee: ActivatedRoute, private notificationService: NotificationService,
     private modal: NzModalService,private userService:UserService,private fb: FormBuilder,private messageService: NzMessageService
     ) { 
       this.form = this.fb.group({
@@ -147,11 +148,35 @@ export class PendingProformaComponent implements OnInit {
       var proformaData = {
           endDate:endDateForProforma,
       };
-      this.proformaService.requestProforma(this.proformaId,proformaData).subscribe(res => {
+
+      this.isSpinning = false;
+
+      this.proformaService.requestProforma(this.proformaId,proformaData).subscribe(async res => {
       
-        var divId = document.getElementById(this.proformaId).style.display = 'none';
-        this.createMessage("Proforma is made Public Successfully!!!"); 
         
+        ///get subcribers;
+          this.userService.getMe().subscribe((user)=>{
+            var subscriberIds=[];
+            user.subscribers.forEach((subscriber)=>{
+              subscriberIds.push(subscriber._id)
+            });
+            var notification = {
+              notificationType:'performa',
+              recipients: subscriberIds,
+              title:'A new performa is available!',
+              content:'Fill it now, don\'t say for later',
+              target:this.proformaId,
+              externalModelType:'Performa'
+            };
+            this.notificationService.sendNotificationRealtime(notification);
+          });
+
+         
+         
+        // var divId = document.getElementById(this.proformaId).style.display = 'none';
+        // this.createMessage("Proforma is made Public Successfully!!!"); 
+        var msg = "Proforma is made Public Successfully!!!";
+        this.router.navigate(['activeProformas/'+msg]);
        });
     }
   }

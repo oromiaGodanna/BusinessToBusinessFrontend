@@ -66,6 +66,7 @@ import { DisputesComponent } from './disputes/disputes.component';
 import { FeedbackDisplaysComponent } from './feedback-displays/feedback-displays.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { NewDisputeComponent } from './new-dispute/new-dispute.component';
+import { OrderDetailsSupplierComponent } from './order-details-supplier/order-details-supplier.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { OrdersComponent } from './orders/orders.component';
 import { PaymentComponent } from './payment/payment.component';
@@ -152,14 +153,16 @@ const routes: Routes = [
  
   { path: 'filterProducts/:productCategory/:productSubCategory/:maxPrice', component: FilterProductComponent},
 
-  { path: 'disputes', component: DisputesComponent },
-  { path: 'feedback', component: FeedbackComponent },
-  { path: 'feedback-displays', component: FeedbackDisplaysComponent },
-  { path: 'new-dispute', component: NewDisputeComponent },
-  { path: 'orders', component: OrdersComponent },
-  { path: 'payment', component: PaymentComponent },
-  { path: 'place-order', component: PlaceOrderComponent },
-  { path: 'order-details', component: OrderDetailsComponent },
+  { path: 'disputes', component: DisputesComponent, canActivate: [AuthGuard] },
+  { path: 'feedback', component: FeedbackComponent, canActivate: [AuthGuard] },
+  { path: 'feedback-displays', component: FeedbackDisplaysComponent, canActivate: [AuthGuard] },
+  { path: 'new-dispute', component: NewDisputeComponent, canActivate: [AuthGuard] },
+  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+  { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
+  { path: 'place-order', component: PlaceOrderComponent, canActivate: [AuthGuard] },
+  { path: 'order-details', component: OrderDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'order-details-supplier', component: OrderDetailsSupplierComponent, canActivate: [AuthGuard] },
+
 
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
