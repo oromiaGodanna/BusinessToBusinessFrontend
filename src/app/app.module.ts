@@ -310,7 +310,7 @@ registerLocaleData(en);
     AppHttpService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
-  exports: [RouterModule],
+  exports: [RouterModule],                                                                                            
   bootstrap: [AppComponent],
 })
 export class AppModule { }

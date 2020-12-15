@@ -48,6 +48,12 @@ export class MessageComponent implements OnInit {
       }
     });
 
+
+    this.messageService.newConversationCreated().subscribe((data) => {
+
+        this.conversations = data;
+    });
+
     // this.messageService.unreadCountReceived().subscribe(() => { });
 
     // this.messageService.unreadCount.subscribe((unreadCount) => {
