@@ -148,10 +148,11 @@ export class PendingProformaComponent implements OnInit {
       var proformaData = {
           endDate:endDateForProforma,
       };
+
+      this.isSpinning = false;
+
       this.proformaService.requestProforma(this.proformaId,proformaData).subscribe(async res => {
       
-        var divId = document.getElementById(this.proformaId).style.display = 'none';
-        this.createMessage("Proforma is made Public Successfully!!!"); 
         
         ///get subcribers;
           this.userService.getMe().subscribe((user)=>{
@@ -162,8 +163,8 @@ export class PendingProformaComponent implements OnInit {
             var notification = {
               notificationType:'performa',
               recipients: subscriberIds,
-              title:'',
-              content:'',
+              title:'A new performa is available!',
+              content:'Fill it now, don\'t say for later',
               target:this.proformaId,
               externalModelType:'Performa'
             };
@@ -172,6 +173,10 @@ export class PendingProformaComponent implements OnInit {
 
          
          
+        // var divId = document.getElementById(this.proformaId).style.display = 'none';
+        // this.createMessage("Proforma is made Public Successfully!!!"); 
+        var msg = "Proforma is made Public Successfully!!!";
+        this.router.navigate(['activeProformas/'+msg]);
        });
     }
   }

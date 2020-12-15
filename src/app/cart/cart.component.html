@@ -327,7 +327,7 @@
         <label class="product-image">Image</label>
         <label class="product-details">Product</label>
         <label class="product-price">Price</label>
-        <label class="product-quantity">Quantity</label>
+        <!--<label class="product-quantity">Quantity</label>-->
         <label class="product-removal">Remove</label>
         <label class="product-line-price">Total</label>
       </div>
@@ -377,11 +377,11 @@
             (ngModelChange)="changeSubTotal(product._id,product.discount,product.minOrder)" />
         </div>
 
-        <div class="product-quantity" *ngIf="!product.discount">
-          <!--<input type="number" value="1" min="1">-->
+        <!-- <div class="product-quantity" *ngIf="!product.discount">
+          <input type="number" value="1" min="1">
           <input nz-input type="number" id="inputQuantity{{product._id}}" [ngModel]="product.minOrder"
             (ngModelChange)="changeSubTotal(product._id,product.price,product.minOrder)" />
-        </div>
+        </div> -->
 
         <div class="product-removal">
           <button nz-button class="remove-product" (click)="removeProductFromCart(product._id)">
