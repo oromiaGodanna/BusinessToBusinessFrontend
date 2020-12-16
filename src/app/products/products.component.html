@@ -348,7 +348,7 @@
 
 
 
-                        <div nz-row>
+                       <!-- <div nz-row>
 
                             <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
 
@@ -361,7 +361,29 @@
                             <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
 
 
+                        </div>-->
+                        <div nz-row *ngIf="productRateValue(product._id).length != 0">
+
+                            <i nz-icon nzType="star" nzTheme="fill" 
+                            class="rateFillColor" *ngFor="let n of productRateValue(product._id);let i = index;"></i>
+
+                            
+                           <i nz-icon nzType="star" nzTheme="outline" 
+                            class="rateFillColor" *ngFor="let n of (noRateValue());let i = index;"></i>
+
+                            <!--
+                                <i nz-icon nzType="star" nzTheme="outline" 
+                            class="rateFillColor" *ngFor="let n of (5);let i = index;"></i>
+                            -->
+                            
                         </div>
+
+                        <div nz-row *ngIf="productRateValue(product._id).length == 0">
+                            <i nz-icon nzType="star" nzTheme="outline" 
+                            class="rateFillColor" *ngFor="let n of [0,1,2,3,4];let i = index;"></i>
+                        </div>
+
+
                         <div nz-row nzJustify="end">
                             <a nz-button nzType="link" (click)="addProductToWishlist(product._id)" nzShape="round"><i
                                     nz-icon nzType="heart" nzTheme="outline"
@@ -406,20 +428,27 @@
                         </p>
 
 
-                        <div nz-row>
+                        <div nz-row *ngIf="productRateValue(product._id).length != 0">
 
-                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                            <i nz-icon nzType="star" nzTheme="fill" 
+                            class="rateFillColor" *ngFor="let n of productRateValue(product._id);let i = index;"></i>
 
-                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
+                            
+                           <i nz-icon nzType="star" nzTheme="outline" 
+                            class="rateFillColor" *ngFor="let n of (noRateValue());let i = index;"></i>
 
-                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-
-                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-
-                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-
-
+                            <!--
+                                <i nz-icon nzType="star" nzTheme="outline" 
+                            class="rateFillColor" *ngFor="let n of (5);let i = index;"></i>
+                            -->
+                            
                         </div>
+
+                        <div nz-row *ngIf="productRateValue(product._id).length == 0">
+                            <i nz-icon nzType="star" nzTheme="outline" 
+                            class="rateFillColor" *ngFor="let n of [0,1,2,3,4];let i = index;"></i>
+                        </div>
+
                         <div nz-row nzJustify="end">
                             <a nz-button nzType="link" (click)="addProductToWishlist(product._id)" nzShape="round"><i
                                     nz-icon nzType="heart" nzTheme="outline"

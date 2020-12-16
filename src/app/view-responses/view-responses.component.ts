@@ -6,6 +6,7 @@ import { Response } from '../models/response';
 import { ResponseService } from '../services/response.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import {UserService } from '../services/user.service';
+import {MessageService } from '../services/message.service';
 
 @Component({
   selector: 'app-view-responses',
@@ -26,7 +27,7 @@ export class ViewResponsesComponent implements OnInit {
 
   constructor(private httpClient:HttpClient,private categoryService:CategoryService,
     private responseService:ResponseService, private router: Router, private routee: ActivatedRoute,
-    private modal: NzModalService,private userService:UserService
+    private modal: NzModalService,private userService:UserService,private messageService:MessageService
     ) { }
 
   ngOnInit(): void {
@@ -64,6 +65,16 @@ export class ViewResponsesComponent implements OnInit {
     var searchWord =  (<HTMLInputElement>document.getElementById("searchWord")).value;
     this.router.navigate(['/searchForProduct', searchWord]);
   }
+
+  contactSeller(sellerId){
+    var loggedInUserId = this.userService.getUserData()._id;
+  var conversation = {
+    users:[sellerId,loggedInUserId],
+    messages:[]
+  };
+ this.messageService.createConversation(conversation);
+ this.router.navigate(['/message']);
+}
 
 }
 

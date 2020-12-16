@@ -65,7 +65,7 @@ export class CartComponent implements OnInit {
                   this.specialOffer = res[0]['specialOffer'];
                   this.productDiscount = this.specialOffer.discount;
                   element.discount = Number(this.productDiscount);
-                  this.subTotalPrice = this.subTotalPrice + (this.specialOffer.discount * element.minOrder);
+                  this.subTotalPrice = this.subTotalPrice + (element.discount * element.cartEntries.amount);
                 });
               }
             });
@@ -74,7 +74,7 @@ export class CartComponent implements OnInit {
 
             for (let i = 0; i < this.cart.length; i++) {
               if (this.cart[i].specialOfferId == null) {
-                this.subTotalPrice = this.subTotalPrice + (this.cart[i].price * this.cart[i].minOrder);
+                this.subTotalPrice = this.subTotalPrice + (this.cart[i].price * this.cart[i].cartEntries.amount);
               }
             }
 
@@ -151,19 +151,20 @@ export class CartComponent implements OnInit {
         var subTotAfter = parseFloat((document.getElementById("subTotal" + productId).innerHTML));
         var divId = document.getElementById(productId).style.display = 'none';
 
-        document.getElementById("subTotal" + productId).innerHTML = (0).toString();
-        var subTotInitial = parseFloat(document.getElementById("cartSubtotal").innerHTML);
+        //document.getElementById("subTotal" + productId).innerHTML = (0).toString();
+        //var subTotInitial = parseFloat(document.getElementById("cartSubtotal").innerHTML);
+        var subTotInitial = (this.subTotalPrice);
         //console.log("Initial "+subTotInitial);
         //console.log("After "+subTotAfter);
         var subTotV = subTotInitial - subTotAfter;
-        console.log(subTotV);
-        var tax = parseFloat((subTotV * 0.05).toFixed(3));
-        var shippment = parseFloat((subTotV * 0.02).toFixed(3));
-        var totalPrice = (subTotV + tax + shippment).toFixed(3);
-        document.getElementById("cartSubtotal").innerHTML = (subTotV).toString();
-        document.getElementById("cartTax").innerHTML = (tax).toString();
-        document.getElementById("cartShipping").innerHTML = (shippment).toString();
-        document.getElementById("cartTotal").innerHTML = (totalPrice).toString();
+        //console.log(subTotV);
+        //var tax = parseFloat((subTotV * 0.05).toFixed(3));
+        //var shippment = parseFloat((subTotV * 0.02).toFixed(3));
+        //var totalPrice = (subTotV + tax + shippment).toFixed(3);
+        //document.getElementById("cartSubtotal").innerHTML = (subTotV).toString();
+       // document.getElementById("cartTax").innerHTML = (tax).toString();
+       // document.getElementById("cartShipping").innerHTML = (shippment).toString();
+        document.getElementById("cartTotal").innerHTML = (subTotV).toString();
         this.cartService.removeFromCart(productId).subscribe();
       }
 

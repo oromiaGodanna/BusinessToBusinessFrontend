@@ -19,6 +19,7 @@ import {WishlistComponent} from '../wishlist/wishlist.component';
 import {CartComponent} from '../cart/cart.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import {UserService } from '../services/user.service';
+import {FeedbacksService } from '../services/feedbacks.service';
 
 @Component({
   selector: 'app-products',
@@ -33,7 +34,7 @@ export class ProductsComponent implements OnInit {
   constructor(private http:HttpClient,private productService:ProductsService,private cartService:CartService,
     private categoryService:CategoryService,private fb: FormBuilder,private wishlistService:WishlistService,private modal: NzModalService,
     private offerService:SpecialofferService,
-    private router: Router,private iconService: NzIconService,
+    private router: Router,private iconService: NzIconService,private feedbackService: FeedbacksService,
     private notification: NzNotificationService,private i18n: NzI18nService,private userService:UserService,private sanit:DomSanitizer){ 
       this.form = this.fb.group({
         productCategory: [null, [Validators.required]],
@@ -65,7 +66,8 @@ export class ProductsComponent implements OnInit {
   counterI=0;
   initialCountProducts=1;
   countProducts=1;
-  
+  productRateV;
+  productNoRate;
 
   getProducts(): void {
         
@@ -178,7 +180,22 @@ export class ProductsComponent implements OnInit {
   openFilter(){
     document.getElementById('filterSideBar').style.display="inline";
   }
-
+  productRateValue(productId){
+      var getRate = this.feedbackService.getRating(productId);
+      var rateValue = getRate.rating;
+      var parseRate = parseInt(rateValue);
+      this.productNoRate = Number(5 - parseRate);
+      console.log( this.productNoRate);
+      if(parseRate = 0){
+        return [];
+      }else{
+        return Array(parseRate);
+      }
+     
+  }
   
+  noRateValue(){
+        return Array(this.productNoRate);
+  }
 }
 

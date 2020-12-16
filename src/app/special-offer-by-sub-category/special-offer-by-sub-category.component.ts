@@ -18,6 +18,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import {CartComponent} from '../cart/cart.component';
 import {WishlistComponent} from '../wishlist/wishlist.component';
 import {UserService } from '../services/user.service';
+import {FeedbacksService } from '../services/feedbacks.service';
 
 @Component({
   selector: 'app-special-offer-by-sub-category',
@@ -27,7 +28,8 @@ import {UserService } from '../services/user.service';
 export class SpecialOfferBySubCategoryComponent implements OnInit {
 
   constructor(private http:HttpClient,private route:ActivatedRoute,private productService:ProductsService,private cartService:CartService,
-    private specialofferService:SpecialofferService,private wishlistService:WishlistService,private iconService: NzIconService,private message: NzMessageService,private notification: NzNotificationService,
+    private specialofferService:SpecialofferService,private feedbackService: FeedbacksService,
+    private wishlistService:WishlistService,private iconService: NzIconService,private message: NzMessageService,private notification: NzNotificationService,
     private router: Router,private fb: FormBuilder,private userService:UserService, private categoryService:CategoryService,private modal: NzModalService,private i18n: NzI18nService) { }
 
     productCategory;
@@ -39,6 +41,8 @@ export class SpecialOfferBySubCategoryComponent implements OnInit {
     initialCountProducts=1;
     countProducts=1;
     categories;
+    productRateV;
+    productNoRate;
 
   ngOnInit(): void {
     this.getSpecialOffers();
@@ -99,6 +103,24 @@ export class SpecialOfferBySubCategoryComponent implements OnInit {
       this.countProducts = res.length;
   });
  
+}
+
+productRateValue(productId){
+  var getRate = this.feedbackService.getRating(productId);
+  var rateValue = getRate.rating;
+  var parseRate = parseInt(rateValue);
+  this.productNoRate = Number(5 - parseRate);
+  console.log( this.productNoRate);
+  if(parseRate = 0){
+    return [];
+  }else{
+    return Array(parseRate);
+  }
+ 
+}
+
+noRateValue(){
+    return Array(this.productNoRate);
 }
   
 }

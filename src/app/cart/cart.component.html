@@ -314,7 +314,7 @@
 </style>
 <nz-layout style="background:white;">
   
-  <nz-content>
+  <nz-content style="margin:30px;">
     <div nz-row>
       <div>
         <h1>Shopping Cart</h1>
@@ -361,7 +361,7 @@
             {{product.cartEntries.additionalInfo[1]}} </p>
           <p class="product-description" *ngIf="product.cartEntries.additionalInfo[2]">Selected Sizes:
             {{product.cartEntries.additionalInfo[2]}} </p>
-          <p class="product-description">Minimum Order Is: {{product.minOrder}} </p>
+          <p class="product-description">Amount given: {{product.cartEntries.amount}} </p>
         </div>
 
         <div class="product-price" *ngIf="product.discount">
@@ -371,11 +371,11 @@
           {{ product.price }} <strong>BIRR</strong>
         </div>
 
-        <div class="product-quantity" *ngIf="product.discount">
-          <!--<input type="number" value="1" min="1">-->
+        <!--<div class="product-quantity" *ngIf="product.discount">
+          <input type="number" value="1" min="1">
           <input nz-input type="number" id="inputQuantity{{product._id}}" [ngModel]="product.minOrder"
             (ngModelChange)="changeSubTotal(product._id,product.discount,product.minOrder)" />
-        </div>
+        </div>-->
 
         <!-- <div class="product-quantity" *ngIf="!product.discount">
           <input type="number" value="1" min="1">
@@ -391,11 +391,11 @@
         </div>
 
         <div class="product-line-price" *ngIf="product.discount">
-          <span id="subTotal{{product._id}}">{{ product.minOrder*product.discount }}</span><strong> BIRR</strong>
+          <span id="subTotal{{product._id}}">{{ product.cartEntries.amount*product.discount }}</span><strong> BIRR</strong>
         </div>
 
         <div class="product-line-price" *ngIf="!product.discount">
-          <span id="subTotal{{product._id}}">{{ product.minOrder*product.price }}</span><strong> BIRR</strong>
+          <span id="subTotal{{product._id}}">{{ product.cartEntries.amount*product.price }}</span><strong> BIRR</strong>
         </div>
 
       </div>
@@ -405,25 +405,12 @@
           <label>Description</label>
           <textarea class="textareaClass" input></textarea>
         </div>
-        <div class="totals-item">
-          <label>Subtotal</label>
-          <div class="totals-value" id="cart-subtotal" style="display: block;"><span
-              id="cartSubtotal">{{subTotalPrice}}</span> <strong> BIRR </strong></div>
-        </div>
-        <div class="totals-item">
-          <label>Tax (5%)</label>
-          <div class="totals-value" id="cart-tax" style="display: block;"><span id="cartTax">{{(subTotalPrice*0.05).toFixed(2)}}</span> <strong>
-              BIRR</strong></div>
-        </div>
-        <div class="totals-item">
-          <label>Shipping (2%)</label>
-          <div class="totals-value" id="cart-shipping" style="display: block;"><span
-              id="cartShipping">{{(subTotalPrice*0.02).toFixed(2)}}</span> <strong> BIRR</strong></div>
-        </div>
+        
+                
         <div class="totals-item totals-item-total">
-          <label>Total</label>
+          <label>Total Price</label>
           <div class="totals-value" id="cart-total" style="display: block;"><span
-              id="cartTotal">{{(subTotalPrice + (subTotalPrice*0.05)+(subTotalPrice*0.02)).toFixed(2)}}</span><strong> BIRR</strong></div>
+              id="cartTotal">{{subTotalPrice}}</span><strong> BIRR</strong></div>
         </div>
       </div>
 

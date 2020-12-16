@@ -18,7 +18,7 @@ import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 import {WishlistComponent} from '../wishlist/wishlist.component';
 import {CartComponent} from '../cart/cart.component';
 import {UserService } from '../services/user.service';
-
+import {FeedbacksService } from '../services/feedbacks.service';
 
 @Component({
   selector: 'app-search-product',
@@ -30,7 +30,7 @@ export class SearchProductComponent implements OnInit {
   constructor(private http:HttpClient,private productService:ProductsService, private route: ActivatedRoute,
     private iconService: NzIconService,private wishlistService:WishlistService,private cartService:CartService,
     private router: Router, private categoryService:CategoryService,private modal: NzModalService,
-    private specialofferService:SpecialofferService,private userService:UserService,
+    private specialofferService:SpecialofferService,private userService:UserService,private feedbackService: FeedbacksService,
     private notification: NzNotificationService,private i18n: NzI18nService) { }
 
     productCategory;
@@ -44,6 +44,8 @@ export class SearchProductComponent implements OnInit {
     isEnglish = false;
     offset=0;
     limit=12;
+    productRateV;
+    productNoRate;
 
   ngOnInit(): void {
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
@@ -113,6 +115,23 @@ export class SearchProductComponent implements OnInit {
     
 }
 
+productRateValue(productId){
+  var getRate = this.feedbackService.getRating(productId);
+  var rateValue = getRate.rating;
+  var parseRate = parseInt(rateValue);
+  this.productNoRate = Number(5 - parseRate);
+  console.log( this.productNoRate);
+  if(parseRate = 0){
+    return [];
+  }else{
+    return Array(parseRate);
+  }
+ 
+}
+
+noRateValue(){
+    return Array(this.productNoRate);
+}
 
 }
 

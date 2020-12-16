@@ -18,6 +18,8 @@ import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 import {WishlistComponent} from '../wishlist/wishlist.component';
 import {CartComponent} from '../cart/cart.component';
 import {UserService } from '../services/user.service';
+import {MessageService } from '../services/message.service';
+import {FeedbacksService } from '../services/feedbacks.service';
 
 @Component({
   selector: 'app-filter-product',
@@ -28,7 +30,7 @@ export class FilterProductComponent implements OnInit {
 
   constructor(private http:HttpClient,private productService:ProductsService,private cartService:CartService,
     private categoryService:CategoryService,private fb: FormBuilder,private wishlistService:WishlistService,private modal: NzModalService,
-    private offerService:SpecialofferService,private userService:UserService,
+    private offerService:SpecialofferService,private userService:UserService,private feedbackService: FeedbacksService,
     private router: Router,private route: ActivatedRoute,private iconService: NzIconService,
     private notification: NzNotificationService,private specialofferService:SpecialofferService,private i18n: NzI18nService) { }
 
@@ -54,7 +56,9 @@ export class FilterProductComponent implements OnInit {
     countInitialProducts=1;
     countMoreProducts=1;
     filterObj;
-    
+    productRateV;
+    productNoRate;
+
     getProducts(): void {
       
       this.route.paramMap.subscribe(params => {
@@ -125,6 +129,23 @@ export class FilterProductComponent implements OnInit {
     
 }
 
+productRateValue(productId){
+  var getRate = this.feedbackService.getRating(productId);
+  var rateValue = getRate.rating;
+  var parseRate = parseInt(rateValue);
+  this.productNoRate = Number(5 - parseRate);
+  console.log( this.productNoRate);
+  if(parseRate = 0){
+    return [];
+  }else{
+    return Array(parseRate);
+  }
+ 
+}
+
+noRateValue(){
+    return Array(this.productNoRate);
+}
     
   }
   
