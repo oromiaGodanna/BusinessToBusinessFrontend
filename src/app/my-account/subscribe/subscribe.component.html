@@ -1,0 +1,9 @@
+<nz-list nzItemLayout="vertical" nzBordered nzHeader="List Of subscribers">
+    <nz-list-item *ngFor="let user of subscribers">
+        <nz-descriptions>
+            <nz-descriptions-item nzTitle="Name">{{user.firstName}}, {{user.lastName}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="Email">{{user.email}}</nz-descriptions-item>
+            <nz-descriptions-item nzTitle="companyName">{{user.companyName}}</nz-descriptions-item>
+        </nz-descriptions>
+    </nz-list-item>
+  </nz-list>

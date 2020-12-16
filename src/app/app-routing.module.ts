@@ -71,33 +71,43 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { OrdersComponent } from './orders/orders.component';
 import { PaymentComponent } from './payment/payment.component';
 import { PlaceOrderComponent } from './place-order/place-order.component';
+import { AdminComponent } from './admin/admin.component';
+import { UserListComponent } from './admin/user-list/user-list.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { ReportComponent } from './admin/report/report.component';
+import { SubscribeComponent } from './my-account/subscribe/subscribe.component';
 
 const routes: Routes = [
-  { path: 'message', component: MessageComponent},
-  { path: 'notification', component: NotificationComponent},
-  
-  { path: 'promotion/email', component: EmailFormComponent},
-  { path: 'promotion/email/:id', component: EmailFormComponent},
+  { path: 'message', component: MessageComponent },
+  { path: 'notification', component: NotificationComponent },
 
-  { path: 'promotion/notification', component: NewNotificationComponent},
-  { path: 'promotion/sms', component: NewSmsComponent},
-  { path: 'promotion', component: PromotionComponent},
+  { path: 'promotion/email', component: EmailFormComponent },
+  { path: 'promotion/email/:id', component: EmailFormComponent },
 
-  { path: 'login', component: LoginComponent},
+  { path: 'promotion/notification', component: NewNotificationComponent },
+  { path: 'promotion/sms', component: NewSmsComponent },
+  { path: 'promotion', component: PromotionComponent },
+
+  { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'footer', component: FooterComponent },
-  { path: 'register', component: RegisterComponent},
+  { path: 'register', component: RegisterComponent },
   { path: 'email_confirmation/:token', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile/:id', component: ProfileComponent },
   {
-    path: 'my_account',  component: MyAccountComponent, canActivate: [AuthGuard], children: [
+    path: 'my_account', component: MyAccountComponent, canActivate: [AuthGuard], children: [
       { path: ':id/view', component: ViewProfileComponent },
       { path: ':id/update', component: UpdateProfileComponent },
       { path: ':id/change_email', component: ChangeEmailComponent },
       { path: ':id/change_password', component: ChangePasswordComponent },
-      { path: ':id/deactivate', component: DeleteAccountComponent}
+      { path: ':id/deactivate', component: DeleteAccountComponent },
+      { path: 'addProduct', component: AddProductComponent },
+      { path: 'myProducts', component: ProductListComponent },
+      { path: 'pendingSpecialoffer', component: PendingSpecialOfferComponent },
+      { path: 'activeSpecialoffer', component: ActiveSpecialOfferComponent },
+      {path : 'subscribers', component: SubscribeComponent }
     ]
   },
   { path: 'help', component: HelpComponent },
@@ -105,44 +115,53 @@ const routes: Routes = [
   { path: 'forgot_password', component: ForgotPasswordComponent },
   { path: 'reset_password/:token', component: ResetPasswordComponent },
   { path: 'subscription', component: SubscriptionModelsComponent },
-  { path: 'subscription_forms', canActivate : [AuthGuard, RoleGuard], component: SubscriptionFormComponent },
-  
-  
-  {path:'products',component:ProductsComponent},
-  {path:'wishlist',component:WishlistComponent},
-  {path:'cart',component:CartComponent},
-  { path: 'product/:id', component: ProductComponent},
-  { path: 'addProduct', component: AddProductComponent},
-  { path: 'myProducts', component: ProductListComponent},
-  { path: 'editProduct/:id', component: EditProductComponent},
-  { path: 'pendingSpecialoffer', component: PendingSpecialOfferComponent},
-  { path: 'activeSpecialoffer', component: ActiveSpecialOfferComponent},
-  { path: 'specialOffers', component: SpecialofferListComponent},
-  { path: 'index', component: IndexComponent},
-  { path: 'addCategory', component: AddCategoryComponent},
-  { path: 'categories', component: CategoriesComponent},
-  { path: 'editCategory/:id', component: EditCategoryComponent},
-  { path: 'successMessage/:type/:message', component: AlertsComponent},
-  { path: 'successMessage/:type/:message/:route', component: AlertsComponent},
-  { path: 'productByCategory/:category', component: ProductByCategoryComponent},
-  { path: 'productBySubCategory/:subCategory', component: ProductBySubCategoryComponent},
-  { path: 'specialOfferByCategory/:category', component: SpecialOfferByCategoryComponent},
-  { path: 'specialOfferBySubCategory/:subCategory', component: SpecialOfferBySubCategoryComponent},
-  { path: 'specialOfferProduct/:id', component: SpecialOfferProductComponent},
-  { path: 'requestProforma', component: RequestProformaComponent},
-  { path: 'pendingProformas', component: PendingProformaComponent},
-  { path: 'pendingProforma/:message', component: PendingProformaComponent},
-  { path: 'activeProformas', component: OpenedProformaComponent},
-  { path: 'activeProformas/:message', component: OpenedProformaComponent},
-  { path: 'closedProformas', component: ClosedProformaComponent},
-  { path: 'closedProformas/:message', component: ClosedProformaComponent},
-  { path: 'viewProforma/:proformaId', component: ViewProformaComponent},
-  { path: 'viewResponses/:itemId', component: ViewResponsesComponent},
-  { path: 'searchForProduct', component: SearchProductComponent},
-  { path: 'searchForProduct/:searchWord', component: SearchProductComponent},
-  { path: 'measurements', component: MeasurementsComponent},
-  { path: 'addMeasurement', component: AddMeasurementComponent},
-  { path: 'filterProducts/:productCategory/:productSubCategory/:maxPrice', component: FilterProductComponent},
+
+  { path: 'adminLogin', component: AdminLoginComponent },
+  {
+    path: 'admin', component: AdminComponent, children: [
+      { path: 'user_list', component: UserListComponent },
+      { path: 'subscription_forms', component: SubscriptionFormComponent },
+      { path: 'addCategory', component: AddCategoryComponent },
+      { path: 'categories', component: CategoriesComponent },
+      { path: 'measurements', component: MeasurementsComponent },
+      { path: 'addMeasurement', component: AddMeasurementComponent },
+      {path: 'report', component: ReportComponent},
+    ]
+  },
+  { path: 'products', component: ProductsComponent },
+  { path: 'wishlist', component: WishlistComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'product/:id', component: ProductComponent },
+  { path: 'addProduct', component: AddProductComponent },
+  { path: 'myProducts', component: ProductListComponent },
+  { path: 'editProduct/:id', component: EditProductComponent },
+  { path: 'pendingSpecialoffer', component: PendingSpecialOfferComponent },
+  { path: 'activeSpecialoffer', component: ActiveSpecialOfferComponent },
+  { path: 'specialOffers', component: SpecialofferListComponent },
+  { path: 'index', component: IndexComponent },
+
+
+  { path: 'editCategory/:id', component: EditCategoryComponent },
+  { path: 'successMessage/:type/:message', component: AlertsComponent },
+  { path: 'successMessage/:type/:message/:route', component: AlertsComponent },
+  { path: 'productByCategory/:category', component: ProductByCategoryComponent },
+  { path: 'productBySubCategory/:subCategory', component: ProductBySubCategoryComponent },
+  { path: 'specialOfferByCategory/:category', component: SpecialOfferByCategoryComponent },
+  { path: 'specialOfferBySubCategory/:subCategory', component: SpecialOfferBySubCategoryComponent },
+  { path: 'specialOfferProduct/:id', component: SpecialOfferProductComponent },
+  { path: 'requestProforma', component: RequestProformaComponent },
+  { path: 'pendingProformas', component: PendingProformaComponent },
+  { path: 'pendingProforma/:message', component: PendingProformaComponent },
+  { path: 'activeProformas', component: OpenedProformaComponent },
+  { path: 'activeProformas/:message', component: OpenedProformaComponent },
+  { path: 'closedProformas', component: ClosedProformaComponent },
+  { path: 'closedProformas/:message', component: ClosedProformaComponent },
+  { path: 'viewProforma/:proformaId', component: ViewProformaComponent },
+  { path: 'viewResponses/:itemId', component: ViewResponsesComponent },
+  { path: 'searchForProduct', component: SearchProductComponent },
+  { path: 'searchForProduct/:searchWord', component: SearchProductComponent },
+
+  { path: 'filterProducts/:productCategory/:productSubCategory/:maxPrice', component: FilterProductComponent },
 
   { path: 'disputes', component: DisputesComponent, canActivate: [AuthGuard] },
   { path: 'feedback', component: FeedbackComponent, canActivate: [AuthGuard] },

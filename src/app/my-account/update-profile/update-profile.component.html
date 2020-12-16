@@ -4,13 +4,7 @@
             <form nz-form [nzLayout]="'vertical'" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 
                 <nz-card nzType="inner" [nzBordered]="false" nzTitle="Basic Information">
-                    <!-- <div nz-row>
-                        <div nz-col nzOffset="8" nzSpan="8">
-                            <nz-avatar style="align-content: center;" [nzSize]="100" nzIcon="user"></nz-avatar>
-                            <nz-upload>
-                            </nz-upload>
-                        </div>
-                    </div> -->
+                  
                     <div nz-row>
                         <div nz-col nzSpan="12">
                             <nz-form-item>
@@ -38,14 +32,14 @@
                                 <nz-form-label [nzSpan]="12" nzRequired>Email</nz-form-label>
                                 <nz-form-control [nzErrorTip]="emailErrorTips" nzSpan="20">
                                     <nz-input-group nzPrefixIcon="mail">
-                                        <input nz-input placeholder="Email Address" formControlName="email" />
+                                        <input nz-input placeholder="Email Address" formControlName="email"/>
                                     </nz-input-group>
-                                    <ng-template #emailErrorTips let-control>
+                                    <!-- <ng-template #emailErrorTips let-control>
                                         <ng-container *ngIf="control.hasError('email')">Please input a valid email
                                             address!</ng-container>
                                         <ng-container *ngIf="control.hasError('required')">Email is required!
                                         </ng-container>
-                                    </ng-template>
+                                    </ng-template> -->
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
@@ -187,6 +181,34 @@
                 </nz-card>
 
                 <nz-card nzType="inner" [nzBordered]="false" nzTitle="Company Information"
+                *ngIf="user.userType == 'Buyer'">
+                <div nz-row>
+                    <div nz-col nzSpan="12">
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="12" nzRequired>Company Name</nz-form-label>
+                            <nz-form-control nzErrorTip="Please enter your Company Name!" nzSpan="20">
+                                <nz-input-group nzPrefixIcon="bank">
+                                    <input formControlName="companyName" nz-input type="text"
+                                        placeholder="Company Name" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col nzSpan="12">
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="12" nzRequired>Tin Number</nz-form-label>
+                            <nz-form-control nzErrorTip="Please input your Tin Number!" nzSpan="20">
+                                <nz-input-group nzPrefixIcon="field-number">
+                                    <input nz-input placeholder="Company Tin Number" type="number"
+                                        formControlName="tinNumber" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+                </nz-card>
+
+                <nz-card nzType="inner" [nzBordered]="false" nzTitle="Company Information"
                     *ngIf="user.userType != 'Buyer'">
                     <div nz-row>
                         <div nz-col nzSpan="12">
@@ -258,7 +280,7 @@
                     </div> -->
 
                     <div nz-row>
-                        <div nz-col nzSpan="12">
+                        <div nz-col nzSpan="12" *ngIf="false">
                             <nz-form-item>
                                 <nz-form-label [nzSpan]="12" nzRequired>Business Type</nz-form-label>
                                 <nz-form-control nzErrorTip="Please input your Password!" nzSpan="20">
@@ -285,7 +307,17 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        
+                        <div nz-col nzSpan="12">
+                            <nz-form-item>
+                                <nz-form-label [nzSpan]="20">Number of Employees</nz-form-label>
+                                <nz-form-control nzSpan="20">
+                                    <nz-input-group nzPrefixIcon="number">
+                                        <input formControlName="numOfEmployees" nz-input type="number"
+                                            placeholder="No of Employees" />
+                                    </nz-input-group>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
                         <!-- <div nz-col nzSpan="12">
                             <nz-form-item>
                                 <nz-form-label [nzSpan]="12">Country</nz-form-label>
@@ -305,21 +337,11 @@
                     </div>
 
                     <div nz-row>
-                        <div nz-col nzSpan="12">
-                            <nz-form-item>
-                                <nz-form-label [nzSpan]="20">Number of Employees</nz-form-label>
-                                <nz-form-control nzSpan="20">
-                                    <nz-input-group nzPrefixIcon="number">
-                                        <input formControlName="numOfEmployees" nz-input type="number"
-                                            placeholder="No of Employees" />
-                                    </nz-input-group>
-                                </nz-form-control>
-                            </nz-form-item>
-                        </div>
-                        <div nz-col nzSpan="12">
+                        
+                        <div nz-col nzSpan="24">
                             <nz-form-item>
                                 <nz-form-label [nzSpan]="12" nzRequired>Official WebSite</nz-form-label>
-                                <nz-form-control nzErrorTip="Please enter your Company Name!" nzSpan="20">
+                                <nz-form-control nzErrorTip="Please enter your Company Name!" nzSpan="22">
                                     <nz-input-group nzPrefixIcon="link">
                                         <input formControlName="officalWebsite" nz-input type="text"
                                             placeholder="Company Name" />

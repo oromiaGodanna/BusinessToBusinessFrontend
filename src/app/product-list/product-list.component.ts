@@ -139,8 +139,12 @@ export class ProductListComponent implements OnInit {
           "endDate":this.form.get('endDate').value,
           };
       
+          this.isVisible = false;
+          
       this.specialofferService.addSpecialOffer(this.product).subscribe(
         (response) => {
+
+          
           
            // console.log(response)
             if(response['sucess'] == true){
@@ -149,6 +153,7 @@ export class ProductListComponent implements OnInit {
               var msg="Product Is Already On Pending For SpecialOffer!";
               this.router.navigate(['/successMessage/success/'+msg+'/specialOffer']); // navigate to other page
             }
+
             
           },
           (error) => {

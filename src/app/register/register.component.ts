@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit {
   verfication: string;
   resendEmail: string;
   mobile: any;
+  regitredUser;
 
   constructor(
     private userService: UserService,
@@ -43,8 +44,12 @@ export class RegisterComponent implements OnInit {
           this.userService.confirmEmail(params['token']).subscribe((response: any) => {
             // console.log('email confirmation in registration componet');
             if (response.status == 200) {
-              // console.log("response", response);
               this.verfication = 'sent';
+              this.userService.createPaymnetAccount(response.user._id).subscribe((reponse: any) => {
+                if (reponse.status == 200) {
+                  //update customer data
+                }
+              });
               this.onNext();
             }
           }, (error: HttpErrorResponse) => {
@@ -128,24 +133,6 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // telInput = {
-  //   initialCountry: this.initialCountry,
-  // }
-  // getNumber(event: any): void {
-  //   this.signupForm.patchValue({ mobile: event });
-  // }
-
-  // hasError(event: any): void {
-  //   if (!event && this.signupForm.value.mobile !== '') {
-  //     this.signupForm.get('mobile').setErrors({ 'invalidPhoneNumber': true });
-  //   }
-  // }
-
-  // onCountryChange(value) {
-  //   this.signupForm.get('country')!.setValue(value.name);
-  //   this.initialCountry = value;
-  // }
-
   passwordMatch(controls: FormGroup): { invalid: boolean } {
     if (controls.get('password').value !== controls.get('confirmPassword').value) {
       controls.get('confirmPassword').setErrors({ 'noMatch': true });
@@ -153,25 +140,6 @@ export class RegisterComponent implements OnInit {
     }
     return null;
   }
-
-  // onCountrySelected(value: string) {
-  //   this.selectedCountry = value;
-  // }
-
-  // get phoneNumbers(): FormArray {
-  //   return this.signupForm.get('phoneNumbers') as FormArray;
-  // }
-
-  // onAddPhoneNo() {
-  //   const control = new FormControl(null, Validators.required);
-  //   this.phoneNumbers.push(control);
-  // }
-
-  // onRemovePhoneNo(index: number) {
-  //   if (this.phoneNumbers.length > 1) {
-  //     this.phoneNumbers.removeAt(index);
-  //   }
-  // }
 
   onNext(): void {
     this.current += 1;
@@ -184,7 +152,7 @@ export class RegisterComponent implements OnInit {
   sideInfo = {
     title: "WELCOME!",
     subTitle: "Let's Get Started",
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit,do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    content: " We provide the technology infrastructure and marketing reach to help merchants, brands and other businesses to leverage the power of new technology to engage with their users and customers and operate in a more efficient way. We enable commercial and social interactions among businesses every day. We aim to build the future infrastructure of commerce, to bring together manufacturers in Ethiopia with the global market. Create an account and help us reach the goals we envision."
   }
 
   agreement = "While creating a website account: i agree to abide by the company Name membership agreemet-willing to receive related memeber ans service emails from company Name";

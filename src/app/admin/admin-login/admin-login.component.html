@@ -1,0 +1,62 @@
+<div nz-row class="content">
+    <div nz-col nzOffset="6" nzSpan="14">
+        <form nz-form [nzLayout]="'vertical'"
+        (ngSubmit)="onSubmit(loginForm)" 
+        #loginForm="ngForm">
+        <nz-alert *ngIf="error == true"  nzType="error" [nzMessage]="errorMsg" nzCloseable nzShowIcon> </nz-alert>
+          <nz-form-item>
+            <nz-form-label nzRequired nzSpan="20">Email</nz-form-label>
+            <nz-form-control nzHasFeedback [nzErrorTip]="emailErrorTips" nzSpan="20">
+              <nz-input-group nzPrefixIcon="mail">
+                <input nz-input 
+                placeholder="E-mail" 
+                type="email" 
+                ngModel
+                name="email"
+                required
+                email />
+                <ng-template #emailErrorTips let-control>
+                  <ng-container *ngIf="control.hasError('email')">Please input a valid email address!</ng-container>
+                  <ng-container *ngIf="control.hasError('required')">Email is required!</ng-container>
+                </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+        
+          <nz-form-item>
+            <nz-form-label nzRequired nzSpan="20">Password</nz-form-label>
+            <nz-form-control nzHasFeedback [nzErrorTip]="passwordErrorTips" nzSpan="20">
+              <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate" >
+                <input nz-input 
+                placeholder="Password" 
+                [type]="passwordVisible ? 'text' : 'password'" 
+                ngModel
+                required
+                name="password"/>
+                <ng-template #passwordErrorTips let-control>
+                  <ng-container *ngIf="control.hasError('required')">Password is required</ng-container>
+                </ng-template>
+              </nz-input-group>
+              <ng-template #suffixTemplate>
+                <i nz-icon [nzType]="passwordVisible ? 'eye' : 'eye-invisible'"
+                  (click)="passwordVisible = !passwordVisible"></i>
+              </ng-template>
+            </nz-form-control>
+          </nz-form-item>
+        
+          <!-- <div nz-row>
+            <div nz-col>
+              <a (click)="forgotPassword()">Forgot password</a>
+            </div>
+          </div> -->
+          
+          <br>
+          <div nz-row>
+            <div nz-col [nzSpan]="20" style="text-align: center;">
+              <button nz-button nzBlock [nzType]="'primary'" type="submit" [disabled]='!loginForm.valid'>Login</button>
+            </div>
+          </div>
+        </form>
+    </div>
+   
+</div>

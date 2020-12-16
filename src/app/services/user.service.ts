@@ -22,11 +22,18 @@ export class UserService {
 
 
   serverUrl = 'http://localhost:3000';
+  paymentUrl = 'http://localhost:3030';
   constructor(private http: HttpClient) { }
 
 
   loginUser(loginInfo: LoginInfo): Observable<any> {
     const url = `${this.serverUrl}/customer/login`;
+    return this.http.post(url, loginInfo);
+  }
+
+  loginAdmin(loginInfo: LoginInfo): Observable<any> {
+    console.log('user service admin login');
+    const url = `${this.serverUrl}/admin/login`;
     return this.http.post(url, loginInfo);
   }
 
@@ -47,11 +54,19 @@ export class UserService {
 
   getUserProfile(userId): Observable<any> {
     const url = `${this.serverUrl}/customer/${userId}`;
-    console.log(url);
     return this.http.get(url);
   }
 
+  getAllUsers(){
+    //return 'get user data';
+    const url = `${this.serverUrl}/customer/`;
+    return this.http.get(url);
+  }
 
+getSubscribers(id){
+  const url = `${this.serverUrl}/customer/subscribers/${id}`;
+    return this.http.get(url);
+}
   forgotPassword(email): Observable<any> {
     const url = `${this.serverUrl}/customer/forgotPassword`;
     return this.http.put(url, { email: email });
@@ -111,6 +126,11 @@ export class UserService {
     this.user = null;
     localStorage.clear();
     this.userSubject.next(null);
+  }
+
+  createPaymnetAccount(userId): Observable<any>{
+    const url = `${this.paymentUrl}/${userId}`;
+    return this.http.post(url,userId);
 
   }
 

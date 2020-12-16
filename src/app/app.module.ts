@@ -135,6 +135,7 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 
 import { NzTableModule } from 'ng-zorro-antd/table';
 
@@ -158,8 +159,13 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 
 import { NzProgressModule } from 'ng-zorro-antd/progress';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { AdminComponent } from './admin/admin.component';
+import { UserListComponent } from './admin/user-list/user-list.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 
 import { OrderDetailsSupplierComponent } from './order-details-supplier/order-details-supplier.component';
+import { ReportComponent } from './admin/report/report.component';
+import { SubscribeComponent } from './my-account/subscribe/subscribe.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -234,7 +240,12 @@ registerLocaleData(en);
     DisputesComponent,
     NewDisputeComponent,
     OrderDetailsComponent,
-    OrderDetailsSupplierComponent
+    AdminComponent,
+    UserListComponent,
+    AdminLoginComponent,
+    OrderDetailsSupplierComponent,
+    ReportComponent,
+    SubscribeComponent
   ],
   imports: [
     BrowserModule,
@@ -296,9 +307,9 @@ registerLocaleData(en);
     NzBadgeModule,
     NzMenuModule,
     NzCheckboxModule,
-
     NzProgressModule,
     NzPaginationModule,
+    NzStatisticModule
 
   ],
   providers: [

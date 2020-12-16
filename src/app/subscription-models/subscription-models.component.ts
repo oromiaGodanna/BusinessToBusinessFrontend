@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 import { AppHttpService } from '../services/app-http.service';
-
+import { UserService } from '../services/user.service';
 import {SubscriptionService} from '../services/subscription.service';
 
 @Component({
@@ -11,10 +11,12 @@ import {SubscriptionService} from '../services/subscription.service';
   styleUrls: ['./subscription-models.component.css']
 })
 export class SubscriptionModelsComponent implements OnInit {
+  loggedInUser;
 
   constructor(
     private subscriptionService: SubscriptionService,
     private http: AppHttpService,
+    private userService: UserService,
     private router: Router,
     private message: NzMessageService) { }
  
@@ -73,5 +75,33 @@ plans=[];
 
   helpCenter(){
     this.router.navigate(['help']);
+  }
+
+
+  buySubscription(index){
+    if(this.userService.isLoggedIn()){
+      this.loggedInUser = this.userService.getUserData();
+      console.log(this.loggedInUser);
+      if(this.loggedInUser.userType == 'Buyer'){
+        this.message.info('Users with a Buyer role can not buy subscriptions');
+      }else{
+        const subscription = this.plans[index];
+        //onsole.log(subscription);
+        this.subscriptionService.buySubscription(this.loggedInUser._id, subscription._id).subscribe(
+          (response: any) => {
+            if (response.status == 200) {
+              this.userService.updateUserData(response.customer);
+              this.message.success('You have bought the subscription successfully');
+            //navigate to subscription details
+            }
+          }, (error) =>{
+            this.message.success(`${error.error} Could not buy subscription. Please try again`);
+          });
+      }
+
+    }else{
+      this.message.info('Please Login to buy a subscription');
+      this.router.navigate(['/login']);
+    }
   }
 }

@@ -12,6 +12,7 @@ export class MyAccountComponent implements OnInit {
 
   // isCollapsed = false;
   userId;
+  userType;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -22,7 +23,9 @@ export class MyAccountComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-    this.userId = (JSON.parse(localStorage.getItem('user')))._id;
+    const user = (JSON.parse(localStorage.getItem('user')));
+    this.userId = user._id;
+    this.userType = user.userType;
   }
 
   logout(){

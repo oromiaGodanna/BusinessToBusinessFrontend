@@ -18,6 +18,7 @@ import {WishlistComponent} from '../wishlist/wishlist.component';
 import {CartComponent} from '../cart/cart.component';
 import {UserService } from '../services/user.service';
 import {MessageService } from '../services/message.service';
+import {FeedbacksService } from '../services/feedbacks.service';
 
 @Component({
   selector: 'app-product',
@@ -28,7 +29,7 @@ export class ProductComponent implements OnInit {
 
   constructor(private http:HttpClient,private productService:ProductsService,private cartService:CartService, private route: ActivatedRoute,
     private iconService: NzIconService,private wishlistService:WishlistService,private modal: NzModalService,
-    private specialofferService:SpecialofferService,
+    private specialofferService:SpecialofferService,private feedbackService: FeedbacksService,
     private router: Router,private notification: NzNotificationService,private i18n: NzI18nService,private userService:UserService,private messageService:MessageService) { 
       
     }
@@ -60,6 +61,9 @@ export class ProductComponent implements OnInit {
   sizeInNumberArray;
   countRelatedProducts;
   fb = new FormBuilder();
+  
+  productRateV;
+  productNoRate;
 
   ngOnInit(): void {
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
@@ -218,5 +222,23 @@ export class ProductComponent implements OnInit {
        this.messageService.createConversation(conversation);
        this.router.navigate(['/message']);
   }
+
+  productRateValue(productId){
+    var getRate = this.feedbackService.getRating(productId);
+    var rateValue = getRate.rating;
+    var parseRate = parseInt(rateValue);
+    this.productNoRate = Number(5 - parseRate);
+    console.log( this.productNoRate);
+    if(parseRate = 0){
+      return [];
+    }else{
+      return Array(parseRate);
+    }
+   
+}
+
+noRateValue(){
+      return Array(this.productNoRate);
+}
 
 }

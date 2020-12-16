@@ -37,11 +37,12 @@ export class LoginComponent implements OnInit {
       (response:any) => {
         if (response.status == 200) {
           this.userService.storeUserData(response.token, response.user);
-          if(response.user.userType == 'Admin'){
-            this.userService.isAdmin = true;
+          if(response.user.userType == 'Buyer'){
+            this.router.navigate(['/index']);
+          }else{
+            this.message.success('Login Successful.');
+            this.router.navigate([`/my_account`, 'myProducts']);
           }
-          this.message.success('Login Successful.');
-          this.router.navigate([`my_account/${response.id}/view`]);
         }
       },(error:HttpErrorResponse) =>{
           this.error = true;
@@ -59,6 +60,6 @@ export class LoginComponent implements OnInit {
   sideInfo = {
     title: "WELCOME BACK!",
     subTitle: "Let's Get Started",
-    content: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+    content: "We empower our customers with the fundamental infrastructure for commerce and new technology, so that they can build businesses and create value that can be shared among our digital economy participants. Login in to unlock the power we provide for your company."
   }
 }

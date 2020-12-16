@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NzUploadChangeParam, NzUploadFile } from 'ng-zorro-antd/upload';
-import { NzMessageService } from "ng-zorro-antd/message";
+// import { NzMessageService} from 'ng-zorro-antd';
 import { Observable, Observer } from 'rxjs';
+import { UploadChangeParam, UploadFile } from 'ng-zorro-antd/upload';
+import { NzMessageService } from "ng-zorro-antd/message";
 
 @Component({
   selector: 'app-feedback',
@@ -15,7 +16,7 @@ export class FeedbackComponent implements OnInit {
   viewAdditional = false;
   loading = false;
   avatarUrl?: string;
-  fileList: NzUploadFile[] = [
+  fileList: UploadFile[] = [
     {
       uid: '-1',
       name: 'xxx.png',
@@ -27,7 +28,7 @@ export class FeedbackComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleChange(info: NzUploadChangeParam): void {
+  handleChange(info: UploadChangeParam): void {
     let fileList = [...info.fileList];
 
     // 1. Limit the number of uploaded files

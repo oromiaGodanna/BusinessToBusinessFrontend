@@ -24,7 +24,7 @@ export class CategoriesComponent implements OnInit {
     private modal: NzModalService,private message: NzMessageService,private userService:UserService,private i18n: NzI18nService) { }
 
   categories;
-  subCategories=[];
+  subCategories = [];
   showImage=false;
   imageToView;
   isEnglish = false;

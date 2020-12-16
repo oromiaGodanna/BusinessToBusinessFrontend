@@ -18,8 +18,11 @@
                             <nz-descriptions-item nzTitle="Joined in">{{"2020"}}</nz-descriptions-item>
                             <nz-descriptions-item nzTitle="Role">{{user.userType}}</nz-descriptions-item>
                         </nz-descriptions>
-                        <button nz-button [nzType]="'primary'" style="float: right;" (click)="subscribe()" *ngIf="!subscribed">Subscribe</button>
-                        <button nz-button style="float: right;" (click)="unsubscribe()" *ngIf="subscribed">Unsubscribe</button>
+                        <div *ngIf='loggedInUser && !(loggedInUser.userType == "Seller")'>
+                            <button nz-button [nzType]="'primary'" style="float: right;" (click)="subscribe()" *ngIf="!subscribed">Subscribe</button>
+                            <button nz-button style="float: right;" (click)="unsubscribe()" *ngIf="subscribed">Unsubscribe</button>
+                        </div>
+                       
                     </div>
                 </div>
             </nz-card>

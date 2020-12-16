@@ -106,7 +106,7 @@ export class ViewProformaComponent implements OnInit {
 
       this.responseService.sendResponse(responseData).subscribe(
         (response) => {
-          var divId = document.getElementById(this.itemId).style.display = 'none';
+          var divId = document.getElementById('responsebtn'+this.itemId).style.display = 'none';
           this.message="Response is Successfully Sent!";
           this.isSpinning = false;
         }

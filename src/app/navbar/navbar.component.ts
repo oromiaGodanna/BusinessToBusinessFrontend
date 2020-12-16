@@ -55,13 +55,13 @@ export class NavbarComponent implements OnInit {
     this.userService.userSubject.subscribe((user: User) => {
       if (user) {
         this.isLoggedIn = true;
-        this.userType= user.userType;
+        //this.userType= user.userType;
       } else {
         this.isLoggedIn = false;
       }
     });
 
-    if (this.isLoggedIn && (this.userType == "Buyer" || this.userType == "Both")) {
+    if (this.isLoggedIn && (this.userType == 'Buyer' || this.userType == 'Both')) {
       this.cartService.countCart().subscribe(res => {
         this.countCart = Number(res);
       });

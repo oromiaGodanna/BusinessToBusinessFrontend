@@ -18,6 +18,7 @@ import { en_US, NzI18nService, zh_CN } from 'ng-zorro-antd/i18n';
 import {WishlistComponent} from '../wishlist/wishlist.component';
 import {CartComponent} from '../cart/cart.component';
 import {UserService } from '../services/user.service';
+import {FeedbacksService } from '../services/feedbacks.service';
 
 @Component({
   selector: 'app-product-by-sub-category',
@@ -27,7 +28,8 @@ import {UserService } from '../services/user.service';
 export class ProductBySubCategoryComponent implements OnInit {
 
   constructor(private http:HttpClient,private productService:ProductsService,private cartService:CartService, private route: ActivatedRoute,
-    private iconService: NzIconService,private wishlistService:WishlistService,private modal: NzModalService,
+    private iconService: NzIconService,private wishlistService:WishlistService,
+    private modal: NzModalService,private feedbackService: FeedbacksService,
     private router: Router, private categoryService:CategoryService,private specialofferService:SpecialofferService,
     private notification: NzNotificationService,private i18n: NzI18nService,private userService:UserService) { }
 
@@ -41,6 +43,8 @@ export class ProductBySubCategoryComponent implements OnInit {
     countMoreProducts=1;
     offset=0;
     limit=12;
+    productRateV;
+  productNoRate;
 
   ngOnInit(): void {
     this.i18n.setLocale(this.isEnglish ? zh_CN : en_US);
@@ -96,6 +100,24 @@ export class ProductBySubCategoryComponent implements OnInit {
       this.countMoreProducts = res.length;
       });
     
+}
+
+productRateValue(productId){
+  var getRate = this.feedbackService.getRating(productId);
+  var rateValue = getRate.rating;
+  var parseRate = parseInt(rateValue);
+  this.productNoRate = Number(5 - parseRate);
+  console.log( this.productNoRate);
+  if(parseRate = 0){
+    return [];
+  }else{
+    return Array(parseRate);
+  }
+ 
+}
+
+noRateValue(){
+      return Array(this.productNoRate);
 }
 
 }

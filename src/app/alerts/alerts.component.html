@@ -37,40 +37,7 @@
     </ul>
   </nz-header>
   <nz-layout>
-    <nz-sider nzCollapsible nzBreakpoint="lg" [nzCollapsedWidth]="0">
-      <ul nzMode="inline" class="sider-menu" nz-menu nzTheme="dark" nzMode="inline">
-
-        <li nz-submenu nzOpen nzIcon="user" nzTitle="Products">
-          <ul>
-            <li nz-menu-item><a href="/myProducts"> Manage Products </a></li>
-            <li nz-menu-item><a href="/addProduct"> Add Product </a></li>
-          </ul>
-        </li>
-
-        <li nz-submenu nzOpen nzIcon="user" nzTitle="Category" nzSelected>
-          <ul>
-            <li nz-menu-item><a href="/categories"> Manage Categories </a></li>
-            <li nz-menu-item nzSelected><a href="/addCategory"> Add Category </a></li>
-          </ul>
-        </li>
-
-        <li nz-submenu nzOpen nzIcon="user" nzTitle="Measurement">
-          <ul>
-            <li nz-menu-item><a href="/measurements">Manage Measurements </a></li>
-            <li nz-menu-item><a href="/addMeasurement"> Add Measurement </a></li>
-          </ul>
-        </li>
-
-        <li nz-submenu nzOpen nzIcon="user" nzTitle="Special Offers">
-          <ul>
-            <li nz-menu-item><a href="/pendingSpecialoffer">Pending Special Offers </a></li>
-            <li nz-menu-item><a href="/activeSpecialoffer">Active Special Offers </a></li>
-          </ul>
-        </li>
-
-      </ul>
-    </nz-sider>
- 
+    
     <nz-layout class="inner-layout">
       <nz-content>
           <nz-result *ngIf="successResult"
@@ -91,11 +58,7 @@
               </div>
           </nz-result>
 
-          <nz-result *ngIf="errorResult" nzStatus="warning" nzTitle="{{message}}">
-              <div nz-result-extra>
-                <button nz-button nzType="primary">Go Back</button>
-              </div>
-          </nz-result>
+         
       </nz-content>
     </nz-layout>
   </nz-layout>
