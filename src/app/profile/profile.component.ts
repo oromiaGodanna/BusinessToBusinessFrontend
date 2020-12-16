@@ -34,11 +34,13 @@ export class ProfileComponent implements OnInit {
         this.message.error('Something Happend while trying to retrive the Users Profile.');
       }
     );
+    console.log(this.userService.isLoggedIn());
     if(this.userService.isLoggedIn()){
-      console.log('user is logged in');
       this.loggedInUser = this.userService.getUserData();
-      if(this.loggedInUser.subscribedTo.includes(this.id)){
-        this.subscribed = true;
+      if(!(this.loggedInUser.userType == 'Seller')){
+        if(this.loggedInUser.subscribedTo.includes(this.id)){
+            this.subscribed = true;
+          }
       }
     }
   }
@@ -50,7 +52,7 @@ export class ProfileComponent implements OnInit {
       this.userService.subscribeTo(this.loggedInUser._id, this.id).subscribe(
         (response: any) => {
           if (response.status == 200) {
-            this.userService.updateUserData(response.subscriber);
+            this.userService.updateUserData(response.subscriberUser);
             this.subscribed = true;
             this.message.success('You are Subscribed');
           }
@@ -60,13 +62,14 @@ export class ProfileComponent implements OnInit {
       }
   }
 
-
   unsubscribe(){
+    console.log('user subscribed', this.id);
      this.userService.unsubscribe(this.loggedInUser._id, this.id).subscribe(
        (response: any) =>{
+         console.log(response);
          if(response.status == 200){
+          this.userService.updateUserData(response.subscriberUser);
           this.subscribed = false;
-          this.userService.updateUserData(response.subscriber);
           this.message.success('You have Unsubscribed');
          }
        }, (error) => {
