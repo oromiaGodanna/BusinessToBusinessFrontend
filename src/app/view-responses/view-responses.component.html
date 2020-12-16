@@ -132,7 +132,7 @@
                     <div class="responseDiv">
                         <div *ngFor="let response of responseData.response" class="commentDiv">
                             <nz-comment [nzAuthor]="response.responseBy">
-                                <nz-avatar nz-comment-avatar nzIcon="user"></nz-avatar>
+                                <a href="#" (click)="contactSeller(response.userId)"><nz-avatar nz-comment-avatar nzIcon="user" ></nz-avatar> </a>
                                 <nz-comment-content>
                                 <p>{{response.unitPrice}} BIRR</p>
                                 </nz-comment-content>

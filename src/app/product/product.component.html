@@ -78,25 +78,29 @@
              
               <nz-divider></nz-divider>
               <div nz-row nzJustify="end">
-                <div class="icons-list"> 
-                    <nz-space>
-                        <nz-space-item>
-                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-                        </nz-space-item>
-                        <nz-space-item>
-                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-                        </nz-space-item>
-                        <nz-space-item>
-                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-                        </nz-space-item>
-                        <nz-space-item>
-                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-                        </nz-space-item>
-                        <nz-space-item>
-                            <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-                        </nz-space-item>
-                    </nz-space>
-                </div>
+                
+                <div nz-row *ngIf="productRateValue(product._id).length != 0">
+
+                  <i nz-icon nzType="star" nzTheme="fill" 
+                  class="rateFillColor" *ngFor="let n of productRateValue(product._id);let i = index;"></i>
+
+                  
+                 <i nz-icon nzType="star" nzTheme="outline" 
+                  class="rateFillColor" *ngFor="let n of (noRateValue());let i = index;"></i>
+
+                  <!--
+                      <i nz-icon nzType="star" nzTheme="outline" 
+                  class="rateFillColor" *ngFor="let n of (5);let i = index;"></i>
+                  -->
+                  
+              </div>
+
+              <div nz-row *ngIf="productRateValue(product._id).length == 0">
+                  <i nz-icon nzType="star" nzTheme="outline" 
+                  class="rateFillColor" *ngFor="let n of [0,1,2,3,4];let i = index;"></i>
+              </div>
+
+
               </div>
              <!--  <h2 nz-row ><span nz-typography nzType="danger"> {{product.price}} Birr </span> / {{product.measurement}}</h2> -->
               <p>

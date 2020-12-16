@@ -149,7 +149,7 @@
 
                             <a href="product/{{product._id}}">{{product.productName | uppercase}}</a>
                             <p><a
-                                    href="product/{{product._id}}">{{((product.description) > 2)? (product.description):((product.description | slice:0:2)+'..')}}</a>
+                                    href="product/{{product._id}}">{{((product.description) > 20)? (product.description):((product.description | slice:0:20)+'..')}}</a>
                             </p>
 
                             <p>
@@ -158,20 +158,27 @@
                                 <br>{{product.minOrder}} (min.Order)
                             </p>
 
-                            <div nz-row>
+                            <div nz-row *ngIf="productRateValue(product._id).length != 0">
 
-                                <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-
-                                <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-
-                                <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-
-                                <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-
-                                <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-
-
+                                <i nz-icon nzType="star" nzTheme="fill" 
+                                class="rateFillColor" *ngFor="let n of productRateValue(product._id);let i = index;"></i>
+    
+                                
+                               <i nz-icon nzType="star" nzTheme="outline" 
+                                class="rateFillColor" *ngFor="let n of (noRateValue());let i = index;"></i>
+    
+                                <!--
+                                    <i nz-icon nzType="star" nzTheme="outline" 
+                                class="rateFillColor" *ngFor="let n of (5);let i = index;"></i>
+                                -->
+                                
                             </div>
+    
+                            <div nz-row *ngIf="productRateValue(product._id).length == 0">
+                                <i nz-icon nzType="star" nzTheme="outline" 
+                                class="rateFillColor" *ngFor="let n of [0,1,2,3,4];let i = index;"></i>
+                            </div>
+
                             <div nz-row nzJustify="end">
                                 <a nz-button nzType="link" (click)="addProductToWishlist(product._id)"
                                     nzShape="round"><i nz-icon nzType="heart" nzTheme="outline"
@@ -200,7 +207,7 @@
 
                             <a href="product/{{product._id}}">{{product.productName | uppercase}}</a>
                             <p><a
-                                    href="product/{{product._id}}">{{((product.description) > 2)? (product.description):((product.description | slice:0:2)+'..')}}</a>
+                                    href="product/{{product._id}}">{{((product.description) > 20)? (product.description):((product.description | slice:0:20)+'..')}}</a>
                             </p>
 
                             <p>
@@ -209,20 +216,27 @@
                                 <br>{{product.minOrder}} (min.Order)
                             </p>
 
-                            <div nz-row>
+                            <div nz-row *ngIf="productRateValue(product._id).length != 0">
 
-                                <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-
-                                <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-
-                                <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-
-                                <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-
-                                <i nz-icon nzType="star" nzTheme="fill" class="rateFillColor"></i>
-
-
+                                <i nz-icon nzType="star" nzTheme="fill" 
+                                class="rateFillColor" *ngFor="let n of productRateValue(product._id);let i = index;"></i>
+    
+                                
+                               <i nz-icon nzType="star" nzTheme="outline" 
+                                class="rateFillColor" *ngFor="let n of (noRateValue());let i = index;"></i>
+    
+                                <!--
+                                    <i nz-icon nzType="star" nzTheme="outline" 
+                                class="rateFillColor" *ngFor="let n of (5);let i = index;"></i>
+                                -->
+                                
                             </div>
+    
+                            <div nz-row *ngIf="productRateValue(product._id).length == 0">
+                                <i nz-icon nzType="star" nzTheme="outline" 
+                                class="rateFillColor" *ngFor="let n of [0,1,2,3,4];let i = index;"></i>
+                            </div>
+
                             <div nz-row nzJustify="end">
                                 <a nz-button nzType="link" (click)="addProductToWishlist(product._id)"
                                     nzShape="round"><i nz-icon nzType="heart" nzTheme="outline"
