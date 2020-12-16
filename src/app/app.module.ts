@@ -135,6 +135,7 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 
 import { NzTableModule } from 'ng-zorro-antd/table';
 
@@ -163,6 +164,7 @@ import { UserListComponent } from './admin/user-list/user-list.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 
 import { OrderDetailsSupplierComponent } from './order-details-supplier/order-details-supplier.component';
+import { ReportComponent } from './admin/report/report.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -240,7 +242,8 @@ registerLocaleData(en);
     AdminComponent,
     UserListComponent,
     AdminLoginComponent,
-    OrderDetailsSupplierComponent
+    OrderDetailsSupplierComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,

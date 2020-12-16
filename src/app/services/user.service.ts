@@ -54,7 +54,12 @@ export class UserService {
 
   getUserProfile(userId): Observable<any> {
     const url = `${this.serverUrl}/customer/${userId}`;
-    console.log(url);
+    return this.http.get(url);
+  }
+
+  getAllUsers(){
+    //return 'get user data';
+    const url = `${this.serverUrl}/customer/`;
     return this.http.get(url);
   }
 

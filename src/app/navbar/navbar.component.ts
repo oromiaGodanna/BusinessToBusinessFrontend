@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit {
     this.userService.userSubject.subscribe((user: User) => {
       if (user) {
         this.isLoggedIn = true;
-        this.userType= user.userType;
+        //this.userType= user.userType;
       } else {
         this.isLoggedIn = false;
       }

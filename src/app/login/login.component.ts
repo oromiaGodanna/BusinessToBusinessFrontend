@@ -37,12 +37,11 @@ export class LoginComponent implements OnInit {
       (response:any) => {
         if (response.status == 200) {
           this.userService.storeUserData(response.token, response.user);
-          if(response.user.userType == 'Admin'){
-            this.userService.isAdmin = true;
-            this.router.navigate(['admin']);
+          if(response.user.userType == 'Buyer'){
+            this.router.navigate(['index']);
           }else{
             this.message.success('Login Successful.');
-            this.router.navigate([`my_account/${response.id}/view`]);
+            this.router.navigate([`/my_account`, 'myProducts']);
           }
         }
       },(error:HttpErrorResponse) =>{
