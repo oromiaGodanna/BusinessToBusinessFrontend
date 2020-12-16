@@ -105,13 +105,13 @@
                 <h2 nz-row nzJustify="center" nzType="warning">{{message}}!</h2>
             </div>
 
-            <div nz-row style="margin:10px;padding:5px;background:white" id="{{proformaId}}">
+            <div nz-row nzJustify="center" style="margin:10px;padding:5px;background:white" id="{{proformaId}}">
                 <div nz-col nz-col nzXs="24" nzSm="24" nzMd="16" nzLg="16" nzXl="16" nzOffset="2">
                     <h3 nz-row nzJustify="center">Items</h3>
                     <div *ngFor="let item of proforma.items;let i = index" id="{{item._id}}">
                         <h4 >{{i+1}}. {{item.category}} </h4>
                         <p>{{item.description}}</p>
-                        <div nz-row nzJustify="center">
+                        <div nz-row>
                             <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="8" nzXl="8">
                                <p *ngIf="item.subCategory"> <strong>Sub-Category : </strong> {{item.subCategory}}</p> 
                             </div>
