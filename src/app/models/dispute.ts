@@ -5,7 +5,7 @@ export class Review {
     refundAmount: string;
     description: string;
     evidence: Array<string>;
-    disputeStatus: string;
+    disputeStatus: {{ status }} string;
     disputeSettlement: object;
 
 }

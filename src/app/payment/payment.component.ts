@@ -31,9 +31,9 @@ export class PaymentComponent implements OnInit {
     }, 1000);
   })
   onSubmit(value: { creditCardId: string}): void{
-   const paymentObj = this.paymentService.addPayment();
-   console.log(paymentObj);
-   console.log(value);
+  //  const paymentObj = this.paymentService.addPayment();
+  //  console.log(paymentObj);
+  //  console.log(value);
 
   }
 }

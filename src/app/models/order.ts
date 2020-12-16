@@ -1,7 +1,7 @@
 export class Order {    
     buyerId: string;
     sellerId: string;
-    cartEntryId: string;
+    cartEntryId: Array<string>;
     totalAmount: Number;
     totalPrice: Number;
     shippingAddress:object;

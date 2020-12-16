@@ -57,21 +57,21 @@
                             <nz-form-label [nzSpan]="8">Postal code</nz-form-label>
                             <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
                                 nzErrorTip="Please input your postal code!">
-                                <input nz-input type="text" formControlName="poBox" placeholder="Postal Code" />
+                                <input nz-input type="number" formControlName="poBox" placeholder="Postal Code" />
                             </nz-form-control>
                         </nz-form-item>
                         <nz-form-item>
                             <nz-form-label [nzSpan]="8">Phone number 1</nz-form-label>
                             <nz-form-control [nzSpan]="12" [nzOffset]="0.5" nzHasFeedback
                                 nzErrorTip="Please input your phone number!">
-                                <input nz-input type="text" formControlName="phoneNumber1"
+                                <input nz-input type="number" formControlName="phoneNumber1"
                                     placeholder="Primary phone number" />
                             </nz-form-control>
                         </nz-form-item>
                         <nz-form-item>
                             <nz-form-label [nzSpan]="8">Phone number 2</nz-form-label>
                             <nz-form-control [nzSpan]="12" [nzOffset]="0.5">
-                                <input nz-input type="text" formControlName="phoneNumber2"
+                                <input nz-input type="number" formControlName="phoneNumber2"
                                     placeholder="Phone number(ptional)" />
                             </nz-form-control>
                         </nz-form-item>
@@ -167,23 +167,23 @@
             <div class="payment-summary">
                 <div nz-row>
                     <div nz-col [nzSpan]="18" [nzOffset]="1">Subtotal</div>
-                    <div nz-col [nzSpan]="4" [nzOffset]="1">589.25 $</div>
+                    <div nz-col [nzSpan]="4" [nzOffset]="1">{{newOrder.totalPrice}} Birr</div>
 
                 </div>
                 <div nz-row>
                     <div nz-col [nzSpan]="18" [nzOffset]="1">Shipping</div>
-                    <div nz-col [nzSpan]="4" [nzOffset]="1"></div>
+                    <div nz-col [nzSpan]="4" [nzOffset]="1">---</div>
 
                 </div>
                 <div nz-row>
                     <div nz-col [nzSpan]="18" [nzOffset]="1">Taxes</div>
-                    <div nz-col [nzSpan]="4" [nzOffset]="1"></div>
+                    <div nz-col [nzSpan]="4" [nzOffset]="1">{{tax}} Birr</div>
 
                 </div>
                 <nz-divider></nz-divider>
                 <div nz-row>
                     <div nz-col [nzSpan]="18" [nzOffset]="1">Total</div>
-                    <div nz-col [nzSpan]="4" [nzOffset]="1"></div>
+                    <div nz-col [nzSpan]="4" [nzOffset]="1">{{total}} Birr</div>
                 </div>
             </div>
 
