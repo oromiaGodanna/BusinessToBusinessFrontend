@@ -3,19 +3,6 @@
         <ul nz-menu nzMode="inline">
             <li nz-menu-group nzTitle="My Account" nzIcon="user">
                 <ul>
-                    <li nz-menu-item nzMatchRouter><a [routerLink]="['/home']"><i nz-icon nzType="home"
-                                nzTheme="outline"></i> Home</a></li>
-                    <li nz-menu-item nzMatchRouter><a [routerLink]="['/my_account', userId , 'view']"><i nz-icon
-                                nzType="eye" nzTheme="outline"></i> View Profile</a></li>
-                    <li nz-menu-item nzMatchRouter><a [routerLink]="['/my_account', userId,'update']"> <i nz-icon
-                                nzType="edit" nzTheme="outline"></i>Update Profile</a></li>
-                    <li nz-menu-item nzMatchRouter><a [routerLink]="['/my_account', userId, 'change_email']"><i nz-icon
-                                nzType="mail" nzTheme="outline"></i>Change Email</a></li>
-                    <li nz-menu-item nzMatchRouter>
-                        <a [routerLink]="['/my_account', userId, 'change_password']">
-                            <i nz-icon nzType="lock" nzTheme="outline"></i>Change Password</a>
-                    </li>
-                    
                     <div *ngIf="!(userType == 'Buyer')"> 
                         <li nz-submenu nzOpen nzIcon="barcode" nzTitle="Products" nzMatchRouter>
                             <ul>
@@ -26,7 +13,7 @@
                                     </a></li>
                             </ul>
                         </li>
-                        <li nz-submenu nzOpen nzIcon="user" nzTitle="Special Offers">
+                        <li nz-submenu nzOpen nzIcon="crown" nzTitle="Special Offers" nzMatchRouter>
                             <ul>
                                 <li nz-menu-item nzMatchRouter><a
                                         [routerLink]="['/my_account', 'pendingSpecialoffer']">Pending Special
@@ -46,11 +33,26 @@
                                 <i nz-icon nzType="transaction" nzTheme="outline"></i>Orders</a>
                         </li>
                         <li nz-menu-item nzMatchRouter>
-                            <a [routerLink]="['/userId', 'Subscribers']">
+                            <a [routerLink]="['/my_account', 'subscribers', userId]">
                                 <i nz-icon nzType="team" nzTheme="outline"></i>Subscribers</a>
                         </li>
                         
                     </div>
+
+                    <li nz-menu-item nzMatchRouter><a [routerLink]="['/index']"><i nz-icon nzType="home"
+                                nzTheme="outline"></i> Home</a></li>
+                    <li nz-menu-item nzMatchRouter><a [routerLink]="['/my_account', userId , 'view']"><i nz-icon
+                                nzType="eye" nzTheme="outline"></i> View Profile</a></li>
+                    <li nz-menu-item nzMatchRouter><a [routerLink]="['/my_account', userId,'update']"> <i nz-icon
+                                nzType="edit" nzTheme="outline"></i>Update Profile</a></li>
+                    <li nz-menu-item nzMatchRouter><a [routerLink]="['/my_account', userId, 'change_email']"><i nz-icon
+                                nzType="mail" nzTheme="outline"></i>Change Email</a></li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a [routerLink]="['/my_account', userId, 'change_password']">
+                            <i nz-icon nzType="lock" nzTheme="outline"></i>Change Password</a>
+                    </li>
+                    
+                  
                     
                     <!-- <li nz-menu-item nzMatchRouter>
                         <a [routerLink]="['/userId', 'prefered_catagories']">
@@ -61,16 +63,16 @@
                             <i nz-icon nzType="wallet" nzTheme="outline"></i>Payment</a>
                     </li> -->
 
-                    <div *ngIf="userType == 'Buyer'">
+                    <!-- <div *ngIf="userType == 'Buyer'">
                         <li nz-menu-item nzMatchRouter>
                             <a [routerLink]="['/userId','SubscribedTo']">
                                 <i nz-icon nzType="heart" nzTheme="outline"></i>Subscribed To</a>
                         </li>
                     </div>
-                    
+                     -->
                     <li nz-menu-item nzMatchRouter>
                         <a [routerLink]="['/my_account', userId, 'deactivate']">
-                            <i nz-icon nzType="poweroff" nzTheme="outline"></i>Deactivate Account</a>
+                            <i nz-icon nzType="poweroff" nzTheme="outline"></i>Delete Account</a>
                     </li>
                     <li nz-menu-item (click)="logout()"><i nz-icon nzType="logout" nzTheme="outline"></i>Log Out</li>
                 </ul>

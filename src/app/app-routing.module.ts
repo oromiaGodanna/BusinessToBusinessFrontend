@@ -75,6 +75,7 @@ import { AdminComponent } from './admin/admin.component';
 import { UserListComponent } from './admin/user-list/user-list.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { ReportComponent } from './admin/report/report.component';
+import { SubscribeComponent } from './my-account/subscribe/subscribe.component';
 
 const routes: Routes = [
   { path: 'message', component: MessageComponent },
@@ -106,6 +107,7 @@ const routes: Routes = [
       { path: 'myProducts', component: ProductListComponent },
       { path: 'pendingSpecialoffer', component: PendingSpecialOfferComponent },
       { path: 'activeSpecialoffer', component: ActiveSpecialOfferComponent },
+      {path : 'subscribers', component: SubscribeComponent }
     ]
   },
   { path: 'help', component: HelpComponent },

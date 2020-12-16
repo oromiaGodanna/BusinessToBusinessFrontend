@@ -280,7 +280,7 @@
                     </div> -->
 
                     <div nz-row>
-                        <div nz-col nzSpan="12">
+                        <div nz-col nzSpan="12" *ngIf="false">
                             <nz-form-item>
                                 <nz-form-label [nzSpan]="12" nzRequired>Business Type</nz-form-label>
                                 <nz-form-control nzErrorTip="Please input your Password!" nzSpan="20">
@@ -307,7 +307,17 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        
+                        <div nz-col nzSpan="12">
+                            <nz-form-item>
+                                <nz-form-label [nzSpan]="20">Number of Employees</nz-form-label>
+                                <nz-form-control nzSpan="20">
+                                    <nz-input-group nzPrefixIcon="number">
+                                        <input formControlName="numOfEmployees" nz-input type="number"
+                                            placeholder="No of Employees" />
+                                    </nz-input-group>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
                         <!-- <div nz-col nzSpan="12">
                             <nz-form-item>
                                 <nz-form-label [nzSpan]="12">Country</nz-form-label>
@@ -327,21 +337,11 @@
                     </div>
 
                     <div nz-row>
-                        <div nz-col nzSpan="12">
-                            <nz-form-item>
-                                <nz-form-label [nzSpan]="20">Number of Employees</nz-form-label>
-                                <nz-form-control nzSpan="20">
-                                    <nz-input-group nzPrefixIcon="number">
-                                        <input formControlName="numOfEmployees" nz-input type="number"
-                                            placeholder="No of Employees" />
-                                    </nz-input-group>
-                                </nz-form-control>
-                            </nz-form-item>
-                        </div>
-                        <div nz-col nzSpan="12">
+                        
+                        <div nz-col nzSpan="24">
                             <nz-form-item>
                                 <nz-form-label [nzSpan]="12" nzRequired>Official WebSite</nz-form-label>
-                                <nz-form-control nzErrorTip="Please enter your Company Name!" nzSpan="20">
+                                <nz-form-control nzErrorTip="Please enter your Company Name!" nzSpan="22">
                                     <nz-input-group nzPrefixIcon="link">
                                         <input formControlName="officalWebsite" nz-input type="text"
                                             placeholder="Company Name" />

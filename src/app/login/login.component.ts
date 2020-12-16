@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         if (response.status == 200) {
           this.userService.storeUserData(response.token, response.user);
           if(response.user.userType == 'Buyer'){
-            this.router.navigate(['index']);
+            this.router.navigate(['/index']);
           }else{
             this.message.success('Login Successful.');
             this.router.navigate([`/my_account`, 'myProducts']);

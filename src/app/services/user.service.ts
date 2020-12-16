@@ -63,7 +63,10 @@ export class UserService {
     return this.http.get(url);
   }
 
-
+getSubscribers(id){
+  const url = `${this.serverUrl}/customer/subscribers/${id}`;
+    return this.http.get(url);
+}
   forgotPassword(email): Observable<any> {
     const url = `${this.serverUrl}/customer/forgotPassword`;
     return this.http.put(url, { email: email });

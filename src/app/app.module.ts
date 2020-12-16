@@ -165,6 +165,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 
 import { OrderDetailsSupplierComponent } from './order-details-supplier/order-details-supplier.component';
 import { ReportComponent } from './admin/report/report.component';
+import { SubscribeComponent } from './my-account/subscribe/subscribe.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -243,7 +244,8 @@ registerLocaleData(en);
     UserListComponent,
     AdminLoginComponent,
     OrderDetailsSupplierComponent,
-    ReportComponent
+    ReportComponent,
+    SubscribeComponent
   ],
   imports: [
     BrowserModule,
@@ -305,9 +307,9 @@ registerLocaleData(en);
     NzBadgeModule,
     NzMenuModule,
     NzCheckboxModule,
-
     NzProgressModule,
     NzPaginationModule,
+    NzStatisticModule
 
   ],
   providers: [

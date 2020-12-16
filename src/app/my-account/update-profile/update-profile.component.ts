@@ -26,33 +26,6 @@ export class UpdateProfileComponent implements OnInit {
     { label: 'DeskTops', value: 'pcs', groupLabel: 'Electronics' }
   ];
 
-  // userData = {
-  //   firstName: String,
-  //   lastName: String,
-  //   email: String,
-  //   userType: String,
-  //   companyName: String,
-  //   //joined: Number,
-  //   alternativeEmail: String,
-  //   mobile: String,
-  //   telephone: String,
-  //   socialLinks: {
-  //     facebook: String,
-  //     twitter: String,
-  //     instagram: String,
-  //     linkedin: String
-  //   },
-  //   fax: String,
-  //   tinNumber: Number,
-  //   yearEstablished: Date,
-  //   businessType: String,
-  //   numOfEmployees: Number,
-  //   address: String,
-  //   country: String,
-  //   officalWebsite: String,
-  //   aboutUs: String
-  // }
-
   title: string = "Complete Your Profile"
   socials = ['facebook', 'twitter', 'linkedin', 'instagram'];
 
