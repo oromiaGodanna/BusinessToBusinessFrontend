@@ -152,7 +152,8 @@ export class CartComponent implements OnInit {
         var divId = document.getElementById(productId).style.display = 'none';
 
         //document.getElementById("subTotal" + productId).innerHTML = (0).toString();
-        var subTotInitial = parseFloat(document.getElementById("cartSubtotal").innerHTML);
+        //var subTotInitial = parseFloat(document.getElementById("cartSubtotal").innerHTML);
+        var subTotInitial = (this.subTotalPrice);
         //console.log("Initial "+subTotInitial);
         //console.log("After "+subTotAfter);
         var subTotV = subTotInitial - subTotAfter;
